@@ -10,7 +10,7 @@ angular.module('dockermon', [
     'containers',
     'containerDetails',
     'images',
-    'imageDetais'
+    'imageDetails'
 ])
     .run(function ($rootScope) {
         $rootScope.host = "http://devft-docker-host-02.web.zooplus.de:2375";

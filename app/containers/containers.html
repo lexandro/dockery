@@ -20,11 +20,11 @@
 
                     <tr ng-repeat="containerData in containerDataList">
                         <td>
-                            <button class="btn btn-info" ng-click="goContainerDetails(containerData.Id)">
+                            <button class="btn btn-info btn-block" ng-click="goContainerDetails(containerData.Id)">
                                 <span class="glyphicon glyphicon-info-sign"></span> {{containerData.Id | limitTo:12}}
                             </button>
                         <td>
-                            <button class="btn btn-info" ng-click="goImageDetails(containerData.ImageId)">
+                            <button class="btn btn-info btn-block" ng-click="goImageDetails(containerData.ImageId)">
                                 <span class="glyphicon glyphicon-info-sign"></span>{{containerData.Image}}
                             </button>
                         </td>
