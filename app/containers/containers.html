@@ -5,31 +5,33 @@
             <form name="constructionForm" novalidate>
                 <table class="table table-condensed table-bordered">
                     <tr class="success">
-                        <td colspan="8" align="center">Containers</td>
+                        <td colspan="8" align="center">Containers on {{$root.host}}</td>
                     </tr>
 
                     <tr>
-                        <td width="10%" class="all-center">IDbutton</td>
-                        <td width="10%" class="all-center">ID</td>
-                        <td width="7%" class="all-center">Image</td>
-                        <td width="7%" class="all-center">Command</td>
-                        <td width="15%" class="all-center">Created</td>
-                        <td width="15%" class="all-center">Status</td>
-                        <td width="7%" class="all-center">Ports</td>
+                        <td width="1%" class="text-center">Container ID</td>
+                        <td width="1%" class="text-center">Image</td>
+                        <td width="7%" class="text-center">Command</td>
+                        <td width="15%" class="text-center">Created</td>
+                        <td width="15%" class="text-center">Status</td>
+                        <td width="7%" class="text-center">Ports</td>
                     </tr>
 
 
-                    <tr ng-repeat="container in containers">
+                    <tr ng-repeat="containerData in containerDataList">
                         <td>
-                            <button class="btn btn-info" ng-click="go('/containerDetails/$scope.container.Id | limitTo:12')">
-                                <span class="glyphicon glyphicon-info-sign"></span> {{container.Id | limitTo:12}}
+                            <button class="btn btn-info" ng-click="goContainerDetails(containerData.Id)">
+                                <span class="glyphicon glyphicon-info-sign"></span> {{containerData.Id | limitTo:12}}
                             </button>
-                        <td><a ng-href="#/containerDetails/{{container.Id | limitTo:12}}">{{container.Id | limitTo:12}}</a></td>
-                        <td>{{container.Image}}</td>
-                        <td>{{container.Command}}</td>
-                        <td>{{container.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
-                        <td>{{container.Status}}</td>
-                        <td>{{container.Ports}}</td>
+                        <td>
+                            <button class="btn btn-info" ng-click="goImageDetails(containerData.ImageId)">
+                                <span class="glyphicon glyphicon-info-sign"></span>{{containerData.Image}}
+                            </button>
+                        </td>
+                        <td>{{containerData.Command}}</td>
+                        <td>{{containerData.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
+                        <td>{{containerData.Status}}</td>
+                        <td>{{containerData.Ports}}</td>
 
                     </tr>
                 </table>
