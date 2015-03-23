@@ -19,8 +19,8 @@
                     </tr>
 
                     <tr ng-repeat="container in containers">
-                        <td><a ng-href="/containerdetails/{{container.Id}}"><span class="glyphicon glyphicon-info-sign"></span></a></td>
-                        <td><a ng-href="/containerdetails/{{container.Id}}">{{container.Id | limitTo:12}}</a></td>
+                        <td><a ng-href="#/containerDetails/{{container.Id | limitTo:12}}"><span class="glyphicon glyphicon-info-sign"></span></a></td>
+                        <td><a ng-href="#/containerDetails/{{container.Id | limitTo:12}}">{{container.Id | limitTo:12}}</a></td>
                         <td>{{container.Image}}</td>
                         <td>{{container.Command}}</td>
                         <td>{{container.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
