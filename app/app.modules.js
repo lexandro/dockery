@@ -7,6 +7,7 @@ angular.module('dockermon', [
     'ngRoute',
     'ngResource',
     'services',
+    'hosts',
     'containers',
     'containerDetails',
     'images',
