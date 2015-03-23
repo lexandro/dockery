@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="dockermon">
+<head>
+    <meta charset="UTF-8">
+    <title>DockerMon</title>
+    <link rel='stylesheet' href='assets/libs/bootstrap/dist/css/bootstrap.css'>
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/">Docker|mon</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a class="active" href="#/containers">Containers</a></li>
+                <li><a href="#/images">Images</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav pull-right">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Help</a></li>
+                </ul>
+            </ul>
+
+
+        </div>
+        <!--/.nav-collapse -->
+
+    </div>
+</nav>
+
+
+<div ng-view class="container"></div>
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted" align="center"><a href="#/news">Hírek: 0</a> | <a href="#/events">Események: 0</a> | <a href="#/messages">Üzenetek: 0</a> | Idő:
+            yyyy.MM.dd hh:ss:mm | Körváltásig hátralévő idő: mm:ss</p>
+    </div>
+</footer>
+<!---->
+<script src="assets/libs/jquery/dist/jquery.js"></script>
+<script src="assets/libs/bootstrap/dist/js/bootstrap.js"></script>
+<!---->
+<script src="assets/libs/angular/angular.js"></script>
+<script src="assets/libs/angular-route/angular-route.js"></script>
+<script src="assets/libs/angular-resource/angular-resource.js"></script>
+<!---->
+<script src="app/app.modules.js"></script>
+<script src="app/shared/services.js"></script>
+<!---->
+</body>
+</html>
