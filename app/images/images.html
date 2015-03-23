@@ -9,19 +9,26 @@
                     </tr>
 
                     <tr>
-                        <td width="10%" class="all-center">Info</td>
-                        <td width="10%" class="all-center">Id</td>
-                        <td width="10%" class="all-center">ParentId</td>
+                        <td width="1%" class="text-center">Image ID</td>
+                        <td width="10%" class="text-center">Parent ID</td>
                         <td width="10%" class="all-center">Created</td>
-                        <td width="7%" class="all-center">RepoTags</td>
+                        <td width="7%" class="all-center">Repository tags</td>
                         <td width="7%" class="all-center">Size</td>
                         <td width="15%" class="all-center">VirtualSize</td>
                     </tr>
 
                     <tr ng-repeat="image in images">
-                        <td><a ng-href="#/imageDetails/{{image.Id | limitTo:12}}"><span class="glyphicon glyphicon-info-sign"></span></a></td>
-                        <td><a ng-href="#/imageDetails/{{image.Id | limitTo:12}}">{{image.Id | limitTo:12}}</a></td>
-                        <td><a ng-href="#/imageDetails/{{image.ParentId | limitTo:12}}">{{image.ParentId | limitTo:12}}</a></td>
+                        <td>
+                            <button class="btn btn-info btn-block" ng-click="goImageDetails(image.Id)">
+                                <span class="glyphicon glyphicon-info-sign"></span> {{image.Id | limitTo:12}}
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-info btn-block" ng-click="goImageDetails(image.ParentId)">
+                                <span class="glyphicon glyphicon-info-sign"></span> {{image.ParentId | limitTo:12}}
+                            </button>
+                        </td>
+
                         <td>{{image.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
                         <td>{{image.RepoTags}}</td>
                         <td>{{image.Size}}</td>

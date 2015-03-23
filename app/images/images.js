@@ -13,5 +13,9 @@ angular.module('images', ['ngRoute'])
         var images = Images.query(function () {
             $scope.images = images;
         });
+
+        $scope.goImageDetails = function (path) {
+            $location.path('/imageDetails/' + path);
+        };
     }])
 ;
