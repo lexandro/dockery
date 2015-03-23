@@ -9,7 +9,7 @@
                     </tr>
 
                     <tr>
-                        <td width="10%" class="all-center">Info</td>
+                        <td width="10%" class="all-center">IDbutton</td>
                         <td width="10%" class="all-center">ID</td>
                         <td width="7%" class="all-center">Image</td>
                         <td width="7%" class="all-center">Command</td>
@@ -18,8 +18,12 @@
                         <td width="7%" class="all-center">Ports</td>
                     </tr>
 
+
                     <tr ng-repeat="container in containers">
-                        <td><a ng-href="#/containerDetails/{{container.Id | limitTo:12}}"><span class="glyphicon glyphicon-info-sign"></span></a></td>
+                        <td>
+                            <button class="btn btn-info" ng-click="go('/containerDetails/$scope.container.Id | limitTo:12')">
+                                <span class="glyphicon glyphicon-info-sign"></span> {{container.Id | limitTo:12}}
+                            </button>
                         <td><a ng-href="#/containerDetails/{{container.Id | limitTo:12}}">{{container.Id | limitTo:12}}</a></td>
                         <td>{{container.Image}}</td>
                         <td>{{container.Command}}</td>

@@ -1,34 +1,36 @@
 <div class="container">
 
-    <div id="wrapper">
-        <div ng-include="$root.sidemenu"></div>
-    </div>
-    <div id="main-wrapper" class="col-md-10 pull-right">
+    <div id="main-wrapper" class="col-md-12 pull-right">
         <div id="main">
             <form name="constructionForm" novalidate>
                 <table class="table table-condensed table-bordered">
                     <tr class="success">
-                        <td colspan="8" align="center">Containers</td>
+                        <td colspan="8" align="center">Images on {{$root.host}}</td>
                     </tr>
 
                     <tr>
-                        <td width="10%" class="all-center">ID</td>
-                        <td width="7%" class="all-center">Image</td>
-                        <td width="7%" class="all-center">Command</td>
-                        <td width="7%" class="all-center">Created</td>
-                        <td width="7%" class="all-center">Status</td>
-                        <td width="7%" class="all-center">Ports</td>
-                        <td width="7%" class="all-center">SizeRw</td>
-                        <td width="7%" class="all-center">SizeRootFs</td>
-                    </tr>
-                    <tr ng-repeat="container in containers">
-                        <td>{{container.id}}</td>
+                        <td width="10%" class="all-center">Info</td>
+                        <td width="10%" class="all-center">Id</td>
+                        <td width="10%" class="all-center">ParentId</td>
+                        <td width="10%" class="all-center">Created</td>
+                        <td width="7%" class="all-center">RepoTags</td>
+                        <td width="7%" class="all-center">Size</td>
+                        <td width="15%" class="all-center">VirtualSize</td>
                     </tr>
 
+                    <tr ng-repeat="image in images">
+                        <td><a ng-href="#/imageDetails/{{image.Id | limitTo:12}}"><span class="glyphicon glyphicon-info-sign"></span></a></td>
+                        <td><a ng-href="#/imageDetails/{{image.Id | limitTo:12}}">{{image.Id | limitTo:12}}</a></td>
+                        <td><a ng-href="#/imageDetails/{{image.ParentId | limitTo:12}}">{{image.ParentId | limitTo:12}}</a></td>
+                        <td>{{image.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
+                        <td>{{image.RepoTags}}</td>
+                        <td>{{image.Size}}</td>
+                        <td>{{image.VirtualSize}}</td>
+
+                    </tr>
                 </table>
 
             </form>
         </div>
     </div>
-</div>
 </div>

@@ -9,7 +9,9 @@ angular.module('images', ['ngRoute'])
         });
     }])
 
-    .controller('ImagesCtrl', ['$rootScope', '$scope', '$location', function ($rootScope, $scope, $location) {
-        console.log('images ');
+    .controller('ImagesCtrl', ['$rootScope', '$scope', '$location', 'Images', function ($rootScope, $scope, $location, Images) {
+        var images = Images.query(function () {
+            $scope.images = images;
+        });
     }])
 ;

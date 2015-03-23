@@ -12,5 +12,8 @@ angular.module('containers', ['ngRoute'])
         var containers = Containers.query(function () {
             $scope.containers = containers;
         });
+        $scope.go = function (path) {
+            $location.path(path);
+        };
     }])
 ;
