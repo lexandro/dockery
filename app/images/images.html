@@ -1,0 +1,34 @@
+<div class="container">
+
+    <div id="wrapper">
+        <div ng-include="$root.sidemenu"></div>
+    </div>
+    <div id="main-wrapper" class="col-md-10 pull-right">
+        <div id="main">
+            <form name="constructionForm" novalidate>
+                <table class="table table-condensed table-bordered">
+                    <tr class="success">
+                        <td colspan="8" align="center">Containers</td>
+                    </tr>
+
+                    <tr>
+                        <td width="10%" class="all-center">ID</td>
+                        <td width="7%" class="all-center">Image</td>
+                        <td width="7%" class="all-center">Command</td>
+                        <td width="7%" class="all-center">Created</td>
+                        <td width="7%" class="all-center">Status</td>
+                        <td width="7%" class="all-center">Ports</td>
+                        <td width="7%" class="all-center">SizeRw</td>
+                        <td width="7%" class="all-center">SizeRootFs</td>
+                    </tr>
+                    <tr ng-repeat="container in containers">
+                        <td>{{container.id}}</td>
+                    </tr>
+
+                </table>
+
+            </form>
+        </div>
+    </div>
+</div>
+</div>

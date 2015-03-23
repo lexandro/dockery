@@ -6,10 +6,13 @@
 angular.module('dockermon', [
     'ngRoute',
     'ngResource',
-    'services'
+    'services',
+    'containers',
+    'containerDetails',
+    'images'
 ])
     .run(function ($rootScope) {
-        $rootScope.host = "http://devft-docker-host-01.web.zooplus.de:2375";
+        $rootScope.host = "http://devft-docker-host-02.web.zooplus.de:2375";
         //
         //$rootScope.sidemenu = 'app/shared/sidemenu.html';
         console.log("Rootscope initialized");
