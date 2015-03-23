@@ -20,12 +20,12 @@
                     <tr ng-repeat="image in images">
                         <td>
                             <button class="btn btn-info btn-block" ng-click="goImageDetails(image.Id)">
-                                <span class="glyphicon glyphicon-info-sign"></span> {{image.Id | limitTo:12}}
+                                {{image.Id | limitTo:12}}
                             </button>
                         </td>
                         <td>
                             <button class="btn btn-info btn-block" ng-click="goImageDetails(image.ParentId)">
-                                <span class="glyphicon glyphicon-info-sign"></span> {{image.ParentId | limitTo:12}}
+                                {{image.ParentId | limitTo:12}}
                             </button>
                         </td>
 

@@ -24,6 +24,7 @@ angular.module('containers', ['ngRoute'])
                 var containerDetails = Containers.get({containerId: container.Id}, function () {
                     $scope.containerDetails = containerDetails;
                     containerData.ImageId = containerDetails.Image;
+                    containerData.Name = containerDetails.Name.substr(1);
                 });
 
             });

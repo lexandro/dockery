@@ -9,7 +9,8 @@
                     </tr>
 
                     <tr>
-                        <td width="1%" class="text-center">Container ID</td>
+                        <td width="1%" class="text-center">ID</td>
+                        <td width="1%" class="text-center">Name</td>
                         <td width="1%" class="text-center">Image</td>
                         <td width="7%" class="text-center">Command</td>
                         <td width="15%" class="text-center">Created</td>
@@ -20,12 +21,18 @@
 
                     <tr ng-repeat="containerData in containerDataList">
                         <td>
-                            <button class="btn btn-info btn-block" ng-click="goContainerDetails(containerData.Id)">
-                                <span class="glyphicon glyphicon-info-sign"></span> {{containerData.Id | limitTo:12}}
+                            <button class="btn btn-info btn-block text-center" ng-click="goContainerDetails(containerData.Id)">
+                                {{containerData.Id | limitTo:12}}
                             </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-info btn-block text-right" ng-click="goContainerDetails(containerData.Id)">
+                                {{containerData.Name}}
+                            </button>
+                        </td>
                         <td>
                             <button class="btn btn-info btn-block" ng-click="goImageDetails(containerData.ImageId)">
-                                <span class="glyphicon glyphicon-info-sign"></span>{{containerData.Image}}
+                                {{containerData.Image}}
                             </button>
                         </td>
                         <td>{{containerData.Command}}</td>
