@@ -10,10 +10,8 @@ angular.module('containerDetails', ['ngRoute'])
     }])
 
     .controller('ContainerDetailsCtrl', ['$rootScope', '$scope', '$location', '$routeParams', 'Containers', function ($rootScope, $scope, $location, $routeParams, Containers) {
-        var containerDetails = Containers.get($routeParams.containerId, function () {
+        var containerDetails = Containers.get({containerId: $routeParams.containerId}, function () {
             $scope.containerDetails = containerDetails;
-            console.log("containerDetails " + JSON.stringify(containerDetails));
-            console.log($rootScope.host);
         });
     }])
 ;
