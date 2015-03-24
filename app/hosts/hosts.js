@@ -20,7 +20,7 @@ angular.module('hosts', ['ngRoute'])
         var host = {};
         host.id = Math.random().toString(36).substr(2, 9);
         host.name = 'DH1';
-        host.url = 'http://devft-docker-hostUrl-02.web.zooplus.de:2375';
+        host.url = 'http://devft-docker-host-02.web.zooplus.de:2375';
         host.created = new Date();
         host.lastConnected = null;
         host.order = 0;
@@ -34,7 +34,7 @@ angular.module('hosts', ['ngRoute'])
         var host3 = {};
         host3.id = Math.random().toString(36).substr(2, 9);
         host3.name = 'DH2';
-        host3.url = 'http://devft-docker-hostUrl-01.web.zooplus.de:2375';
+        host3.url = 'http://devft-docker-host-01.web.zooplus.de:2375';
         host3.order = 1;
         hosts.push(host3);
 
