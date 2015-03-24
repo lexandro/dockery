@@ -10,7 +10,7 @@ angular.module('images', ['ngRoute'])
     }])
 
     .controller('ImagesCtrl', ['$rootScope', '$scope', '$location', 'Helpers', 'Docker', function ($rootScope, $scope, $location, Helpers, Docker) {
-        if (Helpers.isEmpty($rootScope.host)) {
+        if (Helpers.isEmpty($rootScope.hostUrl)) {
             $location.path('/hosts');
         } else {
             //

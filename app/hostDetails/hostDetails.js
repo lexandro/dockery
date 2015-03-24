@@ -10,12 +10,12 @@ angular.module('hostDetails', ['ngRoute'])
     }])
 
     .controller('HostDetailsCtrl', ['$rootScope', '$scope', '$location', '$routeParams', 'Helpers', 'Docker', function ($rootScope, $scope, $location, $routeParams, Helpers, Docker) {
-        if (Helpers.isEmpty($rootScope.host)) {
+        if (Helpers.isEmpty($rootScope.hostUrl)) {
             $location.path('/hosts');
         } else {
             var dockerInfo = Docker.info().get(function () {
                 console.log('Hostdetails enter ' + JSON.stringify(dockerInfo));
-                dockerInfo.url = $rootScope.host;
+                dockerInfo.url = $rootScope.hostUrl;
                 $scope.dockerInfo = dockerInfo;
                 var versionInfo = Docker.version().get(function () {
                     $scope.versionInfo = versionInfo;

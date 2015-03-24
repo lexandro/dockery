@@ -25,7 +25,7 @@ angular.module('services', [])
     .factory('Docker', function ($resource, $rootScope) {
         return {
             containers: function () {
-                return $resource($rootScope.host + '/containers/:containerId/json', {
+                return $resource($rootScope.hostUrl + '/containers/:containerId/json', {
                     query: {
                         method: "GET",
                         isArray: true
@@ -36,7 +36,7 @@ angular.module('services', [])
                     }
                 });
             }, images: function () {
-                return $resource($rootScope.host + '/images/:imageId/json', {
+                return $resource($rootScope.hostUrl + '/images/:imageId/json', {
                     query: {
                         method: "GET",
                         isArray: true
@@ -48,7 +48,7 @@ angular.module('services', [])
                 });
             },
             info: function () {
-                return $resource($rootScope.host + '/info', {
+                return $resource($rootScope.hostUrl + '/info', {
                     get: {
                         method: "GET",
                         isArray: false
@@ -56,7 +56,7 @@ angular.module('services', [])
                 });
             },
             version: function () {
-                return $resource($rootScope.host + '/version', {
+                return $resource($rootScope.hostUrl + '/version', {
                     get: {
                         method: "GET",
                         isArray: false
@@ -80,7 +80,7 @@ angular.module('services', [])
                 var hosts = JSON.parse(localStorage.getItem("hosts"));
                 hosts.forEach(function (host) {
                     if (host.default) {
-                        $rootScope.host = host;
+                        $rootScope.hostUrl = host;
                     }
                 });
                 return hosts;

@@ -2,48 +2,58 @@
 
     <div id="main-wrapper" class="col-md-12 pull-right">
         <div id="main">
-            <div class="row">
-                <div class="col-md-4">
-                    <input type="text" size="45">
-                </div>
-                <div class="col-md-1">
-                    <button class="btn btn-info">Add</button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-1">&nbsp;</div>
-
-
-            </div>
-
-
-            <table class="table table-condensed table-bordered">
-                <tr class="success">
-                    <td colspan="8" align="center">Hosts data</td>
-                </tr>
-                <tr>
-                    <td width="20%" class="text-center"><strong>Name</strong></td>
-                    <td width="30%" class="text-center"><strong>Host URL</strong></td>
-                    <td width="8%" class="text-center"><strong>Created</strong></td>
-                    <td width="8%" class="text-center"><strong>Last connected</strong></td>
-                    <td width="1%" class="text-center"><strong>Actions</strong></td>
-                    <td width="1%" class="text-center"><strong>Default</strong></td>
-                </tr>
-                <tr ng-repeat="host in hosts">
-                    <td width="5%" class="text-left">{{host.name}}</td>
-                    <td width="5%" class="text-left">{{host.url | limitTo:50}}</td>
-                    <td width="1%" class="text-center">{{host.created | date : shortDate}}</td>
-                    <td width="7%" class="text-center">{{host.lastConnected | date : shortDate}}</td>
-                    <td width="15%" class="text-center">
-                        <button class="btn btn-info glyphicon glyphicon-log-in" ng-click="setHost(host)"/>
-                        <button class="btn btn-info glyphicon glyphicon-cog" ng-click=""/>
-                        <button class="btn btn-info glyphicon glyphicon-remove" ng-click=""/>
-                    </td>
-                    <td width="7%" class="text-center"><span style="font-size:1.5em;" class="glyphicon glyphicon-unchecked" aria-hidden="true"></span></td>
-                </tr>
-
-            </table>
-
         </div>
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <label class="sr-only" for="dockerHostUrl"></label>
+                <input type="url" class="form-control" id="dockerHostUrl" placeholder="docker host address">
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+            <div class="form-group">
+                <label class="sr-only" for="pingInterval"></label>
+                <input ng-model='pingInterval' type="number" class="form-control" id="pingInterval" placeholder="Ping interval in ms">
+            </div>
+            <button type="submit" class="btn btn-primary">Set</button>
+
+        </form>
+        <form class="form-inline" role="form">
+        </form>
+        <br/>
+
+        <table class="table table-condensed table-bordered">
+            <tr class="success">
+                <td colspan="8" align="center">Hosts data</td>
+            </tr>
+            <tr>
+                <td width="1%" class="text-center"><strong>Health</strong></td>
+                <td width="20%" class="text-center"><strong>Name</strong></td>
+                <td width="30%" class="text-center"><strong>Host URL</strong></td>
+                <td width="8%" class="text-center"><strong>Created</strong></td>
+                <td width="8%" class="text-center"><strong>Last connected</strong></td>
+                <td width="1%" class="text-center"><strong>Actions</strong></td>
+                <td width="1%" class="text-center"><strong>Default</strong></td>
+            </tr>
+            <tr ng-repeat="host in hosts">
+                <td width="1%" class="text-left">
+                    <button ng-disabled='!host.status'
+                            ng-click="checkHost(host)"
+                            ng-class="{'btn btn-success glyphicon glyphicon-signal': host.status, 'btn btn-danger glyphicon glyphicon-remove-sign': !host.status}"
+                            />
+                </td>
+                <td width="5%" class="text-left">{{host.name}}</td>
+                <td width="5%" class="text-left">{{host.url | limitTo:50}}</td>
+                <td width="1%" class="text-center">{{host.created | date : shortDate}}</td>
+                <td width="7%" class="text-center">{{host.lastConnected | date : shortDate}}</td>
+                <td width="15%" class="text-center">
+                    <button class="btn btn-info glyphicon glyphicon-log-in" ng-click="checkContainersFor(host)"/>
+                    <button class="btn btn-info glyphicon glyphicon-cog" ng-click=""/>
+                    <button class="btn btn-info glyphicon glyphicon-remove" ng-click=""/>
+                </td>
+                <td width="7%" class="text-center"><span style="font-size:1.5em;" class="glyphicon glyphicon-unchecked" aria-hidden="true"></span></td>
+            </tr>
+
+        </table>
+
     </div>
+</div>
 </div>

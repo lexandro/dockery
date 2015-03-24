@@ -10,7 +10,7 @@ angular.module('imageDetails', ['ngRoute'])
     }])
 
     .controller('ImageDetailsCtrl', ['$rootScope', '$scope', '$location', '$routeParams', 'Helpers', 'Docker', function ($rootScope, $scope, $location, $routeParams, Helpers, Docker) {
-        if (Helpers.isEmpty($rootScope.host)) {
+        if (Helpers.isEmpty($rootScope.hostUrl)) {
             $location.path('/hosts');
         } else {
             var imageDetails = Docker.images().get({imageId: $routeParams.imageId}, function () {

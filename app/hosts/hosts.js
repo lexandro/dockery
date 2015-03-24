@@ -7,12 +7,19 @@ angular.module('hosts', ['ngRoute'])
             controller: 'HostCtrl'
         });
     }])
-    .controller('HostCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'HostService', function ($rootScope, $scope, $location, $timeout, HostService) {
+    .controller('HostCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'HostService', 'Helpers', 'Docker', function ($rootScope, $scope, $location, $timeout, HostService, Helpers, Docker) {
+        // do we have previously set ping interval?
+        if (!hasOwnProperty.call($rootScope, 'lastPingInterval')) {
+            // no, initialize
+            $rootScope.lastPingInterval = 5000;
+        }
+        $scope.pingInterval = $rootScope.lastPingInterval;
+
 
         var hosts = [];
         var host = {};
         host.name = 'DH1';
-        host.url = 'http://devft-docker-host-02.web.zooplus.de:2375';
+        host.url = 'http://devft-docker-hostUrl-02.web.zooplus.de:2375';
         host.created = new Date();
         host.lastConnected = null;
         host.order = 0;
@@ -24,7 +31,7 @@ angular.module('hosts', ['ngRoute'])
         hosts.push(host2);
         var host3 = {};
         host3.name = 'DH2';
-        host3.url = 'http://devft-docker-host-01.web.zooplus.de:2375';
+        host3.url = 'http://devft-docker-hostUrl-01.web.zooplus.de:2375';
         host3.order = 1;
         hosts.push(host3);
 
@@ -33,28 +40,59 @@ angular.module('hosts', ['ngRoute'])
 
         var hosts = [];
         hosts = HostService.load();
+        hosts.forEach(function (host) {
+            host.status = false;
+        });
         $scope.hosts = hosts;
 
-        $scope.setHost = function (host) {
-            $rootScope.host = host.url;
+        var setHost = function (host) {
+            $rootScope.hostUrl = host.url;
             host.lastConnected = new Date();
             console.log(JSON.stringify($scope.hosts));
             HostService.save($scope.hosts);
+        }
+        $scope.checkContainersFor = function (host) {
+            $rootScope.hostUrl = host.url;
+            setHost(host);
             $location.path('/containers');
-
         }
 
-        if (!hasOwnProperty.call($rootScope, 'tick') && $rootScope.tick != true) {
+        $scope.checkHost = function (host) {
+            setHost(host);
+            $location.path('/hostDetails');
+        }
+
+
+        if (!hasOwnProperty.call($rootScope, 'tick') || $rootScope.tick == false) {
             console.log('tickstart');
             $rootScope.tick = true;
             tick();
         } else {
             console.log('tickNEMstart');
         }
+        $scope.$on("$destroy", function () {
+            $rootScope.tick = false;
+        });
 
+        function tick() {
+            if ($rootScope.tick == true) {
+                console.log('ticklog in');
+                hosts.forEach(function (host) {
+                    Docker.ping(host.url).get(function (response) {
+                        host.status = true;
+                    }, function (response) {
+                        host.status = false;
+                    });
 
-        function tick($rootScope) {
-            console.log('tick');
-            $timeout(tick, 5000);
+                });
+
+                var interval = parseInt($scope.pingInterval);
+                if (isNaN(interval) || interval < 1000) {
+                    interval = $rootScope.lastPingInterval;
+                } else {
+                    $rootScope.lastPingInterval = $scope.pingInterval;
+                }
+                $timeout(tick, interval);
+            }
         };
     }]);
