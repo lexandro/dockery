@@ -5,15 +5,18 @@
         </div>
         <form class="form-inline" role="form">
             <div class="form-group">
-                <label class="sr-only" for="dockerHostUrl"></label>
-                <input type="url" class="form-control" id="dockerHostUrl" placeholder="docker host address">
+                <input type="text" class="form-control" id="newHostName" ng-model="newHostName" placeholder="name">
+                <input type="url" class="form-control" id="newHostUrl" ng-model="newHostUrl" placeholder="docker host address">
             </div>
-            <button type="submit" class="btn btn-primary">Add</button>
+            <button type="submit" class="btn btn-primary" ng-click="addHost()">Add</button>
+            <br/>
+            <br/>
+
             <div class="form-group">
                 <label class="sr-only" for="pingInterval"></label>
                 <input ng-model='pingInterval' type="number" class="form-control" id="pingInterval" placeholder="Ping interval in ms">
             </div>
-            <button type="submit" class="btn btn-primary">Set</button>
+            <button type="submit" class="btn btn-primary" ng-click="updateStatus()">Set</button>
 
         </form>
         <form class="form-inline" role="form">
@@ -26,7 +29,7 @@
             </tr>
             <tr>
                 <td width="1%" class="text-center"><strong>Health</strong></td>
-                <td width="20%" class="text-center"><strong>Name</strong></td>
+                <td width="15%" class="text-center"><strong>Name</strong></td>
                 <td width="30%" class="text-center"><strong>Host URL</strong></td>
                 <td width="8%" class="text-center"><strong>Created</strong></td>
                 <td width="8%" class="text-center"><strong>Last connected</strong></td>
@@ -38,6 +41,7 @@
                     <button ng-disabled='!host.status'
                             ng-click="checkHost(host)"
                             ng-class="{'btn btn-success glyphicon glyphicon-signal': host.status, 'btn btn-danger glyphicon glyphicon-remove-sign': !host.status}"
+                            title="See host stats"
                             />
                 </td>
                 <td width="5%" class="text-left">{{host.name}}</td>
@@ -45,9 +49,10 @@
                 <td width="1%" class="text-center">{{host.created | date : shortDate}}</td>
                 <td width="7%" class="text-center">{{host.lastConnected | date : shortDate}}</td>
                 <td width="15%" class="text-center">
-                    <button class="btn btn-info glyphicon glyphicon-log-in" ng-click="checkContainersFor(host)"/>
-                    <button class="btn btn-info glyphicon glyphicon-cog" ng-click=""/>
-                    <button class="btn btn-info glyphicon glyphicon-remove" ng-click=""/>
+                    <button ng-class="{'btn btn-success glyphicon glyphicon-log-in': host.selected, 'btn btn-info glyphicon glyphicon-log-in': !host.selected}"
+                            ng-click="checkContainersFor(host)" ng-disabled='!host.status' title="Select host"/>
+                    <button class="btn btn-info glyphicon glyphicon-cog" ng-click="" title="Edit host settings"/>
+                    <button class="btn btn-info glyphicon glyphicon-remove" ng-click="removeHost(host)" title="Delete host from the list"/>
                 </td>
                 <td width="7%" class="text-center"><span style="font-size:1.5em;" class="glyphicon glyphicon-unchecked" aria-hidden="true"></span></td>
             </tr>
