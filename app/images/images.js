@@ -9,13 +9,18 @@ angular.module('images', ['ngRoute'])
         });
     }])
 
-    .controller('ImagesCtrl', ['$rootScope', '$scope', '$location', 'Images', function ($rootScope, $scope, $location, Images) {
-        var images = Images.query(function () {
-            $scope.images = images;
-        });
+    .controller('ImagesCtrl', ['$rootScope', '$scope', '$location', 'Helpers', 'Docker', function ($rootScope, $scope, $location, Helpers, Docker) {
+        if (Helpers.isEmpty($rootScope.host)) {
+            $location.path('/hosts');
+        } else {
+            //
+            var images = Docker.images().query(function () {
+                $scope.images = images;
+            });
 
-        $scope.goImageDetails = function (path) {
-            $location.path('/imageDetails/' + path);
-        };
+            $scope.goImageDetails = function (path) {
+                $location.path('/imageDetails/' + path);
+            };
+        }
     }])
 ;
