@@ -7,35 +7,41 @@ angular.module('hosts', ['ngRoute'])
             controller: 'HostCtrl'
         });
     }])
-    .controller('HostCtrl', ['$rootScope', '$scope', '$location', 'Containers', function ($rootScope, $scope, $location, Containers) {
+    .controller('HostCtrl', ['$rootScope', '$scope', '$location', 'HostService', function ($rootScope, $scope, $location, HostService) {
 
-        var containers = Containers.query(function () {
-            var containerDataList = [];
-            containers.forEach(function (container) {
-                var containerData = {};
-                containerData.Id = container.Id;
-                containerData.Image = container.Image;
-                containerData.Command = container.Command;
-                containerData.Created = container.Created;
-                containerData.Status = container.Status;
-                containerData.Ports = container.Ports;
-                containerDataList.push(containerData);
+        var hosts = [];
+        var host = {};
+        host.name = 'DH1';
+        host.url = 'http://devft-docker-host-02.web.zooplus.de:2375';
+        host.created = new Date();
+        host.lastConnected = null;
+        host.order = 0;
+        hosts.push(host);
+        var host2 = {};
+        host2.name = 'Home';
+        host2.url = 'http://192.168.100.29:2375';
+        host2.order = 1;
+        hosts.push(host2);
+        var host3 = {};
+        host3.name = 'DH2';
+        host3.url = 'http://devft-docker-host-01.web.zooplus.de:2375';
+        host3.order = 1;
+        hosts.push(host3);
 
-                var containerDetails = Containers.get({containerId: container.Id}, function () {
-                    $scope.containerDetails = containerDetails;
-                    containerData.ImageId = containerDetails.Image;
-                });
+        //console.log(JSON.stringify(hosts));
+        HostService.save(hosts);
 
-            });
-            $scope.containerDataList = containerDataList;
-        });
-        //
-        $scope.goContainerDetails = function (path) {
-            $location.path('/containerDetails/' + path);
-        };
-        //
-        $scope.goImageDetails = function (path) {
-            $location.path('/imageDetails/' + path);
-        };
-    }])
-;
+        var hosts = [];
+        hosts = HostService.load();
+        $scope.hosts = hosts;
+
+        $scope.setHost = function (host) {
+            $rootScope.host = host.url;
+            host.lastConnected = new Date();
+            console.log(JSON.stringify($scope.hosts));
+            HostService.save($scope.hosts);
+            $location.path('/containers');
+
+        }
+
+    }]);

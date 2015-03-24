@@ -7,14 +7,25 @@
                     <td colspan="8" align="center">Hosts data</td>
                 </tr>
                 <tr>
-                    <td width="5%" class="text-center">Host URL</td>
-                    <td width="1%" class="text-center">Created</td>
-                    <td width="7%" class="text-center">Last connected</td>
-                    <td width="15%" class="text-center">Created</td>
-                    <td width="15%" class="text-center">Connect</td>
-                    <td width="7%" class="text-center">Delete</td>
+                    <td width="20%" class="text-center"><strong>Name</strong></td>
+                    <td width="30%" class="text-center"><strong>Host URL</strong></td>
+                    <td width="8%" class="text-center"><strong>Created</strong></td>
+                    <td width="8%" class="text-center"><strong>Last connected</strong></td>
+                    <td width="1%" class="text-center"><strong>Actions</strong></td>
+                    <td width="1%" class="text-center"><strong>Default</strong></td>
                 </tr>
-
+                <tr ng-repeat="host in hosts">
+                    <td width="5%" class="text-left">{{host.name}}</td>
+                    <td width="5%" class="text-left">{{host.url | limitTo:50}}</td>
+                    <td width="1%" class="text-center">{{host.created | date : shortDate}}</td>
+                    <td width="7%" class="text-center">{{host.lastConnected | date : shortDate}}</td>
+                    <td width="15%" class="text-center">
+                        <button class="btn btn-info glyphicon glyphicon-log-in" ng-click="setHost(host)"/>
+                        <button class="btn btn-info glyphicon glyphicon-cog" ng-click=""/>
+                        <button class="btn btn-info glyphicon glyphicon-remove" ng-click=""/>
+                    </td>
+                    <td width="7%" class="text-center"><span style="font-size:1.5em;" class="glyphicon glyphicon-unchecked" aria-hidden="true"></span></td>
+                </tr>
 
             </table>
 
