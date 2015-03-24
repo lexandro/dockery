@@ -7,7 +7,7 @@ angular.module('hosts', ['ngRoute'])
             controller: 'HostCtrl'
         });
     }])
-    .controller('HostCtrl', ['$rootScope', '$scope', '$location', 'HostService', function ($rootScope, $scope, $location, HostService) {
+    .controller('HostCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'HostService', function ($rootScope, $scope, $location, $timeout, HostService) {
 
         var hosts = [];
         var host = {};
@@ -44,4 +44,17 @@ angular.module('hosts', ['ngRoute'])
 
         }
 
+        if (!hasOwnProperty.call($rootScope, 'tick') && $rootScope.tick != true) {
+            console.log('tickstart');
+            $rootScope.tick = true;
+            tick();
+        } else {
+            console.log('tickNEMstart');
+        }
+
+
+        function tick($rootScope) {
+            console.log('tick');
+            $timeout(tick, 5000);
+        };
     }]);
