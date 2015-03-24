@@ -36,7 +36,6 @@ angular.module('services', [])
                     }
                 });
             }, images: function () {
-                //console.log('root ' + JSON.stringify($rootScope));
                 return $resource($rootScope.host + '/images/:imageId/json', {
                     query: {
                         method: "GET",
@@ -49,7 +48,6 @@ angular.module('services', [])
                 });
             },
             info: function () {
-                //console.log('root ' + JSON.stringify($rootScope));
                 return $resource($rootScope.host + '/info', {
                     get: {
                         method: "GET",
@@ -58,7 +56,6 @@ angular.module('services', [])
                 });
             },
             version: function () {
-                //console.log('root ' + JSON.stringify($rootScope));
                 return $resource($rootScope.host + '/version', {
                     get: {
                         method: "GET",
