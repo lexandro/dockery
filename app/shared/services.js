@@ -17,8 +17,11 @@ angular.module('services', [])
                 }
                 return true;
             },
-            hasTrueFlag: function hasTrueFlag(object, propertyName) {
+            hasTrueFlag: function (object, propertyName) {
                 return !!(object.hasOwnProperty(propertyName) && object[propertyName] == true);
+            },
+            newId: function () {
+                return Math.random().toString(36).substr(2, 9);
             }
         }
     })

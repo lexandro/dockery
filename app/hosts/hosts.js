@@ -18,7 +18,7 @@ angular.module('hosts', ['ngRoute'])
 
         var hosts = [];
         var host = {};
-        host.id = Math.random().toString(36).substr(2, 9);
+        host.id = Helpers.newId();
         host.name = 'DH1';
         host.url = 'http://devft-docker-host-02.web.zooplus.de:2375';
         host.created = new Date();
@@ -26,13 +26,13 @@ angular.module('hosts', ['ngRoute'])
         host.order = 0;
         hosts.push(host);
         var host2 = {};
-        host2.id = Math.random().toString(36).substr(2, 9);
+        host2.id = Helpers.newId();
         host2.name = 'Home';
         host2.url = 'http://192.168.100.29:2375';
         host2.order = 1;
         hosts.push(host2);
         var host3 = {};
-        host3.id = Math.random().toString(36).substr(2, 9);
+        host3.id = Helpers.newId();
         host3.name = 'DH2';
         host3.url = 'http://devft-docker-host-01.web.zooplus.de:2375';
         host3.order = 1;
@@ -82,7 +82,7 @@ angular.module('hosts', ['ngRoute'])
 
         $scope.addHost = function () {
             var host = {};
-            host.id = Math.random().toString(36).substr(2, 9);
+            host.id = Helpers.newId();
             host.name = $scope.newHostName;
             host.url = $scope.newHostUrl;
             host.created = new Date();
