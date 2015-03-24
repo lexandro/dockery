@@ -62,6 +62,15 @@ angular.module('services', [])
                         isArray: false
                     }
                 });
+            },
+
+            ping: function (hostUrl) {
+                return $resource(hostUrl + '/_ping', {
+                    get: {
+                        method: "GET",
+                        isArray: false
+                    }
+                });
             }
         }
     })
