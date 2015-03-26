@@ -1,49 +1,55 @@
 <div class="container">
 
-    <div id="main-wrapper" class="col-md-12 pull-right">
-        <div id="main">
-            <form name="constructionForm" novalidate>
-                <table class="table table-condensed table-bordered">
-                    <tr class="success">
-                        <td colspan="8" align="center">Containers on {{$root.hostUrl}}</td>
-                    </tr>
+    <div class="col-md-12 pull-right">
+        <div class="container">
+            <div class="page-header">
+                <h1>Example page header
+                    <small>Subtext for header</small>
+                </h1>
+            </div>
+            <div class="input-group">
 
-                    <tr>
-                        <td width="1%" class="text-center">ID</td>
-                        <td width="1%" class="text-center">Name</td>
-                        <td width="1%" class="text-center">Image</td>
-                        <td width="7%" class="text-center">Command</td>
-                        <td width="15%" class="text-center">Created</td>
-                        <td width="15%" class="text-center">Status</td>
-                        <td width="7%" class="text-center">Ports</td>
-                    </tr>
+                <input type="text" class="form-control" id="inputGroupSuccess1" aria-describedby="inputGroupSuccess1Status">
+            </div>
+            <table class="table table-condensed table-hover table-bordered">
+                <tr class="success">
+                    <td colspan="8" align="center">Containers on {{$root.hostUrl}}</td>
+                </tr>
+
+                <tr>
+                    <td width="1%" class="text-center">ID</td>
+                    <td width="1%" class="text-center">Name</td>
+                    <td width="1%" class="text-center">Image</td>
+                    <td width="7%" class="text-center">Command</td>
+                    <td width="15%" class="text-center">Created</td>
+                    <td width="15%" class="text-center">Status</td>
+                    <td width="7%" class="text-center">Ports</td>
+                </tr>
 
 
-                    <tr ng-repeat="containerData in containerDataList">
-                        <td>
-                            <button class="btn btn-info btn-block text-center" ng-click="goContainerDetails(containerData.Id)">
-                                {{containerData.Id | limitTo:12}}
-                            </button>
-                        </td>
-                        <td>
-                            <button class="btn btn-info btn-block text-right" ng-click="goContainerDetails(containerData.Id)">
-                                {{containerData.Name}}
-                            </button>
-                        </td>
-                        <td>
-                            <button class="btn btn-info btn-block" ng-click="goImageDetails(containerData.ImageId)">
-                                {{containerData.Image}}
-                            </button>
-                        </td>
-                        <td>{{containerData.Command}}</td>
-                        <td>{{containerData.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
-                        <td>{{containerData.Status}}</td>
-                        <td>{{containerData.Ports}}</td>
+                <tr ng-repeat="containerData in containerDataList">
+                    <td>
+                        <button class="btn btn-info btn-block text-center" ng-click="goContainerDetails(containerData.Id)">
+                            {{containerData.Id | limitTo:12}}
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-info btn-block text-right" ng-click="goContainerDetails(containerData.Id)">
+                            {{containerData.Name}}
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-info btn-block" ng-click="goImageDetails(containerData.ImageId)">
+                            {{containerData.Image}}
+                        </button>
+                    </td>
+                    <td>{{containerData.Command}}</td>
+                    <td>{{containerData.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
+                    <td>{{containerData.Status}}</td>
+                    <td>{{containerData.Ports}}</td>
 
-                    </tr>
-                </table>
-
-            </form>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
