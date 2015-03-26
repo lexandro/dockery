@@ -24,18 +24,23 @@ angular.module('hosts', ['ngRoute'])
         host.created = new Date();
         host.lastConnected = null;
         host.order = 0;
+        host.status = false;
         hosts.push(host);
         var host2 = {};
         host2.id = Helpers.newId();
         host2.name = 'Home';
         host2.url = 'http://192.168.100.29:2375';
         host2.order = 1;
+        host2.created = new Date();
+        host2.status = false;
         hosts.push(host2);
         var host3 = {};
         host3.id = Helpers.newId();
+        host3.created = new Date();
         host3.name = 'DH2';
         host3.url = 'http://devft-docker-host-01.web.zooplus.de:2375';
         host3.order = 1;
+        host3.status = false;
         hosts.push(host3);
 
         HostService.save(hosts);
@@ -116,6 +121,15 @@ angular.module('hosts', ['ngRoute'])
         if (!hasOwnProperty.call($rootScope, 'tick') || $rootScope.tick == false) {
             $scope.updateStatus();
         }
+
+        $scope.validateUrl = function (host) {
+            console.log('!!!!!!!!!!!!');
+            var prefix = 'http://';
+            if (host.url.substr(0, prefix.length) !== prefix) {
+                host.url = prefix + host.url;
+            }
+            pingHost(host);
+        };
 
         $scope.$on("$destroy", function () {
             $rootScope.tick = false;

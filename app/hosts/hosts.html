@@ -23,42 +23,75 @@
         </form>
         <br/>
 
-        <table class="table table-condensed table-bordered">
-            <tr class="success">
-                <td colspan="8" align="center">Hosts data</td>
-            </tr>
-            <tr>
-                <td width="1%" class="text-center"><strong>Health</strong></td>
-                <td width="15%" class="text-center"><strong>Name</strong></td>
-                <td width="30%" class="text-center"><strong>Host URL</strong></td>
-                <td width="8%" class="text-center"><strong>Created</strong></td>
-                <td width="8%" class="text-center"><strong>Last connected</strong></td>
-                <td width="1%" class="text-center"><strong>Actions</strong></td>
-                <td width="1%" class="text-center"><strong>Default</strong></td>
-            </tr>
-            <tr ng-repeat="host in hosts">
-                <td width="1%" class="text-left">
-                    <button ng-disabled='!host.status'
-                            ng-click="checkHost(host)"
-                            ng-class="{'btn btn-success glyphicon glyphicon-signal': host.status, 'btn btn-danger glyphicon glyphicon-remove-sign': !host.status}"
-                            title="See host stats"
-                            />
-                </td>
-                <td width="5%" class="text-left">{{host.name}}</td>
-                <td width="5%" class="text-left">{{host.url | limitTo:50}}</td>
-                <td width="1%" class="text-center">{{host.created | date : shortDate}}</td>
-                <td width="7%" class="text-center">{{host.lastConnected | date : shortDate}}</td>
-                <td width="15%" class="text-center">
-                    <button ng-class="{'btn btn-success glyphicon glyphicon-log-in': host.selected, 'btn btn-info glyphicon glyphicon-log-in': !host.selected}"
-                            ng-click="checkContainersFor(host)" ng-disabled='!host.status' title="Select host"/>
-                    <button class="btn btn-info glyphicon glyphicon-cog" ng-click="" title="Edit host settings"/>
-                    <button class="btn btn-info glyphicon glyphicon-remove" ng-click="removeHost(host)" title="Delete host from the list"/>
-                </td>
-                <td width="7%" class="text-center"><span style="font-size:1.5em;" class="glyphicon glyphicon-unchecked" aria-hidden="true"></span></td>
-            </tr>
+        <div class="table-responsive">
+            <table class="table table-condensed table-bordered">
+                <tr class="success">
+                    <td colspan="8" align="center">Hosts data</td>
+                </tr>
+                <tr>
+                    <td width="1%" class="text-center"><strong>Health</strong></td>
+                    <td width="15%" class="text-center"><strong>Name</strong></td>
+                    <td width="30%" class="text-center"><strong>Host URL</strong></td>
+                    <td width="8%" class="text-center"><strong>Created</strong></td>
+                    <td width="8%" class="text-center"><strong>Last connected</strong></td>
+                    <td width="1%" class="text-center"><strong>Actions</strong></td>
+                    <td width="1%" class="text-center"><strong>Default</strong></td>
+                </tr>
+                <tr ng-repeat="host in hosts | orderBy: '!status'">
+                    <td width="1%" class="text-left">
+                        <button ng-disabled="!host.status"
+                                ng-click="checkHost(host)"
+                                ng-class="{'btn btn-success glyphicon glyphicon-signal': host.status, 'btn btn-danger glyphicon glyphicon-remove-sign': !host.status}"
+                                title="See host stats">
+                        </button>
+                    </td>
+                    <td width="5%" class="text-left">
+                        <div ng-hide="nameEditorEnabled">
+                            {{host.name}}
+                            <div class="btn-group">
+                                <button class="btn btn-primary btn-xs glyphicon glyphicon-pencil"
+                                        ng-click="nameEditorEnabled=!nameEditorEnabled"></button>
+                            </div>
+                        </div>
+                        <div ng-show="nameEditorEnabled">
+                            <input ng-model="host.name">
+                            <button class="btn btn-primary btn-xs glyphicon glyphicon-ok"
+                                    ng-click="nameEditorEnabled=!nameEditorEnabled"></button>
+                        </div>
+                    </td>
+                    <td width="5%" class="text-left">
+                        <div ng-hide="urlEditorEnabled">
+                            {{host.url | limitTo:50}}
+                            <div class="btn-group">
+                                <button class="btn btn-primary btn-xs glyphicon glyphicon-pencil"
+                                        ng-click="urlEditorEnabled=!urlEditorEnabled"></button>
+                            </div>
+                        </div>
+                        <div ng-show="urlEditorEnabled">
+                            <input size="40" ng-model="host.url">
+                            <button class="btn btn-primary btn-xs glyphicon glyphicon-ok"
+                                    ng-click="urlEditorEnabled=!urlEditorEnabled;validateUrl(host)"></button>
+                        </div>
+                    </td>
+                    <td width="1%" class="text-center">{{host.created | date : shortDate}}</td>
+                    <td width="7%" class="text-center">{{host.lastConnected | date : shortDate}}</td>
+                    <td width="15%" class="text-center">
+                        <button ng-class="{'btn btn-success glyphicon glyphicon-log-in': host.selected, 'btn btn-info glyphicon glyphicon-log-in': !host.selected}"
+                                ng-click="checkContainersFor(host)" ng-disabled='!host.status' title="Select host"></button>
+                        <button class=" btn btn-info glyphicon glyphicon-remove" ng-click="removeHost(host)" title="Delete host from the list"></button>
+                    </td>
+                    <td width="7%" class="text-center"><span style="font-size:1.5em;" class="glyphicon glyphicon-unchecked" aria-hidden="true"></span></td>
+                </tr>
 
-        </table>
-
+            </table>
+        </div>
+        <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+            Extra small button <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            ...
+        </ul>
     </div>
+</div>
 </div>
 </div>
