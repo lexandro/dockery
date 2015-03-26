@@ -1,20 +1,98 @@
-<div class="container">
+<div class="container-fluid">
+    <div class="col-md-12 text-center">
+        <h1>Docker host information</h1>
+    </div>
 
-    <div id="main-wrapper" class="col-md-12 pull-right">
-        <div id="main">
-            <div class="col-md=12">Host url: {{dockerInfo.url}}</div>
-            <div class="col-md=12">Version: {{versionInfo.Version}}</div>
-            <div class="col-md=12">Api Version: {{versionInfo.ApiVersion}}</div>
-            <div class="col-md=12">KernelVersion: {{versionInfo.KernelVersion}}</div>
-            <div class="col-md=12">Go Version:{{versionInfo.GoVersion}}</div>
-            <div class="col-md=12">Index server address:{{dockerInfo.IndexServerAddress}}</div>
-            <div class="col-md=12">Debug:</div>
-            <div class="col-md=12">IPv4 forwarding:</div>
-            <div class="col-md=12">Memory limit</div>
-            <div class="col-md=12">Swap limit</div>
-            <div class="col-md=12">Containers</div>
-            <div class="col-md=12">Images</div>
+    <div class="col-md-12 pull-right">
+        <div>
+            <div class="col-md-4 text-right">Host URL</div>
+            <div class="col-md-5 text-left">{{dockerInfo.url}}</div>
+            <!---->
+            <div class="col-md-4 text-right">Docker daemon name</div>
+            <div class="col-md-5 text-left">{{dockerInfo.Name}}</div>
+            <!---->
+            <div class="col-md-4 text-right"><a href="#/containers"><strong>Containers</strong></a></div>
+            <div class="col-md-5 text-left"><a href="#/containers"><strong>{{dockerInfo.Containers}} (all)</strong></a></div>
+            <!---->
+            <div class="col-md-4 text-right"><a href="#/images"><strong>Images</strong></a></div>
+            <div class="col-md-5 text-left"><a href="#/images"><strong>{{dockerInfo.Images}} (all)</strong></a></div>
+            <!---->
+            <div class="col-md-4 text-right">Total memory</div>
+            <div class="col-md-5 text-left">{{dockerInfo.MemTotal/1024/1024/1024 | number:2}} GiB</div>
+            <!---->
+            <div class="col-md-4 text-right">Host operating system</div>
+            <div class="col-md-5 text-left">{{dockerInfo.OperatingSystem}}</div>
+            <!---->
+            <div class="col-md-4 text-right">CPUs</div>
+            <div class="col-md-5 text-left">{{dockerInfo.NCPU}}</div>
+            <!---->
+            <div class="col-md-4 text-right">Docker server version</div>
+            <div class="col-md-5 text-left">{{versionInfo.Version}}</div>
+            <!---->
+            <div class="col-md-4 text-right">Remote Api Version</div>
+            <div class="col-md-5 text-left">{{versionInfo.ApiVersion}}</div>
+            <!---->
+            <div class="col-md-4 text-right">Kernel Version</div>
+            <div class="col-md-5 text-left">{{versionInfo.KernelVersion}}</div>
+            <!---->
+            <div class="col-md-4 text-right">Go Version</div>
+            <div class="col-md-5 text-left">{{versionInfo.GoVersion}}</div>
+            <!---->
+            <div class="col-md-4 text-right">Registry</div>
+            <div class="col-md-5 text-left">{{dockerInfo.IndexServerAddress}}</div>
+            <!---->
+            <div class="col-md-4 text-right"><a href="https://docs.docker.com/introduction/understanding-docker/#union-file-systems">Storage Driver</a></div>
+            <div class="col-md-5 text-left"><a href="https://docs.docker.com/introduction/understanding-docker/#union-file-systems">{{dockerInfo.Driver}}</a>
+            </div>
+            <!---->
+            <div class="col-md-4 text-right">Execution Driver</div>
+            <div class="col-md-5 text-left">{{dockerInfo.ExecutionDriver}}</div>
+            <!---->
+            <div class="col-md-4 text-right">KernelVersion</div>
+            <div class="col-md-5 text-left">{{dockerInfo.KernelVersion}}</div>
+            <!---->
+            <div class="col-md-4 text-right">Docker daemon ID</div>
+            <div class="col-md-5 text-left">{{dockerInfo.ID}}</div>
+            <!---->
+            <div class="col-md-4 text-right">NFd</div>
+            <div class="col-md-5 text-left">{{dockerInfo.NFd}}</div>
+            <!---->
+            <div class="col-md-4 text-right">NGoroutines</div>
+            <div class="col-md-5 text-left">{{dockerInfo.NGoroutines}}</div>
+            <!---->
+            <div class="col-md-4 text-right">NEventsListener</div>
+            <div class="col-md-5 text-left">{{dockerInfo.NEventsListener}}</div>
+            <!---->
+            <div class="col-md-4 text-right">Docker path</div>
+            <div class="col-md-5 text-left">{{dockerInfo.InitPath}}</div>
+            <!---->
+            <div class="col-md-4 text-right">Memory Limit</div>
+            <div class="col-md-5 text-left">
+                <span ng-class="{'text-success glyphicon glyphicon-ok-circle': dockerInfo.MemoryLimit==1,'text-danger glyphicon glyphicon-ban-circle': dockerInfo.MemoryLimit==0}"></span>
+            </div>
+            <!---->
+            <div class="col-md-4 text-right">Swap Limit</div>
+            <div class="col-md-5 text-left">
+                <span ng-class="{'text-success glyphicon glyphicon-ok-circle': dockerInfo.SwapLimit==1,'text-danger glyphicon glyphicon-ban-circle': dockerInfo.SwapLimit==0}"></span>
+            </div>
+            <!---->
+            <div class="col-md-4 text-right">IPv4 Forwarding</div>
+            <div class="col-md-5 text-left">
+                <span ng-class="{'text-success glyphicon glyphicon-ok-circle': dockerInfo.IPv4Forwarding==1, 'text-danger glyphicon glyphicon-ban-circle': dockerInfo.IPv4Forwarding==0}">
+                </span>
+            </div>
+            <!---->
+            <div class="col-md-4 text-right">Docker root dir</div>
+            <div class="col-md-5 text-left">{{dockerInfo.DockerRootDir}}</div>
+            <!---->
+            <!--<div class="col-md-4 text-right">InitSha1</div>-->
+            <!--<div class="col-md-5 text-left">{{dockerInfo.InitSha1}}</div>-->
+            <!---->
+            <!--<div class="col-md-4 text-right">Labels</div>-->
+            <!--<div class="col-md-5 text-left">{{dockerInfo.Labels}}</div>-->
+            <!---->
+            <div class="col-md-4 text-right">Git Commit</div>
+            <div class="col-md-5 text-left">{{versionInfo.GitCommit}}</div>
         </div>
     </div>
-</div>
 </div>

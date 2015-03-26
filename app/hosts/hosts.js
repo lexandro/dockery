@@ -72,6 +72,7 @@ angular.module('hosts', ['ngRoute'])
             $rootScope.hostUrl = host.url;
             setHost(host);
             host.selected = true;
+            host.lastConnected = new Date();
             $location.path('/containers');
         };
 
