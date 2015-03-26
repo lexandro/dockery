@@ -8,15 +8,15 @@
                 <input type="text" class="form-control" id="newHostName" ng-model="newHostName" placeholder="name">
                 <input type="url" class="form-control" id="newHostUrl" ng-model="newHostUrl" placeholder="docker host address">
             </div>
-            <button type="submit" class="btn btn-primary" ng-click="addHost()">Add</button>
+            <button type="submit" class="btn btn-primary glyphicon glyphicon-plus" ng-click="addHost()"></button>
             <br/>
             <br/>
 
-            <div class="form-group">
+            <div class="input-group">
                 <label class="sr-only" for="pingInterval"></label>
                 <input ng-model='pingInterval' type="number" class="form-control" id="pingInterval" placeholder="Ping interval in ms">
             </div>
-            <button type="submit" class="btn btn-primary" ng-click="updateStatus()">Set</button>
+            <button type="submit" class="btn btn-primary glyphicon glyphicon-refresh" ng-click="updateStatus()"></button>
 
         </form>
         <form class="form-inline" role="form">
@@ -41,7 +41,7 @@
                     <td width="1%" class="text-left">
                         <button ng-disabled="!host.status"
                                 ng-click="checkHost(host)"
-                                ng-class="{'btn btn-success glyphicon glyphicon-signal': host.status, 'btn btn-danger glyphicon glyphicon-remove-sign': !host.status}"
+                                ng-class="{'btn btn-success glyphicon glyphicon-signal': host.status, 'btn btn-danger glyphicon glyphicon-flash': !host.status}"
                                 title="See host stats">
                         </button>
                     </td>

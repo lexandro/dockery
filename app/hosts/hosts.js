@@ -87,18 +87,21 @@ angular.module('hosts', ['ngRoute'])
         };
 
         $scope.addHost = function () {
-            var host = {};
-            host.id = Helpers.newId();
-            host.name = $scope.newHostName;
-            host.url = $scope.newHostUrl;
-            host.created = new Date();
-            host.lastConnected = null;
-            host.status = false;
-            host.selected = false;
-            hosts.push(host);
-            $scope.hosts = hosts;
-            HostService.save($scope.hosts);
-            pingHost(host);
+            if (!Helpers.isEmpty($scope.newHostName) && !Helpers.isEmpty($scope.newHostUrl)) {
+                var host = {};
+                host.id = Helpers.newId();
+                host.name = $scope.newHostName;
+                host.url = $scope.newHostUrl;
+                host.created = new Date();
+                host.lastConnected = null;
+                host.status = false;
+                host.selected = false;
+                hosts.push(host);
+
+                $scope.hosts = hosts;
+                HostService.save($scope.hosts);
+                pingHost(host);
+            }
         };
 
         $scope.removeHost = function (deleteHost) {
