@@ -55,7 +55,6 @@
                         <div ng-show="editHostEnabled">
                             <input ng-model="host.name">
                         </div>
-
                     </td>
                     <td width="5%" class="text-left">
                         <div ng-click="editHostEnabled=!editHostEnabled">
@@ -66,9 +65,7 @@
                         </div>
                         <div ng-show="editHostEnabled">
                             <input size="40" ng-model="host.url">
-
                         </div>
-
                     </td>
                     <td width="1%" class="text-center">{{host.created | date : shortDate}}</td>
                     <td width="7%" class="text-center">{{host.lastConnected | date : shortDate}}</td>
