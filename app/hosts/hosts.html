@@ -51,10 +51,11 @@
                             <div ng-hide="editHostEnabled">
                                 {{host.name}}
                             </div>
-                            <div ng-show="editHostEnabled">
-                                <input ng-model="host.name">
-                            </div>
                         </div>
+                        <div ng-show="editHostEnabled">
+                            <input ng-model="host.name">
+                        </div>
+
                     </td>
                     <td width="5%" class="text-left">
                         <div ng-click="editHostEnabled=!editHostEnabled">
@@ -62,9 +63,10 @@
                                 {{host.url | limitTo:50}}
 
                             </div>
-                            <div ng-show="editHostEnabled">
-                                <input size="40" ng-model="host.url">
-                            </div>
+                        </div>
+                        <div ng-show="editHostEnabled">
+                            <input size="40" ng-model="host.url">
+
                         </div>
 
                     </td>
@@ -75,7 +77,7 @@
                                 ng-click="checkContainersFor(host)" ng-disabled='!host.status' title="Select host"></button>
                         <button ng-class="{'btn btn-warning glyphicon glyphicon-pencil':!editHostEnabled, 'btn btn-success glyphicon glyphicon-ok':editHostEnabled}"
                                 ng-click="editHostEnabled=!editHostEnabled" title="Edit host data"></button>
-                        <button class="btn btn-danger glyphicon glyphicon-remove" ng-click="removeHost(host)" title="Delete host from the list"></button>
+                        <button class="btn btn-danger glyphicon glyphicon-trash" ng-click="removeHost(host)" title="Delete host from the list"></button>
                     </td>
                     <td width="7%" class="text-center"><span style="font-size:1.5em;" class="glyphicon glyphicon-unchecked" aria-hidden="true"></span></td>
                 </tr>
