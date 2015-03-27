@@ -37,7 +37,7 @@
                     <td width="1%" class="text-center"><strong>Actions</strong></td>
                     <td width="1%" class="text-center"><strong>Default</strong></td>
                 </tr>
-                <tr ng-repeat="host in hosts | orderBy: '!status'">
+                <tr ng-repeat="host in hosts | orderBy: '[!status, name]'">
                     <td width="1%" class="text-left">
                         <button ng-disabled="!host.status"
                                 ng-click="checkHost(host)"
@@ -46,25 +46,24 @@
                         </button>
                     </td>
                     <td width="5%" class="text-left">
-                        <div ng-click="editHostEnabled=!editHostEnabled">
-
-                            <div ng-hide="editHostEnabled">
+                        <div ng-click="saveHost(host)">
+                            <div ng-hide="host.editHostEnabled">
                                 {{host.name}}
                             </div>
                         </div>
-                        <div ng-show="editHostEnabled">
-                            <input ng-model="host.name">
+                        <div ng-show="host.editHostEnabled">
+                            <input ng-model="host.editHostName">
                         </div>
                     </td>
                     <td width="5%" class="text-left">
-                        <div ng-click="editHostEnabled=!editHostEnabled">
-                            <div ng-hide="editHostEnabled">
+                        <div ng-click="saveHost(host)">
+                            <div ng-hide="host.editHostEnabled">
                                 {{host.url | limitTo:50}}
 
                             </div>
                         </div>
-                        <div ng-show="editHostEnabled">
-                            <input size="40" ng-model="host.url">
+                        <div ng-show="host.editHostEnabled">
+                            <input size="40" ng-model="host.editHostUrl">
                         </div>
                     </td>
                     <td width="1%" class="text-center">{{host.created | date : shortDate}}</td>
@@ -72,8 +71,8 @@
                     <td width="15%" class="text-center">
                         <button ng-class="{'btn btn-success glyphicon glyphicon-log-in': host.selected, 'btn btn-info glyphicon glyphicon-log-in': !host.selected}"
                                 ng-click="checkContainersFor(host)" ng-disabled='!host.status' title="Select host"></button>
-                        <button ng-class="{'btn btn-warning glyphicon glyphicon-pencil':!editHostEnabled, 'btn btn-success glyphicon glyphicon-ok':editHostEnabled}"
-                                ng-click="editHostEnabled=!editHostEnabled" title="Edit host data"></button>
+                        <button ng-class="{'btn btn-warning glyphicon glyphicon-pencil':!host.editHostEnabled, 'btn btn-success glyphicon glyphicon-ok':host.editHostEnabled}"
+                                ng-click="saveHost(host)" title="Edit host data"></button>
                         <button class="btn btn-danger glyphicon glyphicon-trash" ng-click="removeHost(host)" title="Delete host from the list"></button>
                     </td>
                     <td width="7%" class="text-center"><span style="font-size:1.5em;" class="glyphicon glyphicon-unchecked" aria-hidden="true"></span></td>
