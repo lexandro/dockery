@@ -25,7 +25,6 @@ angular.module('containers', ['ngRoute'])
             $scope.goImageDetails = function (path) {
                 $location.path('/imageDetails/' + path);
             };
-
         }
         function refreshContainers() {
             var containerDataList = {};

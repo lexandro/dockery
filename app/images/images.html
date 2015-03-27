@@ -1,43 +1,40 @@
-<div class="container">
+<div id="main-wrapper" class="col-md-12 pull-right">
+    <div id="main">
+        <form name="constructionForm" novalidate>
+            <table class="table table-condensed table-bordered">
+                <tr class="success">
+                    <td colspan="8" align="center">Images on {{$root.hostUrl}}</td>
+                </tr>
 
-    <div id="main-wrapper" class="col-md-12 pull-right">
-        <div id="main">
-            <form name="constructionForm" novalidate>
-                <table class="table table-condensed table-bordered">
-                    <tr class="success">
-                        <td colspan="8" align="center">Images on {{$root.hostUrl}}</td>
-                    </tr>
+                <tr>
+                    <td width="1%" class="text-center">Image ID</td>
+                    <td width="10%" class="text-center">Parent ID</td>
+                    <td width="10%" class="all-center">Created</td>
+                    <td width="7%" class="all-center">Repository tags</td>
+                    <td width="7%" class="all-center">Size</td>
+                    <td width="15%" class="all-center">VirtualSize</td>
+                </tr>
 
-                    <tr>
-                        <td width="1%" class="text-center">Image ID</td>
-                        <td width="10%" class="text-center">Parent ID</td>
-                        <td width="10%" class="all-center">Created</td>
-                        <td width="7%" class="all-center">Repository tags</td>
-                        <td width="7%" class="all-center">Size</td>
-                        <td width="15%" class="all-center">VirtualSize</td>
-                    </tr>
+                <tr ng-repeat="image in images">
+                    <td>
+                        <button class="btn btn-info btn-block" ng-click="goImageDetails(image.Id)">
+                            {{image.Id | limitTo:12}}
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-info btn-block" ng-click="goImageDetails(image.ParentId)">
+                            {{image.ParentId | limitTo:12}}
+                        </button>
+                    </td>
 
-                    <tr ng-repeat="image in images">
-                        <td>
-                            <button class="btn btn-info btn-block" ng-click="goImageDetails(image.Id)">
-                                {{image.Id | limitTo:12}}
-                            </button>
-                        </td>
-                        <td>
-                            <button class="btn btn-info btn-block" ng-click="goImageDetails(image.ParentId)">
-                                {{image.ParentId | limitTo:12}}
-                            </button>
-                        </td>
+                    <td>{{image.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
+                    <td>{{image.RepoTags}}</td>
+                    <td>{{image.Size}}</td>
+                    <td>{{image.VirtualSize}}</td>
 
-                        <td>{{image.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
-                        <td>{{image.RepoTags}}</td>
-                        <td>{{image.Size}}</td>
-                        <td>{{image.VirtualSize}}</td>
+                </tr>
+            </table>
 
-                    </tr>
-                </table>
-
-            </form>
-        </div>
+        </form>
     </div>
 </div>

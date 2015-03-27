@@ -6,40 +6,43 @@
     <link rel='stylesheet' href='assets/libs/bootstrap/dist/css/bootstrap.css'>
 </head>
 <body>
+<div id="header" class="navbar  navbar-fixed-top">
+    <div class="navbar-header">
+        <nav class="navbar navbar-default navbar-fixed-top ">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                        aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#/hostDetails">Docker|mon</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a class="active" href="#/hosts">Hosts</a></li>
+                    <li><a class="active" href="#/containers">Containers</a></li>
+                    <li><a href="#/images">Images</a></li>
+                </ul>
 
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#/hostDetails">Docker|mon</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a class="active" href="#/hosts">Hosts</a></li>
-                <li><a class="active" href="#/containers">Containers</a></li>
-                <li><a href="#/images">Images</a></li>
-            </ul>
-
-            <ul class="nav navbar-nav pull-right">
-                <li><a href="#">Help</a></li>
-            </ul>
+                <ul class="nav navbar-nav pull-right">
+                    <li><a href="#">Help</a></li>
+                </ul>
 
 
-        </div>
-        <!--/.nav-collapse -->
+            </div>
 
+        </nav>
     </div>
-</nav>
+</div>
 <br/>
 <br/>
 <br/>
 
-<div ng-view class="container"></div>
+<div ng-view class="container-fluid">
+
+</div>
 
 
 <!---->
