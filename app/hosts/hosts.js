@@ -15,36 +15,6 @@ angular.module('hosts', ['ngRoute'])
         }
         $scope.pingInterval = $rootScope.lastPingInterval;
 
-
-        //var hosts = [];
-        //var host = {};
-        //host.id = Helpers.newId();
-        //host.name = 'DH1';
-        //host.url = 'http://devft-docker-host-02.web.zooplus.de:2375';
-        //host.created = new Date();
-        //host.lastConnected = null;
-        //host.order = 0;
-        //host.status = false;
-        //hosts.push(host);
-        //var host2 = {};
-        //host2.id = Helpers.newId();
-        //host2.name = 'Home';
-        //host2.url = 'http://192.168.100.29:2375';
-        //host2.order = 1;
-        //host2.created = new Date();
-        //host2.status = false;
-        //hosts.push(host2);
-        //var host3 = {};
-        //host3.id = Helpers.newId();
-        //host3.created = new Date();
-        //host3.name = 'DH2';
-        //host3.url = 'http://devft-docker-host-01.web.zooplus.de:2375';
-        //host3.order = 1;
-        //host3.status = false;
-        //hosts.push(host3);
-        //
-        //HostService.save(hosts);
-
         var hosts = [];
         hosts = HostService.load();
         hosts.forEach(function (host) {
@@ -106,7 +76,6 @@ angular.module('hosts', ['ngRoute'])
         };
 
         $scope.saveHost = function (host) {
-            console.log("savehost");
             if (host.editHostEnabled) {
                 host.name = host.editHostName;
                 host.url = host.editHostUrl;
@@ -140,7 +109,6 @@ angular.module('hosts', ['ngRoute'])
         }
 
         $scope.validateUrl = function (host) {
-            console.log('!!!!!!!!!!!!');
             var prefix = 'http://';
             if (host.url.substr(0, prefix.length) !== prefix) {
                 host.url = prefix + host.url;

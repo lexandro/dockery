@@ -1,35 +1,36 @@
 <div class="container">
 
-    <div id="main-wrapper" class="col-md-12 pull-right">
-        <div id="main">
+    <div class="col-md-12">
+        <div>
         </div>
         <form class="form-inline" role="form">
             <div class="form-group">
                 <input type="text" class="form-control" id="newHostName" ng-model="newHostName" placeholder="name">
                 <input type="url" class="form-control" id="newHostUrl" ng-model="newHostUrl" placeholder="docker host address">
             </div>
-            <button type="submit" class="btn btn-primary glyphicon glyphicon-plus" ng-click="addHost()"></button>
+            <button type="submit" class="btn btn-success glyphicon glyphicon-plus" ng-click="addHost()"></button>
             <br/>
             <br/>
 
-            <div class="input-group">
-                <label class="sr-only" for="pingInterval"></label>
-                <input ng-model='pingInterval' type="number" class="form-control" id="pingInterval" placeholder="Ping interval in ms">
-            </div>
-            <button type="submit" class="btn btn-primary glyphicon glyphicon-refresh" ng-click="updateStatus()"></button>
-
         </form>
-        <form class="form-inline" role="form">
-        </form>
-        <br/>
-
         <div class="table-responsive">
             <table class="table table-condensed table-bordered">
                 <tr class="success">
-                    <td colspan="8" align="center">
-                        Hosts data
+                    <td colspan="8">
+                        <div class="input-group col-md-3">
+                            <label class="sr-only" for="pingInterval"></label>
+                            <input type="text" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required" id="pingInterval"
+                                   style="width: 100% !important;margin-top: 2px" ng-model='pingInterval' placeholder="Ping interval in ms">
+                            <span class="input-group-btn">
+                            <button ng-click="updateStatus()" title="Refresh list" type="submit" class="btn btn-primary glyphicon glyphicon-refresh"
+                                    style="width: 40px; margin-right: 160px;margin-left: 5px;">
+
+                            </button>
+                        </span>
+                        </div>
                     </td>
                 </tr>
+
                 <tr>
                     <td width="1%" class="text-center"><strong>Health</strong></td>
                     <td width="15%" class="text-center"><strong>Name</strong></td>
