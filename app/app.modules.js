@@ -16,8 +16,6 @@ angular.module('dockermon', [
     'imageDetails'
 ])
     .run(function ($rootScope) {
-        //$rootScope.sidemenu = 'app/shared/sidemenu.html';
-        console.log("Rootscope initialized");
     }).config(['$routeProvider', function ($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/hosts'});
     }]);
