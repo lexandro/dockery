@@ -71,15 +71,19 @@ angular.module('services', [])
             }
         }
     })
-    .factory('HostService', ['$rootScope', function ($rootScope) {
+    .factory('HostService', ['$rootScope', 'Helpers', function ($rootScope, Helpers) {
         return {
             load: function () {
                 var hosts = JSON.parse(localStorage.getItem("hosts"));
-                hosts.forEach(function (host) {
-                    if (host.default) {
-                        $rootScope.hostUrl = host;
-                    }
-                });
+                if (Helpers.isEmpty(hosts)) {
+                    hosts = [];
+                } else {
+                    hosts.forEach(function (host) {
+                        if (host.default) {
+                            $rootScope.hostUrl = host;
+                        }
+                    });
+                }
                 return hosts;
             },
             save: function (hosts) {
