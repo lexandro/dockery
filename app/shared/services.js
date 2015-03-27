@@ -2,16 +2,10 @@ angular.module('services', [])
     .factory('Helpers', function () {
         return {
             isEmpty: function (obj) {
-                var hasOwnProperty = Object.prototype.hasOwnProperty;
-                // null and undefined are "empty"
                 if (obj == null) return true;
-                // Assume if it has a length property with a non-zero value
-                // that that property is correct.
                 if (obj.length > 0)    return false;
                 if (obj.length === 0)  return true;
-                // Otherwise, does it have any properties of its own?
-                // Note that this doesn't handle
-                // toString and valueOf enumeration bugs in IE < 9
+                var hasOwnProperty = Object.prototype.hasOwnProperty;
                 for (var key in obj) {
                     if (hasOwnProperty.call(obj, key)) return false;
                 }
@@ -28,7 +22,7 @@ angular.module('services', [])
     .factory('Docker', function ($resource, $rootScope) {
         return {
             containers: function () {
-                return $resource($rootScope.hostUrl + '/containers/:containerId/json', {
+                return $resource($rootScope.hostUrl + '/containers/:containerId/json?size=:sizeFlag', {
                     query: {
                         method: "GET",
                         isArray: true
