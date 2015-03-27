@@ -1,55 +1,52 @@
 <div class="container">
 
-    <div class="col-md-12 pull-right">
-        <div class="container">
-            <div class="page-header">
-                <h1>Example page header
-                    <small>Subtext for header</small>
-                </h1>
-            </div>
-            <div class="input-group">
+    <table class="table table-condensed table-hover table-bordered">
+        <tr class="success">
+            <td colspan="8" align="center">
+                <div class="container">
+                    <div class="col-md-1">
+                        <span ng-click='refreshContainers()' class="glyphicon glyphicon-refresh left"></span>
+                    </div>
+                    <div class="col-md-11">
+                        Containers on {{$root.hostUrl}}
+                    </div>
 
-                <input type="text" class="form-control" id="inputGroupSuccess1" aria-describedby="inputGroupSuccess1Status">
-            </div>
-            <table class="table table-condensed table-hover table-bordered">
-                <tr class="success">
-                    <td colspan="8" align="center">Containers on {{$root.hostUrl}}</td>
-                </tr>
+                </div>
+            </td>
+        </tr>
 
-                <tr>
-                    <td width="1%" class="text-center">ID</td>
-                    <td width="1%" class="text-center">Name</td>
-                    <td width="1%" class="text-center">Image</td>
-                    <td width="7%" class="text-center">Command</td>
-                    <td width="15%" class="text-center">Created</td>
-                    <td width="15%" class="text-center">Status</td>
-                    <td width="7%" class="text-center">Ports</td>
-                </tr>
+        <tr>
+            <td width="1%" class="text-center">ID</td>
+            <td width="1%" class="text-center">Name</td>
+            <td width="1%" class="text-center">Image</td>
+            <td width="15%" class="text-center">Created</td>
+            <td width="15%" class="text-center">Status</td>
+            <td width="7%" class="text-center">Diff size</td>
+            <td width="7%" class="text-center">Virtual size</td>
+        </tr>
 
 
-                <tr ng-repeat="containerData in containerDataList">
-                    <td>
-                        <button class="btn btn-info btn-block text-center" ng-click="goContainerDetails(containerData.Id)">
-                            {{containerData.Id | limitTo:12}}
-                        </button>
-                    </td>
-                    <td>
-                        <button class="btn btn-info btn-block text-right" ng-click="goContainerDetails(containerData.Id)">
-                            {{containerData.Name}}
-                        </button>
-                    </td>
-                    <td>
-                        <button class="btn btn-info btn-block" ng-click="goImageDetails(containerData.ImageId)">
-                            {{containerData.Image}}
-                        </button>
-                    </td>
-                    <td>{{containerData.Command}}</td>
-                    <td>{{containerData.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
-                    <td>{{containerData.Status}}</td>
-                    <td>{{containerData.Ports}}</td>
+        <tr ng-repeat="(key, value) in containerDataList">
+            <td>
+                <button class="btn btn-info btn-block text-center" ng-click="goContainerDetails(value.Id)">
+                    {{value.Id | limitTo:12}}
+                </button>
+            </td>
+            <td>
+                <button class="btn btn-info btn-block text-right" ng-click="goContainerDetails(value.Id)">
+                    {{value.Name}}
+                </button>
+            </td>
+            <td>
+                <button class="btn btn-info btn-block" ng-click="goImageDetails(value.ImageId)">
+                    {{value.Image}}
+                </button>
+            </td>
+            <td>{{value.Created * 1000 | date:'dd, MMM yyyy HH:mm:ss'}}</td>
+            <td class="text-center">{{value.Status}}</td>
+            <td>{{value.SizeRw | bytes }}</td>
+            <td>{{value.SizeRootFs | bytes }}</td>
 
-                </tr>
-            </table>
-        </div>
-    </div>
+        </tr>
+    </table>
 </div>

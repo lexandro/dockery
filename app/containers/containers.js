@@ -8,22 +8,38 @@ angular.module('containers', ['ngRoute'])
         });
     }])
     .controller('ContainerCtrl', ['$rootScope', '$scope', '$location', 'Helpers', 'Docker', function ($rootScope, $scope, $location, Helpers, Docker) {
-        console.log('COntainers');
         if (Helpers.isEmpty($rootScope.hostUrl)) {
             $location.path('/hosts');
         } else {
+            refreshContainers();
 
+
+            $scope.refreshContainers = function () {
+                refreshContainers();
+            };
+            //
+            $scope.goContainerDetails = function (path) {
+                $location.path('/containerDetails/' + path);
+            };
+            //
+            $scope.goImageDetails = function (path) {
+                $location.path('/imageDetails/' + path);
+            };
+
+        }
+        function refreshContainers() {
+            var containerDataList = {};
             var containers = Docker.containers().query(function () {
-                var containerDataList = [];
                 containers.forEach(function (container) {
                     var containerData = {};
+
                     containerData.Id = container.Id;
                     containerData.Image = container.Image;
-                    containerData.Command = container.Command;
                     containerData.Created = container.Created;
                     containerData.Status = container.Status;
-                    containerData.Ports = container.Ports;
-                    containerDataList.push(containerData);
+                    containerData.SizeRw = 0;
+                    containerData.SizeRootFs = 0;
+                    containerDataList[containerData.Id] = containerData;
 
                     var containerDetails = Docker.containers().get({containerId: container.Id}, function () {
                         $scope.containerDetails = containerDetails;
@@ -34,13 +50,15 @@ angular.module('containers', ['ngRoute'])
                 });
                 $scope.containerDataList = containerDataList;
             });
-            //
-            $scope.goContainerDetails = function (path) {
-                $location.path('/containerDetails/' + path);
-            };
-            //
-            $scope.goImageDetails = function (path) {
-                $location.path('/imageDetails/' + path);
-            };
+            var containersWithSize = Docker.containers().query({sizeFlag: 1}, function () {
+                containersWithSize.forEach(function (containerWithSize) {
+                    var containerData = containerDataList[containerWithSize.Id];
+                    if (containerWithSize.Id == containerData.Id) {
+                        containerData.SizeRw = containerWithSize.SizeRw;
+                        containerData.SizeRootFs = containerWithSize.SizeRootFs;
+                    }
+                });
+                $scope.containerDataList = containerDataList;
+            });
         }
     }]);
