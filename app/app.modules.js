@@ -6,6 +6,7 @@
 angular.module('dockermon', [
     'ngRoute',
     'ngResource',
+    'filters',
     'services',
     'hosts',
     'hostDetails',
@@ -19,7 +20,6 @@ angular.module('dockermon', [
         console.log("Rootscope initialized");
     }).config(['$routeProvider', function ($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/hosts'});
-    }])
-;
+    }]);
 
 
