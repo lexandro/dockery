@@ -34,13 +34,14 @@
             </td>
             <td>
                 <button class="btn btn-info btn-block text-right" ng-click="goContainerDetails(value.Id)">
-                    {{value.Name}}
+                    {{value.Name | shorten:true:30}}
                 </button>
             </td>
             <td>
                 <button class="btn btn-info btn-block" ng-click="goImageDetails(value.ImageId)">
-                    {{value.Image}}
+                    {{value.Image | shorten:true:30}}
                 </button>
+
             </td>
             <td>{{value.Created * 1000 | date:'dd, MMM yyyy HH:mm:ss'}}</td>
             <td class="text-center">{{value.Status}}</td>

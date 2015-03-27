@@ -50,7 +50,7 @@
                     <td width="5%" class="text-left">
                         <div ng-click="saveHost(host)">
                             <div ng-hide="host.editHostEnabled">
-                                {{host.name}}
+                                {{host.name | shorten:true:35}}
                             </div>
                         </div>
                         <div ng-show="host.editHostEnabled">
@@ -60,7 +60,7 @@
                     <td width="5%" class="text-left">
                         <div ng-click="saveHost(host)">
                             <div ng-hide="host.editHostEnabled">
-                                {{host.url | limitTo:50}}
+                                {{host.url | shorten:true:50}}
 
                             </div>
                         </div>
