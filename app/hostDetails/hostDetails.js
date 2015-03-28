@@ -14,7 +14,6 @@ angular.module('hostDetails', ['ngRoute'])
             $location.path('/hosts');
         } else {
             var dockerInfo = Docker.info().get(function () {
-                console.log('Hostdetails enter ' + JSON.stringify(dockerInfo));
                 dockerInfo.url = $rootScope.hostUrl;
                 $scope.dockerInfo = dockerInfo;
                 var versionInfo = Docker.version().get(function () {
