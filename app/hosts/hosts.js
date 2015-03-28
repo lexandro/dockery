@@ -16,26 +16,30 @@ angular.module('hosts', ['ngRoute'])
         $scope.pingInterval = $rootScope.lastPingInterval;
 
         var hosts = [];
-        hosts = HostService.load();
+        try {
+            hosts = HostService.load();
+        } catch (err) {
+            console.log("Error loading hosts data: " + err);
+        }
+
         hosts.forEach(function (host) {
             host.status = false;
             host.editHostEnabled = false;
-            if (hasOwnProperty.call($rootScope, 'hostUrl')) {
+            host.selected = false;
+
+            if (!Helpers.isEmpty($rootScope.hostUrl)) {
                 host.selected = (host.url == $rootScope.hostUrl);
-            }
-            else {
-                host.selected = false;
+            } else {
+                if (host.defaultConnection) {
+                    selectHost(host);
+                    host.selected = true;
+                } else {
+                    host.selected = false;
+                }
+
             }
         });
         $scope.hosts = hosts;
-
-        function setHost(host) {
-            $rootScope.hostUrl = host.url;
-            host.lastConnected = new Date();
-            HostService.save($scope.hosts);
-        }
-
-
         function pingHost(host) {
             Docker.ping(host.url).get(function () {
                 host.status = true;
@@ -44,68 +48,20 @@ angular.module('hosts', ['ngRoute'])
             });
         }
 
-        $scope.checkContainersFor = function (host) {
-            $rootScope.hostUrl = host.url;
-            setHost(host);
+        function selectHost(host) {
             host.selected = true;
-            host.lastConnected = new Date();
-            $location.path('/containers');
-        };
+            setActiveHost(host);
+        }
 
-        $scope.checkHost = function (host) {
-            setHost(host);
-            $location.path('/hostDetails');
-        };
-
-        $scope.addHost = function () {
-            if (!Helpers.isEmpty($scope.newHostName) && !Helpers.isEmpty($scope.newHostUrl)) {
-                var host = {};
-                host.id = Helpers.newId();
-                host.name = $scope.newHostName;
-                host.url = $scope.newHostUrl;
-                host.created = new Date();
-                host.lastConnected = null;
-                host.status = false;
-                host.selected = false;
-                hosts.push(host);
-
-                $scope.hosts = hosts;
-                HostService.save($scope.hosts);
-                pingHost(host);
-            }
-        };
-
-        $scope.saveHost = function (host) {
-            if (host.editHostEnabled) {
-                host.name = host.editHostName;
-                host.url = host.editHostUrl;
-                HostService.save($scope.hosts);
-            } else {
-                host.editHostName = host.name;
-                host.editHostUrl = host.url;
-            }
-            host.editHostEnabled = !host.editHostEnabled;
-        };
-
-        $scope.removeHost = function (deleteHost) {
-            hosts.forEach(function (host, index, object) {
-                if (host.id === deleteHost.id) {
-                    object.splice(index, 1);
-                }
-            });
+        function saveHosts() {
             $scope.hosts = hosts;
             HostService.save($scope.hosts);
+        }
 
-        };
-
-        $scope.updateStatus = function () {
-            $rootScope.tick = true;
-            tick();
-        };
-
-
-        if (!hasOwnProperty.call($rootScope, 'tick') || $rootScope.tick == false) {
-            $scope.updateStatus();
+        function setActiveHost(host) {
+            $rootScope.hostUrl = host.url;
+            host.lastConnected = new Date();
+            saveHosts();
         }
 
         $scope.validateUrl = function (host) {
@@ -137,4 +93,74 @@ angular.module('hosts', ['ngRoute'])
                 $timeout(tick, interval);
             }
         }
-    }]);
+
+
+        $scope.setDefaultHost = function (host) {
+            var originalState = host.defaultConnection;
+            hosts.forEach(function (_host) {
+                _host.defaultConnection = false;
+            });
+            host.defaultConnection = !originalState;
+            saveHosts();
+        };
+
+        $scope.goContainers = function (host) {
+            selectHost(host);
+            $location.path('/containers');
+        };
+
+        $scope.goHostDetails = function (host) {
+            selectHost(host);
+            $location.path('/hostDetails');
+        };
+
+        $scope.addHost = function () {
+            if (!Helpers.isEmpty($scope.newHostName) && !Helpers.isEmpty($scope.newHostUrl)) {
+                var host = {};
+                host.id = Helpers.newId();
+                host.name = $scope.newHostName;
+                host.url = $scope.newHostUrl;
+                host.created = new Date();
+                host.lastConnected = null;
+                host.status = false;
+                host.defaultConnection = false;
+                host.selected = false;
+                hosts.push(host);
+
+                saveHosts();
+                pingHost(host);
+            }
+        };
+
+        $scope.saveHost = function (host) {
+            if (host.editHostEnabled) {
+                host.name = host.editHostName;
+                host.url = host.editHostUrl;
+                saveHosts();
+            } else {
+                host.editHostName = host.name;
+                host.editHostUrl = host.url;
+            }
+            host.editHostEnabled = !host.editHostEnabled;
+        };
+
+        $scope.removeHost = function (deleteHost) {
+            hosts.forEach(function (host, index, object) {
+                if (host.id === deleteHost.id) {
+                    object.splice(index, 1);
+                }
+            });
+            saveHosts();
+        };
+
+        $scope.updateStatus = function () {
+            $rootScope.tick = true;
+            tick();
+        };
+
+        if (!hasOwnProperty.call($rootScope, 'tick') || $rootScope.tick == false) {
+            $scope.updateStatus();
+        }
+
+    }])
+;

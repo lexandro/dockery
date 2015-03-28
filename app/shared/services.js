@@ -74,6 +74,7 @@ angular.module('services', [])
     .factory('HostService', ['$rootScope', 'Helpers', function ($rootScope, Helpers) {
         return {
             load: function () {
+                //localStorage.clear();
                 var hosts = JSON.parse(localStorage.getItem("hosts"));
                 if (Helpers.isEmpty(hosts)) {
                     hosts = [];
