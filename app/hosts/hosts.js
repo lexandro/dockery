@@ -29,14 +29,6 @@ angular.module('hosts', ['ngRoute'])
 
             if (!Helpers.isEmpty($rootScope.hostUrl)) {
                 host.selected = (host.url == $rootScope.hostUrl);
-            } else {
-                if (host.defaultConnection) {
-                    selectHost(host);
-                    host.selected = true;
-                } else {
-                    host.selected = false;
-                }
-
             }
         });
         $scope.hosts = hosts;
@@ -44,8 +36,12 @@ angular.module('hosts', ['ngRoute'])
         function pingHost(host) {
             Docker.ping(host.url).get(function () {
                 host.status = true;
+                if (host.defaultConnection) {
+                    selectHost(host);
+                    host.selected = true;
+                }
             }, function () {
-                host.status = false;
+                setDisabledHost(host);
             });
         }
 
@@ -63,6 +59,14 @@ angular.module('hosts', ['ngRoute'])
             $rootScope.hostUrl = host.url;
             host.lastConnected = new Date();
             saveHosts();
+        }
+
+        function setDisabledHost(host) {
+            host.status = false;
+            host.selected = false;
+            if ($rootScope.hostUrl === host.url) {
+                $rootScope.hostUrl = null;
+            }
         }
 
         $scope.validateUrl = function (host) {
