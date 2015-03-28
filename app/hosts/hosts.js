@@ -40,6 +40,7 @@ angular.module('hosts', ['ngRoute'])
             }
         });
         $scope.hosts = hosts;
+
         function pingHost(host) {
             Docker.ping(host.url).get(function () {
                 host.status = true;
