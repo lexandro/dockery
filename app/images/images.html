@@ -43,8 +43,8 @@
 
                     <td>{{image.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
                     <td>{{image.RepoTags}}</td>
-                    <td>{{image.Size}}</td>
-                    <td>{{image.VirtualSize}}</td>
+                    <td>{{image.Size | bytes}}</td>
+                    <td>{{image.VirtualSize| bytes}}</td>
 
                 </tr>
             </table>
