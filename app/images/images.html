@@ -3,9 +3,23 @@
         <form name="constructionForm" novalidate>
             <table class="table table-condensed table-hover table-bordered">
                 <tr class="success">
-                    <td colspan="8" align="center">Images on {{$root.hostUrl}}</td>
-                </tr>
+                    <td colspan="6">
+                        <div class="btn-group col-md-4" role="group" aria-label="...">
+                            <button type="button" class="btn btn-primary" style="margin-right: 5px"><span class="glyphicon glyphicon-refresh"></span>Refresh
+                            </button>
+                            <button type="button" class="btn btn-primary" style="margin-right: 5px"><span class="glyphicon glyphicon-unchecked"></span>All
+                            </button>
+                            <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-unchecked"></span>Untagged</button>
 
+                        </div>
+                        <div class="col-md-6 vcenter">
+                            Images on {{$root.hostUrl}}
+                        </div>
+
+                    </td>
+
+
+                </tr>
                 <tr>
                     <td width="1%" class="text-center">Image ID</td>
                     <td width="10%" class="text-center">Parent ID</td>
