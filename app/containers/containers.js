@@ -26,6 +26,16 @@ angular.module('containers', ['ngRoute'])
                 $location.path('/imageDetails/' + path);
             };
         }
+        function getObjectPropertiesAmount(containerDataList) {
+            var count = 0;
+            for (var prop in containerDataList) {
+                if (containerDataList.hasOwnProperty(prop)) {
+                    ++count;
+                }
+            }
+            return count;
+        }
+
         function refreshContainers() {
             var containerDataList = {};
             var containers = Docker.containers().query(function () {
@@ -48,6 +58,7 @@ angular.module('containers', ['ngRoute'])
 
                 });
                 $scope.containerDataList = containerDataList;
+                $scope.containerDataSize = getObjectPropertiesAmount(containerDataList);
             });
             var containersWithSize = Docker.containers().query({sizeFlag: 1}, function () {
                 containersWithSize.forEach(function (containerWithSize) {
@@ -58,6 +69,7 @@ angular.module('containers', ['ngRoute'])
                     }
                 });
                 $scope.containerDataList = containerDataList;
+                $scope.containerDataSize = getObjectPropertiesAmount(containerDataList);
             });
         }
     }]);
