@@ -14,13 +14,45 @@ angular.module('images', ['ngRoute'])
             $location.path('/hosts');
         } else {
             //
-            var images = Docker.images().query(function () {
-                $scope.images = images;
-            });
+
+            $scope.showAllImagesFlag = false;
+            $scope.showUntaggedImagesFlag = false;
+            refreshImages();
+
+
+            $scope.switchShowAllFlag = function () {
+                $scope.showAllImagesFlag = !$scope.showAllImagesFlag;
+                refreshImages();
+            };
+            $scope.switchShowUntaggedFlag = function () {
+                $scope.showUntaggedImagesFlag = !$scope.showUntaggedImagesFlag;
+                refreshImages();
+            };
+
+            $scope.refreshImages = function () {
+                refreshImages();
+            };
 
             $scope.goImageDetails = function (path) {
                 $location.path('/imageDetails/' + path);
             };
         }
+
+        function refreshImages() {
+            var images = Docker.images().query({showAllImagesFlag: $scope.showAllImagesFlag ? 1 : 0}, function () {
+                    var result = [];
+                    images.forEach(function (image) {
+                        if ($scope.showUntaggedImagesFlag == true) {
+                            result.push(image);
+                        } else if (image.RepoTags[0] != "<none>:<none>") {
+                            result.push(image);
+                        }
+                    });
+                    $scope.images = result;
+                }
+            );
+        }
+
+
     }])
 ;
