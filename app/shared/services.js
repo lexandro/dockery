@@ -22,7 +22,7 @@ angular.module('services', [])
     .factory('Docker', function ($resource, $rootScope) {
         return {
             containers: function () {
-                return $resource($rootScope.hostUrl + '/containers/:containerId/json?size=:sizeFlag', {
+                return $resource($rootScope.hostUrl + '/containers/:containerId/json?size=:sizeFlag', null, {
                     query: {
                         method: "GET",
                         isArray: true
@@ -33,19 +33,19 @@ angular.module('services', [])
                     }
                 });
             }, images: function () {
-                return $resource($rootScope.hostUrl + '/images/:imageId/json', {
-                    query: {
+                return $resource($rootScope.hostUrl + '/images/:imageId/json?all=:showAllImagesFlag', null, {
+                    'query': {
                         method: "GET",
                         isArray: true
                     },
-                    get: {
+                    'get': {
                         method: "GET",
                         isArray: false
                     }
                 });
             },
             info: function () {
-                return $resource($rootScope.hostUrl + '/info', {
+                return $resource($rootScope.hostUrl + '/info', null, {
                     get: {
                         method: "GET",
                         isArray: false
@@ -53,7 +53,7 @@ angular.module('services', [])
                 });
             },
             version: function () {
-                return $resource($rootScope.hostUrl + '/version', {
+                return $resource($rootScope.hostUrl + '/version', null, {
                     get: {
                         method: "GET",
                         isArray: false
@@ -62,7 +62,7 @@ angular.module('services', [])
             },
 
             ping: function (hostUrl) {
-                return $resource(hostUrl + '/_ping', {
+                return $resource(hostUrl + '/_ping', null, {
                     get: {
                         method: "GET",
                         isArray: false
