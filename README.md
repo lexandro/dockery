@@ -5,7 +5,7 @@ A small Docker host monitoring webapp for basic management of images and contain
 bootstrap frameworks. All fixed, changes, enhancement or ideas are welcome! :)
 
 
-Enable remote access to docker daemon
+Enable remote access to Docker daemon
 =====================================
 
 To manage your docker host(s) with **dockermon** please please add the following parameters to your Docker daemon launcher:
