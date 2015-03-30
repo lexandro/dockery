@@ -38,7 +38,8 @@
                 <td width="1%" class="text-center"><strong>Actions</strong></td>
                 <td width="1%" class="text-center"><strong>Default</strong></td>
             </tr>
-            <tr ng-repeat="host in hosts track by $index | orderBy: '[!status, name]'">
+            <tr ng-repeat="host in hosts  | orderBy: '[!status, name]'">
+                <!--<tr ng-repeat="host in hosts track by $index | orderBy: '[!status, name]'">-->
                 <td width="1%" class="text-left">
                     <button ng-disabled="!host.status"
                             ng-click="goHostDetails(host)"

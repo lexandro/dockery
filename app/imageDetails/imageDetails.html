@@ -1,10 +1,7 @@
-<div class="container">
-
-    <div id="main-wrapper" class="col-md-12 pull-right">
-        <div id="main">
-            <div class="col-md=12">Image details:</div>
-            <div class="col-md=12">Image Id: {{imageDetails.Id}}</div>
-            <div class="col-md=12">Author: {{imageDetails.Author}}</div>
-        </div>
+<div class="col-md-12 pull-right">
+    <div class="row">
+        <div class="col-md-3">Image details:</div>
+        <div class="col-md-6">Image Id: {{imageDetails.Id| limitTo:12}}</div>
+        <div class="col-md-3">Author: {{imageDetails.Author}}</div>
     </div>
 </div>
