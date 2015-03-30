@@ -1,4 +1,4 @@
-<div class="col-md-12 pull-right">
+<div class="col-md-12 pull-right" xmlns="http://www.w3.org/1999/html">
     <div class="row">
         <div class="col-md-12">
             <h1>Image: **first image tag**
@@ -8,38 +8,43 @@
     </div>
     <div class="row">
         <div class="col-md-1">ID/Parent ID:</div>
-        <div class="col-md-5">#{{imageDetails.Id | limitTo:12 }} / #{{imageDetails.Parent | limitTo:12}}</div>
-        <div class="col-md-1">Author:</div>
+        <div class="col-md-4">#{{imageDetails.Id | limitTo:12 }} / #{{imageDetails.Parent | limitTo:12}}</div>
+        <div class="col-md-2">Author:</div>
         <div class="col-md-5">{{imageDetails.Author}}</div>
     </div>
     <div class="row">
         <div class="col-md-1">Image name:</div>
-        <div class="col-md-5">N/A</div>
-        <div class="col-md-1">OS/Architecture:</div>
+        <div class="col-md-4">N/A</div>
+        <div class="col-md-2">OS/Architecture:</div>
         <div class="col-md-5">{{imageDetails.Os}}/{{imageDetails.Architecture}}</div>
     </div>
     <div class="row">
         <div class="col-md-1">Creation date:</div>
-        <div class="col-md-5">{{imageDetails.Created | date:'medium'}}</div>
-        <div class="col-md-1">Command:</div>
-        <div class="col-md-5">{{imageDetails.ContainerConfig.Cmd}}</div>
+        <div class="col-md-4">{{imageDetails.Created | date:'medium'}}</div>
+        <div class="col-md-2">Command:</div>
+        <div class="col-md-5"><code><span ng-repeat="cmd in imageDetails.ContainerConfig.Cmd"> {{cmd}}</span></code></div>
     </div>
     <div class="row">
         <div class="col-md-1">Docker version:</div>
-        <div class="col-md-5">{{imageDetails.DockerVersion}}</div>
-        <div class="col-md-1">Entry point:</div>
-        <div class="col-md-5">{{imageDetails.Config.Entrypoint}}</div>
+        <div class="col-md-4">{{imageDetails.DockerVersion}}</div>
+        <div class="col-md-2">Entry point:</div>
+        <div class="col-md-5"><code ng-show="imageDetails.Config.Entrypoint.length>0">{{imageDetails.Config.Entrypoint[0]}}</code></div>
     </div>
     <div class="row">
         <div class="col-md-1">Size (virtual size):</div>
-        <div class="col-md-5">{{imageDetails.Size | bytes}} ({{imageDetails.VirtualSize | bytes}})</div>
-        <div class="col-md-1">Exposed ports:</div>
+        <div class="col-md-4">{{imageDetails.Size | bytes}} ({{imageDetails.VirtualSize | bytes}})</div>
+        <div class="col-md-2">Exposed ports:</div>
         <div class="col-md-5">{{imageDetails.Config.ExposedPorts}}</div>
     </div>
     <div class="row">
         <div class="col-md-1">Comment:</div>
-        <div class="col-md-5">{{imageDetails.Comment}}</div>
-        <div class="col-md-1">Environment variables:</div>
-        <div class="col-md-5">{{imageDetails.Config.Env}}</div>
+        <div class="col-md-4">{{imageDetails.Comment}}</div>
+        <div class="col-md-2">Environment variables:</div>
+        <div class="col-md-5"><p ng-repeat="env in imageDetails.Config.Env"><code>{{env}}</code></p></div>
     </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-5">Working dir:</div>
+        <div class="col-md-5">{{imageDetails.Config.WorkingDir}}</div>
+    </div>
+    <hr/>
 </div>
