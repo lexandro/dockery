@@ -8,9 +8,20 @@ bootstrap frameworks. All fixed, changes, enhancement or ideas are welcome! :)
 Enable remote access to docker daemon
 =====================================
 
-To manage your docker host(s) with **dockermon** please please add the following parameters to your docker daemon launcher:
+To manage your docker host(s) with **dockermon** please please add the following parameters to your Docker daemon launcher:
 
 ```bash
  $ docker -d -H=0.0.0.0:2375 -api-enable-cors
+```
+
+or edit your /etc/default/docker file:
+
+```bash
+DOCKER_OPTS='-H tcp://0.0.0.0:2375 -api-enable-cors'
+```
+
+then issue the following command:
+```bash
+service docker restart
 ```
 
