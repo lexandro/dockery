@@ -1,7 +1,45 @@
 <div class="col-md-12 pull-right">
     <div class="row">
-        <div class="col-md-3">Image details:</div>
-        <div class="col-md-6">Image Id: {{imageDetails.Id| limitTo:12}}</div>
-        <div class="col-md-3">Author: {{imageDetails.Author}}</div>
+        <div class="col-md-12">
+            <h1>Image: **first image tag**
+
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">ID/Parent ID:</div>
+        <div class="col-md-5">#{{imageDetails.Id | limitTo:12 }} / #{{imageDetails.Parent | limitTo:12}}</div>
+        <div class="col-md-1">Author:</div>
+        <div class="col-md-5">{{imageDetails.Author}}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">Image name:</div>
+        <div class="col-md-5">N/A</div>
+        <div class="col-md-1">OS/Architecture:</div>
+        <div class="col-md-5">{{imageDetails.Os}}/{{imageDetails.Architecture}}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">Creation date:</div>
+        <div class="col-md-5">{{imageDetails.Created | date:'medium'}}</div>
+        <div class="col-md-1">Command:</div>
+        <div class="col-md-5">{{imageDetails.ContainerConfig.Cmd}}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">Docker version:</div>
+        <div class="col-md-5">{{imageDetails.DockerVersion}}</div>
+        <div class="col-md-1">Entry point:</div>
+        <div class="col-md-5">{{imageDetails.Config.Entrypoint}}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">Size (virtual size):</div>
+        <div class="col-md-5">{{imageDetails.Size | bytes}} ({{imageDetails.VirtualSize | bytes}})</div>
+        <div class="col-md-1">Exposed ports:</div>
+        <div class="col-md-5">{{imageDetails.Config.ExposedPorts}}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">Comment:</div>
+        <div class="col-md-5">{{imageDetails.Comment}}</div>
+        <div class="col-md-1">Environment variables:</div>
+        <div class="col-md-5">{{imageDetails.Config.Env}}</div>
     </div>
 </div>
