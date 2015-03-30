@@ -2,7 +2,9 @@ docker|mon
 ==========
 
 A small Docker host monitoring webapp for basic management of images and containers. This is my learning project to get familiar with angular.js and Twitter 
-bootstrap frameworks. All fixed, changes, enhancement or ideas are welcome! :)
+bootstrap frameworks. 
+
+All fixes, changes, enhancement or ideas are welcome! :)
 
 
 Enable remote access to Docker daemon
