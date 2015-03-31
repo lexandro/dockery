@@ -41,6 +41,12 @@ angular.module('services', [])
                     'get': {
                         method: "GET",
                         isArray: false
+                    },
+                    'history': {
+                        method: "GET",
+                        url: $rootScope.hostUrl + '/images/:imageId/history',
+                        isArray: true
+
                     }
                 });
             },
