@@ -17,8 +17,8 @@ angular.module('imageDetails', ['ngRoute'])
                 $scope.imageDetails = imageDetails;
             });
 
-            var imageHistory = Docker.images().history({imageId: $routeParams.imageId}, function () {
-                console.log(JSON.stringify(imageHistory));
+            var imageHistoryList = Docker.images().history({imageId: $routeParams.imageId}, function () {
+                $scope.imageHistoryList = imageHistoryList;
             });
         }
     }])

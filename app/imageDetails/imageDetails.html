@@ -47,4 +47,25 @@
         <div class="col-md-5">{{imageDetails.Config.WorkingDir}}</div>
     </div>
     <hr/>
+    <div class="table-responsive">
+        <table class="table table-condensed table-hover table-striped table-bordered">
+            <thead>
+            <tr class="success">
+                <td width="3%" class="text-center"><strong>Id</strong></td>
+                <td width="5%" class="text-center"><strong>Created</strong></td>
+                <td width="40%" class="text-center"><strong>Command</strong></td>
+                <td width="3%" class="text-center"><strong>Size</strong></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="imageHistory in imageHistoryList">
+                <td>{{imageHistory.Id | limitTo:12}}</td>
+                <td>{{imageHistory.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
+                <td>{{imageHistory.CreatedBy| limitTo:80}}</td>
+                <td>{{imageHistory.Size | bytes:2}}</td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
 </div>
