@@ -27,3 +27,24 @@ then issue the following command to activate changes:
 service docker restart
 ```
 
+TODO
+====
+
+
+- add list all checkbox to container list view
+- add list last n items to container list view
+- add list since filter to container list view 
+- add list before filter to container list view 
+- add exit code filter to container list view 
+- add status filter to container list view
+ 
+- enhance the initial container details view
+
+- fix default connection issue (two green buttons on hosts view)
+
+- add tag list to the image details
+- add paging to the tables/lists
+- add image deletion to the image list view
+- add group selection with checkbox to the image list view for multi-actions (delete, etc..)
+- add image pulling to the image list view 
+- redesign host information page
