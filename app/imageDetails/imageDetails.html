@@ -8,8 +8,9 @@
     </div>
     <div class="row">
         <div class="col-md-1">ID / Parent ID:</div>
-        <div class="col-md-4"><a ng-href="#/images/{{imageDetails.Id}}"><samp>{{imageDetails.Id | limitTo:12}}</samp></a> / <a
-                ng-href="#/images/{{imageDetails.Parent}}"><samp>{{imageDetails.Parent | limitTo:12}}</samp></a></div>
+        <div class="col-md-4"><a ng-href="#/images/{{imageDetails.Id}}"><samp><span
+                class="label label-primary">{{imageDetails.Id | limitTo:12}}</span></samp></a> / <a
+                ng-href="#/images/{{imageDetails.Parent}}"><samp><span class="label label-info">{{imageDetails.Parent | limitTo:12}}</span></samp></a></div>
         <div class="col-md-2">Author:</div>
         <div class="col-md-5">{{imageDetails.Author}}</div>
     </div>
@@ -57,17 +58,26 @@
         <table class="table table-condensed table-hover table-striped table-bordered">
             <thead>
             <tr class="success">
+                <td colspan="4">
+                    <div class="col-md-12 vcenter text-center">
+                        <strong>Image history <span class="badge">{{imageHistoryList.length}}</span></strong>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
                 <td width="3%" class="text-center"><strong>Id</strong></td>
                 <td width="5%" class="text-center"><strong>Created</strong></td>
-                <td width="40%" class="text-center"><strong>Command</strong></td>
+                <td width="40%" class="text-center"><strong>Command (first 160 chars)</strong></td>
                 <td width="3%" class="text-center"><strong>Size</strong></td>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="imageHistory in imageHistoryList">
-                <td><a ng-href="#/imageDetails/{{imageHistory.Id}}"><samp>{{imageHistory.Id | limitTo:12}}</samp></a></td>
+                <td class="text-center"><a ng-href="#/imageDetails/{{imageHistory.Id}}"><samp><span
+                        class="label label-info">{{imageHistory.Id | limitTo:12}}</span></samp></a></td>
                 <td>{{imageHistory.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
-                <td>{{imageHistory.CreatedBy| limitTo:80}}</td>
+                <td><code>{{imageHistory.CreatedBy| limitTo:160}}</code></td>
                 <td>{{imageHistory.Size | bytes:2}}</td>
             </tr>
             </tbody>
