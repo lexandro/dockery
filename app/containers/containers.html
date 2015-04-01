@@ -2,11 +2,19 @@
     <thead>
     <tr class="success">
         <td colspan="6">
-            <div class="btn-group col-md-4" role="group" aria-label="...">
-                <button type="button" class="btn btn-primary" ng-click='refreshContainers()' title="Refresh list" style="margin-right: 5px"><span
-                        class="glyphicon glyphicon-refresh"></span>Refresh
+            <div class="col-md-4">
+                <button type="button" ng-click="refreshContainers()" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span>Refresh
                 </button>
-                <button type="button" class="btn btn-success" ng-click='createContainer()' title="Create new container" style="margin-right: 5px"><span
+                <button type="button" class="btn btn-primary" ng-click="switchShowAllFlag()">
+                    <span ng-class="{'glyphicon glyphicon-unchecked':!showAllImagesFlag, 'glyphicon glyphicon-check':showAllImagesFlag}"></span>All
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="switchShowUntaggedFlag()"><span
+                        ng-class="{'glyphicon glyphicon-unchecked':!showUntaggedImagesFlag, 'glyphicon glyphicon-check':showUntaggedImagesFlag}"></span>Untagged
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="switchShowContainerSizeFlag()"><span
+                        ng-class="{'glyphicon glyphicon-unchecked':!showContainerSizeFlag, 'glyphicon glyphicon-check':showContainerSizeFlag}"></span>Show size
+                </button>
+                <button type="button" class="btn btn-success" ng-click='createContainer()' title="Create new container"><span
                         class="glyphicon glyphicon-plus"></span>Create
                 </button>
 

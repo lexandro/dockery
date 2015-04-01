@@ -11,8 +11,8 @@ angular.module('containers', ['ngRoute'])
         if (Helpers.isEmpty($rootScope.hostUrl)) {
             $location.path('/hosts');
         } else {
+            $scope.showContainerSizeFlag = false;
             refreshContainers();
-
 
             $scope.refreshContainers = function () {
                 refreshContainers();
