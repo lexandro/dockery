@@ -9,15 +9,12 @@
     <table class="table table-condensed table-hover table-striped table-bordered">
         <thead>
         <tr class="success">
-            <td colspan="6">
+            <td colspan="7">
                 <div class="col-md-4">
                     <button type="button" ng-click="refreshContainers()" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span>Refresh
                     </button>
-                    <button type="button" class="btn btn-primary" ng-click="switchShowAllFlag()">
-                        <span ng-class="{'glyphicon glyphicon-unchecked':!showAllImagesFlag, 'glyphicon glyphicon-check':showAllImagesFlag}"></span>All
-                    </button>
-                    <button type="button" class="btn btn-primary" ng-click="switchShowUntaggedFlag()"><span
-                            ng-class="{'glyphicon glyphicon-unchecked':!showUntaggedImagesFlag, 'glyphicon glyphicon-check':showUntaggedImagesFlag}"></span>Untagged
+                    <button type="button" class="btn btn-primary" ng-click="switchShowAllContainersFlag()">
+                        <span ng-class="{'glyphicon glyphicon-unchecked':!showAllContainersFlag, 'glyphicon glyphicon-check':showAllContainersFlag}"></span>All
                     </button>
                     <button type="button" class="btn btn-primary" ng-click="switchShowContainerSizeFlag()"><span
                             ng-class="{'glyphicon glyphicon-unchecked':!showContainerSizeFlag, 'glyphicon glyphicon-check':showContainerSizeFlag}"></span>Show
@@ -34,12 +31,29 @@
             </td>
         </tr>
         <tr>
-            <td width="10%" class="text-center"><strong>ID</strong></td>
-            <td width="10%" class="text-center"><strong>Name</strong></td>
-            <td width="10%" class="text-center"><strong>Image</strong></td>
-            <td width="10%" class="text-center"><strong>Status</strong></td>
-            <td width="10%" class="text-center"><strong>Diff size (Virtual size)</strong></td>
-            <td width="8%" class="text-center"><strong>Created</strong></td>
+            <td width="5%" class="text-center">
+                <div class="vcenter">
+                    <strong>ID</strong>
+                </div>
+            </td>
+            <td width="5%" class="text-center vcenter">
+                <div class="vcenter"><strong>Name</strong></div>
+            </td>
+            <td width="5%" class="text-center vcenter">
+                <div class="vcenter"><strong>Image</strong></div>
+            </td>
+            <td width="40%" class="text-center vcenter">
+                <div class="vcenter"><strong>Command</strong></div>
+            </td>
+            <td width="5%" class="text-center vcenter">
+                <div class="vcenter"><strong>Status</strong></div>
+            </td>
+            <td width="5%" class="text-center vcenter">
+                <div class="vcenter"><strong>Diff size (Virtual size)</strong></div>
+            </td>
+            <td width="8%" class="text-center vcenter">
+                <div class="vcenter"><strong>Created</strong></div>
+            </td>
         </tr>
         </thead>
         <tbody>
@@ -59,6 +73,7 @@
                     {{value.Image | shorten:true:30}}
                 </button>
             </td>
+            <td class="text-left">{{value.Command | shorten:true:30}}</td>
             <td class="text-left">{{value.Status}}</td>
             <td class="text-left">{{value.SizeRw | bytes:2 }} ({{value.SizeRootFs | bytes:2 }})</td>
             <td class="text-left">{{value.Created * 1000 | date:'dd, MMM yyyy HH:mm:ss'}}</td>
