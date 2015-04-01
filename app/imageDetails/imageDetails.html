@@ -7,8 +7,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-1">ID/Parent ID:</div>
-        <div class="col-md-4">#{{imageDetails.Id | limitTo:12 }} / #{{imageDetails.Parent | limitTo:12}}</div>
+        <div class="col-md-1">ID / Parent ID:</div>
+        <div class="col-md-4"><a ng-href="#/images/{{imageDetails.Id}}"><samp>{{imageDetails.Id | limitTo:12}}</samp></a> / <a
+                ng-href="#/images/{{imageDetails.Parent}}"><samp>{{imageDetails.Parent | limitTo:12}}</samp></a></div>
         <div class="col-md-2">Author:</div>
         <div class="col-md-5">{{imageDetails.Author}}</div>
     </div>
@@ -22,7 +23,8 @@
         <div class="col-md-1">Creation date:</div>
         <div class="col-md-4">{{imageDetails.Created | date:'medium'}}</div>
         <div class="col-md-2">Command:</div>
-        <div class="col-md-5"><code><span ng-repeat="cmd in imageDetails.ContainerConfig.Cmd"> {{cmd}}</span></code></div>
+        <div class="col-md-5"><code ng-show="imageDetails.ContainerConfig.Cmd.length>0"><span
+                ng-repeat="cmd in imageDetails.ContainerConfig.Cmd"> {{cmd}}</span></code></div>
     </div>
     <div class="row">
         <div class="col-md-1">Docker version:</div>
@@ -44,7 +46,7 @@
     </div>
     <div class="row">
         <div class="col-md-2 col-md-offset-5">Working dir:</div>
-        <div class="col-md-5">{{imageDetails.Config.WorkingDir}}</div>
+        <div class="col-md-5"><code ng-show="imageDetails.Config.WorkingDir.length>0">{{imageDetails.Config.WorkingDir}}</code></div>
     </div>
     <hr/>
     <div class="table-responsive">
@@ -59,7 +61,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="imageHistory in imageHistoryList">
-                <td>{{imageHistory.Id | limitTo:12}}</td>
+                <td><a ng-href="#/imageDetails/{{imageHistory.Id}}"><samp>{{imageHistory.Id | limitTo:12}}</samp></a></td>
                 <td>{{imageHistory.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
                 <td>{{imageHistory.CreatedBy| limitTo:80}}</td>
                 <td>{{imageHistory.Size | bytes:2}}</td>
