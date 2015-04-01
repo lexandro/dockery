@@ -22,7 +22,7 @@ angular.module('services', [])
     .factory('Docker', function ($resource, $rootScope) {
         return {
             containers: function () {
-                return $resource($rootScope.hostUrl + '/containers/:containerId/json?size=:sizeFlag', null, {
+                return $resource($rootScope.hostUrl + '/containers/:containerId/json', null, {
                     query: {
                         method: "GET",
                         isArray: true
