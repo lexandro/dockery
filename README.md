@@ -30,8 +30,6 @@ service docker restart
 TODO
 ====
 
-
-- add list all checkbox to container list view
 - add list last n items to container list view
 - add list since filter to container list view 
 - add list before filter to container list view 
@@ -47,4 +45,4 @@ TODO
 - add image deletion to the image list view
 - add group selection with checkbox to the image list view for multi-actions (delete, etc..)
 - add image pulling to the image list view 
-- redesign host information page
+- redesign host information page...drastically :)
