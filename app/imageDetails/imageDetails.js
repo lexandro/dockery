@@ -15,6 +15,8 @@ angular.module('imageDetails', ['ngRoute'])
         } else {
             var imageDetails = Docker.images().get({imageId: $routeParams.imageId}, function () {
                 $scope.imageDetails = imageDetails;
+                // converting the port listing map map to a more readable format
+                imageDetails.Config.ExposedPorts = Object.keys(imageDetails.Config.ExposedPorts).join(', ');
             });
 
             var imageHistoryList = Docker.images().history({imageId: $routeParams.imageId}, function () {
