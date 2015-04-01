@@ -1,7 +1,7 @@
 <div class="col-md-12 pull-right">
     <table class="table table-condensed table-hover table-striped table-bordered">
         <tr class="success">
-            <td colspan="6">
+            <td colspan="5">
                 <div class="col-md-4">
                     <button type="button" ng-click="refreshImages()" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span>Refresh
                     </button>
@@ -20,8 +20,7 @@
         <tr>
             <td width="7%" class="text-center"><strong>Image ID</strong></td>
             <td width="20%" class="text-center"><strong>Repository tags</strong></td>
-            <td width="7%" class="text-center"><strong>Size</strong></td>
-            <td width="7%" class="text-center"><strong>Virtual Size</strong></td>
+            <td width="7%" class="text-center"><strong>Size (Virtual size)</strong></td>
             <td width="5%" class="text-center"><strong>Created</strong></td>
         </tr>
         <tr ng-repeat="image in images | orderBy:RepoTags[0]">
@@ -32,8 +31,7 @@
             </td>
             <td><p ng-repeat="tag in image.RepoTags | orderBy: tag">{{tag}}</p>
             </td>
-            <td>{{image.Size | bytes}}</td>
-            <td>{{image.VirtualSize| bytes}}</td>
+            <td>{{image.Size | bytes:2}} ({{image.VirtualSize| bytes:2}})</td>
             <td>{{image.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
         </tr>
     </table>

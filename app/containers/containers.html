@@ -1,7 +1,7 @@
 <table class="table table-condensed table-hover table-striped table-bordered">
     <thead>
     <tr class="success">
-        <td colspan="7">
+        <td colspan="6">
             <div class="btn-group col-md-4" role="group" aria-label="...">
                 <button type="button" class="btn btn-primary" ng-click='refreshContainers()' title="Refresh list" style="margin-right: 5px"><span
                         class="glyphicon glyphicon-refresh"></span>Refresh
@@ -22,8 +22,7 @@
         <td width="15%" class="text-center">Image</td>
         <td width="14%" class="text-center">Created</td>
         <td width="10%" class="text-center">Status</td>
-        <td width="10%" class="text-center">Diff size</td>
-        <td width="10%" class="text-center">Virtual size</td>
+        <td width="10%" class="text-center">Diff size (Virtual size)</td>
     </tr>
     </thead>
     <tbody>
@@ -45,8 +44,7 @@
         </td>
         <td>{{value.Created * 1000 | date:'dd, MMM yyyy HH:mm:ss'}}</td>
         <td class="text-center">{{value.Status}}</td>
-        <td>{{value.SizeRw | bytes }}</td>
-        <td>{{value.SizeRootFs | bytes }}</td>
+        <td>{{value.SizeRw | bytes:2 }} ({{value.SizeRootFs | bytes:2 }})</td>
     </tr>
     </tbody>
 </table>
