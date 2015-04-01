@@ -1,4 +1,10 @@
 <div class="col-md-12 pull-right">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Images on: {{$root.hostUrl}} </h1>
+        </div>
+    </div>
+    <hr/>
     <table class="table table-condensed table-hover table-striped table-bordered">
         <tr class="success">
             <td colspan="5">
@@ -13,26 +19,26 @@
                     </button>
                 </div>
                 <div class="col-md-6 vcenter">
-                    <strong>Images on {{$root.hostUrl}} <span class="badge">{{images.length}}</span></strong>
+                    <strong>Items listed: <span class="badge">{{images.length}}</span></strong>
                 </div>
             </td>
         </tr>
         <tr>
-            <td width="7%" class="text-center"><strong>Image ID</strong></td>
+            <td width="1%" class="text-center"><strong>Image ID</strong></td>
             <td width="20%" class="text-center"><strong>Repository tags</strong></td>
             <td width="7%" class="text-center"><strong>Size (Virtual size)</strong></td>
             <td width="5%" class="text-center"><strong>Created</strong></td>
         </tr>
         <tr ng-repeat="image in images | orderBy:RepoTags[0]">
-            <td>
+            <td class="text-center">
                 <button class="btn btn-info btn-block" ng-click="goImageDetails(image.Id)">
                     {{image.Id | limitTo:12}}
                 </button>
             </td>
-            <td><p ng-repeat="tag in image.RepoTags | orderBy: tag">{{tag}}</p>
+            <td class="text-left"><p ng-repeat="tag in image.RepoTags | orderBy: tag">{{tag}}</p>
             </td>
-            <td>{{image.Size | bytes:2}} ({{image.VirtualSize| bytes:2}})</td>
-            <td>{{image.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
+            <td class="text-left">{{image.Size | bytes:2}} ({{image.VirtualSize| bytes:2}})</td>
+            <td class="text-left">{{image.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
         </tr>
     </table>
 </div>
