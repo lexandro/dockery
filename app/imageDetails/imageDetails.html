@@ -74,7 +74,7 @@
                 <td class="text-center"><a ng-href="#/imageDetails/{{imageHistory.Id}}"><samp><span
                         class="label label-info">{{imageHistory.Id | limitTo:12}}</span></samp></a></td>
                 <td>{{imageHistory.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
-                <td><code>{{imageHistory.CreatedBy| limitTo:160}}</code></td>
+                <td><code>{{imageHistory.CreatedBy| shorten:true:160}}</code></td>
                 <td>{{imageHistory.Size | bytes:2}}</td>
             </tr>
             </tbody>
