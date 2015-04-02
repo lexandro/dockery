@@ -13,10 +13,18 @@ angular.module('containers', ['ngRoute'])
         } else {
             $scope.showAllContainersFlag = false;
             $scope.showContainerSizeFlag = false;
+            $scope.selectAllFlag = false;
             refreshContainers();
 
             $scope.refreshContainers = function () {
                 refreshContainers();
+            };
+            //
+            $scope.switchSelected = function (containerData) {
+                containerData.selected = !containerData.selected;
+            };
+            $scope.switchSelectAllFlag = function () {
+                $scope.selectAllFlag = !$scope.selectAllFlag;
             };
             //
             $scope.switchShowAllContainersFlag = function () {
@@ -28,7 +36,6 @@ angular.module('containers', ['ngRoute'])
                 $scope.showContainerSizeFlag = !$scope.showContainerSizeFlag;
                 refreshContainers();
             };
-
             //
             $scope.goContainerDetails = function (path) {
                 $location.path('/containerDetails/' + path);
@@ -57,12 +64,12 @@ angular.module('containers', ['ngRoute'])
             var containers = Docker.containers().query(containerParam, function () {
                 containers.forEach(function (container) {
                     var containerData = {};
-
                     containerData.Id = container.Id;
                     containerData.Image = container.Image;
                     containerData.Created = container.Created;
                     containerData.Command = container.Command;
                     containerData.Status = container.Status;
+                    containerData.Selected = false;
                     containerData.SizeRw = 0;
                     containerData.SizeRootFs = 0;
                     containerDataList[containerData.Id] = containerData;

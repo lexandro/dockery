@@ -9,7 +9,7 @@
     <table class="table table-condensed table-hover table-striped table-bordered">
         <thead>
         <tr class="success">
-            <td colspan="7">
+            <td colspan="8">
                 <div class="col-md-4">
                     <button type="button" ng-click="refreshContainers()" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span>Refresh
                     </button>
@@ -31,6 +31,12 @@
             </td>
         </tr>
         <tr>
+            <td width="2%" align="center">
+                 <span ng-class="{'glyphicon glyphicon-check':selectAllFlag, 'glyphicon glyphicon-unchecked':!selectAllFlag}"
+                       class="vcenter"
+                       ng-click="switchSelectAllFlag()">
+                </span>
+            </td>
             <td width="5%" class="text-center">
                 <div class="vcenter">
                     <strong>ID</strong>
@@ -45,7 +51,7 @@
             <td width="40%" class="text-center vcenter">
                 <div class="vcenter"><strong>Command</strong></div>
             </td>
-            <td width="5%" class="text-center vcenter">
+            <td width="8%" class="text-center vcenter">
                 <div class="vcenter"><strong>Status</strong></div>
             </td>
             <td width="5%" class="text-center vcenter">
@@ -58,6 +64,11 @@
         </thead>
         <tbody>
         <tr ng-repeat="(key, value) in containerDataList" class="text-center">
+            <td align="center">
+                 <span ng-class="{'glyphicon glyphicon-check':selectAllFlag||value.selected, 'glyphicon glyphicon-unchecked':!(selectAllFlag||value.selected)}"
+                       ng-click="switchSelected(value)">
+                </span>
+            </td>
             <td>
                 <button class="btn btn-info btn-block text-center" ng-click="goContainerDetails(value.Id)">
                     {{value.Id | limitTo:12}}
@@ -75,7 +86,9 @@
             </td>
             <td class="text-left">{{value.Command | shorten:true:30}}</td>
             <td class="text-left">{{value.Status}}</td>
-            <td class="text-left">{{value.SizeRw | bytes:2 }} ({{value.SizeRootFs | bytes:2 }})</td>
+            <td class="text-left">{{showContainerSizeFlag==true?value.SizeRw:NAN | bytes:2 }} ({{showContainerSizeFlag==true?value.SizeRootFs:NAN | bytes:2
+                }})
+            </td>
             <td class="text-left">{{value.Created * 1000 | date:'dd, MMM yyyy HH:mm:ss'}}</td>
         </tr>
         </tbody>
