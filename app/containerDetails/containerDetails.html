@@ -1,21 +1,92 @@
 <div class="col-md-12 pull-right">
     <div class="row">
         <div class="col-md-12">
-            <h1>Image: **first image tag**
-
-            </h1>
+            <h1>Container: {{containerDetails.Name.substring(1)}} </h1>
         </div>
     </div>
-
-
-    <div id="main-wrapper" class="col-md-12 pull-right">
-        <div id="main">
-            <div class="col-md=12">Container details:</div>
-            <div class="col-md=12">Hostname: {{containerDetails.Config.Hostname}}</div>
-            <div class="col-md=12">Name: {{containerDetails.Name}}</div>
-            <div class="col-md=12">Image: {{containerDetails.Config.Image}}</div>
-            <div class="col-md=12">Created: {{containerDetails.Created}}</div>
-        </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-1">Name:</div>
+        <div class="col-md-3">{{containerDetails.Name}}</div>
+        <div class="col-md-1">Network mode:</div>
+        <div class="col-md-3">{{containerDetails.HostConfig.NetworkMode}}</div>
+        <div class="col-md-1">CPU share:</div>
+        <div class="col-md-3">{{containerDetails.Config.CpuShares}}</div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-md-1">Hostname:</div>
+        <div class="col-md-3">{{containerDetails.Config.Hostname}}</div>
+        <div class="col-md-1">Host bridge:</div>
+        <div class="col-md-3">{{containerDetails.NetworkSettings.Bridge}}</div>
+        <div class="col-md-1">CPU set:</div>
+        <div class="col-md-3">{{containerDetails.Config.Cpuset}}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">Image:</div>
+        <div class="col-md-3"><a ng-href="#/imageDetails/{{containerDetails.Image}}">
+            <samp>
+                <span class="label label-primary">{{containerDetails.Config.Image | limitTo:12}}</span>
+            </samp></a>
+        </div>
+        <div class="col-md-1">Ports:</div>
+        <div class="col-md-3"><span class="label label-danger">TBD</span></div>
+        <div class="col-md-1">PID on host:</div>
+        <div class="col-md-3">{{containerDetails.State.Pid}}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">Created:</div>
+        <div class="col-md-3">{{containerDetails.Created | date:'medium'}}</div>
+        <div class="col-md-1">IPv4</div>
+        <div class="col-md-3">{{containerDetails.NetworkSettings.IPAddress}}/{{containerDetails.NetworkSettings.IPPrefixLen}}</div>
+        <div class="col-md-1">Driver:</div>
+        <div class="col-md-3">{{containerDetails.Driver}}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">Started:</div>
+        <div class="col-md-3">{{containerDetails.State.StartedAt| date:'medium'}}</div>
+        <div class="col-md-1">Gateway:</div>
+        <div class="col-md-3">{{containerDetails.NetworkSettings.Gateway}}</div>
+        <div class="col-md-1">ExecDriver:</div>
+        <div class="col-md-3">{{containerDetails.ExecDriver}}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">Finished:</div>
+        <div class="col-md-3">{{containerDetails.State.FinishedAt| date:'medium'}} <span class="label label-danger">Fix it</span></div>
+        <div class="col-md-1">DNS:</div>
+        <div class="col-md-3">{{containerDetails.HostConfig.Dns}}</div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">State:</div>
+        <div class="col-md-3"><span class="label label-danger">TBD</span></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">Restart count:</div>
+        <div class="col-md-3">{{containerDetails.RestartCount}}</div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">Command:</div>
+        <div class="col-md-3">{{containerDetails.Config.Cmd}}<span class="label label-danger">Fix it</span></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">Working dir:</div>
+        <div class="col-md-3">{{containerDetails.Config.WorkingDir}}</div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3"></div>
+    </div>
 </div>
