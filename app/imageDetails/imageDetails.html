@@ -10,10 +10,8 @@
     <div class="row">
         <div class="col-md-1">ID / Parent ID:</div>
         <div class="col-md-4"><a ng-href="#/imageDetails/{{imageDetails.Id}}">
-            <samp>
-                <span class="label label-primary">{{imageDetails.Id | limitTo:12}}</span>
-            </samp></a> / <a ng-href="#/imageDetails/{{imageDetails.Parent}}"><samp><span
-                class="label label-info">{{imageDetails.Parent | limitTo:12}}</span></samp></a>
+            <samp><span class="label label-primary">{{imageDetails.Id | limitTo:12}}</span></samp></a> / <a
+                ng-href="#/imageDetails/{{imageDetails.Parent}}"><samp><span class="label label-info">{{imageDetails.Parent | limitTo:12}}</span></samp></a>
         </div>
         <div class="col-md-2">Author:</div>
         <div class="col-md-5">{{imageDetails.Author}}</div>
