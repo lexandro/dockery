@@ -1,13 +1,13 @@
 <div class="col-md-12 pull-right">
     <div class="row">
         <div class="col-md-12">
-            <h1>Container: {{containerDetails.Name.substring(1)}} </h1>
+            <h1>Container: <strong>{{containerDetails.Name.substring(1).toUpperCase()}}</strong></h1>
         </div>
     </div>
     <hr/>
     <div class="row">
         <div class="col-md-1">Name:</div>
-        <div class="col-md-3">{{containerDetails.Name}}</div>
+        <div class="col-md-3">{{containerDetails.Name.toUpperCase()}}</div>
         <div class="col-md-1">Network mode:</div>
         <div class="col-md-3">{{containerDetails.HostConfig.NetworkMode}}</div>
         <div class="col-md-1">CPU share:</div>
@@ -89,4 +89,12 @@
         <div class="col-md-1"></div>
         <div class="col-md-3"></div>
     </div>
+    <hr/>
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#">Logs</a></li>
+        <li role="presentation"><a href="#">Processes</a></li>
+        <li role="presentation"><a href="#">Diff</a></li>
+        <li role="presentation"><a href="#">TTY</a></li>
+        <li role="presentation"><a href="#">Pure json</a></li>
+    </ul>
 </div>
