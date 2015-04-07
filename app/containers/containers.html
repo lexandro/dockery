@@ -84,7 +84,7 @@
                     {{value.Image | shorten:true:30}}
                 </button>
             </td>
-            <td class="text-left">{{value.Command | shorten:true:30}}</td>
+            <td class="text-left">{{value.Command | shorten:true:80}}</td>
             <td class="text-left">{{value.Status}}</td>
             <td class="text-left">{{showContainerSizeFlag==true?value.SizeRw:NAN | bytes:2 }} ({{showContainerSizeFlag==true?value.SizeRootFs:NAN | bytes:2
                 }})
