@@ -30,7 +30,13 @@ angular.module('services', [])
                     get: {
                         method: "GET",
                         isArray: false
+                    },
+                    diff: {
+                        url: $rootScope.hostUrl + '/containers/:containerId/changes',
+                        method: "GET",
+                        isArray: true
                     }
+
                 });
             }, images: function () {
                 return $resource($rootScope.hostUrl + '/images/:imageId/json?all=:showAllImagesFlag', null, {
