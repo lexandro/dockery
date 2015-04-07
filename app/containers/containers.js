@@ -32,7 +32,6 @@ angular.module('containers', ['ngRoute'])
                 refreshContainers();
             };
             $scope.switchShowContainerSizeFlag = function () {
-                console.log('sizeswitch');
                 $scope.showContainerSizeFlag = !$scope.showContainerSizeFlag;
                 refreshContainers();
             };
