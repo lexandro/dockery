@@ -98,6 +98,31 @@
         <li role="presentation" ng-class="{'active':activeTab=='json'}"><a ng-click="showJson(containerDetails.Id.substr(0,12))">Pure json</a></li>
     </ul>
     <div ng-show="activeTab=='diff'">
+        <br/>
+
+        <div class="col-md-1">
+            <button type="button" class="btn btn-block btn-default btn-sm" ng-click="prevDiffPage()">
+                <span class="glyphicon glyphicon-chevron-left"></span> Previous
+            </button>
+        </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-block btn-default btn-sm" ng-click="nextDiffPage()">
+                Next <span class=" glyphicon glyphicon-chevron-right"></span>
+            </button>
+        </div>
+        <div class="col-md-1 vcenter">
+            Page {{diffSettings["pageIndex"] }} / {{ diffSettings["maxPageIndex"]}}
+        </div>
+        <div class="col-md-9 vcenter text-left">
+            Page size:
+            <select ng-model="newDiffPageSize" ng-click="changeDiffPaging()">
+                <option>10</option>
+                <option>20</option>
+                <option>50</option>
+            </select>
+        </div>
+        <br/>
+        <br/>
         <table class="table table-condensed table-hover table-striped">
             <thead>
             <tr class="success">
@@ -105,7 +130,7 @@
                     <strong>Status</strong>
                 </td>
                 <td width="90%" class="text-center">
-                    <strong>Folders/files</strong>
+                    <strong>Folders/files <span class="badge">{{diffSettings["count"]}}</span></strong>
                 </td>
             </thead>
             <tr ng-repeat="diff in containerDiffs track by $index | orderBy:Path">
@@ -115,5 +140,8 @@
                 <td>{{diff.Path}}</td>
             </tr>
         </table>
+        <div class="col-md-9 vcenter text-left">
+            Items listed: {{ diffSettings["startIndex"]}} - {{ diffSettings["endIndex"]}}
+        </div>
     </div>
 </div>
