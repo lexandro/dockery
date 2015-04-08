@@ -9,6 +9,7 @@
     "jquery": "~2.1.1",
     "bootstrap": "~3.3.4",
     "angular-route": "1.3.x",
-    "angular-resource": "1.3.x"
+    "angular-resource": "1.3.x",
+    "json-formatter": "~0.2.7"
   }
 }
