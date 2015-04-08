@@ -13,7 +13,7 @@ angular.module('containerDetails', ['ngRoute'])
         if (Helpers.isEmpty($rootScope.hostUrl)) {
             $location.path('/hosts');
         } else {
-            $scope.activeTab = 'logs';
+            $scope.activeTab = 'top';
             $scope.newDiffPageSize = 20;
             //
             var diffSettings = [];
@@ -23,9 +23,11 @@ angular.module('containerDetails', ['ngRoute'])
             diffSettings["endIndex"] = 0;
             diffSettings["pageSize"] = $scope.newDiffPageSize;
             $scope.diffSettings = diffSettings;
+
             //
             var containerDetails = Docker.containers().get({containerId: $routeParams.containerId}, function () {
                 $scope.containerDetails = containerDetails;
+                $scope.showProcesses($routeParams.containerId);
             });
             //
             //
@@ -35,8 +37,12 @@ angular.module('containerDetails', ['ngRoute'])
             };
 
             $scope.showProcesses = function (containerId) {
-                $scope.activeTab = 'ps';
+                $scope.activeTab = 'top';
                 console.log(containerId);
+                var containerProcesses = Docker.containers().top({containerId: containerId}, function () {
+                    console.log(JSON.stringify(containerProcesses));
+                    $scope.containerProcesses = containerProcesses;
+                });
             };
 
             $scope.showDiff = function (containerId) {

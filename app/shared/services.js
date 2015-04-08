@@ -35,8 +35,12 @@ angular.module('services', [])
                         url: $rootScope.hostUrl + '/containers/:containerId/changes',
                         method: "GET",
                         isArray: true
+                    },
+                    top: {
+                        url: $rootScope.hostUrl + '/containers/:containerId/top',
+                        method: "GET",
+                        isArray: false
                     }
-
                 });
             }, images: function () {
                 return $resource($rootScope.hostUrl + '/images/:imageId/json?all=:showAllImagesFlag', null, {

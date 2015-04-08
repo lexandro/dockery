@@ -91,15 +91,36 @@
     </div>
     <hr/>
     <ul class="nav nav-tabs">
+        <li role="presentation" ng-class="{'active':activeTab=='top'}"><a ng-click="showProcesses(containerDetails.Id.substr(0,12))">Processes</a></li>
         <li role="presentation" ng-class="{'active':activeTab=='logs'}"><a ng-click="showLogs(containerDetails.Id.substr(0,12))">Logs</a></li>
-        <li role="presentation" ng-class="{'active':activeTab=='ps'}"><a ng-click="showProcesses(containerDetails.Id.substr(0,12))">Processes</a></li>
         <li role="presentation" ng-class="{'active':activeTab=='diff'}"><a ng-click="showDiff(containerDetails.Id.substr(0,12))">Diff</a></li>
         <li role="presentation" ng-class="{'active':activeTab=='tty'}"><a ng-click="showTty(containerDetails.Id.substr(0,12))">TTY</a></li>
         <li role="presentation" ng-class="{'active':activeTab=='json'}"><a ng-click="showJson(containerDetails.Id.substr(0,12))">Pure json</a></li>
     </ul>
-    <div ng-show="activeTab=='diff'">
-        <br/>
+    <br/>
 
+    <div ng-show="activeTab=='top'">
+        <table class="table table-condensed table-hover table-striped">
+            <thead>
+            <tr class="success">
+                <td ng-repeat="title in containerProcesses.Titles">
+                    <strong>{{title}}</strong>
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="process in containerProcesses.Processes">
+                <td ng-repeat="processItem in process">
+                    {{processItem}}
+                </td>
+
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+    <div ng-show="activeTab=='diff'">
         <div class="col-md-1">
             <button type="button" class="btn btn-block btn-default btn-sm" ng-click="prevDiffPage()">
                 <span class="glyphicon glyphicon-chevron-left"></span> Previous
