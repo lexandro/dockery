@@ -31,11 +31,12 @@ angular.module('containerDetails', ['ngRoute'])
 
             $scope.showDiff = function (containerId) {
                 $scope.activeTab = 'diff';
+                $scope.currentDiffPage = 0;
                 console.log("loading diffs");
 
                 var containerDiffs = Docker.containers().diff({containerId: containerId}, function () {
                     var subDiffs = [];
-                    for (var i = 0; i < 30; i++) {
+                    for (var i = 0; i < 30 && i < containerDiffs.length; i++) {
                         subDiffs.push(containerDiffs[i]);
                     }
                     $scope.containerDiffs = subDiffs;
