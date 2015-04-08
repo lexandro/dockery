@@ -165,4 +165,7 @@
             Items listed: {{ diffSettings["startIndex"]}} - {{ diffSettings["endIndex"]}}
         </div>
     </div>
+    <div ng-show="activeTab=='json'">
+        <json-formatter json="containerDetails" open="10"></json-formatter>
+    </div>
 </div>
