@@ -90,9 +90,9 @@ Roadmap /by priority/
 
 Far future, not decided yet
 ===========================
-Add repeated pinging to containers (the list and per container)
-Detect fig/compose naming pattern
-Grep colored logs on container with pluggable patterns
-Multiple container log tailing with one click/window
-Ping open ports for spring actuator endpoints (health, ping, info, etc...) Risky...
-Ping open ports for swagger endpoint (/api_docs)
+- Add repeated pinging to containers (the list and per container)
+- Detect fig/compose naming pattern
+- Grep colored logs on container with pluggable patterns
+- Multiple container log tailing with one click/window
+- Ping open ports for spring actuator endpoints (health, ping, info, etc...) Risky...
+- Ping open ports for swagger endpoint (/api_docs)
