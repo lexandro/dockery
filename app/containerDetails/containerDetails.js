@@ -40,7 +40,6 @@ angular.module('containerDetails', ['ngRoute'])
                 $scope.activeTab = 'top';
                 console.log(containerId);
                 var containerProcesses = Docker.containers().top({containerId: containerId}, function () {
-                    console.log(JSON.stringify(containerProcesses));
                     $scope.containerProcesses = containerProcesses;
                 });
             };
