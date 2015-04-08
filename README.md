@@ -1,6 +1,8 @@
 docker|mon
 ==========
 
+Version: 0.1.something (not ready for releasing)
+
 A small Docker host monitoring webapp for basic management of images and containers. This is my learning project to get familiar with angular.js and Twitter 
 bootstrap frameworks. 
 
@@ -30,6 +32,13 @@ service docker restart
 TODO
 ====
 
+- change paging buttons/style on containers/container details/diff listing
+- add log view to containers/container details/diff listing
+- add TTY view to containers/container details/diff listing
+- make containers/container details head smaller
+
+
+- add rename to container list view
 - add list last n items to container list view
 - add list since filter to container list view 
 - add list before filter to container list view 
@@ -37,6 +46,7 @@ TODO
 - add status filter to container list view
  
 - add go first, go last to containers/container details/diff listing
+
 - add "Please wait..." view/anim for time consuming operation 
 
 - fix default connection issue (two green buttons on hosts view)
