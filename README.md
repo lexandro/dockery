@@ -36,12 +36,12 @@ TODO
 - add exit code filter to container list view 
 - add status filter to container list view
  
-- enhance the initial container details view
+- add go first, go last to containers/container details/diff listing
+- add "Please wait..." view/anim for time consuming operation 
 
 - fix default connection issue (two green buttons on hosts view)
 
 - add tag list to the image details
-- add paging to the tables/lists
 - add image deletion to the image list view
 - add image pulling to the image list view 
 - redesign host information page...drastically :)
