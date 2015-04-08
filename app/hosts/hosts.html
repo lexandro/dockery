@@ -54,18 +54,17 @@
                         </div>
                     </div>
                     <div ng-show="host.editHostEnabled">
-                        <input ng-model="host.editHostName">
+                        <input ng-model="host.editHostName" ng-enter="saveHost(host)">
                     </div>
                 </td>
                 <td width="5%" class="text-left">
                     <div ng-click="saveHost(host)">
                         <div ng-hide="host.editHostEnabled">
                             {{host.url | shorten:true:50}}
-
                         </div>
                     </div>
                     <div ng-show="host.editHostEnabled">
-                        <input size="40" ng-model="host.editHostUrl">
+                        <input size="40" ng-model="host.editHostUrl" ng-enter="saveHost(host)">
                     </div>
                 </td>
                 <td width="1%" class="text-center">{{host.created | date : shortDate}}</td>

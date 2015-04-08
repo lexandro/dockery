@@ -142,6 +142,7 @@ angular.module('hosts', ['ngRoute'])
                 host.name = host.editHostName;
                 host.url = host.editHostUrl;
                 saveHosts();
+                pingHost(host);
             } else {
                 host.editHostName = host.name;
                 host.editHostUrl = host.url;
