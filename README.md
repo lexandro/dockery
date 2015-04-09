@@ -30,9 +30,6 @@ service docker restart
 Roadmap /by priority/
 =====================
 
-0.1.0
-- add go first, go last to containers/container details/diff listing
-
 0.1.1
 - add log view to containers/container details/diff listing
 
@@ -100,3 +97,8 @@ Far future, not decided yet
 - Multiple container log tailing with one click/window
 - Ping open ports for spring actuator endpoints (health, ping, info, etc...) Risky...
 - Ping open ports for swagger endpoint (/api_docs)
+
+Done
+====
+0.1.0
+- add go first, go last to containers/container details/diff listing
