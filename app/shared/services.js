@@ -19,8 +19,19 @@ angular.module('services', [])
             }
         }
     })
-    .factory('Docker', function ($resource, $rootScope) {
+    .factory('Docker', function ($resource, $http, $rootScope) {
         return {
+            containerLogs: function (containerId, logParams, callback) {
+                $http({
+                    method: 'GET',
+                    url: $rootScope.hostUrl + '/containers/' + containerId + '/logs',
+                    params: logParams
+                })
+                    .success(callback)
+                    .error(function (data, status, headers, config) {
+                        console.log('error', data);
+                    });
+            },
             containers: function () {
                 return $resource($rootScope.hostUrl + '/containers/:containerId/json', null, {
                     query: {
@@ -38,11 +49,6 @@ angular.module('services', [])
                     },
                     top: {
                         url: $rootScope.hostUrl + '/containers/:containerId/top',
-                        method: "GET",
-                        isArray: false
-                    },
-                    logs: {
-                        url: $rootScope.hostUrl + '/containers/:containerId/logs',
                         method: "GET",
                         isArray: false
                     }
