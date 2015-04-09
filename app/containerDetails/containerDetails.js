@@ -23,7 +23,6 @@ angular.module('containerDetails', ['ngRoute'])
             diffSettings["endIndex"] = 0;
             diffSettings["pageSize"] = $scope.newDiffPageSize;
             $scope.diffSettings = diffSettings;
-
             //
             var containerDetails = Docker.containers().get({containerId: $routeParams.containerId}, function () {
                 $scope.containerDetails = containerDetails;
@@ -53,7 +52,6 @@ angular.module('containerDetails', ['ngRoute'])
                         $scope.stdErrLog = data;
                     });
                 });
-
             };
 
             $scope.showProcesses = function (containerId) {

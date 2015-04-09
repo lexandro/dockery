@@ -37,8 +37,8 @@ Roadmap /by priority/
 - Add: TTY view to containers/container details/diff listing
 
 0.1.3
-- Fix: make containers/container details head smaller
 - Fix: finish container details page TBD items
+- Fix: make containers/container details head smaller
 - Fix: Don't call top when container is stopped
 - Fix: Don't cut down first character on displayed container name when the first char differ from '/'
 
