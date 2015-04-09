@@ -32,39 +32,28 @@ angular.module('containerDetails', ['ngRoute'])
             //
             $scope.showLogs = function (containerId) {
                 $scope.activeTab = 'logs';
-                console.log(containerId);
+
                 var logParams = {}
-                logParams.stderr = 1;
+                logParams.stderr = 0;
                 logParams.stdout = 1;
                 logParams.timestamps = 1;
-                logParams.containerId = containerId;
+                logParams.tail = 1000;
 
-                //http://stackoverflow.com/questions/26059955/angularjs-get-byte-error-when-downloading-binary-data-using-asp-net-web-api
-                //$http.get('http://example.com', {responseType: 'arraybuffer'})
-
-                var containerLogs = Docker.containers().logs(logParams, function () {
-                    console.log('Amount of data ' + containerLogs.length);
-                    console.log('Data ' + JSON.stringify(containerLogs));
-                    var counter = 0;
-                    var line = '';
-                    var data = '';
-                    for (data in containerLogs) {
-                        if (counter < 8) {
-                            counter++;
-                        } else {
-                            console.log(data);
-                            if (data != '/n') {
-                                line += data;
-                            } else {
-                                console.log(line);
-                                line = '';
-                                counter = 0;
-                            }
-                        }
-                    }
-                    console.log('Log processed');
-                    //console.log(JSON.stringify(containerLogs));
+                Docker.containerLogs(containerId, logParams, function (data, status, headers, config) {
+                    //data = data.replace(/[\r]/g, '\n');
+                    data = data.substring(8);
+                    //data = data.replace(/\n(.{8})/g, '\n');
+                    $scope.stdOutLog = data;
+                    logParams.stderr = 1;
+                    logParams.stdout = 0;
+                    Docker.containerLogs(containerId, logParams, function (data, status, headers, config) {
+                        //data = data.replace(/[\r]/g, '\n');
+                        data = data.substring(8);
+                        //data = data.replace(/\n(.{8})/g, '\n');
+                        $scope.stdErrLog = data;
+                    });
                 });
+
             };
 
             $scope.showProcesses = function (containerId) {

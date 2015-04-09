@@ -120,6 +120,19 @@
         </table>
     </div>
 
+    <div ng-show="activeTab=='logs'">
+        <div ng-class="{'panel-body col-md-6': stdErrLog.length>0, 'panel-body col-md-12': !stdErrLog.length>0}" ng-show="stdOutLog.length>0">
+            <pre class="pre-scrollable">
+            {{stdOutLog}}
+            </pre>
+        </div>
+        <div ng-class="{'panel-body col-md-6': stdOutLog.length>0, 'panel-body col-md-12': !stdOutLog.length>0}" ng-show="stdErrLog.length>0">
+            <pre class="pre-scrollable">
+            {{stdErrLog}}
+            </pre>
+        </div>
+    </div>
+
     <div ng-show="activeTab=='diff'">
         <div class="col-md-3 vcenter">
             <button type="button" class="btn  btn-default btn-sm" ng-click="firstDiffPage()">
