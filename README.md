@@ -37,10 +37,12 @@ Roadmap /by priority/
 - Add: TTY view to containers/container details/diff listing
 
 0.1.3
+- Add: container details diff view: refresh button 
 - Fix: finish container details page TBD items
 - Fix: make containers/container details head smaller
 - Fix: Don't call top when container is stopped
 - Fix: Don't cut down first character on displayed container name when the first char differ from '/'
+
 
 0.1.4
 - Add: "Please wait..." view/anim for time consuming operations (container size, diff, ps, etc...)
