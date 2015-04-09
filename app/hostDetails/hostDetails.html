@@ -48,9 +48,6 @@
         <div class="col-md-4 text-right">Execution Driver</div>
         <div class="col-md-5 text-left">{{dockerInfo.ExecutionDriver|| 'N/A'}}</div>
         <!---->
-        <div class="col-md-4 text-right">KernelVersion</div>
-        <div class="col-md-5 text-left">{{dockerInfo.KernelVersion|| 'N/A'}}</div>
-        <!---->
         <div class="col-md-4 text-right">Docker daemon ID</div>
         <div class="col-md-5 text-left">{{dockerInfo.ID || 'N/A'}}</div>
         <!---->
@@ -61,7 +58,7 @@
         <div class="col-md-5 text-left"><a href="http://golang.org/pkg/runtime/#NumGoroutine">{{dockerInfo.NGoroutines ||'N/A'}}</a></div>
         <!---->
         <div class="col-md-4 text-right">Events listener subscribers</div>
-        <div class="col-md-5 text-left"><a href="https://github.com/docker/docker/blob/master/events/events.go">{{dockerInfo.NEventsListener|| 'N/A'}}</a></div>
+        <div class="col-md-5 text-left"><a href="https://github.com/docker/docker/blob/master/daemon/events/events.go">{{dockerInfo.NEventsListener|| 'N/A'}}</a></div>
         <!---->
         <div class="col-md-4 text-right">Docker path</div>
         <div class="col-md-5 text-left">{{dockerInfo.InitPath|| 'N/A'}}</div>
