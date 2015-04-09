@@ -31,7 +31,6 @@ Roadmap /by priority/
 =====================
 
 0.1.0
-- change paging buttons/style on containers/container details/diff listing
 - add go first, go last to containers/container details/diff listing
 
 0.1.1
