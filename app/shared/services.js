@@ -40,6 +40,11 @@ angular.module('services', [])
                         url: $rootScope.hostUrl + '/containers/:containerId/top',
                         method: "GET",
                         isArray: false
+                    },
+                    logs: {
+                        url: $rootScope.hostUrl + '/containers/:containerId/logs',
+                        method: "GET",
+                        isArray: false
                     }
                 });
             }, images: function () {
