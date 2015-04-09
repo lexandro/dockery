@@ -31,58 +31,61 @@ Roadmap /by priority/
 =====================
 
 0.1.1
-- add log view to containers/container details/diff listing
+- Add: log view to containers/container details/diff listing
 
 0.1.2
-- add TTY view to containers/container details/diff listing
+- Add: TTY view to containers/container details/diff listing
 
 0.1.3
-- make containers/container details head smaller
-- finish container details page TBD items
+- Fix: make containers/container details head smaller
+- Fix: finish container details page TBD items
+- Fix: Don't call top when container is stopped
+- Fix: Don't cut down first character on displayed container name when the first char differ from '/'
 
 0.1.4
-- add "Please wait..." view/anim for time consuming operations (container size, diff, ps, etc...)
-- fix default connection issue (two green buttons on hosts view)
+- Add: "Please wait..." view/anim for time consuming operations (container size, diff, ps, etc...)
+- Fix: default connection issue (two green buttons on hosts view)
 
 0.2.0
-- add rename container to container list view
+- Add: rename container to container list view
 
 0.2.1
-- add list last n items to container list view
-- add list since filter to container list view 
-- add list before filter to container list view 
-- add exit code filter to container list view 
-- add status filter to container list view
+- Add: list last n items to container list view
+- Add: list since filter to container list view 
+- Add: list before filter to container list view 
+- Add: exit code filter to container list view 
+- Add: status filter to container list view
 0.2.2
-- add create container view
+- Add: create container view
 
 0.3.0
-- add tag list to the image details
+- Fix: show image name in the image details
+- Add: tag list to the image details
 
 0.3.1
-- add image deletion to the image list view
+- Add: image deletion to the image list view
 
 0.3.2
-- list active containers related to the image in image details
+- Add: list active containers related to the image in image details
 
 0.3.3
-- add login into the docker hub and/or private repo(s) 
-- add image pulling to the image list view
+- Add: login into the docker hub and/or private repo(s) 
+- Add: image pulling to the image list view
 
 0.4.0
-- redesign host information page...drastically++ :)
+- Fix: redesign host information page...drastically++ :)
 
 0.4.1
-- add helper links to the known fields/information pieces to help understand
+- Add: helper links to the known fields/information pieces to help understand
 
 0.4.2
-- also add tooltips to these items on all views
+- Add: also add tooltips to these items on all views
 
 0.5.0
-- make it more responsive
+- Fix: make it more responsive
 
 0.5.1
-- add download file link to containers/container details/diff listing items
+- Add: download file link to containers/container details/diff listing items
 
 Not scheduled
 =============
@@ -101,4 +104,4 @@ Far future, not decided yet
 Done
 ====
 0.1.0
-- add go first, go last to containers/container details/diff listing
+- Add: go first, go last to containers/container details/diff listing
