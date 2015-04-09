@@ -85,7 +85,12 @@ Roadmap /by priority/
 - make it more responsive
 
 0.5.1
-- help (?)
+- add download file link to containers/container details/diff listing items
+
+Not scheduled
+=============
+- Help
+- docker image with version check in the webapp
 
 Far future, not decided yet
 ===========================

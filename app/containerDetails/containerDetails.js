@@ -38,7 +38,6 @@ angular.module('containerDetails', ['ngRoute'])
 
             $scope.showProcesses = function (containerId) {
                 $scope.activeTab = 'top';
-                console.log(containerId);
                 var containerProcesses = Docker.containers().top({containerId: containerId}, function () {
                     $scope.containerProcesses = containerProcesses;
                 });
@@ -74,6 +73,10 @@ angular.module('containerDetails', ['ngRoute'])
                         updateDiffPagedList();
                     }
                 };
+                $scope.firstDiffPage = function () {
+                    diffSettings["pageIndex"] = 1;
+                    updateDiffPagedList();
+                };
                 $scope.prevDiffPage = function () {
                     if (diffSettings["pageIndex"] > 1) {
                         diffSettings["pageIndex"]--;
@@ -86,6 +89,10 @@ angular.module('containerDetails', ['ngRoute'])
                         updateDiffPagedList();
                     }
                 };
+                $scope.lastDiffPage = function () {
+                    diffSettings["pageIndex"] = diffSettings["maxPageIndex"];
+                    updateDiffPagedList();
+                }
             };
 
 

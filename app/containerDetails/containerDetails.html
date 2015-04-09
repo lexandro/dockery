@@ -121,20 +121,24 @@
     </div>
 
     <div ng-show="activeTab=='diff'">
-        <div class="col-md-1">
-            <button type="button" class="btn btn-block btn-default btn-sm" ng-click="prevDiffPage()">
+        <div class="col-md-3 vcenter">
+            <button type="button" class="btn  btn-default btn-sm" ng-click="firstDiffPage()">
+                <span class="glyphicon glyphicon-step-backward"></span> First
+            </button>
+            <button type="button" class="btn btn-default btn-sm" ng-click="prevDiffPage()">
                 <span class="glyphicon glyphicon-chevron-left"></span> Previous
             </button>
-        </div>
-        <div class="col-md-1">
-            <button type="button" class="btn btn-block btn-default btn-sm" ng-click="nextDiffPage()">
+            <button type="button" class="btn btn-default btn-sm" ng-click="nextDiffPage()">
                 Next <span class=" glyphicon glyphicon-chevron-right"></span>
+            </button>
+            <button type="button" class="btn btn-default btn-sm" ng-click="lastDiffPage()">
+                Last <span class=" glyphicon glyphicon-step-forward"></span>
             </button>
         </div>
         <div class="col-md-1 vcenter">
             Page {{diffSettings["pageIndex"] }} / {{ diffSettings["maxPageIndex"]}}
         </div>
-        <div class="col-md-9 vcenter text-left">
+        <div class="col-md-8 vcenter text-left">
             Page size:
             <select ng-model="newDiffPageSize" ng-click="changeDiffPaging()">
                 <option>10</option>

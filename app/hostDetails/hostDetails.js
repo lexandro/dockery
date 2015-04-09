@@ -20,7 +20,5 @@ angular.module('hostDetails', ['ngRoute'])
                     $scope.versionInfo = versionInfo;
                 });
             });
-
         }
-    }])
-;
+    }]);
