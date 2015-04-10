@@ -40,10 +40,15 @@ Roadmap /by priority/
 - Fix: Don't call top when container is stopped
 - Fix: Don't cut down first character on displayed container name when the first char differ from '/'
 
-
 0.1.4
 - Add: "Please wait..." view/anim for time consuming operations (container size, diff, ps, etc...)
 - Fix: default connection issue (two green buttons on hosts view)
+
+0.1.5
+- Add: start/stop/pause/kill/etc.. button to container list view
+
+0.1.6
+- Add: start/stop/pause/kill/etc.. button to container details view
 
 0.2.0
 - Add: rename container to container list view
@@ -54,6 +59,7 @@ Roadmap /by priority/
 - Add: list before filter to container list view 
 - Add: exit code filter to container list view 
 - Add: status filter to container list view
+
 0.2.2
 - Add: create container view
 
