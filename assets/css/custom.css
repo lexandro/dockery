@@ -2,3 +2,9 @@
     vertical-align: middle;
     margin-top: 6px
 }
+
+pre {
+    overflow: auto;
+    word-wrap: normal;
+    white-space: pre-wrap;
+}
