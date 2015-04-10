@@ -140,13 +140,19 @@
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <div class="form-inline">
-                        <button type="button" ng-click="" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-refresh"></span>Reload</button>
-                        <button type="button" ng-click="" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-unchecked"></span>Show timestamp</button>
+                        <button type="button" ng-click="refreshStdOutLogs()" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-refresh"></span>Reload</button>
+                        <button type="button" ng-click="switchShowStdOutTimestamp()" class="btn btn-primary btn-sm">
+                            <span ng-class="{'glyphicon glyphicon-unchecked':!logSettings['stdOutTimestamp'], 'glyphicon glyphicon-check':logSettings['stdOutTimestamp']}"></span>Show
+                            timestamp
+                        </button>
                         <div class="input-group">
                             <div class="input-group-addon">Tail lines:</div>
-                            <input type="number" max="9999" value="1000" class="form-control">
+                            <input type="number" max="9999" class="form-control" ng-model='logSettings["stdOutTail"]'>
                         </div>
-                        <button type="button" ng-click="" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-unchecked"></span>all</button>
+                        <button type="button" ng-click="switchStdOutTailAll()" class="btn btn-primary btn-sm">
+                            <span ng-class="{'glyphicon glyphicon-unchecked':!logSettings['stdOutTailAll'], 'glyphicon glyphicon-check':logSettings['stdOutTailAll']}"></span>
+                            all
+                        </button>
 
                     </div>
                 </div>
@@ -162,13 +168,20 @@
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <div class="form-inline">
-                        <button type="button" ng-click="" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-refresh"></span>Reload</button>
-                        <button type="button" ng-click="" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-unchecked"></span>Show timestamp</button>
+                        <button type="button" ng-click="refreshStdErrLogs()" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-refresh"></span>Reload</button>
+                        <button type="button" ng-click="switchShowStdErrTimestamp()" class="btn btn-primary btn-sm">
+                            <span ng-class="{'glyphicon glyphicon-unchecked':!logSettings['stdErrTimestamp'], 'glyphicon glyphicon-check':logSettings['stdErrTimestamp']}"></span>Show
+                            timestamp
+                        </button>
                         <div class="input-group">
                             <div class="input-group-addon">Tail lines:</div>
-                            <input type="number" max="9999" value="1000" class="form-control">
+                            <input type="number" max="9999" class="form-control" ng-model='logSettings["stdErrTail"]'>
                         </div>
-                        <button type="button" ng-click="" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-unchecked"></span>all</button>
+                        <button type="button" ng-click="switchStdErrTailAll()" class="btn btn-primary btn-sm">
+                            <span ng-class="{'glyphicon glyphicon-unchecked':!logSettings['stdErrTailAll'], 'glyphicon glyphicon-check':logSettings['stdErrTailAll']}"></span>
+                            all
+                        </button>
+
                     </div>
                 </div>
                 <div class="panel-body">

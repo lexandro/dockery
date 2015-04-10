@@ -27,9 +27,11 @@ angular.module('containerDetails', ['ngRoute'])
             var logSettings = [];
             logSettings["showStdOut"] = true;
             logSettings["stdOutTail"] = 1000;
+            logSettings["stdOutTailAll"] = false;
             logSettings["stdOutTimestamp"] = true;
             logSettings["showStdErr"] = true;
             logSettings["stdErrTail"] = 1000;
+            logSettings["stdErrTailAll"] = false;
             logSettings["stdErrTimestamp"] = true;
             $scope.logSettings = logSettings;
 
@@ -43,61 +45,69 @@ angular.module('containerDetails', ['ngRoute'])
                 $scope.activeTab = 'logs';
 
 
-                var logParams = {}
+                var logParams = {};
                 logParams.stderr = 0;
                 logParams.stdout = 1;
-                logParams.timestamps = 1;
-                logParams.tail = 1000;
+                logParams.timestamps = logSettings["stdOutTimestamp"];
+                logParams.tail = logSettings["stdOutTailAll"] == true ? true : logSettings["stdOutTail"];
 
                 Docker.containerLogs(containerId, logParams, function (data, status, headers, config) {
-                    //data = data.replace(/[\r]/g, '\n');
-                    //data = data.substring(8);
-                    //data = data.replace(/\n(.{8})/g, '\n');
-
                     $scope.stdOutLog = data;
-
-                    var dateRegex = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{9}Z)/;
-                    //dateRegex = /\d{4}/;
-                    console.log('regex ' + data.search(dateRegex));
-                    //
-
-                    //for (var i = 0; i < data.length; i++) {
-                    //    console.log(i + ". 0x" + data[i].charCodeAt(0).toString(16) + " " + data[i]);
-                    //}
-
-                    //var line = "";
-                    //var count = 0;
-                    //console.log('log here');
-                    //for (var i = 0; i < data.length; i++) {
-                    //    count++;
-                    //    if (count > 8) {
-                    //        line += data[i];
-                    //        //console.log('in ' + i + ". " + data[i].charCodeAt(0) + " - " + line);
-                    //        if (data[i].charCodeAt(0) == 10) {
-                    //            console.log('newline');
-                    //            console.log(line);
-                    //            line = '';
-                    //            count = 0;
-                    //        }
-                    //    }
-                    //
-                    //}
-
-
                     logParams.stderr = 1;
                     logParams.stdout = 0;
+                    logParams.timestamps = logSettings["stdErrTimestamp"];
+                    logParams.tail = logSettings["stdErrTailAll"] == true ? true : logSettings["stdErrTail"];
                     Docker.containerLogs(containerId, logParams, function (data, status, headers, config) {
-                        //data = data.replace(/[\r]/g, '\n');
                         data = data.substring(8);
-                        //data = data.replace(/\n(.{8})/g, '\n');
                         $scope.stdErrLog = data;
                     });
                 });
+
                 $scope.switchStdOutPanel = function () {
                     logSettings["showStdOut"] = !logSettings["showStdOut"];
                 };
                 $scope.switchStdErrPanel = function () {
                     logSettings["showStdErr"] = !logSettings["showStdErr"];
+                };
+
+                $scope.refreshStdOutLogs = function () {
+                    logParams.stderr = 0;
+                    logParams.stdout = 1;
+                    logParams.timestamps = logSettings["stdOutTimestamp"];
+                    logParams.tail = logSettings["stdOutTailAll"] == true ? true : logSettings["stdOutTail"];
+                    Docker.containerLogs(containerId, logParams, function (data, status, headers, config) {
+                        $scope.stdOutLog = data;
+                    });
+                };
+
+                $scope.switchShowStdOutTimestamp = function () {
+                    logSettings["stdOutTimestamp"] = !logSettings["stdOutTimestamp"];
+                    $scope.refreshStdOutLogs();
+                };
+
+                $scope.switchStdOutTailAll = function () {
+                    logSettings["stdOutTailAll"] = !logSettings["stdOutTailAll"];
+                    $scope.refreshStdOutLogs();
+                };
+
+                $scope.refreshStdErrLogs = function () {
+                    logParams.stderr = 1;
+                    logParams.stdout = 0;
+                    logParams.timestamps = logSettings["stdErrTimestamp"];
+                    logParams.tail = logSettings["stdErrTailAll"] == true ? true : logSettings["stdErrTail"];
+                    Docker.containerLogs(containerId, logParams, function (data, status, headers, config) {
+                        $scope.stdErrLog = data;
+                    });
+                };
+
+                $scope.switchShowStdErrTimestamp = function () {
+                    logSettings["stdErrTimestamp"] = !logSettings["stdErrTimestamp"];
+                    $scope.refreshStdErrLogs();
+                };
+
+                $scope.switchStdErrTailAll = function () {
+                    logSettings["stdErrTailAll"] = !logSettings["stdErrTailAll"];
+                    $scope.refreshStdErrLogs();
                 };
             };
 

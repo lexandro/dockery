@@ -30,9 +30,6 @@ service docker restart
 Roadmap /by priority/
 =====================
 
-0.1.1
-- Add: log view to containers/container details/diff listing
-
 0.1.2
 - Add: TTY view to containers/container details/diff listing
 
@@ -88,6 +85,7 @@ Roadmap /by priority/
 
 0.5.1
 - Add: download file link to containers/container details/diff listing items
+- Add: option to show containers logs as formatted/raw 
 
 Not scheduled
 =============
@@ -105,5 +103,9 @@ Far future, not decided yet
 
 Done
 ====
+
+0.1.1
+- Add: log view to containers/container details/diff listing
+
 0.1.0
 - Add: go first, go last to containers/container details/diff listing
