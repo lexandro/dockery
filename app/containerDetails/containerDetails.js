@@ -141,7 +141,6 @@ angular.module('containerDetails', ['ngRoute'])
                     }
                     $scope.containerDiffs = subDiffs;
                 };
-
                 $scope.changeDiffPaging = function () {
                     if ($scope.newDiffPageSize != diffSettings["pageSize"]) {
                         updateDiffPagedList();
