@@ -44,7 +44,6 @@ angular.module('containerDetails', ['ngRoute'])
             $scope.showLogs = function (containerId) {
                 $scope.activeTab = 'logs';
 
-
                 var logParams = {};
                 logParams.stderr = 0;
                 logParams.stdout = 1;
