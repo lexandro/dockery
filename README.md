@@ -26,16 +26,18 @@ then issue the following command to activate changes:
 ```bash
 service docker restart
 ```
-
-Roadmap /by priority/
+Under development
 =====================
 
-0.1.3
+0.1.3 
 - Add: container details diff view: refresh button 
 - Fix: finish container details page TBD items
 - Fix: make containers/container details head smaller
 - Fix: Don't call top when container is stopped
 - Fix: Don't cut down first character on displayed container name when the first char differ from '/'
+
+Roadmap /by priority/
+=====================
 
 0.1.4
 - Add: "Please wait..." view/anim for time consuming operations (container size, diff, ps, etc...)
@@ -99,6 +101,7 @@ Not scheduled
 
 Far future, not decided yet
 ===========================
+- Make features docker host remote api version aware. Hide non-existing functions
 - Add repeated pinging to containers (the list and per container)
 - Detect fig/compose naming pattern
 - Grep colored logs on container with pluggable patterns
