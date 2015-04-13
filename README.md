@@ -89,6 +89,7 @@ Roadmap /by priority/
 0.5.1
 - Add: download file link to containers/container details/diff listing items
 - Add: option to show containers logs as formatted/raw 
+- Fix: TTY terminal doubles characters in some cases.  
 
 Not scheduled
 =============

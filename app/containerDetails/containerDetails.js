@@ -131,10 +131,16 @@ angular.module('containerDetails', ['ngRoute'])
                     term.destroy();
                 }
                 //
+                var containerDiffs = {};
+                //
+                var refreshDiffs = function () {
+                    containerDiffs = Docker.containers().diff({containerId: containerId}, function () {
+                        updateDiffPagedList();
+                    });
+                }
+                //
                 $scope.activeTab = 'diff';
-                var containerDiffs = Docker.containers().diff({containerId: containerId}, function () {
-                    updateDiffPagedList();
-                });
+                refreshDiffs();
                 //
                 var updateDiffPagedList = function () {
                     var diffPageSize = $scope.newDiffPageSize;
@@ -154,6 +160,11 @@ angular.module('containerDetails', ['ngRoute'])
                     }
                     $scope.containerDiffs = subDiffs;
                 };
+
+                $scope.refreshDiffs = function () {
+                    refreshDiffs();
+                };
+
                 $scope.changeDiffPaging = function () {
                     if ($scope.newDiffPageSize != diffSettings["pageSize"]) {
                         updateDiffPagedList();
