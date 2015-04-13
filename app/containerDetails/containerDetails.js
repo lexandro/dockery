@@ -41,7 +41,19 @@ angular.module('containerDetails', ['ngRoute'])
             var containerDetails = Docker.containers().get({containerId: $routeParams.containerId}, function () {
                 $scope.containerDetails = containerDetails;
                 $scope.showProcesses($routeParams.containerId);
-                console.log(JSON.stringify(containerDetails.NetworkSettings.Ports));
+
+                // TODO check output format with multiple port situation
+                var portAssignments = "";
+                for (var key in containerDetails.NetworkSettings.Ports) {
+                    portAssignments = portAssignments + key + ':';
+                    var portArray = containerDetails.NetworkSettings.Ports[key];
+                    portArray.forEach(function (port) {
+                        portAssignments += port["HostPort"];
+                    });
+                    portAssignments += ', ';
+                }
+
+                $scope.portAssignments = portAssignments.substring(0, portAssignments.length - 2);
             });
             //
 
@@ -122,9 +134,11 @@ angular.module('containerDetails', ['ngRoute'])
                 }
                 //
                 $scope.activeTab = 'top';
-                var containerProcesses = Docker.containers().top({containerId: containerId}, function () {
-                    $scope.containerProcesses = containerProcesses;
-                });
+                if (containerDetails.State.Running) {
+                    var containerProcesses = Docker.containers().top({containerId: containerId}, function () {
+                        $scope.containerProcesses = containerProcesses;
+                    });
+                }
             };
 
             $scope.showDiff = function (containerId) {

@@ -29,31 +29,24 @@ service docker restart
 Under development
 =====================
 
-0.1.3 
-- Add: container details diff view: refresh button 
-- Fix: finish container details page TBD items
-- Fix: make containers/container details head smaller
-- Fix: Don't call top when container is stopped
-- Fix: Don't cut down first character on displayed container name when the first char differ from '/'
-
-Roadmap /by priority/
-=====================
-
 0.1.4
 - Add: "Please wait..." view/anim for time consuming operations (container size, diff, ps, etc...)
 - Fix: default connection issue (two green buttons on hosts view)
 
+Roadmap /by priority/
+=====================
+
 0.1.5
-- Add: start/stop/pause/kill/etc.. button to container list view
+- Add: start/stop/pause/kill/etc.. button to container list view to manage containers
 
 0.1.6
-- Add: start/stop/pause/kill/etc.. button to container details view
+- Add: start/stop/pause/kill/etc.. button to container details view to manage a container
 
 0.1.7
 - Add: containerdetails/volumes
 
 0.2.0
-- Add: rename container to container list view
+- Add: rename container to container list view - Remote api version dependent feature
 
 0.2.1
 - Add: list last n items to container list view
@@ -123,3 +116,10 @@ Done
 
 0.1.2
 - Add: TTY view to containers/container details/tty listing
+
+0.1.3 
+- Add: container details diff view: refresh button 
+- Fix: finish container details page TBD items
+- Fix: make containers/container details head smaller
+- Fix: Don't call top when container is stopped
+- *not fixed*: Don't cut down first character on displayed container name when the first char differ from '/' - replaced with Full name feature.

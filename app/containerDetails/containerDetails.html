@@ -18,7 +18,7 @@
     </div>
     <hr/>
     <div class="row">
-        <div class="col-md-1 text-right"><strong>Name:</strong></div>
+        <div class="col-md-1 text-right"><strong>Full name:</strong></div>
         <div class="col-md-3">{{containerDetails.Name.toUpperCase()}}</div>
         <div class="col-md-1 text-right"><strong>Network mode:</strong></div>
         <div class="col-md-3">{{containerDetails.HostConfig.NetworkMode}}</div>
@@ -41,7 +41,7 @@
             </samp></a>
         </div>
         <div class="col-md-1 text-right"><strong>Ports:</strong></div>
-        <div class="col-md-3"><span class="label label-danger">TBD</span></div>
+        <div class="col-md-3"><strong>{{portAssignments}}</strong></div>
         <div class="col-md-1 text-right"><strong>PID on host:</strong></div>
         <div class="col-md-3">{{containerDetails.State.Pid}}</div>
     </div>
