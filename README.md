@@ -49,6 +49,9 @@ Roadmap /by priority/
 0.1.6
 - Add: start/stop/pause/kill/etc.. button to container details view
 
+0.1.7
+- Add: containerdetails/volumes
+
 0.2.0
 - Add: rename container to container list view
 

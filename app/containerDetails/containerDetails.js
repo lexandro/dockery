@@ -41,6 +41,7 @@ angular.module('containerDetails', ['ngRoute'])
             var containerDetails = Docker.containers().get({containerId: $routeParams.containerId}, function () {
                 $scope.containerDetails = containerDetails;
                 $scope.showProcesses($routeParams.containerId);
+                console.log(JSON.stringify(containerDetails.NetworkSettings.Ports));
             });
             //
 
