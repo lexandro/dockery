@@ -244,7 +244,13 @@
             Items listed: {{ diffSettings["startIndex"]}} - {{ diffSettings["endIndex"]}}
         </div>
     </div>
+    <div ng-show="activeTab=='tty'">
+        <div class="col-md-offset-2 col-md-8">
+            <pre id="terminal" style="line-height: 1;"></pre>
+        </div>
+    </div>
     <div ng-show="activeTab=='json'">
         <json-formatter json="containerDetails" open="10"></json-formatter>
     </div>
+
 </div>

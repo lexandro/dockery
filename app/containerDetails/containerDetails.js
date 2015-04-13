@@ -34,16 +34,21 @@ angular.module('containerDetails', ['ngRoute'])
             logSettings["stdErrTailAll"] = false;
             logSettings["stdErrTimestamp"] = true;
             $scope.logSettings = logSettings;
+            // dirt hack to emulate destroy function :)
+            var term = {};
 
-            //
+
             var containerDetails = Docker.containers().get({containerId: $routeParams.containerId}, function () {
                 $scope.containerDetails = containerDetails;
                 $scope.showProcesses($routeParams.containerId);
             });
             //
-            $scope.showLogs = function (containerId) {
-                $scope.activeTab = 'logs';
 
+            $scope.showLogs = function (containerId) {
+                if (!Helpers.isEmpty(term)) {
+                    term.destroy();
+                }
+                $scope.activeTab = 'logs';
                 var logParams = {};
                 logParams.stderr = 0;
                 logParams.stdout = 1;
@@ -111,6 +116,10 @@ angular.module('containerDetails', ['ngRoute'])
             };
 
             $scope.showProcesses = function (containerId) {
+                if (!Helpers.isEmpty(term)) {
+                    term.destroy();
+                }
+                //
                 $scope.activeTab = 'top';
                 var containerProcesses = Docker.containers().top({containerId: containerId}, function () {
                     $scope.containerProcesses = containerProcesses;
@@ -118,6 +127,10 @@ angular.module('containerDetails', ['ngRoute'])
             };
 
             $scope.showDiff = function (containerId) {
+                if (!Helpers.isEmpty(term)) {
+                    term.destroy();
+                }
+                //
                 $scope.activeTab = 'diff';
                 var containerDiffs = Docker.containers().diff({containerId: containerId}, function () {
                     updateDiffPagedList();
@@ -168,17 +181,35 @@ angular.module('containerDetails', ['ngRoute'])
                 }
             };
 
-
             $scope.showTty = function (containerId) {
                 $scope.activeTab = 'tty';
-                console.log(containerId);
+                var termContainer = document.getElementById('terminal');
+                term = new Terminal();
+                var url = $rootScope.hostUrl.replace('http:', 'ws:').replace('https:', 'wss:') + '/containers/' + containerId + '/attach/ws?logs=0&stream=1&stdout=1&stderr=1&stdin=1';
+                var socket = new WebSocket(url);
+                term.open(termContainer);
+                term.resize(80, 25);
+                term.on('data', function (data) {
+                    socket.send(data);
+                });
+                socket.onmessage = function (e) {
+                    term.write(e.data);
+                }
             };
-
 
             $scope.showJson = function (containerId) {
+                if (!Helpers.isEmpty(term)) {
+                    term.destroy();
+                }
+                //
                 $scope.activeTab = 'json';
-                console.log(containerId);
             };
+
+            $scope.$on("$destroy", function () {
+                if (!Helpers.isEmpty(term)) {
+                    term.destroy();
+                }
+            });
         }
     }])
 ;

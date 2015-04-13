@@ -30,9 +30,6 @@ service docker restart
 Roadmap /by priority/
 =====================
 
-0.1.2
-- Add: TTY view to containers/container details/diff listing
-
 0.1.3
 - Add: container details diff view: refresh button 
 - Fix: finish container details page TBD items
@@ -97,6 +94,7 @@ Not scheduled
 =============
 - Help
 - docker image with version check in the webapp
+- Add copyright when released or published (xterm.js, json-formatter)
 
 Far future, not decided yet
 ===========================
@@ -115,3 +113,6 @@ Done
 
 0.1.0
 - Add: go first, go last to containers/container details/diff listing
+
+0.1.2
+- Add: TTY view to containers/container details/tty listing
