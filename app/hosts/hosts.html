@@ -6,7 +6,7 @@
             <input type="text" class="form-control" id="newHostName" ng-model="newHostName" placeholder="name">
             <input type="url" class="form-control" id="newHostUrl" ng-model="newHostUrl" placeholder="docker host address">
         </div>
-        <button type="submit" class="btn btn-success glyphicon glyphicon-plus" ng-click="addHost()"></button>
+        <button type="submit" class="btn btn-success " ng-click="addHost()"><span class="glyphicon glyphicon-plus"></span> Add</button>
         <br/>
         <br/>
 
@@ -20,8 +20,8 @@
                         <input type="text" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required" id="pingInterval"
                                style="width: 100% !important;margin-top: 2px" ng-model='pingInterval' placeholder="Ping interval in ms">
                             <span class="input-group-btn">
-                            <button ng-click="updateStatus()" title="Refresh list" type="submit" class="btn btn-primary glyphicon glyphicon-refresh"
-                                    style="width: 40px; margin-right: 160px;margin-left: 5px;">
+                            <button ng-click="updateStatus()" title="Refresh list" type="submit" class="btn btn-primary"
+                                    style="width: 40px; margin-right: 160px;margin-left: 5px;"><span class="glyphicon glyphicon-refresh"></span>
 
                             </button>
                         </span>
