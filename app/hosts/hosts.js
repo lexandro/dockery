@@ -36,7 +36,7 @@ angular.module('hosts', ['ngRoute'])
         function pingHost(host) {
             Docker.ping(host.url).get(function () {
                 host.status = true;
-                if (host.defaultConnection) {
+                if (host.defaultConnection && Helpers.isEmpty($rootScope.hostUrl)) {
                     selectHost(host);
                     host.selected = true;
                 }
