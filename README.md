@@ -90,6 +90,9 @@ Roadmap /by priority/
 - Add: option to show containers logs as formatted/raw 
 - Fix: TTY terminal doubles characters in some cases.  
 
+0.5.2 
+- Add: add search for container diff
+
 Not scheduled
 =============
 - Help
