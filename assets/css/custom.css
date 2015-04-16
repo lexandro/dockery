@@ -8,3 +8,40 @@ pre {
     word-wrap: normal;
     white-space: pre-wrap;
 }
+
+.spin{
+    -webkit-transform-origin: 50% 58%;
+    transform-origin:50% 50%;
+    -ms-transform-origin:50% 58%; /* IE 9 */
+    -webkit-animation: spin .5s infinite linear;
+    -moz-animation: spin .5s infinite linear;
+    -o-animation: spin .5s infinite linear;
+    animation: spin .5s infinite linear;
+}
+
+@-moz-keyframes spin {
+    from {
+        -moz-transform: rotate(0deg);
+    }
+    to {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
