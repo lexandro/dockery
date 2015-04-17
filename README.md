@@ -42,6 +42,9 @@ Roadmap /by priority/
 0.1.7
 - Add: containerdetails/volumes
 
+0.1.8
+- Add: show containerdetails/ cpu/network datastream as diagram/graph or stg. else 
+
 0.2.0
 - Add: rename container to container list view - Remote api version dependent feature
 
