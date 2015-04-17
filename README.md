@@ -41,9 +41,13 @@ Roadmap /by priority/
 
 0.1.7
 - Add: containerdetails/volumes
+- Fix: test port assignment [exposed image without public, exposed with -P, exposed with -p, portless image with -P, portless image with -p]
 
 0.1.8
 - Add: show containerdetails/ cpu/network datastream as diagram/graph or stg. else 
+
+0.1.9
+- Add: separate containers by their state [running, paused, stopped]
 
 0.2.0
 - Add: rename container to container list view - Remote api version dependent feature
@@ -109,6 +113,8 @@ Far future, not decided yet
 - Multiple container log tailing with one click/window
 - Ping open ports for spring actuator endpoints (health, ping, info, etc...) Risky...
 - Ping open ports for swagger endpoint (/api_docs)
+- Swarm support
+- compose yml support
 
 Done
 ====
