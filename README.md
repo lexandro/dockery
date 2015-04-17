@@ -102,6 +102,7 @@ Not scheduled
 Far future, not decided yet
 ===========================
 - Make features docker host remote api version aware. Hide non-existing functions
+- Redesign layout from top menu to side menu
 - Add repeated pinging to containers (the list and per container)
 - Detect fig/compose naming pattern
 - Grep colored logs on container with pluggable patterns
