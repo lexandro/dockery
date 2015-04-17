@@ -14,18 +14,17 @@ angular.module('hosts', ['ngRoute'])
             $rootScope.lastPingInterval = 60000;
         }
         $scope.pingInterval = $rootScope.lastPingInterval;
-
         var hosts = [];
         try {
             hosts = HostService.load();
         } catch (err) {
             console.log("Error loading hosts data: " + err);
         }
-
         hosts.forEach(function (host) {
             host.status = false;
             host.editHostEnabled = false;
             host.selected = false;
+            host.pinging = true;
 
             if (!Helpers.isEmpty($rootScope.hostUrl)) {
                 host.selected = (host.url == $rootScope.hostUrl);
@@ -34,13 +33,16 @@ angular.module('hosts', ['ngRoute'])
         $scope.hosts = hosts;
 
         function pingHost(host) {
+            host.pinging = true;
             Docker.ping(host.url).get(function () {
                 host.status = true;
+                host.pinging = false;
                 if (host.defaultConnection && Helpers.isEmpty($rootScope.hostUrl)) {
                     selectHost(host);
                     host.selected = true;
                 }
             }, function () {
+                host.pinging = false;
                 setDisabledHost(host);
             });
         }
@@ -86,7 +88,6 @@ angular.module('hosts', ['ngRoute'])
             if ($rootScope.tick == true) {
                 hosts.forEach(function (host) {
                     pingHost(host);
-
                 });
 
                 var interval = parseInt($scope.pingInterval);

@@ -1,5 +1,5 @@
 <div class="col-md-12">
-    <span class="glyphicon glyphicon-refresh spin"></span>
+
     <div>
     </div>
     <form class="form-inline" role="form">
@@ -29,7 +29,7 @@
                 </td>
             </tr>
             <tr>
-                <td width="1%" class="text-center"><strong>Health</strong></td>
+                <td width="1%" class="text-center"><strong>Status</strong></td>
                 <td width="15%" class="text-center"><strong>Name</strong></td>
                 <td width="30%" class="text-center"><strong>Host URL</strong></td>
                 <td width="8%" class="text-center"><strong>Created</strong></td>
@@ -42,9 +42,12 @@
                 <td width="1%" class="text-left">
                     <button ng-disabled="!host.status"
                             ng-click="goHostDetails(host)"
-                            ng-class="{'btn btn-success glyphicon glyphicon-signal': host.status, 'btn btn-danger glyphicon glyphicon-flash': !host.status}"
+                            ng-class="{'btn btn-success': host.status, 'btn btn-danger': !host.status}"
                             title="See host stats">
+                        <span ng-class="{'glyphicon glyphicon-signal': host.status, 'glyphicon glyphicon-flash': !host.status}" ng-show="!host.pinging"></span>
+                        <span class="glyphicon glyphicon-refresh spin" ng-show="host.pinging"></span>
                     </button>
+
                 </td>
                 <td width="5%" class="text-left">
                     <div ng-click="saveHost(host)">
