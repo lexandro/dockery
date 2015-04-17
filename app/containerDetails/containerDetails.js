@@ -38,7 +38,14 @@ angular.module('containerDetails', ['ngRoute'])
             var term = {};
 
 
+            $scope.containerDetailsLoading = true;
+            $scope.containerDetailsLoadingMessage = 'Loading container data';
+            $scope.containerTopLoading = false;
+            $scope.containerLogsLoading = false;
+            $scope.containerDiffLoading = false;
+
             var containerDetails = Docker.containers().get({containerId: $routeParams.containerId}, function () {
+                $scope.containerDetailsLoading = false;
                 $scope.containerDetails = containerDetails;
                 $scope.showProcesses($routeParams.containerId);
 
@@ -52,12 +59,13 @@ angular.module('containerDetails', ['ngRoute'])
                     });
                     portAssignments += ', ';
                 }
-
                 $scope.portAssignments = portAssignments.substring(0, portAssignments.length - 2);
             });
             //
 
             $scope.showLogs = function (containerId) {
+                $scope.containerLogsLoading = true;
+                $scope.containerLogsLoadingMessage = 'Loading log information';
                 if (!Helpers.isEmpty(term)) {
                     term.destroy();
                 }
@@ -75,6 +83,7 @@ angular.module('containerDetails', ['ngRoute'])
                     logParams.timestamps = logSettings["stdErrTimestamp"];
                     logParams.tail = logSettings["stdErrTailAll"] == true ? true : logSettings["stdErrTail"];
                     Docker.containerLogs(containerId, logParams, function (data, status, headers, config) {
+                        $scope.containerLogsLoading = false;
                         data = data.substring(8);
                         $scope.stdErrLog = data;
                     });
@@ -129,6 +138,8 @@ angular.module('containerDetails', ['ngRoute'])
             };
 
             $scope.showProcesses = function (containerId) {
+                $scope.containerTopLoading = true;
+                $scope.containerTopLoadingMessage = 'Loading process information';
                 if (!Helpers.isEmpty(term)) {
                     term.destroy();
                 }
@@ -136,6 +147,7 @@ angular.module('containerDetails', ['ngRoute'])
                 $scope.activeTab = 'top';
                 if (containerDetails.State.Running) {
                     var containerProcesses = Docker.containers().top({containerId: containerId}, function () {
+                        $scope.containerTopLoading = false;
                         $scope.containerProcesses = containerProcesses;
                     });
                 }
@@ -147,12 +159,15 @@ angular.module('containerDetails', ['ngRoute'])
                 }
                 //
                 var containerDiffs = {};
+                $scope.containerDiffLoading = true;
+                $scope.containerDiffLoadingMessage = 'Loading container diff information. Be patient! It could take some time.';
                 //
                 var refreshDiffs = function () {
                     containerDiffs = Docker.containers().diff({containerId: containerId}, function () {
+                        $scope.containerDiffLoading = false;
                         updateDiffPagedList();
                     });
-                }
+                };
                 //
                 $scope.activeTab = 'diff';
                 refreshDiffs();

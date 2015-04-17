@@ -17,6 +17,9 @@
         </div>
     </div>
     <hr/>
+    <div class="alert alert-info" role="alert" ng-show="containerDetailsLoading">
+        <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span> {{containerDetailsLoadingMessage}}</h3>
+    </div>
     <div class="row">
         <div class="col-md-1 text-right"><strong>Full name:</strong></div>
         <div class="col-md-3">{{containerDetails.Name.toUpperCase()}}</div>
@@ -96,6 +99,9 @@
     <br/>
 
     <div ng-show="activeTab=='top'">
+        <div class="alert alert-info" role="alert" ng-show="containerTopLoading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span> {{containerTopLoadingMessage}}</h3>
+        </div>
         <table class="table table-condensed table-hover table-striped">
             <thead>
             <tr class="success">
@@ -114,6 +120,9 @@
         </table>
     </div>
     <div ng-show="activeTab=='logs'">
+        <div class="alert alert-info" role="alert" ng-show="containerLogsLoading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span> {{containerLogsLoadingMessage}}</h3>
+        </div>
         <div class="col-md-6">
             <button type="button" ng-click="switchStdOutPanel()"
                     ng-class="{'btn btn-primary': logSettings['showStdOut'], 'btn btn-info': !logSettings['showStdOut']}">
@@ -189,12 +198,13 @@
                         </pre>
                 </div>
             </div>
-
-
         </div>
     </div>
 
     <div ng-show="activeTab=='diff'">
+        <div class="alert alert-info" role="alert" ng-show="containerDiffLoading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span> {{containerDiffLoadingMessage}}</h3>
+        </div>
         <div class="col-md-4 vcenter">
             <button type="button" class="btn  btn-primary btn-sm" ng-click="refreshDiffs()">
                 <span class="glyphicon glyphicon-refresh"></span> Refresh
