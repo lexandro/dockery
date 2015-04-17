@@ -13,13 +13,15 @@ angular.module('imageDetails', ['ngRoute'])
         if (Helpers.isEmpty($rootScope.hostUrl)) {
             $location.path('/hosts');
         } else {
-            $scope.imageDataLoading=true;
-            $scope.imageDataLoadingMessage='Loading image data';
+            $scope.imageDataLoading = true;
+            $scope.imageDataLoadingMessage = 'Loading image data';
             var imageDetails = Docker.images().get({imageId: $routeParams.imageId}, function () {
-                $scope.imageDataLoading=false;
+                $scope.imageDataLoading = false;
                 $scope.imageDetails = imageDetails;
                 // converting the port listing map map to a more readable format
-                imageDetails.Config.ExposedPorts = Object.keys(imageDetails.Config.ExposedPorts).join(', ');
+                if (imageDetails.Config) {
+                    imageDetails.Config.ExposedPorts = Object.keys(imageDetails.Config.ExposedPorts).join(', ');
+                }
             });
 
             var imageHistoryList = Docker.images().history({imageId: $routeParams.imageId}, function () {
