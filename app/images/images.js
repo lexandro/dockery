@@ -39,6 +39,8 @@ angular.module('images', ['ngRoute'])
         }
 
         function refreshImages() {
+            $scope.imageListing=true;
+            $scope.imageListingMessage='Loading image data';
             var images = Docker.images().query({showAllImagesFlag: $scope.showAllImagesFlag ? 1 : 0}, function () {
                     var result = [];
                     images.forEach(function (image) {
@@ -48,6 +50,7 @@ angular.module('images', ['ngRoute'])
                             result.push(image);
                         }
                     });
+                    $scope.imageListing=false;
                     $scope.images = result;
                 }
             );
