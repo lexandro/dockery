@@ -30,15 +30,11 @@ service docker restart
 Under development
 =====================
 
-0.1.4
-- Add: "Please wait..." view/anim for time consuming operations (container size, diff, ps, etc...)
-- Fix: default connection issue (two green buttons on hosts view)
+0.1.5
+- Add: start/stop/pause/kill/etc.. button to container list view to manage containers
 
 Roadmap /by priority/
 =====================
-
-0.1.5
-- Add: start/stop/pause/kill/etc.. button to container list view to manage containers
 
 0.1.6
 - Add: start/stop/pause/kill/etc.. button to container details view to manage a container
@@ -128,3 +124,8 @@ Done
 - Fix: make containers/container details head smaller
 - Fix: Don't call top when container is stopped
 - *not fixed*: Don't cut down first character on displayed container name when the first char differ from '/' - replaced with Full name feature.
+
+0.1.4
+- Add: "Please wait..." view/anim for time consuming operations (container size, diff, ps, etc...)
+- Fix: default connection issue (two green buttons on hosts view)
+- Fix: image details view error with root images/no port exposed images because of a missing property
