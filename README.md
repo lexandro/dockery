@@ -92,6 +92,7 @@ Roadmap /by priority/
 
 0.5.2 
 - Add: add search for container diff
+- Fix: Adding new host sometimes causing index by errors. 
 
 Not scheduled
 =============
