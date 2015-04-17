@@ -14,9 +14,12 @@ angular.module('containers', ['ngRoute'])
             $scope.showAllContainersFlag = false;
             $scope.showContainerSizeFlag = false;
             $scope.selectAllFlag = false;
+
             refreshContainers();
 
             $scope.refreshContainers = function () {
+                $scope.containerListing = true;
+                $scope.containerListingMessage = 'Loading container list';
                 refreshContainers();
             };
             //
@@ -61,6 +64,7 @@ angular.module('containers', ['ngRoute'])
                 containerParam.all = 1;
             }
             var containers = Docker.containers().query(containerParam, function () {
+                $scope.containerListing = false;
                 containers.forEach(function (container) {
                     var containerData = {};
                     containerData.Id = container.Id;
@@ -84,7 +88,6 @@ angular.module('containers', ['ngRoute'])
                 $scope.containerDataSize = getObjectPropertiesAmount(containerDataList);
             });
             if ($scope.showContainerSizeFlag == true) {
-                console.log('Size ' + $scope.showContainerSizeFlag);
                 containerParam = {};
                 if ($scope.showAllContainersFlag == true) {
                     containerParam.all = 1;
@@ -92,7 +95,8 @@ angular.module('containers', ['ngRoute'])
                 if ($scope.showContainerSizeFlag == true) {
                     containerParam.size = 1;
                 }
-                console.log(JSON.stringify(containerParam));
+                $scope.containerSizeListing = true;
+                $scope.containerSizeListingMessage = 'Querying container size data. It could take some time.';
                 var containersWithSize = Docker.containers().query(containerParam, function () {
                     containersWithSize.forEach(function (containerWithSize) {
                         var containerData = containerDataList[containerWithSize.Id];
@@ -101,6 +105,7 @@ angular.module('containers', ['ngRoute'])
                             containerData.SizeRootFs = containerWithSize.SizeRootFs;
                         }
                     });
+                    $scope.containerSizeListing = false;
                     $scope.containerDataList = containerDataList;
                     $scope.containerDataSize = getObjectPropertiesAmount(containerDataList);
                 });
