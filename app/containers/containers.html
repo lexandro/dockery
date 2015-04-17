@@ -5,99 +5,100 @@
         </div>
     </div>
     <hr/>
-    <div ng-show="containerListing">
-        <h1 class="text-center"><span class="glyphicon glyphicon-refresh spin"></span> {{containerListingMessage}}</h1>
-    </div>
-    <div ng-show="!containerListing">
-        <div class="alert alert-info" role="alert" ng-show="containerSizeListing">
-            <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span> {{containerSizeListingMessage}}</h3>
-        </div>
-        <table class="table table-condensed table-hover table-striped table-bordered">
-            <thead>
-            <tr class="success">
-                <td colspan="8">
-                    <div class="col-md-4">
-                        <button type="button" ng-click="refreshContainers()" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span>Refresh
-                        </button>
-                        <button type="button" class="btn btn-primary" ng-click="switchShowAllContainersFlag()">
-                            <span ng-class="{'glyphicon glyphicon-unchecked':!showAllContainersFlag, 'glyphicon glyphicon-check':showAllContainersFlag}"></span>All
-                        </button>
-                        <button type="button" class="btn btn-primary" ng-click="switchShowContainerSizeFlag()"><span
-                                ng-class="{'glyphicon glyphicon-unchecked':!showContainerSizeFlag, 'glyphicon glyphicon-check':showContainerSizeFlag}"></span>Show
-                            size
-                        </button>
-                        <button type="button" class="btn btn-success" ng-click='createContainer()' title="Create new container"><span
-                                class="glyphicon glyphicon-plus"></span>Create
-                        </button>
 
-                    </div>
-                    <div class="col-md-6 vcenter">
-                        <strong> Items listed: <span class="badge">{{containerDataSize}}</span></strong>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td width="2%" align="center">
+    <div class="alert alert-info" role="alert" ng-show="containerListing">
+        <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span> {{containerListingMessage}}</h3>
+    </div>
+
+    <div class="alert alert-warning" role="alert" ng-show="containerSizeListing">
+        <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span> {{containerSizeListingMessage}}</h3>
+    </div>
+
+    <table class="table table-condensed table-hover table-striped table-bordered">
+        <thead>
+        <tr class="success">
+            <td colspan="8">
+                <div class="col-md-4">
+                    <button type="button" ng-click="refreshContainers()" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span>Refresh
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="switchShowAllContainersFlag()">
+                        <span ng-class="{'glyphicon glyphicon-unchecked':!showAllContainersFlag, 'glyphicon glyphicon-check':showAllContainersFlag}"></span>All
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="switchShowContainerSizeFlag()"><span
+                            ng-class="{'glyphicon glyphicon-unchecked':!showContainerSizeFlag, 'glyphicon glyphicon-check':showContainerSizeFlag}"></span>Show
+                        size
+                    </button>
+                    <button type="button" class="btn btn-success" ng-click='createContainer()' title="Create new container"><span
+                            class="glyphicon glyphicon-plus"></span>Create
+                    </button>
+
+                </div>
+                <div class="col-md-6 vcenter">
+                    <strong> Items listed: <span class="badge">{{containerDataSize}}</span></strong>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="2%" align="center">
                  <span ng-class="{'glyphicon glyphicon-check':selectAllFlag, 'glyphicon glyphicon-unchecked':!selectAllFlag}"
                        class="vcenter"
                        ng-click="switchSelectAllFlag()">
                 </span>
-                </td>
-                <td width="5%" class="text-center">
-                    <div class="vcenter">
-                        <strong>ID</strong>
-                    </div>
-                </td>
-                <td width="5%" class="text-center vcenter">
-                    <div class="vcenter"><strong>Name</strong></div>
-                </td>
-                <td width="5%" class="text-center vcenter">
-                    <div class="vcenter"><strong>Image</strong></div>
-                </td>
-                <td width="40%" class="text-center vcenter">
-                    <div class="vcenter"><strong>Command</strong></div>
-                </td>
-                <td width="8%" class="text-center vcenter">
-                    <div class="vcenter"><strong>Status</strong></div>
-                </td>
-                <td width="5%" class="text-center vcenter">
-                    <div class="vcenter"><strong>Diff size (Virtual size)</strong></div>
-                </td>
-                <td width="11%" class="text-center vcenter">
-                    <div class="vcenter"><strong>Created</strong></div>
-                </td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="(key, value) in containerDataList" class="text-center">
-                <td align="center">
+            </td>
+            <td width="5%" class="text-center">
+                <div class="vcenter">
+                    <strong>ID</strong>
+                </div>
+            </td>
+            <td width="5%" class="text-center vcenter">
+                <div class="vcenter"><strong>Name</strong></div>
+            </td>
+            <td width="5%" class="text-center vcenter">
+                <div class="vcenter"><strong>Image</strong></div>
+            </td>
+            <td width="40%" class="text-center vcenter">
+                <div class="vcenter"><strong>Command</strong></div>
+            </td>
+            <td width="8%" class="text-center vcenter">
+                <div class="vcenter"><strong>Status</strong></div>
+            </td>
+            <td width="5%" class="text-center vcenter">
+                <div class="vcenter"><strong>Diff size (Virtual size)</strong></div>
+            </td>
+            <td width="11%" class="text-center vcenter">
+                <div class="vcenter"><strong>Created</strong></div>
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="(key, value) in containerDataList" class="text-center">
+            <td align="center">
                  <span ng-class="{'glyphicon glyphicon-check':selectAllFlag||value.selected, 'glyphicon glyphicon-unchecked':!(selectAllFlag||value.selected)}"
                        ng-click="switchSelected(value)">
                 </span>
-                </td>
-                <td>
-                    <button class="btn btn-info btn-block text-center" ng-click="goContainerDetails(value.Id)">
-                        {{value.Id | limitTo:12}}
-                    </button>
-                </td>
-                <td class="text-center">
-                    <button class="btn btn-info btn-block text-right" ng-click="goContainerDetails(value.Id)">
-                        {{value.Name | shorten:true:30}}
-                    </button>
-                </td>
-                <td class="text-center">
-                    <button class="btn btn-info btn-block" ng-click="goImageDetails(value.ImageId)">
-                        {{value.Image | shorten:true:30}}
-                    </button>
-                </td>
-                <td class="text-left">{{value.Command | shorten:true:80}}</td>
-                <td class="text-left">{{value.Status}}</td>
-                <td class="text-left">{{showContainerSizeFlag==true?value.SizeRw:NAN | bytes:2 }} ({{showContainerSizeFlag==true?value.SizeRootFs:NAN | bytes:2
-                    }})
-                </td>
-                <td class="text-left">{{value.Created * 1000 | date:'dd, MMM yyyy HH:mm:ss'}}</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+            </td>
+            <td>
+                <button class="btn btn-info btn-block text-center" ng-click="goContainerDetails(value.Id)">
+                    {{value.Id | limitTo:12}}
+                </button>
+            </td>
+            <td class="text-center">
+                <button class="btn btn-info btn-block text-right" ng-click="goContainerDetails(value.Id)">
+                    {{value.Name | shorten:true:30}}
+                </button>
+            </td>
+            <td class="text-center">
+                <button class="btn btn-info btn-block" ng-click="goImageDetails(value.ImageId)">
+                    {{value.Image | shorten:true:30}}
+                </button>
+            </td>
+            <td class="text-left">{{value.Command | shorten:true:80}}</td>
+            <td class="text-left">{{value.Status}}</td>
+            <td class="text-left">{{showContainerSizeFlag==true?value.SizeRw:NAN | bytes:2 }} ({{showContainerSizeFlag==true?value.SizeRootFs:NAN | bytes:2
+                }})
+            </td>
+            <td class="text-left">{{value.Created * 1000 | date:'dd, MMM yyyy HH:mm:ss'}}</td>
+        </tr>
+        </tbody>
+    </table>
 </div>
