@@ -3,8 +3,10 @@
         <h3>Docker host information</h3>
         <hr/>
     </div>
-
-    <div class="col-md-12">
+    <div class="col-md-12" ng-show="loadingAnimation">
+        <h1 class="text-center"><span class="glyphicon glyphicon-refresh spin"></span>{{loadingMessage}}</h1>
+    </div>
+    <div class="col-md-12" ng-show="!loadingAnimation">
         <div class="col-md-4 text-right">Host URL</div>
         <div class="col-md-5 text-left">{{dockerInfo.url|| 'N/A'}}</div>
         <!---->

@@ -11,12 +11,12 @@ pre {
 
 .spin{
     -webkit-transform-origin: 50% 58%;
-    transform-origin:50% 50%;
+    transform-origin:49% 48%;
     -ms-transform-origin:50% 58%; /* IE 9 */
-    -webkit-animation: spin .5s infinite linear;
-    -moz-animation: spin .5s infinite linear;
-    -o-animation: spin .5s infinite linear;
-    animation: spin .5s infinite linear;
+    -webkit-animation: spin 1s infinite linear;
+    -moz-animation: spin 15s infinite linear;
+    -o-animation: spin 1s infinite linear;
+    animation: spin 1s infinite linear;
 }
 
 @-moz-keyframes spin {

@@ -13,9 +13,12 @@ angular.module('hostDetails', ['ngRoute'])
         if (Helpers.isEmpty($rootScope.hostUrl)) {
             $location.path('/hosts');
         } else {
+            $scope.loadingAnimation = true;
+            $scope.loadingMessage = 'Loading docker host info';
             var dockerInfo = Docker.info().get(function () {
                 dockerInfo.url = $rootScope.hostUrl;
                 $scope.dockerInfo = dockerInfo;
+                $scope.loadingAnimation = false;
                 var versionInfo = Docker.version().get(function () {
                     $scope.versionInfo = versionInfo;
                 });
