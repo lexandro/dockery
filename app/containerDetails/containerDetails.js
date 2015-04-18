@@ -53,7 +53,7 @@ angular.module('containerDetails', ['ngRoute'])
                 var portAssignments = "";
                 for (var key in containerDetails.NetworkSettings.Ports) {
                     portAssignments = portAssignments + key + ':';
-                    var portArray = containerDetails.NetworkSettings.Ports[key];
+                    var portArray = containerDetails.NetworkSettings.PortMapping.Ports[key];
                     portArray.forEach(function (port) {
                         portAssignments += port["HostPort"];
                     });
