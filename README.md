@@ -95,6 +95,7 @@ Roadmap /by priority/
 
 0.5.2 
 - Add: add search for container diff
+- Add: set refresh interval on container listing
 - Fix: Adding new host sometimes causing index by errors. 
 
 Not scheduled
