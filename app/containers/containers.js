@@ -67,25 +67,17 @@ angular.module('containers', ['ngRoute'])
                 $scope.containerListing = false;
                 containers.forEach(function (container) {
                     var containerData = {};
-                    containerData.Id = container.Id;
-                    containerData.Image = container.Image;
-                    containerData.Created = container.Created;
-                    containerData.Command = container.Command;
-                    containerData.Status = container.Status;
+                    containerData.container = container;
                     containerData.Selected = false;
-                    containerData.SizeRw = 0;
-                    containerData.SizeRootFs = 0;
-                    containerDataList[containerData.Id] = containerData;
-
+                    containerDataList[container.Id] = containerData;
                     var containerDetails = Docker.containers().get({containerId: container.Id}, function () {
                         $scope.containerDetails = containerDetails;
-                        containerData.ImageId = containerDetails.Image;
-                        containerData.Name = containerDetails.Name.charAt(0) === '/' ? containerDetails.Name.substr(1) : containerDetails.Name;
+                        containerData.containerDetails = containerDetails;
                     });
 
                 });
                 $scope.containerDataList = containerDataList;
-                $scope.containerDataSize = getObjectPropertiesAmount(containerDataList);
+                $scope.containerDataListSize = getObjectPropertiesAmount(containerDataList);
             });
             if ($scope.showContainerSizeFlag == true) {
                 containerParam = {};
@@ -100,14 +92,13 @@ angular.module('containers', ['ngRoute'])
                 var containersWithSize = Docker.containers().query(containerParam, function () {
                     containersWithSize.forEach(function (containerWithSize) {
                         var containerData = containerDataList[containerWithSize.Id];
-                        if (containerWithSize.Id == containerData.Id) {
-                            containerData.SizeRw = containerWithSize.SizeRw;
-                            containerData.SizeRootFs = containerWithSize.SizeRootFs;
+                        if (containerWithSize.Id == containerData.container.Id) {
+                            containerData.container = containerWithSize;
                         }
                     });
                     $scope.containerSizeListing = false;
                     $scope.containerDataList = containerDataList;
-                    $scope.containerDataSize = getObjectPropertiesAmount(containerDataList);
+                    $scope.containerDataListSize = getObjectPropertiesAmount(containerDataList);
                 });
             }
         }
