@@ -38,16 +38,16 @@ Roadmap /by priority/
 
 0.1.6
 - Add: start/stop/pause/kill/etc.. button to container details view to manage a container
+- Add: separate containers by their state [running, paused, stopped]
 
 0.1.7
 - Add: containerdetails/volumes
-- Fix: test port assignment [exposed image without public, exposed with -P, exposed with -p, portless image with -P, portless image with -p]
 
 0.1.8
 - Add: show containerdetails/ cpu/network datastream as diagram/graph or stg. else 
 
 0.1.9
-- Add: separate containers by their state [running, paused, stopped]
+- Fix: test port assignment [exposed image without public, exposed with -P, exposed with -p, portless image with -P, portless image with -p]
 
 0.2.0
 - Add: rename container to container list view - Remote api version dependent feature

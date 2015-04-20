@@ -15,6 +15,7 @@ angular.module('containers', ['ngRoute'])
             $scope.showContainerSizeFlag = false;
             $scope.selectAllFlag = false;
 
+
             refreshContainers();
 
             $scope.refreshContainers = function () {
@@ -68,6 +69,26 @@ angular.module('containers', ['ngRoute'])
                 containers.forEach(function (container) {
                     var containerData = {};
                     containerData.container = container;
+
+                    var containerStatus = '';
+                    if (container.Status.indexOf('Up') == 0 || container.Status.indexOf('Restarting') == 0 || container.Status.indexOf('Removal') == 0) {
+                        if (container.Status.indexOf('Paused') > -1 || container.Status.indexOf('Removal') == 0) {
+                            containerStatus = 'paused';
+                        } else {
+                            containerStatus = 'running';
+                        }
+                    } else {
+                        if (container.Status == '') {
+                            containerStatus = 'created';
+                        } else {
+                            containerStatus = 'stopped';
+                        }
+
+                    }
+                    containerData.containerStatus = containerStatus;
+
+
+
                     containerData.Selected = false;
                     containerDataList[container.Id] = containerData;
                     var containerDetails = Docker.containers().get({containerId: container.Id}, function () {
