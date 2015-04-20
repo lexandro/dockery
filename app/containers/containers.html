@@ -37,29 +37,33 @@
                     </button>
                 </div>
                 <div class="col-md-4 vcenter">
-                    <button class="btn btn-success btn-sm">
+                    <button class="btn btn-success btn-sm"
+                            ng-click="startSelectedContainers()">
                         <span class="glyphicon glyphicon glyphicon-play"></span><strong> start</strong>
                     </button>
-                    <button class="btn btn-danger btn-sm">
+                    <button class="btn btn-danger btn-sm"
+                            ng-click="stopSelectedContainers()">
                         <span class="glyphicon glyphicon glyphicon-stop"></span><strong> stop</strong>
                     </button>
-                    <button class="btn btn-primary btn-sm">
+                    <button class="btn btn-primary btn-sm"
+                            ng-click="restartSelectedContainers()">
                         <span class="glyphicon glyphicon glyphicon-refresh"></span><strong> restart</strong>
                     </button>
-
-                    <button class="btn btn-warning btn-sm">
+                    <button class="btn btn-warning btn-sm"
+                            ng-click="pauseSelectedContainers()">
                         <span class="glyphicon glyphicon glyphicon-pause"></span><strong> pause</strong>
                     </button>
-                    <button class="btn btn-info btn-sm">
+                    <button class="btn btn-info btn-sm"
+                            ng-click="unpauseSelectedContainers()">
                         <span class="glyphicon glyphicon glyphicon-repeat"></span><strong> unpause</strong>
                     </button>
-
-                    <button class="btn btn-danger btn-sm">
+                    <button class="btn btn-danger btn-sm"
+                            ng-click="removeSelectedContainers()">
                         <span class="glyphicon glyphicon glyphicon-trash"></span><strong> remove</strong>
                     </button>
                 </div>
                 <div class="col-md-4 vcenter">
-                    <strong> Items listed: <span class="badge">{{containerDataListSize}}</span></strong>
+                    <strong> Items listed: <span class="badge">{{containerDataList.length}}</span></strong>
                 </div>
             </td>
         </tr>
@@ -71,7 +75,7 @@
                 </span>
             </td>
 
-            <td width="15%" class="text-center">
+            <td width="10%" class="text-center">
                 <div class="vcenter"><strong>Control</strong></div>
             </td>
             <td width="5%" class="text-center vcenter">
@@ -99,66 +103,66 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="(key, value) in containerDataList | orderBy: '[!key]'" class="text-center">
+        <tr ng-repeat="containerData in containerDataList | orderBy: '[containerStatus]'" class="text-center">
             <td align="center">
-                 <span ng-class="{'glyphicon glyphicon-check':selectAllFlag||value.selected, 'glyphicon glyphicon-unchecked':!(selectAllFlag||value.selected)}"
-                       ng-click="switchSelected(value)">
+                 <span ng-class="{'glyphicon glyphicon-check':selectAllFlag||containerData.selected, 'glyphicon glyphicon-unchecked':!(selectAllFlag||containerData.selected)}"
+                       ng-click="switchSelected(containerData)">
                 </span>
             </td>
             <td align="left">
                 <button class="btn btn-success btn-sm"
-                        ng-show="['created', 'stopped'].indexOf(value.containerStatus)>-1"
-                        ng-click="startContainer(value.container.Id)">
+                        ng-show="['created', 'stopped'].indexOf(containerData.containerStatus)>-1"
+                        ng-click="startContainer(containerData.container.Id)">
                     <span class="glyphicon glyphicon glyphicon-play"></span><strong> start</strong>
                 </button>
-                <button class="btn btn-warning btn-sm" ng-show="['running'].indexOf(value.containerStatus)>-1"
-                        ng-click="pauseContainer(value.container.Id)">
+                <button class="btn btn-warning btn-sm" ng-show="['running'].indexOf(containerData.containerStatus)>-1"
+                        ng-click="pauseContainer(containerData.container.Id)">
                     <span class="glyphicon glyphicon glyphicon-pause"></span><strong> pause</strong>
                 </button>
-                <button class="btn btn-info btn-sm" ng-show="['paused'].indexOf(value.containerStatus)>-1"
-                        ng-click="unpauseContainer(value.container.Id)">
+                <button class="btn btn-info btn-sm" ng-show="['paused'].indexOf(containerData.containerStatus)>-1"
+                        ng-click="unpauseContainer(containerData.container.Id)">
                     <span class="glyphicon glyphicon glyphicon-pause"></span><strong> unpause</strong>
                 </button>
-                <button class="btn btn-danger btn-sm" ng-show="['running'].indexOf(value.containerStatus)>-1"
-                        ng-click="stopContainer(value.container.Id)">
+                <button class="btn btn-danger btn-sm" ng-show="['running'].indexOf(containerData.containerStatus)>-1"
+                        ng-click="stopContainer(containerData.container.Id)">
                     <span class="glyphicon glyphicon glyphicon-stop"></span><strong> stop</strong>
                 </button>
                 <button class="btn btn-danger btn-sm"
-                        ng-show="['created', 'stopped'].indexOf(value.containerStatus)>-1"
-                        ng-click="removeContainer(value.container.Id)">
+                        ng-show="['created', 'stopped'].indexOf(containerData.containerStatus)>-1"
+                        ng-click="removeContainer(containerData.container.Id)">
                     <span class="glyphicon glyphicon glyphicon-trash"></span><strong> remove</strong>
                 </button>
             </td>
             <td>
                 <p class="label" style="font-size:0.9em;"
-                   ng-class="{'label-success': value.containerStatus=='running', 'label-warning': value.containerStatus=='paused', 'label-danger': value.containerStatus=='stopped','label-info': value.containerStatus=='created'}">
-                    {{value.containerStatus}}</p>
+                   ng-class="{'label-success': containerData.containerStatus=='running', 'label-warning': containerData.containerStatus=='paused', 'label-danger': containerData.containerStatus=='stopped','label-info': containerData.containerStatus=='created'}">
+                    {{containerData.containerStatus}}</p>
             </td>
 
             <td>
                 <button class="btn btn-block btn-primary btn-sm text-center"
-                        ng-click="goContainerDetails(value.container.Id)">
-                    {{value.container.Id | limitTo:12}}
+                        ng-click="goContainerDetails(containerData.container.Id)">
+                    {{containerData.container.Id | limitTo:12}}
                 </button>
             </td>
             <td class="text-center">
                 <button class="btn btn-primary btn-block btn-sm text-right"
-                        ng-click="goContainerDetails(value.container.Id)">
-                    {{value.containerDetails.Name.charAt(0) === '/' ? value.containerDetails.Name.substr(1) :
-                    value.containerDetails.Name | shorten:true:30}}
+                        ng-click="goContainerDetails(containerData.container.Id)">
+                    {{containerData.containerDetails.Name.charAt(0) === '/' ? containerData.containerDetails.Name.substr(1) :
+                    containerData.containerDetails.Name | shorten:true:30}}
                 </button>
             </td>
             <td class="text-center">
-                <button class="btn btn-info btn-block btn-sm" ng-click="goImageDetails(value.containerDetails.Image)">
-                    {{value.container.Image | shorten:true:30}}
+                <button class="btn btn-info btn-block btn-sm" ng-click="goImageDetails(containerData.containerDetails.Image)">
+                    {{containerData.container.Image | shorten:true:30}}
                 </button>
             </td>
-            <td class="text-left">{{value.container.Command | shorten:true:80}}</td>
-            <td class="text-left">{{showContainerSizeFlag==true?value.container.SizeRw:NAN | bytes:2 }}
-                ({{showContainerSizeFlag==true?value.container.SizeRootFs:NAN | bytes:2
+            <td class="text-left">{{containerData.container.Command | shorten:true:80}}</td>
+            <td class="text-left">{{showContainerSizeFlag==true?containerData.container.SizeRw:NAN | bytes:2 }}
+                ({{showContainerSizeFlag==true?containerData.container.SizeRootFs:NAN | bytes:2
                 }})
             </td>
-            <td class="text-left">{{value.container.Created * 1000 | date:'dd, MMM yyyy HH:mm:ss'}}</td>
+            <td class="text-left">{{containerData.container.Created * 1000 | date:'dd, MMM yyyy HH:mm:ss'}}</td>
         </tr>
         </tbody>
     </table>

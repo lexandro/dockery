@@ -30,15 +30,12 @@ service docker restart
 Under development
 =====================
 
-0.1.5
-- Add: start/stop/pause/kill/etc.. button to container list view to manage containers
-
-Roadmap /by priority/
-=====================
-
 0.1.6
 - Add: start/stop/pause/kill/etc.. button to container details view to manage a container
 - Add: separate containers by their state [running, paused, stopped]
+
+Roadmap /by priority/
+=====================
 
 0.1.7
 - Add: containerdetails/volumes
@@ -47,6 +44,7 @@ Roadmap /by priority/
 - Add: show containerdetails/ cpu/network datastream as diagram/graph or stg. else 
 
 0.1.9
+- Add: select all/select page on containers 
 - Fix: test port assignment [exposed image without public, exposed with -P, exposed with -p, portless image with -P, portless image with -p]
 
 0.2.0
@@ -61,13 +59,14 @@ Roadmap /by priority/
 
 0.2.2
 - Add: create container view
+- Add: select all/select page on images 
 
 0.2.3
 - Add: containers: command popover to show the whole command
 
 0.3.0
-- Fix: show image name in the image details
 - Add: tag list to the image details
+- Fix: show image name in the image details
 
 0.3.1
 - Add: image deletion to the image list view
@@ -143,3 +142,7 @@ Done
 - Add: "Please wait..." view/anim for time consuming operations (container size, diff, ps, etc...)
 - Fix: default connection issue (two green buttons on hosts view)
 - Fix: image details view error with root images/no port exposed images because of a missing property
+
+0.1.5
+- Add: start/stop/pause/kill/etc.. button to container list view to manage containers
+- Fix: select all containers, not selected all containers properly.

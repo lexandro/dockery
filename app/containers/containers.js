@@ -29,6 +29,8 @@ angular.module('containers', ['ngRoute'])
             };
             $scope.switchSelectAllFlag = function () {
                 $scope.selectAllFlag = !$scope.selectAllFlag;
+                setSelected($scope.selectAllFlag);
+
             };
             //
             $scope.switchShowAllContainersFlag = function () {
@@ -76,26 +78,100 @@ angular.module('containers', ['ngRoute'])
                 );
             };
             //
+            $scope.restartContainer = function (containerId) {
+                Docker.containers().restart({containerId: containerId}, {}, function () {
+                        refreshContainers();
+                    }
+                );
+            };
+            //
             $scope.removeContainer = function (containerId) {
                 Docker.containers().remove({containerId: containerId, v: 1, force: 1}, {}, function () {
                         refreshContainers();
                     }
                 );
             };
+            //
+            $scope.startSelectedContainers = function () {
+                $scope.containerDataList.forEach(function (containerData) {
+                    if (containerData.selected) {
+                        $scope.startContainer(containerData.container.Id);
+                    }
+                });
+            };
+            $scope.stopSelectedContainers = function () {
+                $scope.containerDataList.forEach(function (containerData) {
+                    if (containerData.selected) {
+                        $scope.stopContainer(containerData.container.Id);
+                    }
+                });
+            };
+            $scope.restartSelectedContainers = function () {
+                $scope.containerDataList.forEach(function (containerData) {
+                    if (containerData.selected) {
+                        $scope.restartContainer(containerData.container.Id);
+                    }
+                });
+            };
+            $scope.pauseSelectedContainers = function () {
+                $scope.containerDataList.forEach(function (containerData) {
+                    if (containerData.selected) {
+                        $scope.pauseContainer(containerData.container.Id);
+                    }
+                });
+            };
+            $scope.unpauseSelectedContainers = function () {
+                $scope.containerDataList.forEach(function (containerData) {
+                    if (containerData.selected) {
+                        $scope.unpauseContainer(containerData.container.Id);
+                    }
+                });
+            };
+            $scope.removeSelectedContainers = function () {
+                $scope.containerDataList.forEach(function (containerData) {
+                    if (containerData.selected) {
+                        $scope.removeContainer(containerData.container.Id);
+                    }
+                });
+
+            };
         }
 
-        function getObjectPropertiesAmount(containerDataList) {
-            var count = 0;
-            for (var prop in containerDataList) {
-                if (containerDataList.hasOwnProperty(prop)) {
-                    ++count;
+        function getContainerData(containerDataList, containerId) {
+            var i = getContainerDataIndex(containerDataList, containerId);
+            return containerDataList[i];
+        }
+
+        function upsertContainerData(containerDataList, containerData) {
+            var i = getContainerDataIndex(containerDataList, containerData.container.Id);
+            if (i > -1) {
+                ontainerDataList[i] = containerData;
+            } else {
+                containerDataList.push(containerData);
+            }
+        }
+
+        function getContainerDataIndex(containerDataList, containerId) {
+            var found = false;
+            var i = 0;
+            while (i < containerDataList.length && !found) {
+                if (containerDataList[i].container.Id === containerId) {
+                    found = true;
+                } else {
+                    i++;
                 }
             }
-            return count;
+            return found ? i : -1;
+        }
+
+        function setSelected(selectedFlag) {
+            $scope.containerDataList.forEach(function (containerData) {
+                containerData.selected = selectedFlag;
+            });
         }
 
         function refreshContainers() {
-            var containerDataList = {};
+            var containerDataList = [];
             var containerParam = {};
             if ($scope.showAllContainersFlag == true) {
                 containerParam.all = 1;
@@ -122,10 +198,7 @@ angular.module('containers', ['ngRoute'])
 
                     }
                     containerData.containerStatus = containerStatus;
-
-
-                    containerData.Selected = false;
-                    containerDataList[container.Id] = containerData;
+                    upsertContainerData(containerDataList, containerData);
                     var containerDetails = Docker.containers().get({containerId: container.Id}, function () {
                         $scope.containerDetails = containerDetails;
                         containerData.containerDetails = containerDetails;
@@ -133,7 +206,7 @@ angular.module('containers', ['ngRoute'])
 
                 });
                 $scope.containerDataList = containerDataList;
-                $scope.containerDataListSize = getObjectPropertiesAmount(containerDataList);
+                setSelected($scope.selectAllFlag);
             });
             if ($scope.showContainerSizeFlag == true) {
                 containerParam = {};
@@ -147,14 +220,13 @@ angular.module('containers', ['ngRoute'])
                 $scope.containerSizeListingMessage = 'Querying container size data. It could take some time.';
                 var containersWithSize = Docker.containers().query(containerParam, function () {
                     containersWithSize.forEach(function (containerWithSize) {
-                        var containerData = containerDataList[containerWithSize.Id];
+                        var containerData = getContainerData(containerDataList, containerWithSize.Id);
                         if (containerWithSize.Id == containerData.container.Id) {
                             containerData.container = containerWithSize;
                         }
                     });
                     $scope.containerSizeListing = false;
                     $scope.containerDataList = containerDataList;
-                    $scope.containerDataListSize = getObjectPropertiesAmount(containerDataList);
                 });
             }
         }
