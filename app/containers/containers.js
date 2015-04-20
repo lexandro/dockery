@@ -47,7 +47,43 @@ angular.module('containers', ['ngRoute'])
             $scope.goImageDetails = function (path) {
                 $location.path('/imageDetails/' + path);
             };
+            //
+            $scope.startContainer = function (containerId) {
+                Docker.containers().start({containerId: containerId}, {}, function () {
+                        refreshContainers();
+                    }
+                );
+            };
+            //
+            $scope.pauseContainer = function (containerId) {
+                Docker.containers().pause({containerId: containerId}, {}, function () {
+                        refreshContainers();
+                    }
+                );
+            };
+            //
+            $scope.unpauseContainer = function (containerId) {
+                Docker.containers().unpause({containerId: containerId}, {}, function () {
+                        refreshContainers();
+                    }
+                );
+            };
+            //
+            $scope.stopContainer = function (containerId) {
+                Docker.containers().stop({containerId: containerId}, {}, function () {
+                        refreshContainers();
+                    }
+                );
+            };
+            //
+            $scope.removeContainer = function (containerId) {
+                Docker.containers().remove({containerId: containerId, v: 1, force: 1}, {}, function () {
+                        refreshContainers();
+                    }
+                );
+            };
         }
+
         function getObjectPropertiesAmount(containerDataList) {
             var count = 0;
             for (var prop in containerDataList) {
@@ -88,7 +124,6 @@ angular.module('containers', ['ngRoute'])
                     containerData.containerStatus = containerStatus;
 
 
-
                     containerData.Selected = false;
                     containerDataList[container.Id] = containerData;
                     var containerDetails = Docker.containers().get({containerId: container.Id}, function () {
@@ -123,4 +158,5 @@ angular.module('containers', ['ngRoute'])
                 });
             }
         }
-    }]);
+    }])
+;
