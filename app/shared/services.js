@@ -51,7 +51,28 @@ angular.module('services', [])
                         url: $rootScope.hostUrl + '/containers/:containerId/top',
                         method: "GET",
                         isArray: false
+                    },
+                    start: {
+                        url: $rootScope.hostUrl + '/containers/:containerId/start',
+                        method: "POST"
+                    },
+                    pause: {
+                        url: $rootScope.hostUrl + '/containers/:containerId/pause',
+                        method: "POST"
+                    },
+                    unpause: {
+                        url: $rootScope.hostUrl + '/containers/:containerId/unpause',
+                        method: "POST"
+                    },
+                    stop: {
+                        url: $rootScope.hostUrl + '/containers/:containerId/stop',
+                        method: "POST"
+                    },
+                    remove: {
+                        url: $rootScope.hostUrl + '/containers/:containerId',
+                        method: "DELETE"
                     }
+
                 });
             }, images: function () {
                 return $resource($rootScope.hostUrl + '/images/:imageId/json?all=:showAllImagesFlag', null, {
