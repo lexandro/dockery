@@ -62,6 +62,9 @@ Roadmap /by priority/
 0.2.2
 - Add: create container view
 
+0.2.3
+- Add: containers: command popover to show the whole command
+
 0.3.0
 - Fix: show image name in the image details
 - Add: tag list to the image details
