@@ -12,13 +12,16 @@
         <tr class="success">
             <td colspan="5">
                 <div class="col-md-4">
-                    <button type="button" ng-click="refreshImages()" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span>Refresh
+                    <button type="button" ng-click="refreshImages()" class="btn btn-primary btn-sm"><span
+                            class="glyphicon glyphicon-refresh"></span><strong> Refresh</strong>
                     </button>
-                    <button type="button" class="btn btn-primary" ng-click="switchShowAllFlag()">
-                        <span ng-class="{'glyphicon glyphicon-unchecked':!showAllImagesFlag, 'glyphicon glyphicon-check':showAllImagesFlag}"></span>All
+                    <button type="button" class="btn btn-primary btn-sm" ng-click="switchShowAllFlag()">
+                        <span ng-class="{'glyphicon glyphicon-unchecked':!showAllImagesFlag, 'glyphicon glyphicon-check':showAllImagesFlag}"></span><strong>
+                        All</strong>
                     </button>
-                    <button type="button" class="btn btn-primary" ng-click="switchShowUntaggedFlag()"><span
-                            ng-class="{'glyphicon glyphicon-unchecked':!showUntaggedImagesFlag, 'glyphicon glyphicon-check':showUntaggedImagesFlag}"></span>Untagged
+                    <button type="button" class="btn btn-primary btn-sm" ng-click="switchShowUntaggedFlag()"><span
+                            ng-class="{'glyphicon glyphicon-unchecked':!showUntaggedImagesFlag, 'glyphicon glyphicon-check':showUntaggedImagesFlag}"></span><strong>
+                        Untagged</strong>
                     </button>
                 </div>
                 <div class="col-md-6 vcenter">
@@ -34,11 +37,13 @@
         </tr>
         <tr ng-repeat="image in images | orderBy:RepoTags[0]">
             <td class="text-center">
-                <button class="btn btn-info btn-block" ng-click="goImageDetails(image.Id)">
-                    {{image.Id | limitTo:12}}
+                <button class="btn btn-info btn-block btn-sm" ng-click="goImageDetails(image.Id)">
+                    <strong>{{image.Id | limitTo:12}}</strong>
                 </button>
             </td>
-            <td class="text-left"><p ng-repeat="tag in image.RepoTags | orderBy: tag">{{tag}}</p>
+            <td class="text-left">
+                <!--<p ng-repeat="tag in image.RepoTags | orderBy: tag">{{tag}}</p>-->
+                {{image.tagString}}
             </td>
             <td class="text-left">{{image.Size | bytes:2}} ({{image.VirtualSize| bytes:2}})</td>
             <td class="text-left">{{image.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>

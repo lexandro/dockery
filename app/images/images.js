@@ -39,18 +39,19 @@ angular.module('images', ['ngRoute'])
         }
 
         function refreshImages() {
-            $scope.imageListing=true;
-            $scope.imageListingMessage='Loading image data';
+            $scope.imageListing = true;
+            $scope.imageListingMessage = 'Loading image data';
             var images = Docker.images().query({showAllImagesFlag: $scope.showAllImagesFlag ? 1 : 0}, function () {
                     var result = [];
                     images.forEach(function (image) {
+                        image.tagString = image.RepoTags.join(', ');
                         if ($scope.showUntaggedImagesFlag == true) {
                             result.push(image);
                         } else if (image.RepoTags[0] != "<none>:<none>") {
                             result.push(image);
                         }
                     });
-                    $scope.imageListing=false;
+                    $scope.imageListing = false;
                     $scope.images = result;
                 }
             );
