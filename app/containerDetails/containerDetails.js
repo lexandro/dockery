@@ -13,6 +13,7 @@ angular.module('containerDetails', ['ngRoute'])
         if (Helpers.isEmpty($rootScope.hostUrl)) {
             $location.path('/hosts');
         } else {
+            var containerDetails = {};
             $scope.activeTab = 'top';
             $scope.newDiffPageSize = 20;
             //
@@ -38,29 +39,60 @@ angular.module('containerDetails', ['ngRoute'])
             var term = {};
 
 
-            $scope.containerDetailsLoading = true;
             $scope.containerDetailsLoadingMessage = 'Loading container data';
             $scope.containerTopLoading = false;
             $scope.containerLogsLoading = false;
             $scope.containerDiffLoading = false;
-
-            var containerDetails = Docker.containers().get({containerId: $routeParams.containerId}, function () {
-                $scope.containerDetailsLoading = false;
-                $scope.containerDetails = containerDetails;
-                $scope.showProcesses($routeParams.containerId);
-
-                // TODO check output format with multiple port situation
-                var portAssignments = "";
-                for (var key in containerDetails.NetworkSettings.Ports) {
-                    portAssignments = portAssignments + key + ':';
-                    var portArray = containerDetails.NetworkSettings.PortMapping.Ports[key];
-                    portArray.forEach(function (port) {
-                        portAssignments += port["HostPort"];
-                    });
-                    portAssignments += ', ';
-                }
-                $scope.portAssignments = portAssignments.substring(0, portAssignments.length - 2);
-            });
+            loadContainerDetails();
+            //
+            $scope.startContainer = function () {
+                Docker.containers().start({containerId: $routeParams.containerId}, {}, function () {
+                        loadContainerDetails();
+                    }
+                );
+            };
+            //
+            $scope.killContainer = function () {
+                Docker.containers().kill({containerId: $routeParams.containerId}, {}, function () {
+                        loadContainerDetails();
+                    }
+                );
+            };
+            //
+            $scope.pauseContainer = function () {
+                Docker.containers().pause({containerId: $routeParams.containerId}, {}, function () {
+                        loadContainerDetails();
+                    }
+                );
+            };
+            //
+            $scope.unpauseContainer = function () {
+                Docker.containers().unpause({containerId: $routeParams.containerId}, {}, function () {
+                        loadContainerDetails();
+                    }
+                );
+            };
+            //
+            $scope.stopContainer = function () {
+                Docker.containers().stop({containerId: $routeParams.containerId}, {}, function () {
+                        loadContainerDetails();
+                    }
+                );
+            };
+            //
+            $scope.restartContainer = function () {
+                Docker.containers().restart({containerId: $routeParams.containerId}, {}, function () {
+                        loadContainerDetails();
+                    }
+                );
+            };
+            //
+            $scope.removeContainer = function () {
+                Docker.containers().remove({containerId: $routeParams.containerId, v: 1, force: 1}, {}, function () {
+                        $location.path('/containers');
+                    }
+                );
+            };
             //
 
             $scope.showLogs = function (containerId) {
@@ -138,14 +170,14 @@ angular.module('containerDetails', ['ngRoute'])
             };
 
             $scope.showProcesses = function (containerId) {
-                $scope.containerTopLoading = true;
-                $scope.containerTopLoadingMessage = 'Loading process information';
                 if (!Helpers.isEmpty(term)) {
                     term.destroy();
                 }
                 //
                 $scope.activeTab = 'top';
                 if (containerDetails.State.Running) {
+                    $scope.containerTopLoading = true;
+                    $scope.containerTopLoadingMessage = 'Loading process information';
                     var containerProcesses = Docker.containers().top({containerId: containerId}, function () {
                         $scope.containerTopLoading = false;
                         $scope.containerProcesses = containerProcesses;
@@ -250,6 +282,27 @@ angular.module('containerDetails', ['ngRoute'])
                 if (!Helpers.isEmpty(term)) {
                     term.destroy();
                 }
+            });
+
+        }
+        function loadContainerDetails() {
+            $scope.containerDetailsLoading = true;
+            containerDetails = Docker.containers().get({containerId: $routeParams.containerId}, function () {
+                $scope.containerDetailsLoading = false;
+                $scope.containerDetails = containerDetails;
+                $scope.showProcesses($routeParams.containerId);
+
+                // TODO check output format with multiple port situation
+                var portAssignments = "";
+                for (var key in containerDetails.NetworkSettings.Ports) {
+                    portAssignments = portAssignments + key + ':';
+                    var portArray = containerDetails.NetworkSettings.PortMapping.Ports[key];
+                    portArray.forEach(function (port) {
+                        portAssignments += port["HostPort"];
+                    });
+                    portAssignments += ', ';
+                }
+                $scope.portAssignments = portAssignments.substring(0, portAssignments.length - 2);
             });
         }
     }])

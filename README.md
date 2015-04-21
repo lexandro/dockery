@@ -32,7 +32,8 @@ Under development
 
 0.1.6
 - Add: start/stop/pause/kill/etc.. button to container details view to manage a container
-- Add: separate containers by their state [running, paused, stopped]
+- Add: group containers by their state [running, paused, stopped]
+- Fix: loading process always displayed on stopped containers
 
 Roadmap /by priority/
 =====================
