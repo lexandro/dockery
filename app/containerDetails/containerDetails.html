@@ -2,7 +2,8 @@
     <div class="row">
         <div class="col-md-6">
             <h3>Container: <strong>{{containerDetails.Name.substring(1).toUpperCase()}}</strong>
-                <span ng-show='containerDetails.State.Running==true && containerDetails.State.Paused==false' class="label label-success">Running</span>
+                <span ng-show='containerDetails.State.Running==true && containerDetails.State.Paused==false'
+                      class="label label-success">Running</span>
                 <span ng-show='containerDetails.State.Paused==true' class="label label-warning">Paused</span>
                 <span ng-show='containerDetails.State.Restarting==true' class="label label-info">Restarting</span>
             <span ng-show='containerDetails.State.Running == false && containerDetails.State.Restarting == false && containerDetails.State.Paused ==false'
@@ -13,7 +14,8 @@
             <span
                     ng-show='containerDetails.State.Running == false && containerDetails.State.Restarting == false && containerDetails.State.Paused ==false&& containerDetails.State.ExitCode ==130'
                     class="label label-danger">Probably terminated with Ctrl-C</span>
-                <span ng-show='containerDetails.State.OOMKilled==true' class="label label-danger">Out of memory</span></h3>
+                <span ng-show='containerDetails.State.OOMKilled==true' class="label label-danger">Out of memory</span>
+            </h3>
         </div>
         <div class="col-md-6">
             <div class="pull-right " style=" vertical-align: middle;margin-top: 21px">
@@ -58,62 +60,67 @@
     <hr/>
 
     <div class="alert alert-info" role="alert" ng-show="containerDetailsLoading">
-        <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span> {{containerDetailsLoadingMessage}}</h3>
+        <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span>
+            {{containerDetailsLoadingMessage}}</h3>
     </div>
     <div class="row">
-        <div class="col-md-1 text-right"><strong>Full name:</strong></div>
+        <div class="col-md-1 text-right"><strong>Full name</strong></div>
         <div class="col-md-3">{{containerDetails.Name.toUpperCase()}}</div>
-        <div class="col-md-1 text-right"><strong>Network mode:</strong></div>
+        <div class="col-md-1 text-right"><strong>Network mode</strong></div>
         <div class="col-md-3">{{containerDetails.HostConfig.NetworkMode}}</div>
-        <div class="col-md-1 text-right"><strong>CPU share:</strong></div>
+        <div class="col-md-1 text-right"><strong>CPU share</strong></div>
         <div class="col-md-3">{{containerDetails.Config.CpuShares}}</div>
     </div>
     <div class="row">
-        <div class="col-md-1 text-right"><strong>Hostname:</strong></div>
+        <div class="col-md-1 text-right"><strong>Hostname</strong></div>
         <div class="col-md-3">{{containerDetails.Config.Hostname}}</div>
-        <div class="col-md-1 text-right"><strong>Host bridge:</strong></div>
+        <div class="col-md-1 text-right"><strong>Host bridge</strong></div>
         <div class="col-md-3">{{containerDetails.NetworkSettings.Bridge}}</div>
-        <div class="col-md-1 text-right"><strong>CPU set:</strong></div>
+        <div class="col-md-1 text-right"><strong>CPU set</strong></div>
         <div class="col-md-3">{{containerDetails.Config.Cpuset}}</div>
     </div>
     <div class="row">
-        <div class="col-md-1 text-right"><strong>Image:</strong></div>
+        <div class="col-md-1 text-right"><strong>Image</strong></div>
         <div class="col-md-3"><a ng-href="#/imageDetails/{{containerDetails.Image}}">
             <samp>
                 <span class="label label-primary">{{containerDetails.Config.Image | limitTo:50}}</span>
             </samp></a>
         </div>
-        <div class="col-md-1 text-right"><strong>Ports:</strong></div>
+        <div class="col-md-1 text-right"><strong>Ports</strong></div>
         <div class="col-md-3"><strong>{{portAssignments}}</strong></div>
-        <div class="col-md-1 text-right"><strong>PID on host:</strong></div>
+        <div class="col-md-1 text-right"><strong>PID on host</strong></div>
         <div class="col-md-3">{{containerDetails.State.Pid}}</div>
     </div>
     <div class="row">
-        <div class="col-md-1 text-right"><strong>Created:</strong></div>
+        <div class="col-md-1 text-right"><strong>Created</strong></div>
         <div class="col-md-3">{{containerDetails.Created | date:'medium'}}</div>
         <div class="col-md-1 text-right"><strong>IPv4</strong></div>
-        <div class="col-md-3">{{containerDetails.NetworkSettings.IPAddress}}/{{containerDetails.NetworkSettings.IPPrefixLen}}</div>
-        <div class="col-md-1 text-right"><strong>Driver:</strong></div>
+        <div class="col-md-3">
+            {{containerDetails.NetworkSettings.IPAddress}}/{{containerDetails.NetworkSettings.IPPrefixLen}}
+        </div>
+        <div class="col-md-1 text-right"><strong>Driver</strong></div>
         <div class="col-md-3">{{containerDetails.Driver}}</div>
     </div>
     <div class="row">
-        <div class="col-md-1 text-right"><strong>Started:</strong></div>
+        <div class="col-md-1 text-right"><strong>Started</strong></div>
         <div class="col-md-3">{{containerDetails.State.StartedAt| date:'medium'}}</div>
-        <div class="col-md-1 text-right"><strong>Gateway:</strong></div>
+        <div class="col-md-1 text-right"><strong>Gateway</strong></div>
         <div class="col-md-3">{{containerDetails.NetworkSettings.Gateway}}</div>
-        <div class="col-md-1 text-right"><strong>ExecDriver:</strong></div>
+        <div class="col-md-1 text-right"><strong>ExecDriver</strong></div>
         <div class="col-md-3">{{containerDetails.ExecDriver}}</div>
     </div>
     <div class="row">
-        <div class="col-md-1 text-right"><strong>Finished:</strong></div>
-        <div class="col-md-3">{{containerDetails.State.Running==true?"No":containerDetails.State.FinishedAt| date:'medium'}}</div>
-        <div class="col-md-1 text-right"><strong>DNS:</strong></div>
+        <div class="col-md-1 text-right"><strong>Finished</strong></div>
+        <div class="col-md-3">{{containerDetails.State.Running==true?"No":containerDetails.State.FinishedAt|
+            date:'medium'}}
+        </div>
+        <div class="col-md-1 text-right"><strong>DNS</strong></div>
         <div class="col-md-3">{{containerDetails.HostConfig.Dns}}</div>
-        <div class="col-md-1 text-right"><strong>Restart count:</strong></div>
+        <div class="col-md-1 text-right"><strong>Restart count</strong></div>
         <div class="col-md-3">{{containerDetails.RestartCount}}</div>
     </div>
     <div class="row">
-        <div class="col-md-1 text-right"><strong>Working dir:</strong></div>
+        <div class="col-md-1 text-right"><strong>Working dir</strong></div>
         <div class="col-md-3">{{containerDetails.Config.WorkingDir}}</div>
         <div class="col-md-1"></div>
         <div class="col-md-3"></div>
@@ -121,26 +128,32 @@
         <div class="col-md-3"></div>
     </div>
     <div class="row">
-        <div class="col-md-1 text-right"><strong>Command:</strong></div>
+        <div class="col-md-1 text-right"><strong>Command</strong></div>
         <div class="col-md-11"><code>{{containerDetails.Config.Cmd.join(' ')}}</code></div>
     </div>
     <div class="row">
-        <div class="col-md-1 text-right"><strong>Entry point:</strong></div>
+        <div class="col-md-1 text-right"><strong>Entry point</strong></div>
         <div class="col-md-11"><code>{{containerDetails.Config.Entrypoint.join(' ')}}</code></div>
     </div>
     <hr/>
     <ul class="nav nav-tabs">
-        <li role="presentation" ng-class="{'active':activeTab=='top'}"><a ng-click="showProcesses(containerDetails.Id.substr(0,12))">Processes</a></li>
-        <li role="presentation" ng-class="{'active':activeTab=='logs'}"><a ng-click="showLogs(containerDetails.Id.substr(0,12))">Logs</a></li>
-        <li role="presentation" ng-class="{'active':activeTab=='diff'}"><a ng-click="showDiff(containerDetails.Id.substr(0,12))">Diff</a></li>
-        <li role="presentation" ng-class="{'active':activeTab=='tty'}"><a ng-click="showTty(containerDetails.Id.substr(0,12))">TTY</a></li>
-        <li role="presentation" ng-class="{'active':activeTab=='json'}"><a ng-click="showJson(containerDetails.Id.substr(0,12))">Pure json</a></li>
+        <li role="presentation" ng-class="{'active':activeTab=='top'}"><a
+                ng-click="showProcesses(containerDetails.Id.substr(0,12))">Processes</a></li>
+        <li role="presentation" ng-class="{'active':activeTab=='logs'}"><a
+                ng-click="showLogs(containerDetails.Id.substr(0,12))">Logs</a></li>
+        <li role="presentation" ng-class="{'active':activeTab=='diff'}"><a
+                ng-click="showDiff(containerDetails.Id.substr(0,12))">Diff</a></li>
+        <li role="presentation" ng-class="{'active':activeTab=='tty'}"><a
+                ng-click="showTty(containerDetails.Id.substr(0,12))">TTY</a></li>
+        <li role="presentation" ng-class="{'active':activeTab=='json'}"><a
+                ng-click="showJson(containerDetails.Id.substr(0,12))">Pure json</a></li>
     </ul>
     <br/>
 
     <div ng-show="activeTab=='top'">
         <div class="alert alert-info" role="alert" ng-show="containerTopLoading">
-            <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span> {{containerTopLoadingMessage}}</h3>
+            <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span>
+                {{containerTopLoadingMessage}}</h3>
         </div>
         <table class="table table-condensed table-hover table-striped" ng-show="canStop">
             <thead>
@@ -161,7 +174,8 @@
     </div>
     <div ng-show="activeTab=='logs'">
         <div class="alert alert-info" role="alert" ng-show="containerLogsLoading">
-            <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span> {{containerLogsLoadingMessage}}</h3>
+            <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span>
+                {{containerLogsLoadingMessage}}</h3>
         </div>
         <div class="col-md-6">
             <button type="button" ng-click="switchStdOutPanel()"
@@ -180,7 +194,8 @@
         <br/>
         <br/>
 
-        <div ng-class="{'col-md-6': logSettings['showStdErr'], 'col-md-12': !logSettings['showStdErr']}" ng-show="logSettings['showStdOut']">
+        <div ng-class="{'col-md-6': logSettings['showStdErr'], 'col-md-12': !logSettings['showStdErr']}"
+             ng-show="logSettings['showStdOut']">
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <div class="form-inline">
@@ -192,7 +207,7 @@
                             timestamp
                         </button>
                         <div class="input-group">
-                            <div class="input-group-addon">Tail lines:</div>
+                            <div class="input-group-addon">Tail lines</div>
                             <input type="number" max="9999" class="form-control" ng-model='logSettings["stdOutTail"]'>
                         </div>
                         <button type="button" ng-click="switchStdOutTailAll()" class="btn btn-primary btn-sm">
@@ -210,7 +225,8 @@
             </div>
 
         </div>
-        <div ng-class="{'col-md-6': logSettings['showStdOut'], 'col-md-12': !logSettings['showStdOut']}" ng-show="logSettings['showStdErr']">
+        <div ng-class="{'col-md-6': logSettings['showStdOut'], 'col-md-12': !logSettings['showStdOut']}"
+             ng-show="logSettings['showStdErr']">
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <div class="form-inline">
@@ -222,7 +238,7 @@
                             timestamp
                         </button>
                         <div class="input-group">
-                            <div class="input-group-addon">Tail lines:</div>
+                            <div class="input-group-addon">Tail lines</div>
                             <input type="number" max="9999" class="form-control" ng-model='logSettings["stdErrTail"]'>
                         </div>
                         <button type="button" ng-click="switchStdErrTailAll()" class="btn btn-primary btn-sm">
@@ -243,7 +259,8 @@
 
     <div ng-show="activeTab=='diff'">
         <div class="alert alert-info" role="alert" ng-show="containerDiffLoading">
-            <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span> {{containerDiffLoadingMessage}}</h3>
+            <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span>
+                {{containerDiffLoadingMessage}}</h3>
         </div>
         <div class="col-md-4 vcenter">
             <button type="button" class="btn  btn-primary btn-sm" ng-click="refreshDiffs()">
