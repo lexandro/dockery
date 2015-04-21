@@ -30,23 +30,18 @@ service docker restart
 Under development
 =====================
 
-0.1.6
-- Add: start/stop/pause/kill/etc.. button to container details view to manage a container
-- Add: group containers by their state [running, paused, stopped]
-- Fix: loading process always displayed on stopped containers
+0.1.7
+  - Add: containerdetails/volumes
 
 Roadmap /by priority/
 =====================
-
-0.1.7
-- Add: containerdetails/volumes
 
 0.1.8
 - Add: show containerdetails/ cpu/network datastream as diagram/graph or stg. else 
 
 0.1.9
 - Add: select all/select page on containers 
-- Fix: test port assignment [exposed image without public, exposed with -P, exposed with -p, portless image with -P, portless image with -p]
+- Fix: display port assignments [exposed image without public, exposed with -P, exposed with -p, portless image with -P, portless image with -p]
 
 0.2.0
 - Add: rename container to container list view - Remote api version dependent feature
@@ -147,3 +142,9 @@ Done
 0.1.5
 - Add: start/stop/pause/kill/etc.. button to container list view to manage containers
 - Fix: select all containers, not selected all containers properly.
+
+0.1.6
+- Add: start/stop/pause/kill/etc.. button to container details view to manage a container
+- Add: group containers by their state [running, paused, stopped]
+- Fix: loading process always displayed on stopped containers
+- Fix: no previuously loaded top data shown for just stopped containers on the containersdetails page

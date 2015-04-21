@@ -18,30 +18,37 @@
         <div class="col-md-6">
             <div class="pull-right " style=" vertical-align: middle;margin-top: 21px">
                 <button class="btn btn-success btn-sm"
+                        ng-disabled="!canStart"
                         ng-click="startContainer()">
                     <span class="glyphicon glyphicon glyphicon-play"></span><strong> start</strong>
                 </button>
                 <button class="btn btn-danger btn-sm"
+                        ng-disabled="!canStop"
                         ng-click="stopContainer()">
                     <span class="glyphicon glyphicon glyphicon-stop"></span><strong> stop</strong>
                 </button>
                 <button class="btn btn-primary btn-sm"
+                        ng-disabled="!canRestart"
                         ng-click="restartContainer()">
                     <span class="glyphicon glyphicon glyphicon-refresh"></span><strong> restart</strong>
                 </button>
                 <button class="btn btn-danger btn-sm"
+                        ng-disabled="!canKill"
                         ng-click="killContainer()">
                     <span class="glyphicon glyphicon glyphicon-trash"></span><strong> kill</strong>
                 </button>
                 <button class="btn btn-warning btn-sm"
+                        ng-disabled="!canPause"
                         ng-click="pauseContainer()">
                     <span class="glyphicon glyphicon glyphicon-pause"></span><strong> pause</strong>
                 </button>
                 <button class="btn btn-info btn-sm"
+                        ng-disabled="!canUnpause"
                         ng-click="unpauseContainer()">
                     <span class="glyphicon glyphicon glyphicon-repeat"></span><strong> unpause</strong>
                 </button>
                 <button class="btn btn-danger btn-sm"
+                        ng-disabled="!canRemove"
                         ng-click="removeContainer()">
                     <span class="glyphicon glyphicon glyphicon-trash"></span><strong> remove</strong>
                 </button>
@@ -135,7 +142,7 @@
         <div class="alert alert-info" role="alert" ng-show="containerTopLoading">
             <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span> {{containerTopLoadingMessage}}</h3>
         </div>
-        <table class="table table-condensed table-hover table-striped">
+        <table class="table table-condensed table-hover table-striped" ng-show="canStop">
             <thead>
             <tr class="success">
                 <td ng-repeat="title in containerProcesses.Titles">

@@ -291,7 +291,15 @@ angular.module('containerDetails', ['ngRoute'])
                 $scope.containerDetailsLoading = false;
                 $scope.containerDetails = containerDetails;
                 $scope.showProcesses($routeParams.containerId);
-
+                //
+                $scope.canStart = !containerDetails.State.Running;
+                $scope.canStop = containerDetails.State.Running && !containerDetails.State.Paused;
+                $scope.canRestart = $scope.canStop;
+                $scope.canKill = $scope.canStop;
+                $scope.canPause = $scope.canStop;
+                $scope.canUnpause = containerDetails.State.Running && containerDetails.State.Paused;
+                $scope.canRemove = !containerDetails.State.Running;
+                //
                 // TODO check output format with multiple port situation
                 var portAssignments = "";
                 for (var key in containerDetails.NetworkSettings.Ports) {
