@@ -1,20 +1,49 @@
 <div class="col-md-12 pull-right">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <h3>Containers on: <strong>{{$root.hostUrl}}</strong></h3>
+        </div>
+        <div class="col-md-6 vcenter">
+            <div class="pull-right " style=" vertical-align: middle;margin-top: 21px">
+                <button class="btn btn-success btn-sm"
+                        ng-click="startSelectedContainers()">
+                    <span class="glyphicon glyphicon glyphicon-play"></span><strong> start</strong>
+                </button>
+                <button class="btn btn-danger btn-sm"
+                        ng-click="stopSelectedContainers()">
+                    <span class="glyphicon glyphicon glyphicon-stop"></span><strong> stop</strong>
+                </button>
+                <button class="btn btn-primary btn-sm"
+                        ng-click="restartSelectedContainers()">
+                    <span class="glyphicon glyphicon glyphicon-refresh"></span><strong> restart</strong>
+                </button>
+                <button class="btn btn-danger btn-sm"
+                        ng-click="killSelectedContainers()">
+                    <span class="glyphicon glyphicon glyphicon-trash"></span><strong> kill</strong>
+                </button>
+                <button class="btn btn-warning btn-sm"
+                        ng-click="pauseSelectedContainers()">
+                    <span class="glyphicon glyphicon glyphicon-pause"></span><strong> pause</strong>
+                </button>
+                <button class="btn btn-info btn-sm"
+                        ng-click="unpauseSelectedContainers()">
+                    <span class="glyphicon glyphicon glyphicon-repeat"></span><strong> unpause</strong>
+                </button>
+                <button class="btn btn-danger btn-sm"
+                        ng-click="removeSelectedContainers()">
+                    <span class="glyphicon glyphicon glyphicon-trash"></span><strong> remove</strong>
+                </button>
+            </div>
         </div>
     </div>
     <hr/>
-
     <div class="alert alert-info" role="alert" ng-show="containerListing">
         <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span> {{containerListingMessage}}</h3>
     </div>
-
     <div class="alert alert-warning" role="alert" ng-show="containerSizeListing">
         <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span> {{containerSizeListingMessage}}
         </h3>
     </div>
-
     <table class="table table-condensed table-hover table-striped table-bordered">
         <thead>
         <tr class="success">
@@ -36,32 +65,7 @@
                             class="glyphicon glyphicon-plus"></span><strong> Create</strong>
                     </button>
                 </div>
-                <div class="col-md-4 vcenter">
-                    <button class="btn btn-success btn-sm"
-                            ng-click="startSelectedContainers()">
-                        <span class="glyphicon glyphicon glyphicon-play"></span><strong> start</strong>
-                    </button>
-                    <button class="btn btn-danger btn-sm"
-                            ng-click="stopSelectedContainers()">
-                        <span class="glyphicon glyphicon glyphicon-stop"></span><strong> stop</strong>
-                    </button>
-                    <button class="btn btn-primary btn-sm"
-                            ng-click="restartSelectedContainers()">
-                        <span class="glyphicon glyphicon glyphicon-refresh"></span><strong> restart</strong>
-                    </button>
-                    <button class="btn btn-warning btn-sm"
-                            ng-click="pauseSelectedContainers()">
-                        <span class="glyphicon glyphicon glyphicon-pause"></span><strong> pause</strong>
-                    </button>
-                    <button class="btn btn-info btn-sm"
-                            ng-click="unpauseSelectedContainers()">
-                        <span class="glyphicon glyphicon glyphicon-repeat"></span><strong> unpause</strong>
-                    </button>
-                    <button class="btn btn-danger btn-sm"
-                            ng-click="removeSelectedContainers()">
-                        <span class="glyphicon glyphicon glyphicon-trash"></span><strong> remove</strong>
-                    </button>
-                </div>
+
                 <div class="col-md-4 vcenter">
                     <strong> Items listed: <span class="badge">{{containerDataList.length}}</span></strong>
                 </div>
@@ -74,7 +78,6 @@
                        ng-click="switchSelectAllFlag()">
                 </span>
             </td>
-
             <td width="12%" class="text-center">
                 <div class="vcenter"><strong>Control</strong></div>
             </td>
@@ -138,7 +141,6 @@
                    ng-class="{'label-success': containerData.containerStatus=='running', 'label-warning': containerData.containerStatus=='paused', 'label-danger': containerData.containerStatus=='stopped','label-info': containerData.containerStatus=='created'}">
                     {{containerData.containerStatus}}</p>
             </td>
-
             <td>
                 <button class="btn btn-block btn-primary btn-sm text-center"
                         ng-click="goContainerDetails(containerData.container.Id)">
@@ -159,8 +161,7 @@
             </td>
             <td class="text-left">{{containerData.container.Command | shorten:true:80}}</td>
             <td class="text-left">{{showContainerSizeFlag==true?containerData.container.SizeRw:NAN | bytes:2 }}
-                ({{showContainerSizeFlag==true?containerData.container.SizeRootFs:NAN | bytes:2
-                }})
+                ({{showContainerSizeFlag==true?containerData.container.SizeRootFs:NAN | bytes:2 }})
             </td>
             <td class="text-left">{{containerData.container.Created * 1000 | date:'dd, MMM yyyy HH:mm:ss'}}</td>
         </tr>

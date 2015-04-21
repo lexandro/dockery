@@ -57,6 +57,13 @@ angular.module('containers', ['ngRoute'])
                 );
             };
             //
+            $scope.killContainer = function (containerId) {
+                Docker.containers().kill({containerId: containerId}, {}, function () {
+                        refreshContainers();
+                    }
+                );
+            };
+            //
             $scope.pauseContainer = function (containerId) {
                 Docker.containers().pause({containerId: containerId}, {}, function () {
                         refreshContainers();
@@ -110,6 +117,13 @@ angular.module('containers', ['ngRoute'])
                 $scope.containerDataList.forEach(function (containerData) {
                     if (containerData.selected) {
                         $scope.restartContainer(containerData.container.Id);
+                    }
+                });
+            };
+            $scope.killSelectedContainers = function () {
+                $scope.containerDataList.forEach(function (containerData) {
+                    if (containerData.selected) {
+                        $scope.killContainer(containerData.container.Id);
                     }
                 });
             };

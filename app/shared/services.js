@@ -55,8 +55,13 @@ angular.module('services', [])
                     start: {
                         url: $rootScope.hostUrl + '/containers/:containerId/start',
                         method: "POST"
-                    }, restart: {
+                    },
+                    restart: {
                         url: $rootScope.hostUrl + '/containers/:containerId/restart?t=1',
+                        method: "POST"
+                    },
+                    kill: {
+                        url: $rootScope.hostUrl + '/containers/:containerId/kill',
                         method: "POST"
                     },
                     pause: {
