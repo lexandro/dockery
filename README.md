@@ -1,4 +1,4 @@
-docker|mon
+# docker|mon
 ==========
 
 Version: 0.1.something (not ready for releasing)
@@ -8,7 +8,7 @@ Yet Another Docker Host Monitoring And Investigating Webapp To Make Images And C
 
 This is my learning project to get familiar with angular.js and Twitter bootstrap frameworks, so be please patient :) 
 
-Enable remote access to Docker daemon
+## Enable remote access to Docker daemon
 =====================================
 
 To manage your docker host(s) with **dockermon** please please add the following parameters to your Docker daemon launcher:
@@ -28,7 +28,7 @@ then issue the following command to activate changes:
 service docker restart
 ```
 
-Beta screenshots
+## Beta screenshots
 =====================
 
 ![hosts](docs/images/screenshot_hosts.jpg "List of hosts")
@@ -38,14 +38,17 @@ Beta screenshots
 ![images](docs/images/screenshot_images.jpg "List of docker host images")
 ![image details](docs/images/screenshot_image_details.jpg "Docker image details")
 
-Under development:
+# Development roadmap:
+=====================
+
+## Under development:
 =====================
 0.1.9
 z
 - Fix: display port assignments [exposed image without public, exposed with -P, exposed with -p, portless image with -P, portless image with -p]
 - Fix: image non-port exposure issue at: http://localhost:63342/dockermon/app/imageDetails/imageDetails.js:23:63
 
-Roadmap /by priority/
+## Roadmap /by priority/
 =====================
 0.2.0
 - Add: rename container to container list view - Remote api version dependent feature
@@ -114,7 +117,7 @@ Roadmap /by priority/
 - Add: paging of images
 - Add: select all/select page on images
 
-Not scheduled
+## Not scheduled
 =============
 - Help
 - docker image with version check in the webapp
