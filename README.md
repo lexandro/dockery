@@ -30,18 +30,14 @@ service docker restart
 Under development
 =====================
 
-0.1.7
-  - Add: containerdetails/volumes
-
-Roadmap /by priority/
-=====================
-
-0.1.8
-- Add: show containerdetails/ cpu/network datastream as diagram/graph or stg. else 
-
 0.1.9
 - Add: select all/select page on containers 
 - Fix: display port assignments [exposed image without public, exposed with -P, exposed with -p, portless image with -P, portless image with -p]
+- Fix: image non-port exposure issue at: http://localhost:63342/dockermon/app/imageDetails/imageDetails.js:23:63
+
+
+Roadmap /by priority/
+=====================
 
 0.2.0
 - Add: rename container to container list view - Remote api version dependent feature
@@ -59,6 +55,9 @@ Roadmap /by priority/
 
 0.2.3
 - Add: containers: command popover to show the whole command
+
+0.1.7
+  - Add: containerdetails/volumes-from (get volume from other containers)
 
 0.3.0
 - Add: tag list to the image details
@@ -94,7 +93,12 @@ Roadmap /by priority/
 0.5.2 
 - Add: add search for container diff
 - Add: set refresh interval on container listing
-- Fix: Adding new host sometimes causing index by errors. 
+- Fix: Adding new host sometimes causing index by errors.
+
+0.6
+ - Add: show containerdetails/ cpu/network datastream as diagram/graph or stg. else 
+
+
 
 Not scheduled
 =============
@@ -148,3 +152,9 @@ Done
 - Add: group containers by their state [running, paused, stopped]
 - Fix: loading process always displayed on stopped containers
 - Fix: no previuously loaded top data shown for just stopped containers on the containersdetails page
+
+0.1.7
+- Add: containerdetails/volumes
+  
+0.1.8
+- Rescheduled

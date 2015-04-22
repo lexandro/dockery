@@ -14,6 +14,7 @@ angular.module('containerDetails', ['ngRoute'])
             $location.path('/hosts');
         } else {
             var containerDetails = {};
+            $scope.Object = Object;
             $scope.activeTab = 'top';
             $scope.newDiffPageSize = 20;
             //
@@ -44,6 +45,10 @@ angular.module('containerDetails', ['ngRoute'])
             $scope.containerLogsLoading = false;
             $scope.containerDiffLoading = false;
             loadContainerDetails();
+            //
+            $scope.isEmpty = function (obj) {
+                return Helpers.isEmpty(obj);
+            };
             //
             $scope.startContainer = function () {
                 Docker.containers().start({containerId: $routeParams.containerId}, {}, function () {
