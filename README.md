@@ -58,30 +58,28 @@ Here's the list of active, scheduled, planned and finished development goals
 
 ## Under development
 0.1.9
-z
+- Add: rename container to container list view - Remote api version dependent feature
 - Fix: display port assignments [exposed image without public, exposed with -P, exposed with -p, portless image with -P, portless image with -p]
 - Fix: image non-port exposure issue at: http://localhost:63342/dockermon/app/imageDetails/imageDetails.js:23:63
 
 ## Roadmap /by priority/
 0.2.0
-- Add: rename container to container list view - Remote api version dependent feature
-
-0.2.1
 - Add: list last n items to container list view
 - Add: list since filter to container list view 
 - Add: list before filter to container list view 
+
+0.2.1
 - Add: exit code filter to container list view 
 - Add: status filter to container list view
 
 0.2.2
 - Add: create container view
  
-
 0.2.3
 - Add: containers: command popover to show the whole command
 
-0.1.7
-  - Add: containerdetails/volumes-from (get volume from other containers)
+0.2.4
+- Add: containerdetails/volumes-from (get volume from other containers)
 
 0.3.0
 - Add: tag list to the image details
@@ -135,7 +133,7 @@ z
 - docker image with version check in the webapp
 - Add copyright when released or published (xterm.js, json-formatter)
 
-Far future, not decided yet
+## Far future, not decided yet
 - Make features docker host remote api version aware. Hide non-existing functions
 - Redesign layout from top menu to side menu
 - Add repeated pinging to containers (the list and per container)
@@ -147,7 +145,7 @@ Far future, not decided yet
 - Swarm support
 - compose yml support
 
-Done
+## Done
 0.1.1
 - Add: log view to containers/container details/diff listing
 
