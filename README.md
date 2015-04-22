@@ -12,6 +12,15 @@ This is my learning project to get familiar with angular.js and Twitter bootstra
 **[Enable remote access to Docker daemon](#enable-remote-access-to-docker-daemon)**
 **[Beta screenshots](#beta-screenshots)**
 **[Development roadmap] (#development-roadmap)**
+
+### Table of Contents
+**[Installation Instructions](#installation-instructions)**  
+**[Usage Instructions](#usage-instructions)**  
+**[Troubleshooting](#troubleshooting)**  
+**[Compatibility](#compatibility)**  
+**[Notes and Miscellaneous](#notes-and-miscellaneous)**  
+**[Building the Extension Bundles](#building-the-extension-bundles)**  
+**[Next Steps, Credits, Feedback, License](#next-steps)**  
  
 
 ## Enable remote access to Docker daemon
