@@ -2,10 +2,10 @@
 
 Version: 0.1.something (not ready for releasing)
 
-Yet Another Docker Host Monitoring And Investigating Webapp To Make Images And Container Management Easier. (YADHMAIWTMIACME :) )  
-
-
-This is my learning project to get familiar with angular.js and Twitter bootstrap frameworks, so be please patient :)
+Yet Another Docker Host Monitoring And Investigating Webapp To Make Images And Container Management Easier. (YADHMAIWTMIACME :) )
+  
+Blueprint web application for my bigger idea to make docker based systems more manageable. This is a standalone solution 
+to manage few docker hosts and do some regular tasks on containers and images. 
  
 ### Table of Contents
 **[Enable remote access to Docker daemon](#enable-remote-access-to-docker-daemon)**  
