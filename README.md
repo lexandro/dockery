@@ -7,11 +7,11 @@ Yet Another Docker Host Monitoring And Investigating Webapp To Make Images And C
 
 This is my learning project to get familiar with angular.js and Twitter bootstrap frameworks, so be please patient :)
  
- 
 ### Table of Contents
-**[Enable remote access to Docker daemon](#enable-remote-access-to-docker-daemon)**
-**[Beta screenshots](#beta-screenshots)**
-**[Development roadmap] (#development-roadmap)**
+**[Enable remote access to Docker daemon](#enable-remote-access-to-docker-daemon)**  
+**[Beta screenshots](#beta-screenshots)**  
+**[Development roadmap](#development-roadmap)**  
+ 
 
 ## Enable remote access to Docker daemon
 
