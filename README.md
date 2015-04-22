@@ -27,18 +27,26 @@ then issue the following command to activate changes:
 ```bash
 service docker restart
 ```
-Under development
+
+Beta screenshots
 =====================
 
+![hosts](docs/images/screenshot_hosts.jpg "List of hosts")
+![host details](docs/images/screenshot_host_details.jpg "Details of the selected host")
+![containers](docs/images/screenshot_containers.jpg "List of docker host containers")
+![container details](docs/images/screenshot_container_details.jpg "Docker container details")
+![images](docs/images/screenshot_images.jpg "List of docker host images")
+![image details](docs/images/screenshot_image_details.jpg "Docker image details")
+
+Under development:
+=====================
 0.1.9
-- Add: select all/select page on containers 
+z
 - Fix: display port assignments [exposed image without public, exposed with -P, exposed with -p, portless image with -P, portless image with -p]
 - Fix: image non-port exposure issue at: http://localhost:63342/dockermon/app/imageDetails/imageDetails.js:23:63
 
-
 Roadmap /by priority/
 =====================
-
 0.2.0
 - Add: rename container to container list view - Remote api version dependent feature
 
@@ -51,7 +59,7 @@ Roadmap /by priority/
 
 0.2.2
 - Add: create container view
-- Add: select all/select page on images 
+ 
 
 0.2.3
 - Add: containers: command popover to show the whole command
@@ -96,9 +104,15 @@ Roadmap /by priority/
 - Fix: Adding new host sometimes causing index by errors.
 
 0.6
- - Add: show containerdetails/ cpu/network datastream as diagram/graph or stg. else 
+- Add: show containerdetails/ cpu/network datastream as diagram/graph or stg. else 
 
+0.6.1
+- Add: paging of containers
+- Add: select all/select page on containers
 
+0.6.2
+- Add: paging of images
+- Add: select all/select page on images
 
 Not scheduled
 =============
@@ -121,7 +135,6 @@ Far future, not decided yet
 
 Done
 ====
-
 0.1.1
 - Add: log view to containers/container details/diff listing
 
