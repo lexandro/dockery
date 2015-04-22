@@ -1,5 +1,4 @@
 # docker|mon
-==========
 
 Version: 0.1.something (not ready for releasing)
 
@@ -9,7 +8,6 @@ Yet Another Docker Host Monitoring And Investigating Webapp To Make Images And C
 This is my learning project to get familiar with angular.js and Twitter bootstrap frameworks, so be please patient :) 
 
 ## Enable remote access to Docker daemon
-=====================================
 
 To manage your docker host(s) with **dockermon** please please add the following parameters to your Docker daemon launcher:
 
@@ -29,27 +27,36 @@ service docker restart
 ```
 
 ## Beta screenshots
-=====================
+These screenshots are not representing the final version!
 
+### List of docker hosts
 ![hosts](docs/images/screenshot_hosts.jpg "List of hosts")
+
+### Host details
 ![host details](docs/images/screenshot_host_details.jpg "Details of the selected host")
+
+### List of docker host containers
 ![containers](docs/images/screenshot_containers.jpg "List of docker host containers")
+
+### Docker container details
 ![container details](docs/images/screenshot_container_details.jpg "Docker container details")
+
+### List of docker host images
 ![images](docs/images/screenshot_images.jpg "List of docker host images")
+
+### Docker image details
 ![image details](docs/images/screenshot_image_details.jpg "Docker image details")
 
-# Development roadmap:
-=====================
+# Development roadmap
+Here's the list of active, scheduled, planned and finished development goals
 
-## Under development:
-=====================
+## Under development
 0.1.9
 z
 - Fix: display port assignments [exposed image without public, exposed with -P, exposed with -p, portless image with -P, portless image with -p]
 - Fix: image non-port exposure issue at: http://localhost:63342/dockermon/app/imageDetails/imageDetails.js:23:63
 
 ## Roadmap /by priority/
-=====================
 0.2.0
 - Add: rename container to container list view - Remote api version dependent feature
 
@@ -118,13 +125,11 @@ z
 - Add: select all/select page on images
 
 ## Not scheduled
-=============
 - Help
 - docker image with version check in the webapp
 - Add copyright when released or published (xterm.js, json-formatter)
 
 Far future, not decided yet
-===========================
 - Make features docker host remote api version aware. Hide non-existing functions
 - Redesign layout from top menu to side menu
 - Add repeated pinging to containers (the list and per container)
@@ -137,7 +142,6 @@ Far future, not decided yet
 - compose yml support
 
 Done
-====
 0.1.1
 - Add: log view to containers/container details/diff listing
 
