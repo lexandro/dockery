@@ -27,6 +27,12 @@ or edit your **/etc/default/docker** file:
 DOCKER_OPTS='-H tcp://0.0.0.0:2375 -api-enable-cors'
 ```
 
+A more recommended approach:
+```bash
+DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4 -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock -api-enable-cors"
+
+```
+
 then issue the following command to activate changes:
 ```bash
 service docker restart
