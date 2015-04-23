@@ -42,10 +42,6 @@ angular.module('containers', ['ngRoute'])
                 refreshContainers();
             };
             //
-            $scope.goContainerDetails = function (path) {
-                $location.path('/containerDetails/' + path);
-            };
-            //
             $scope.goImageDetails = function (path) {
                 $location.path('/imageDetails/' + path);
             };
@@ -99,6 +95,22 @@ angular.module('containers', ['ngRoute'])
                 );
             };
             //
+            $scope.renameContainer = function (containerData) {
+                containerData.renameContainerEnabled = !containerData.renameContainerEnabled;
+                if (!containerData.renameContainerEnabled && containerData.newName != containerData.containerDetails.Name) {
+                    Docker.containers().rename({
+                        containerId: containerData.containerDetails.Id,
+                        name: containerData.newName
+                    }, {}, function () {
+                        refreshContainers();
+                    }, function () {
+                        refreshContainers();
+                    });
+                } else {
+                    containerData.newName = containerData.containerDetails.Name;
+                }
+            };
+            //
             $scope.startSelectedContainers = function () {
                 $scope.containerDataList.forEach(function (containerData) {
                     if (containerData.selected) {
@@ -149,6 +161,12 @@ angular.module('containers', ['ngRoute'])
                 });
 
             };
+
+            $scope.keydown = function ($event, containerData) {
+                if ($event.keyCode == 27) {
+                    containerData.renameContainerEnabled = false;
+                }
+            };
         }
 
         function getContainerData(containerDataList, containerId) {
@@ -195,6 +213,7 @@ angular.module('containers', ['ngRoute'])
                 containers.forEach(function (container) {
                     var containerData = {};
                     containerData.container = container;
+                    containerData.renameContainerEnabled = false;
 
                     var containerStatus = '';
                     if (container.Status.indexOf('Up') == 0 || container.Status.indexOf('Restarting') == 0 || container.Status.indexOf('Removal') == 0) {

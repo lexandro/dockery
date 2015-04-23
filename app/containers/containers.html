@@ -90,10 +90,13 @@
             <td width="5%" class="text-center vcenter">
                 <div class="vcenter"><strong>Name</strong></div>
             </td>
-            <td width="5%" class="text-center vcenter">
+            <td width="3%" class="text-center vcenter">
+                <div class="vcenter"><strong>Edit</strong></div>
+            </td>
+            <td width="15%" class="text-center vcenter">
                 <div class="vcenter"><strong>Image</strong></div>
             </td>
-            <td width="40%" class="text-center vcenter">
+            <td width="35%" class="text-center vcenter">
                 <div class="vcenter"><strong>Command</strong></div>
             </td>
 
@@ -142,22 +145,32 @@
                     {{containerData.containerStatus}}</p>
             </td>
             <td>
-                <button class="btn btn-block btn-primary btn-sm text-center"
-                        ng-click="goContainerDetails(containerData.container.Id)">
-                    {{containerData.container.Id | limitTo:12}}
-                </button>
+                <a ng-href="#/containerDetails/{{containerData.container.Id }}">
+                    {{containerData.container.Id | limitTo:12}}</a>
+            </td>
+            <td class="text-right">
+                <input ng-model="containerData.newName"
+                       ng-enter="renameContainer(containerData)"
+                       ng-show="containerData.renameContainerEnabled"
+                       ng-keydown="keydown($event, containerData)">
+
+                <div ng-show="!containerData.renameContainerEnabled">
+                    <strong>
+                        <a ng-href="#/containerDetails/{{containerData.container.Id }}">
+                            {{containerData.containerDetails.Name.charAt(0) === '/' ?
+                            containerData.containerDetails.Name.substr(1) : containerData.containerDetails.Name |
+                            shorten:true:30}}</a>
+                    </strong>
+                </div>
+            </td>
+            <td id="renameContainer">
+                <button class="btn btn-sm glyphicon"
+                        ng-class="{'btn-warning glyphicon-pencil':!containerData.renameContainerEnabled, 'btn-success glyphicon-ok':containerData.renameContainerEnabled}"
+                        ng-click="renameContainer(containerData)" title="Rename container"></button>
             </td>
             <td class="text-center">
-                <button class="btn btn-primary btn-block btn-sm text-right"
-                        ng-click="goContainerDetails(containerData.container.Id)">
-                    {{containerData.containerDetails.Name.charAt(0) === '/' ? containerData.containerDetails.Name.substr(1) :
-                    containerData.containerDetails.Name | shorten:true:30}}
-                </button>
-            </td>
-            <td class="text-center">
-                <button class="btn btn-info btn-block btn-sm" ng-click="goImageDetails(containerData.containerDetails.Image)">
-                    {{containerData.container.Image | shorten:true:30}}
-                </button>
+                <a ng-href="#/imageDetails/{{containerData.container.Image }}">
+                    {{containerData.container.Image | shorten:true:30}}</a>
             </td>
             <td class="text-left">{{containerData.container.Command | shorten:true:80}}</td>
             <td class="text-left">{{showContainerSizeFlag==true?containerData.container.SizeRw:NAN | bytes:2 }}

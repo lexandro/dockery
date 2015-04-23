@@ -79,6 +79,10 @@ angular.module('services', [])
                     remove: {
                         url: $rootScope.hostUrl + '/containers/:containerId',
                         method: "DELETE"
+                    },
+                    rename: {
+                        url: $rootScope.hostUrl + '/containers/:containerId/rename',
+                        method: "POST"
                     }
 
                 });
