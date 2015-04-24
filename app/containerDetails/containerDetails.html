@@ -154,7 +154,12 @@
     <br/>
 
     <div ng-show="activeTab=='info'">
-        <div class="col-md-12">
+
+        <div class="alert alert-info" role="alert" ng-show="containerDetailsLoading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span>
+                {{containerDetailsLoadingMessage}}</h3>
+        </div>
+        <div class="col-md-4">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title">
@@ -163,7 +168,24 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    Panel content
+                    <table class="table table-condensed table-hover table-striped" ng-show="true">
+                        <thead>
+                        <tr>
+                            <th>Container internal port</th>
+                            <th>Host IP/port</th>
+                            <th class="text-center">Public</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="(key, value) in containerDetails.NetworkSettings['Ports']">
+                            <td>{{key}}</td>
+                            <td>{{value[0]["HostIp"]}}{{value.length>0?":":""}}{{value[0]["HostPort"]}}</td>
+                            <td class="text-center" ng-show="value.length>0"><strong>true</strong></td>
+                            <td class="text-center" ng-show="!value.length>0">false</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
 

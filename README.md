@@ -59,18 +59,13 @@ These screenshots are not representing the final version!
 Here's the list of active, scheduled, planned and finished development goals
 
 ## Under development
-0.1.9
-- Add: rename container to container list view - Remote api version dependent feature
-- Fix: display port assignments [exposed image without public, exposed with -P, exposed with -p, portless image with -P, portless image with -p]
-- Fix: image non-port exposure issue at: http://localhost:63342/dockermon/app/imageDetails/imageDetails.js:23:63
-
-## Roadmap /by priority/
 0.2.0
 - Add: list last n items to container list view
 - Add: list since filter to container list view 
 - Add: list before filter to container list view
 - Fix: use image ID in containerlist link, because the 'namespace/repo:tag' is forwarding to wrong place
 
+## Roadmap /by priority/
 0.2.1
 - Add: exit code filter to container list view 
 - Add: status filter to container list view
@@ -185,3 +180,8 @@ Here's the list of active, scheduled, planned and finished development goals
   
 0.1.8
 - Rescheduled
+
+0.1.9
+- Add: rename container to container list view - Remote api version dependent feature
+- Fix: display port assignments [exposed image without public, exposed with -P, exposed with -p, portless image with -P, portless image with -p]
+- Fix: image non-port exposure issue at: http://localhost:63342/dockermon/app/imageDetails/imageDetails.js:23:63
