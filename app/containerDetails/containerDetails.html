@@ -86,26 +86,26 @@
                 <span class="label label-primary">{{containerDetails.Config.Image | limitTo:50}}</span>
             </samp></a>
         </div>
-        <div class="col-md-1 text-right"><strong>Ports</strong></div>
-        <div class="col-md-3"><strong>{{portAssignments}}</strong></div>
+        <div class="col-md-1 text-right"><strong>IPv4</strong></div>
+        <div class="col-md-3">
+            {{containerDetails.NetworkSettings.IPAddress}}/{{containerDetails.NetworkSettings.IPPrefixLen}}
+        </div>
         <div class="col-md-1 text-right"><strong>PID on host</strong></div>
         <div class="col-md-3">{{containerDetails.State.Pid}}</div>
     </div>
     <div class="row">
         <div class="col-md-1 text-right"><strong>Created</strong></div>
         <div class="col-md-3">{{containerDetails.Created | date:'medium'}}</div>
-        <div class="col-md-1 text-right"><strong>IPv4</strong></div>
-        <div class="col-md-3">
-            {{containerDetails.NetworkSettings.IPAddress}}/{{containerDetails.NetworkSettings.IPPrefixLen}}
-        </div>
+        <div class="col-md-1 text-right"><strong>Gateway</strong></div>
+        <div class="col-md-3">{{containerDetails.NetworkSettings.Gateway}}</div>
         <div class="col-md-1 text-right"><strong>Driver</strong></div>
         <div class="col-md-3">{{containerDetails.Driver}}</div>
     </div>
     <div class="row">
         <div class="col-md-1 text-right"><strong>Started</strong></div>
         <div class="col-md-3">{{containerDetails.State.StartedAt| date:'medium'}}</div>
-        <div class="col-md-1 text-right"><strong>Gateway</strong></div>
-        <div class="col-md-3">{{containerDetails.NetworkSettings.Gateway}}</div>
+        <div class="col-md-1 text-right"><strong>DNS</strong></div>
+        <div class="col-md-3">{{containerDetails.HostConfig.Dns}}</div>
         <div class="col-md-1 text-right"><strong>ExecDriver</strong></div>
         <div class="col-md-3">{{containerDetails.ExecDriver}}</div>
     </div>
@@ -114,8 +114,8 @@
         <div class="col-md-3">{{containerDetails.State.Running==true?"No":containerDetails.State.FinishedAt|
             date:'medium'}}
         </div>
-        <div class="col-md-1 text-right"><strong>DNS</strong></div>
-        <div class="col-md-3">{{containerDetails.HostConfig.Dns}}</div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3"></div>
         <div class="col-md-1 text-right"><strong>Restart count</strong></div>
         <div class="col-md-3">{{containerDetails.RestartCount}}</div>
     </div>
