@@ -135,31 +135,11 @@
         <div class="col-md-1 text-right"><strong>Entry point</strong></div>
         <div class="col-md-11"><code>{{containerDetails.Config.Entrypoint.join(' ')}}</code></div>
     </div>
-    <div class="row">
-        <div class="col-md-1 text-right"><strong>Volumes</strong></div>
-        <div class="col-md-1">
-            <table class="table table-condensed table-hover table-bordered" ng-show="!isEmpty(containerDetails.Volumes)">
-                <thead>
-                <tr class="success">
-                    <th class="text-center">Host</th>
-                    <th class="text-center">Container</th>
-                    <th class="text-center">Writeable</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="(key,value) in containerDetails.Volumes">
-                    <td>{{value}}</td>
-                    <td>{{key}}</td>
-                    <td>{{containerDetails.VolumesRW[key]==true?'yes':'no'}}</td>
-                </tr>
-                </tbody>
-            </table>
 
-        </div>
-        <!--<div class="col-md-11">{{containerDetails.Volumes["/vol"]}}</div>-->
-    </div>
     <hr/>
     <ul class="nav nav-tabs">
+        <li role="presentation" ng-class="{'active':activeTab=='info'}"><a
+                ng-click="showInfo(containerDetails.Id.substr(0,12))">Info</a></li>
         <li role="presentation" ng-class="{'active':activeTab=='top'}"><a
                 ng-click="showProcesses(containerDetails.Id.substr(0,12))">Processes</a></li>
         <li role="presentation" ng-class="{'active':activeTab=='logs'}"><a
@@ -172,6 +152,52 @@
                 ng-click="showJson(containerDetails.Id.substr(0,12))">Pure json</a></li>
     </ul>
     <br/>
+
+    <div ng-show="activeTab=='info'">
+        <div class="col-md-12">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="fa fa-plug"> </span>
+                        Port assignments
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="fa fa-folder-open"></span>
+                        Volumes
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-condensed table-hover table-striped" ng-show="!isEmpty(containerDetails.Volumes)">
+                        <thead>
+                        <tr>
+                            <th>Host</th>
+                            <th>Container</th>
+                            <th class="text-center">Writeable</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="(key,value) in containerDetails.Volumes">
+                            <td>{{value}}</td>
+                            <td>{{key}}</td>
+                            <td class="text-center">{{containerDetails.VolumesRW[key]==true?'yes':'no'}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <div ng-show="activeTab=='top'">
         <div class="alert alert-info" role="alert" ng-show="containerTopLoading">
@@ -344,5 +370,9 @@
     <div ng-show="activeTab=='json'">
         <json-formatter json="containerDetails" open="10"></json-formatter>
     </div>
-
 </div>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>

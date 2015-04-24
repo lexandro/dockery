@@ -15,7 +15,7 @@ angular.module('containerDetails', ['ngRoute'])
         } else {
             var containerDetails = {};
             $scope.Object = Object;
-            $scope.activeTab = 'top';
+            $scope.activeTab = 'info';
             $scope.newDiffPageSize = 20;
             //
             var diffSettings = [];
@@ -174,6 +174,10 @@ angular.module('containerDetails', ['ngRoute'])
                 };
             };
 
+            $scope.showInfo = function (containerId) {
+                $scope.activeTab = 'info';
+            }
+
             $scope.showProcesses = function (containerId) {
                 if (!Helpers.isEmpty(term)) {
                     term.destroy();
@@ -295,7 +299,7 @@ angular.module('containerDetails', ['ngRoute'])
             containerDetails = Docker.containers().get({containerId: $routeParams.containerId}, function () {
                 $scope.containerDetailsLoading = false;
                 $scope.containerDetails = containerDetails;
-                $scope.showProcesses($routeParams.containerId);
+                $scope.showInfo($routeParams.containerId);
                 //
                 $scope.canStart = !containerDetails.State.Running;
                 $scope.canStop = containerDetails.State.Running && !containerDetails.State.Paused;
@@ -309,10 +313,10 @@ angular.module('containerDetails', ['ngRoute'])
                 var portAssignments = "";
                 for (var key in containerDetails.NetworkSettings.Ports) {
                     portAssignments = portAssignments + key + ':';
-                    var portArray = containerDetails.NetworkSettings.PortMapping.Ports[key];
-                    portArray.forEach(function (port) {
-                        portAssignments += port["HostPort"];
-                    });
+                    //var portArray = containerDetails.NetworkSettings.PortMapping.Ports[key];
+                    //portArray.forEach(function (port) {
+                    //    portAssignments += port["HostPort"];
+                    //});
                     portAssignments += ', ';
                 }
                 $scope.portAssignments = portAssignments.substring(0, portAssignments.length - 2);
