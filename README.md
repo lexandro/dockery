@@ -126,6 +126,9 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: paging of images
 - Add: select all/select page on images
 
+0.6.3
+- Add: export/import hosts list
+
 ## Not scheduled
 - Help
 - docker image with version check in the webapp
