@@ -38,12 +38,12 @@ service docker restart
 Dockermon is released as an nginx backed docker image to make it easier to use. The image is auto updated by every push with the **latest** tag, the versioning will be added 
 after the first official releaseing
 
-### get the image
+**get the image**
 ```bash
 docker pull lexandro/dockermon
 ```
 
-### start the image
+**start the image**
 ```bash
 docker run -d -p 80:80 --name dockermon lexandro/dockermon
 ```
