@@ -72,7 +72,8 @@ Here's the list of active, scheduled, planned and finished development goals
 0.2.0
 - Add: list last n items to container list view
 - Add: list since filter to container list view 
-- Add: list before filter to container list view 
+- Add: list before filter to container list view
+- Fix: use image ID in containerlist link, because the 'namespace/repo:tag' is forwarding to wrong place
 
 0.2.1
 - Add: exit code filter to container list view 
