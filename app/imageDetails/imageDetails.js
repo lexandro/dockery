@@ -19,7 +19,7 @@ angular.module('imageDetails', ['ngRoute'])
                 $scope.imageDataLoading = false;
                 $scope.imageDetails = imageDetails;
                 // converting the port listing map map to a more readable format
-                if (imageDetails.Config) {
+                if (imageDetails.Config.ExposedPorts) {
                     imageDetails.Config.ExposedPorts = Object.keys(imageDetails.Config.ExposedPorts).join(', ');
                 }
             });
