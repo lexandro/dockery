@@ -4,12 +4,13 @@ Blueprint web application for my bigger idea to make docker based systems more m
 to manage few docker hosts and do some regular tasks on containers and images. 
  
 ### Table of Contents
-**[Enable remote access to Docker daemon](#enable-remote-access-to-docker-daemon)**  
+**[Enable remote access to a Docker daemon](#enable-remote-access-to-a-docker-daemon)**  
+**[Run as docker container](#run-as-docker-container)**  
 **[Beta screenshots](#beta-screenshots)**  
 **[Development roadmap](#development-roadmap)**  
  
 
-## Enable remote access to Docker daemon
+## Enable remote access to a Docker daemon
 
 To manage your docker host(s) with **dockermon** please please add the following parameters to your Docker daemon launcher:
 
@@ -33,7 +34,19 @@ then issue the following command to activate changes:
 ```bash
 service docker restart
 ```
+## Run as docker container
+Dockermon is released as an nginx backed docker image to make it easier to use. The image is auto updated by every push with the **latest** tag, the versioning will be added 
+after the first official releaseing
 
+### get the image
+```bash
+docker pull lexandro/dockermon
+```
+
+### start the image
+```bash
+docker run -d -p 80:80 --name dockermon lexandro/dockermon
+```
 ## Beta screenshots
 These screenshots are not representing the final version!
 
