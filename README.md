@@ -80,24 +80,37 @@ Here's the list of active, scheduled, planned and finished development goals
 
 ## Roadmap /by priority/
 0.2.1
+- Add: create container page
+
+0.2.2
 - Add: exit code filter to container list view 
 - Add: status filter to container list view
 
-0.2.2
-- Add: create container view
- 
 0.2.3
-- Add: containers: command popover to show the whole command
+- Add: image deletion to the image list view
 
 0.2.4
-- Add: containerdetails/volumes-from (get volume from other containers)
+- Add: add search for container diff
+
+0.2.5
+- Add: sort by table header fields in containers list
+
+0.2.6
+- Add: sort by table header fields in images list
+
+0.2.7
+- Add: filter by table header fields in containers list
+
+0.2.8
+- Add: filter by table header fields in images list
 
 0.3.0
-- Add: tag list to the image details
-- Fix: show image name in the image details
+- Add: containerdetails/volumes-from (get volume from other containers)
 
 0.3.1
-- Add: image deletion to the image list view
+- Add: containers: command popover to show the whole command
+- Add: tag list to the image details
+- Fix: show image name in the image details
 
 0.3.2
 - Add: list active containers related to the image in image details
@@ -121,10 +134,9 @@ Here's the list of active, scheduled, planned and finished development goals
 0.5.1
 - Add: download file link to containers/container details/diff listing items
 - Add: option to show containers logs as formatted/raw 
-- Fix: TTY terminal doubles characters in some cases.  
+- Fix: TTY terminal doubling characters in some cases.  
 
 0.5.2 
-- Add: add search for container diff
 - Add: set refresh interval on container listing
 - Fix: Adding new host sometimes causing index by errors.
 
@@ -148,6 +160,7 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add copyright when released or published (xterm.js, json-formatter)
 
 ## Far future, not decided yet
+- Presets for create container page
 - Make features docker host remote api version aware. Hide non-existing functions
 - Redesign layout from top menu to side menu
 - Add repeated pinging to containers (the list and per container)
@@ -199,5 +212,6 @@ Here's the list of active, scheduled, planned and finished development goals
 
 0.1.9
 - Add: rename container to container list view - Remote api version dependent feature
+- Add: release automatically in docker image format
 - Fix: display port assignments [exposed image without public, exposed with -P, exposed with -p, portless image with -P, portless image with -p]
 - Fix: image non-port exposure issue at: http://localhost:63342/dockermon/app/imageDetails/imageDetails.js:23:63
