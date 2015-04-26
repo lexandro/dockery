@@ -72,58 +72,59 @@ These screenshots are not representing the final version!
 Here's the list of active, scheduled, planned and finished development goals
 
 ## Under development
-0.2.0
-- Add: list last n items to container list view
-- Add: list since filter to container list view 
-- Add: list before filter to container list view
+
+0.2.1
+- Add: create container page
 - Fix: use image ID in containerlist link, because the 'namespace/repo:tag' is forwarding to wrong place
 
 ## Roadmap /by priority/
-0.2.1
-- Add: create container page
 
 0.2.2
-- Add: exit code filter to container list view 
-- Add: status filter to container list view
-
-0.2.3
 - Add: image deletion to the image list view
 
-0.2.4
-- Add: add search for container diff
-
-0.2.5
+0.2.3
 - Add: sort by table header fields in containers list
-
-0.2.6
 - Add: sort by table header fields in images list
 
-0.2.7
+0.2.4
 - Add: filter by table header fields in containers list
-
-0.2.8
 - Add: filter by table header fields in images list
 
-0.3.0
+0.2.5
 - Add: containerdetails/volumes-from (get volume from other containers)
 
-0.3.1
+0.2.6
 - Add: containers: command popover to show the whole command
 - Add: tag list to the image details
 - Fix: show image name in the image details
 
-0.3.2
+0.2.7
 - Add: list active containers related to the image in image details
+
+0.2.8
+- Add: image pulling to the image list view
+
+
+0.3.0
+- Add: add search for container diff
+
+0.3.1
+- Add: helper links to the known fields/information pieces to help understand
+
+0.3.2
+- Add: exit code filter to container list view 
+- Add: status filter to container list view
+
 
 0.3.3
 - Add: login into the docker hub and/or private repo(s) 
-- Add: image pulling to the image list view
+
 
 0.4.0
 - Fix: redesign host information page...drastically++ :)
 
 0.4.1
-- Add: helper links to the known fields/information pieces to help understand
+- Add: download file link to containers/container details/diff listing items
 
 0.4.2
 - Add: also add tooltips to these items on all views
@@ -132,7 +133,7 @@ Here's the list of active, scheduled, planned and finished development goals
 - Fix: make it more responsive
 
 0.5.1
-- Add: download file link to containers/container details/diff listing items
+
 - Add: option to show containers logs as formatted/raw 
 - Fix: TTY terminal doubling characters in some cases.  
 
@@ -171,6 +172,9 @@ Here's the list of active, scheduled, planned and finished development goals
 - Ping open ports for swagger endpoint (/api_docs)
 - Swarm support
 - compose yml support
+- Add: list last n items to container list view
+- Add: list since filter to container list view 
+- Add: list before filter to container list view
 
 ## Done
 0.1.1
@@ -215,3 +219,6 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: release automatically in docker image format
 - Fix: display port assignments [exposed image without public, exposed with -P, exposed with -p, portless image with -P, portless image with -p]
 - Fix: image non-port exposure issue at: http://localhost:63342/dockermon/app/imageDetails/imageDetails.js:23:63
+
+0.2.0
+- Rescheduled
