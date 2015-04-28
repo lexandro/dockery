@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('containerDetails', ['ngRoute'])
+angular.module('createContainer', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/createContainer', {
