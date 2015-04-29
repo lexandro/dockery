@@ -13,6 +13,7 @@ angular.module('dockermon', [
     'hostDetails',
     'containers',
     'containerDetails',
+    'createContainer',
     'images',
     'imageDetails'
 ])

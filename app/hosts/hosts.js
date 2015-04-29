@@ -169,5 +169,4 @@ angular.module('hosts', ['ngRoute'])
             $scope.updateStatus();
         }
 
-    }])
-;
+    }]);

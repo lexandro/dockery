@@ -162,6 +162,10 @@ angular.module('containers', ['ngRoute'])
 
             };
 
+            $scope.createContainer = function () {
+                $location.path('/createContainer');
+            };
+
             $scope.keydown = function ($event, containerData) {
                 if ($event.keyCode == 27) {
                     containerData.renameContainerEnabled = false;
