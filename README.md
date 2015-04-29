@@ -74,7 +74,7 @@ Here's the list of active, scheduled, planned and finished development goals
 ## Under development
 
 0.2.1
-- Add: create container page
+- Add: create container page - basic
 - Fix: use image ID in containerlist link, because the 'namespace/repo:tag' is forwarding to wrong place
 
 ## Roadmap /by priority/
