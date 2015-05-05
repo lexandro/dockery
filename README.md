@@ -104,7 +104,6 @@ Here's the list of active, scheduled, planned and finished development goals
 0.2.8
 - Add: image pulling to the image list view
 
-
 0.3.0
 - Add: add search for container diff
 
@@ -115,10 +114,8 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: exit code filter to container list view 
 - Add: status filter to container list view
 
-
 0.3.3
 - Add: login into the docker hub and/or private repo(s) 
-
 
 0.4.0
 - Fix: redesign host information page...drastically++ :)
