@@ -34,12 +34,9 @@ angular.module('services', [])
             },
             containers: function () {
                 return $resource($rootScope.hostUrl + '/containers/:containerId/json', null, {
-                    query: {
-                        method: "GET",
-                        isArray: true
-                    },
-                    get: {
-                        method: "GET",
+                    create: {
+                        url: $rootScope.hostUrl + '/containers/create',
+                        method: "POST",
                         isArray: false
                     },
                     diff: {
@@ -47,18 +44,9 @@ angular.module('services', [])
                         method: "GET",
                         isArray: true
                     },
-                    top: {
-                        url: $rootScope.hostUrl + '/containers/:containerId/top',
+                    get: {
                         method: "GET",
                         isArray: false
-                    },
-                    start: {
-                        url: $rootScope.hostUrl + '/containers/:containerId/start',
-                        method: "POST"
-                    },
-                    restart: {
-                        url: $rootScope.hostUrl + '/containers/:containerId/restart?t=1',
-                        method: "POST"
                     },
                     kill: {
                         url: $rootScope.hostUrl + '/containers/:containerId/kill',
@@ -68,13 +56,9 @@ angular.module('services', [])
                         url: $rootScope.hostUrl + '/containers/:containerId/pause',
                         method: "POST"
                     },
-                    unpause: {
-                        url: $rootScope.hostUrl + '/containers/:containerId/unpause',
-                        method: "POST"
-                    },
-                    stop: {
-                        url: $rootScope.hostUrl + '/containers/:containerId/stop',
-                        method: "POST"
+                    query: {
+                        method: "GET",
+                        isArray: true
                     },
                     remove: {
                         url: $rootScope.hostUrl + '/containers/:containerId',
@@ -83,8 +67,28 @@ angular.module('services', [])
                     rename: {
                         url: $rootScope.hostUrl + '/containers/:containerId/rename',
                         method: "POST"
+                    },
+                    restart: {
+                        url: $rootScope.hostUrl + '/containers/:containerId/restart?t=1',
+                        method: "POST"
+                    },
+                    start: {
+                        url: $rootScope.hostUrl + '/containers/:containerId/start',
+                        method: "POST"
+                    },
+                    stop: {
+                        url: $rootScope.hostUrl + '/containers/:containerId/stop',
+                        method: "POST"
+                    },
+                    top: {
+                        url: $rootScope.hostUrl + '/containers/:containerId/top',
+                        method: "GET",
+                        isArray: false
+                    },
+                    unpause: {
+                        url: $rootScope.hostUrl + '/containers/:containerId/unpause',
+                        method: "POST"
                     }
-
                 });
             }, images: function () {
                 return $resource($rootScope.hostUrl + '/images/:imageId/json?all=:showAllImagesFlag', null, {
