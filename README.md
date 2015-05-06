@@ -76,11 +76,13 @@ Here's the list of active, scheduled, planned and finished development goals
 0.2.1
 - Add: create container page - basic
 - Fix: use image ID in containerlist link, because the 'namespace/repo:tag' is forwarding to wrong place
+- Fix: select all in containers can't be change (it' all or nothing)
 
 ## Roadmap /by priority/
 
 0.2.2
 - Add: image deletion to the image list view
+- Add: create container: name format check
 
 0.2.3
 - Add: sort by table header fields in containers list
