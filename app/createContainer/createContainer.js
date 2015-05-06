@@ -19,8 +19,18 @@ angular.module('createContainer', ['ngRoute'])
             $scope.privileged = false;
             //
             $scope.createContainer = function () {
-                console.log('create');
+                console.log('create start');
+                // TODO add name format check
+                var createdContainer = Docker.containers().create($scope.newContainerName ? {name: $scope.newContainerName} : null,
+                    {
+                        Image: $scope.imageName
+                    },
+                    function () {
+                        console.log(JSON.stringify(createdContainer));
+                    }
+                )
             };
+
             $scope.createAndStartContainer = function () {
                 $scope.createContainer();
                 console.log('and start');
@@ -30,4 +40,5 @@ angular.module('createContainer', ['ngRoute'])
                 $scope.newContainerName = 'random_container';
             };
         }
-    }]);
+    }])
+;
