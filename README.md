@@ -83,6 +83,7 @@ Here's the list of active, scheduled, planned and finished development goals
 0.2.2
 - Add: image deletion to the image list view
 - Add: create container: name format check
+- Add: privilege containers should show warning color in details or maybe in the lists too
 
 0.2.3
 - Add: sort by table header fields in containers list
