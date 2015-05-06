@@ -24,7 +24,12 @@ angular.module('createContainer', ['ngRoute'])
                 var createdContainer = Docker.containers().create($scope.newContainerName ? {name: $scope.newContainerName} : null,
                     {
                         Image: $scope.imageName,
-                        Cmd: $scope.command.split(' ')
+                        Cmd: $scope.command.split(' '),
+                        Tty: $scope.tty,
+                        HostConfig: {
+                            Privileged: $scope.privileged
+                        }
+
                     },
                     function () {
                         console.log(JSON.stringify(createdContainer));
