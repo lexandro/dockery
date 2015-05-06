@@ -23,7 +23,8 @@ angular.module('createContainer', ['ngRoute'])
                 // TODO add name format check
                 var createdContainer = Docker.containers().create($scope.newContainerName ? {name: $scope.newContainerName} : null,
                     {
-                        Image: $scope.imageName
+                        Image: $scope.imageName,
+                        Cmd: $scope.command.split(' ')
                     },
                     function () {
                         console.log(JSON.stringify(createdContainer));
