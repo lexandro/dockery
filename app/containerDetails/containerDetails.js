@@ -99,7 +99,6 @@ angular.module('containerDetails', ['ngRoute'])
                 );
             };
             //
-
             $scope.showLogs = function (containerId) {
                 $scope.containerLogsLoading = true;
                 $scope.containerLogsLoadingMessage = 'Loading log information';
