@@ -17,10 +17,14 @@ angular.module('createContainer', ['ngRoute'])
             $scope.tty = true;
             $scope.interactive = true;
             $scope.privileged = false;
+            $scope.validation = {};
+            //
             //
             $scope.createContainer = function () {
                 console.log('create start');
                 // TODO add name format check
+                $scope.validation.imageNameRequired = Helpers.isEmpty($scope.imageName);
+                $scope.validation.newContainerNameRequired = Helpers.isEmpty($scope.newContainerName);
                 var createdContainer = Docker.containers().create($scope.newContainerName ? {name: $scope.newContainerName} : null,
                     {
                         Image: $scope.imageName,

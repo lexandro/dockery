@@ -9,31 +9,37 @@
             <span class="fa fa-play"></span> <strong>Create and start</strong>
         </button>
     </h1>
+    <form name="createContainerForm">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><span class="fa fa-gears"></span> Basic settings</h4>
+                    </div>
+                    <div class="panel-body">
 
-    <div class="row">
-        <div class="col-md-4">
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <h4 class="panel-title"><span class="fa fa-gears"></span> Basic settings</h4>
-                </div>
-                <div class="panel-body">
-                    <div class="col-md-12 text-center" style="color: red" ng-messages="imageEmpty">
-                        <strong>Image not specified!</strong>
-                    </div>
-                    <div class="col-md-3 vcenter text-right">
-                        <strong>Image</strong>
-                    </div>
-                    <div class="col-md-9 input-group">
-                        <input type="text" class="form-control" ng-model="imageName" placeholder="Enter the image name">
-                    </div>
-                    <br/>
+                        <div class="col-md-12 text-center" style="color: red" ng-show="validation.imageNameRequired">
+                            <strong>Image not specified!</strong>
+                        </div>
+                        <div class="col-md-3 vcenter text-right">
+                            <strong>Image</strong>
+                        </div>
+                        <div class="col-md-9 input-group">
+                            <input type="text" class="form-control" ng-model="imageName" name="imageee"
+                                   placeholder="Enter the image name" required minlength="1">
+                        </div>
+                        <br/>
 
-                    <div class="col-md-3 vcenter text-right">
-                        <strong>Name</strong>
-                    </div>
-                    <div class="col-md-9 input-group">
-                        <input type="text" class="form-control" ng-model="newContainerName"
-                               placeholder="Enter or generate container name">
+                        <div class="col-md-12 text-center" style="color: red"
+                             ng-show="validation.newContainerNameRequired">
+                            <strong>Container name not specified!</strong>
+                        </div>
+                        <div class="col-md-3 vcenter text-right">
+                            <strong>Name</strong>
+                        </div>
+                        <div class="col-md-9 input-group">
+                            <input type="text" class="form-control" ng-model="newContainerName"
+                                   placeholder="Enter or generate container name">
                     <span class="input-group-btn">
                             <button ng-click="generateContainerName()" title="Generate random name" type="submit"
                                     class="btn btn-info"
@@ -41,58 +47,150 @@
                                 <span class="fa fa-question-circle" style="font-size: large"></span>
                             </button>
                     </span>
-                    </div>
-                    <br/>
+                        </div>
+                        <br/>
 
-                    <div class="col-md-3 vcenter text-right">
-                        <strong>Command</strong>
-                    </div>
-                    <div class="col-md-9 input-group">
-                        <input type="text" class="form-control" ng-model="command"
-                               placeholder="Type your command if no entrypoint specified">
-                    </div>
+                        <div class="col-md-3 vcenter text-right">
+                            <strong>Command</strong>
+                        </div>
+                        <div class="col-md-9 input-group">
+                            <input type="text" class="form-control" ng-model="command"
+                                   placeholder="Type your command if no entrypoint specified">
+                        </div>
 
 
-                    <div class="col-md-12">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" ng-model="rm"> remove after exit (--rm)
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" ng-model="detach"> detached mode (-d, --detach)
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" ng-model="tty"> Allocate a pseudo-TTY (-t, --tty)
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" ng-model="interactive"> Keep STDIN open even if not attached (-i,
-                                --interactive=false)
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" ng-model="privileged"> Give extended privileges to this container
-                                (--privileged)
-                            </label>
+                        <div class="col-md-12">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="rm"> remove after exit (--rm)
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="detach"> detached mode (-d, --detach)
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="tty"> Allocate a pseudo-TTY (-t, --tty)
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="interactive"> Keep STDIN open even if not attached
+                                    (-i,
+                                    --interactive=false)
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="privileged"> Give extended privileges to this
+                                    container
+                                    (--privileged)
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><span class="fa fa-tachometer"></span> Runtime settings</h4>
+                    </div>
+                    <div class="panel-body">
+
+
+                        <div class="col-md-12">
+                            <h4>Environment variables
+                                <small>(-e, --env)</small>
+                            </h4>
+                        </div>
+                        <div class="col-md-12">
+                            <h4>Entrypoint
+                                <small>(--entrypoint)</small>
+                            </h4>
+                            <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
+                                   placeholder="container name">
+                        </div>
+                        <div class="col-md-12">
+                            <h4>Working directory
+                                <small>(-w, --workdir)</small>
+                            </h4>
+                            <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
+                                   placeholder="container name">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><span class="fa fa-sitemap"></span> Network</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"> Publish all exposed ports to random ports (-P,
+                                    --publish-all)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
+                                   placeholder="container name">
+
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
+                                   placeholder="container name">
+
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
+                                   placeholder="container name">
+
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
+                                   placeholder="container name">
+
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
+                                   placeholder="container name">
+
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
+                                   placeholder="container name">
+
+                        </div>
+                        <div class="col-md-12">
+                            <h4>Expose a port or a range of ports
+                                <small>(--expose)</small>
+                            </h4>
+                            <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
+                                   placeholder="container name">
+                            <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
+                                   placeholder="container name">
+                            <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
+                                   placeholder="container name">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <div class="col-md-4">
-            <div class="panel panel-warning">
+            <div class="panel panel-danger">
                 <div class="panel-heading">
-                    <h4 class="panel-title"><span class="fa fa-tachometer"></span> Runtime settings</h4>
+                    <h4 class="panel-title"><span class="fa fa-database"></span> Volumes</h4>
                 </div>
                 <div class="panel-body">
-
-
                     <div class="col-md-12">
                         <h4>Environment variables
                             <small>(-e, --env)</small>
@@ -116,95 +214,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h4 class="panel-title"><span class="fa fa-sitemap"></span> Network</h4>
-                </div>
-                <div class="panel-body">
-                    <div class="col-md-12">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Publish all exposed ports to random ports (-P, --publish-all)
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
-                               placeholder="container name">
 
-                    </div>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
-                               placeholder="container name">
-
-                    </div>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
-                               placeholder="container name">
-
-                    </div>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
-                               placeholder="container name">
-
-                    </div>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
-                               placeholder="container name">
-
-                    </div>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
-                               placeholder="container name">
-
-                    </div>
-                    <div class="col-md-12">
-                        <h4>Expose a port or a range of ports
-                            <small>(--expose)</small>
-                        </h4>
-                        <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
-                               placeholder="container name">
-                        <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
-                               placeholder="container name">
-                        <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
-                               placeholder="container name">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="col-md-4">
-        <div class="panel panel-danger">
-            <div class="panel-heading">
-                <h4 class="panel-title"><span class="fa fa-database"></span> Volumes</h4>
-            </div>
-            <div class="panel-body">
-                <div class="col-md-12">
-                    <h4>Environment variables
-                        <small>(-e, --env)</small>
-                    </h4>
-                </div>
-                <div class="col-md-12">
-                    <h4>Entrypoint
-                        <small>(--entrypoint)</small>
-                    </h4>
-                    <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
-                           placeholder="container name">
-                </div>
-                <div class="col-md-12">
-                    <h4>Working directory
-                        <small>(-w, --workdir)</small>
-                    </h4>
-                    <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
-                           placeholder="container name">
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
+    </form>
 </div>
