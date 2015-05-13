@@ -84,7 +84,9 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: image deletion to the image list view
 - Add: create container: name format check
 - Add: privilege containers should show warning color in details or maybe in the lists too
-
+- Add: display privileged container on container details page
+- Add: mark privileged containers on container list page
+ 
 0.2.3
 - Add: sort by table header fields in containers list
 - Add: sort by table header fields in images list
