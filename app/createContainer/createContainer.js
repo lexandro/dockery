@@ -12,6 +12,7 @@ angular.module('createContainer', ['ngRoute'])
             $location.path('/hosts');
         } else {
             $scope.imageName = 'ubuntu';
+            $scope.imageName = 'lexandro/echo-repeat';
             $scope.rm = false;
             $scope.detach = true;
             $scope.tty = true;
@@ -25,6 +26,7 @@ angular.module('createContainer', ['ngRoute'])
                 // TODO add name format check
                 $scope.validation.imageNameRequired = Helpers.isEmpty($scope.imageName);
                 $scope.validation.newContainerNameRequired = Helpers.isEmpty($scope.newContainerName);
+                $scope.command = '' + $scope.command;
                 var createdContainer = Docker.containers().create($scope.newContainerName ? {name: $scope.newContainerName} : null,
                     {
                         Image: $scope.imageName,
@@ -37,6 +39,7 @@ angular.module('createContainer', ['ngRoute'])
                     },
                     function () {
                         console.log(JSON.stringify(createdContainer));
+                        Docker.containers().start({containerId: createdContainer.Id}, {});
                     }
                 )
             };
