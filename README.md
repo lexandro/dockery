@@ -83,9 +83,6 @@ Here's the list of active, scheduled, planned and finished development goals
 0.2.2
 - Add: image deletion to the image list view
 - Add: create container: name format check
-- Add: privilege containers should show warning color in details or maybe in the lists too
-- Add: display privileged container on container details page
-- Add: mark privileged containers on container list page
  
 0.2.3
 - Add: sort by table header fields in containers list
@@ -97,6 +94,10 @@ Here's the list of active, scheduled, planned and finished development goals
 
 0.2.5
 - Add: containerdetails/volumes-from (get volume from other containers)
+- Add: privilege containers should show warning color in details or maybe in the lists too
+- Add: display privileged container on container details page
+- Add: mark privileged containers on container list page
+- Add: Show environment variables on container details page
 
 0.2.6
 - Add: containers: command popover to show the whole command
