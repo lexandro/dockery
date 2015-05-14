@@ -30,8 +30,6 @@
                                   ng-show="!!imageNameForm.$error.required"></span>
                         </form>
                     </div>
-                    <br/>
-
                     <div class="col-md-3 vcenter text-right">
                         <strong>Name</strong>
                     </div>
@@ -132,8 +130,10 @@
                         <h4>Entrypoint
                             <small>(--entrypoint)</small>
                         </h4>
-                        <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
-                               placeholder="container name">
+                        <div ng-repeat="entryPoint in entryPoints">
+                            <input type="text" class="form-control" ng-model="entryPoint"
+                                   placeholder="container name" ng-keyup="entryPointValidator()">
+                        </div>
                     </div>
                     <div class="col-md-12">
                         <h4>Working directory
@@ -219,7 +219,7 @@
                     </h4>
                 </div>
                 <div class="col-md-12">
-                    <h4>Entrypoint
+                    <h4>Entrypoints
                         <small>(--entrypoint)</small>
                     </h4>
                     <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
