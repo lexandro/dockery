@@ -33,16 +33,17 @@
                         <div class="col-md-3 vcenter text-right">
                             <strong>Name</strong>
                         </div>
-                        <div class="col-md-9 input-group">
+                        <div class="col-md-8 input-group">
+                            <span class="input-group-btn">
                             <input type="text" class="form-control" ng-model="newContainerName"
                                    placeholder="Enter or generate container name">
-                    <span class="input-group-btn">
+
                             <button ng-click="generateContainerName()" title="Generate random name" type="submit"
                                     class="btn btn-info"
                                     style="width: 40px; margin-right: 160px;margin-left: 3px;">
                                 <span class="fa fa-magic" style="font-size: large"></span>
                             </button>
-                    </span>
+                        </span>
                         </div>
                         <br/>
 
@@ -102,6 +103,25 @@
                             <h4>Environment variables
                                 <small>(-e, --env)</small>
                             </h4>
+                        </div>
+
+                        <div class="form-group col-md-12" ng-repeat="envVar in environmentVariables">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" ng-model="envVar.name" placeholder="name"
+                                       ng-keyup="envVarValidator()">
+                            </div>
+                            <div class="col-md-5 input-group">
+                                <span class="input-group-btn">
+                                <input type="text" class="form-control" ng-model="envVar.value" placeholder="value"
+                                       ng-keyup="envVarValidator()">
+
+                                <button ng-click="deleteEnvVarEntry($index)" title="Delete entry" type="submit"
+                                        class="btn btn-danger"
+                                        style="width: 40px; margin-right: 160px;margin-left: 3px;">
+                                    <span class="fa fa-trash" style="font-size: large"></span>
+                                </button>
+                                </span>
+                            </div>
                         </div>
                         <div class="col-md-12">
                             <h4>Entrypoint
