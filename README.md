@@ -76,12 +76,14 @@ Here's the list of active, scheduled, planned and finished development goals
 0.2.1
 - Add: create container page - basic
 - Fix: use image ID in containerlist link, because the 'namespace/repo:tag' is forwarding to wrong place
+- Fix: select all in containers can't be change (it' all or nothing)
 
 ## Roadmap /by priority/
 
 0.2.2
 - Add: image deletion to the image list view
-
+- Add: create container: name format check
+ 
 0.2.3
 - Add: sort by table header fields in containers list
 - Add: sort by table header fields in images list
@@ -92,6 +94,10 @@ Here's the list of active, scheduled, planned and finished development goals
 
 0.2.5
 - Add: containerdetails/volumes-from (get volume from other containers)
+- Add: privilege containers should show warning color in details or maybe in the lists too
+- Add: display privileged container on container details page
+- Add: mark privileged containers on container list page
+- Add: Show environment variables on container details page
 
 0.2.6
 - Add: containers: command popover to show the whole command
@@ -104,7 +110,6 @@ Here's the list of active, scheduled, planned and finished development goals
 0.2.8
 - Add: image pulling to the image list view
 
-
 0.3.0
 - Add: add search for container diff
 
@@ -115,10 +120,8 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: exit code filter to container list view 
 - Add: status filter to container list view
 
-
 0.3.3
 - Add: login into the docker hub and/or private repo(s) 
-
 
 0.4.0
 - Fix: redesign host information page...drastically++ :)
