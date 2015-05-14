@@ -36,7 +36,7 @@
                         <strong>Name</strong>
                     </div>
                     <div class="col-md-8 input-group">
-                            <span class="input-group-btn">
+                        <span class="input-group-btn">
                             <input type="text" class="form-control" ng-model="newContainerName"
                                    placeholder="Enter or generate container name">
 
@@ -107,12 +107,15 @@
                         </h4>
                     </div>
 
-                    <div class="form-group col-md-12" ng-repeat="envVar in environmentVariables">
-                        <div class="col-md-6">
+                    <div class="form-group" ng-repeat="envVar in environmentVariables">
+                        <div class="col-md-6"
+                             ng-class="{'has-success':!!envVar.name,'has-error':!envVar.name}">
                             <input type="text" class="form-control" ng-model="envVar.name" placeholder="name"
+                                   aria-describedby="envNameValidationStatus"
                                    ng-keyup="envVarValidator()">
                         </div>
-                        <div class="col-md-5 input-group">
+                        <div class="col-md-5 input-group"
+                             ng-class="{'has-success':!!envVar.value,'has-error':!envVar.value}">
                                 <span class="input-group-btn">
                                 <input type="text" class="form-control" ng-model="envVar.value" placeholder="value"
                                        ng-keyup="envVarValidator()">
