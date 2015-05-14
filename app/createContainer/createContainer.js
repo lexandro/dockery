@@ -20,6 +20,8 @@ angular.module('createContainer', ['ngRoute'])
             $scope.privileged = false;
             $scope.validation = {};
             $scope.environmentVariables = [{}];
+
+
             //
             //
             $scope.createContainer = function () {
