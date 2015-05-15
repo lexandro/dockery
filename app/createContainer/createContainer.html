@@ -126,13 +126,21 @@
                                 </span>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-11">
                         <h4>Entrypoint
                             <small>(--entrypoint)</small>
                         </h4>
-                        <div ng-repeat="entryPoint in entryPoints">
-                            <input type="text" class="form-control" ng-model="entryPoint"
+                        <div ng-repeat="entryPoint in entryPoints" class="form-group input-group">
+                            <span class="input-group-btn">
+                            <input type="text" class="form-control" ng-model="entryPoint.value"
                                    placeholder="container name" ng-keyup="entryPointValidator()">
+
+                            <button ng-click="deleteEntryPointEntry($index)" title="Delete entrypoint" type="submit"
+                                    class="btn btn-danger"
+                                    style="width: 40px; margin-right: 160px;margin-left: 3px;">
+                                <span class="fa fa-trash" style="font-size: large"></span>
+                            </button>
+                            </span>
                         </div>
                     </div>
                     <div class="col-md-12">

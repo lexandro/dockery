@@ -20,7 +20,7 @@ angular.module('createContainer', ['ngRoute'])
             $scope.privileged = false;
             $scope.validation = {};
             $scope.environmentVariables = [{}];
-            $scope.entryPoints = [""];
+            $scope.entryPoints = [{value: ""}];
 
 
             //
@@ -110,13 +110,12 @@ angular.module('createContainer', ['ngRoute'])
                 var entryPoints = $scope.entryPoints;
                 var newEntryPoints = [];
                 entryPoints.forEach(function (entryPoint) {
-                    if (!isEmpty(entryPoint)) {
+                    if (!isEmpty(entryPoint.value)) {
                         newEntryPoints.push(entryPoint);
                     }
                 });
 
-                newEntryPoints.push("d");
-                newEntryPoints.push("d");
+                newEntryPoints.push({value: ""});
                 console.log(JSON.stringify(newEntryPoints));
                 $scope.entryPoints = newEntryPoints;
             }
