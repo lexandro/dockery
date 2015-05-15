@@ -105,7 +105,6 @@ angular.module('createContainer', ['ngRoute'])
                     $scope.environmentVariables.splice(index, 1);
                 }
             }
-
             $scope.entryPointValidator = function () {
                 console.log('entryPointValidator start');
                 var entryPoints = $scope.entryPoints;
