@@ -21,6 +21,7 @@ angular.module('createContainer', ['ngRoute'])
             $scope.validation = {};
             $scope.environmentVariables = [{}];
             $scope.entryPoints = [{value: ""}];
+            $scope.workDir = "";
 
 
             //
@@ -63,11 +64,13 @@ angular.module('createContainer', ['ngRoute'])
                         entryPointStrings.push(entryPoint.value);
                     });
                     entryPointStrings.splice(entryPointStrings.length - 1, 1);
-
-                    console.log(JSON.stringify(entryPointStrings));
-
                     newContainerParameters.Entrypoint = entryPointStrings;
                 }
+
+                if (!isEmpty($scope.workDir)) {
+                    newContainerParameters.WorkingDir = $scope.workDir;
+                }
+
 
                 //
                 newContainerParameters.HostConfig = {};
