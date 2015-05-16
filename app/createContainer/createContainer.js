@@ -44,6 +44,8 @@ angular.module('createContainer', ['ngRoute'])
                 if (!isEmpty($scope.tty)) {
                     newContainerParameters.Tty = $scope.tty;
                 }
+
+                // converting env variables
                 if ($scope.environmentVariables.length > 1) {
                     var envs = [];
                     $scope.environmentVariables.forEach(function (envVar) {
@@ -54,13 +56,23 @@ angular.module('createContainer', ['ngRoute'])
                     newContainerParameters.Env = envs;
                 }
 
+                // generating entrypoint entry
+                if ($scope.entryPoints.length > 1) {
+                    var entryPointStrings = [];
+                    $scope.entryPoints.forEach(function (entryPoint) {
+                        entryPointStrings.push(entryPoint.value);
+                    });
+                    entryPointStrings.splice(entryPointStrings.length - 1, 1);
+
+                    console.log(JSON.stringify(entryPointStrings));
+
+                    newContainerParameters.Entrypoint = entryPointStrings;
+                }
+
                 //
                 newContainerParameters.HostConfig = {};
-                console.log($scope.privileged);
-                console.log(isEmpty($scope.privileged));
 
                 if ($scope.privileged == true) {
-                    console.log("benn");
                     newContainerParameters.HostConfig.Privileged = true;
                 }
                 console.log(JSON.stringify(newContainerParameters));
