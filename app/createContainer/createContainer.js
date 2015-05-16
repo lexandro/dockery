@@ -23,6 +23,7 @@ angular.module('createContainer', ['ngRoute'])
             $scope.entryPoints = [{value: ""}];
             $scope.workDir = "";
             $scope.publishAllPorts = false;
+            $scope.publishedPorts = [{port: "", protocol: 'tcp', port2: ""}];
 
             //
             $scope.createContainer = function () {
@@ -79,7 +80,6 @@ angular.module('createContainer', ['ngRoute'])
                 }
 
                 if ($scope.publishAllPorts) {
-                    console.log('PUBLISHALL')
                     newContainerParameters.HostConfig.PublishAllPorts = true;
                 }
                 console.log(JSON.stringify(newContainerParameters));
