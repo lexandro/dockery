@@ -22,9 +22,8 @@ angular.module('createContainer', ['ngRoute'])
             $scope.environmentVariables = [{}];
             $scope.entryPoints = [{value: ""}];
             $scope.workDir = "";
+            $scope.publishAllPorts = false;
 
-
-            //
             //
             $scope.createContainer = function () {
                 // TODO add name format check
@@ -77,6 +76,11 @@ angular.module('createContainer', ['ngRoute'])
 
                 if ($scope.privileged == true) {
                     newContainerParameters.HostConfig.Privileged = true;
+                }
+
+                if ($scope.publishAllPorts) {
+                    console.log('PUBLISHALL')
+                    newContainerParameters.HostConfig.PublishAllPorts = true;
                 }
                 console.log(JSON.stringify(newContainerParameters));
                 //
