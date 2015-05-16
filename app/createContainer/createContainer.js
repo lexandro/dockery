@@ -106,7 +106,6 @@ angular.module('createContainer', ['ngRoute'])
                 }
             }
             $scope.entryPointValidator = function () {
-                console.log('entryPointValidator start');
                 var entryPoints = $scope.entryPoints;
                 var newEntryPoints = [];
                 entryPoints.forEach(function (entryPoint) {
@@ -118,6 +117,13 @@ angular.module('createContainer', ['ngRoute'])
                 newEntryPoints.push({value: ""});
                 console.log(JSON.stringify(newEntryPoints));
                 $scope.entryPoints = newEntryPoints;
+            }
+
+            $scope.deleteEntryPointEntry = function (index) {
+                var arrayLength = $scope.entryPoints.length;
+                if (arrayLength > 1 && index < arrayLength - 1) {
+                    $scope.entryPoints.splice(index, 1);
+                }
             }
         }
         function isEmpty(obj) {

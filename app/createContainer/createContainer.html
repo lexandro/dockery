@@ -133,7 +133,7 @@
                         <div ng-repeat="entryPoint in entryPoints" class="form-group input-group">
                             <span class="input-group-btn">
                             <input type="text" class="form-control" ng-model="entryPoint.value"
-                                   placeholder="container name" ng-keyup="entryPointValidator()">
+                                   placeholder="entrypoint command" ng-keyup="entryPointValidator()">
 
                             <button ng-click="deleteEntryPointEntry($index)" title="Delete entrypoint" type="submit"
                                     class="btn btn-danger"
