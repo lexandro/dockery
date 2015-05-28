@@ -99,7 +99,6 @@ angular.module('containerDetails', ['ngRoute'])
                 );
             };
             //
-
             $scope.showLogs = function (containerId) {
                 $scope.containerLogsLoading = true;
                 $scope.containerLogsLoadingMessage = 'Loading log information';
@@ -142,7 +141,6 @@ angular.module('containerDetails', ['ngRoute'])
                         $scope.stdOutLog = data;
                     });
                 };
-
                 $scope.switchShowStdOutTimestamp = function () {
                     logSettings["stdOutTimestamp"] = !logSettings["stdOutTimestamp"];
                     $scope.refreshStdOutLogs();
