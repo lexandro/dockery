@@ -24,7 +24,6 @@ angular.module('createContainer', ['ngRoute'])
             $scope.workDir = "";
             $scope.publishAllPorts = false;
             $scope.publishedPorts = [{port: "", protocol: 'tcp', port2: ""}];
-
             //
             $scope.createContainer = function () {
                 // TODO add name format check
