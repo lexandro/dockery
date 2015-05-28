@@ -141,7 +141,6 @@ angular.module('containerDetails', ['ngRoute'])
                         $scope.stdOutLog = data;
                     });
                 };
-
                 $scope.switchShowStdOutTimestamp = function () {
                     logSettings["stdOutTimestamp"] = !logSettings["stdOutTimestamp"];
                     $scope.refreshStdOutLogs();
