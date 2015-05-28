@@ -30,8 +30,6 @@
                                   ng-show="!!imageNameForm.$error.required"></span>
                         </form>
                     </div>
-                    <br/>
-
                     <div class="col-md-3 vcenter text-right">
                         <strong>Name</strong>
                     </div>
@@ -85,8 +83,7 @@
                         <!--</div>-->
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" ng-model="privileged"> Give extended privileges to this
-                                container (--privileged)
+                                <input type="checkbox" ng-model="privileged"> Give extended privileges to this container (--privileged)
                             </label>
                         </div>
                     </div>
@@ -128,19 +125,29 @@
                                 </span>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-11">
                         <h4>Entrypoint
                             <small>(--entrypoint)</small>
                         </h4>
-                        <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
-                               placeholder="container name">
+                        <div ng-repeat="entryPoint in entryPoints" class="form-group input-group">
+                            <span class="input-group-btn">
+                            <input type="text" class="form-control" ng-model="entryPoint.value"
+                                   placeholder="entrypoint command" ng-keyup="entryPointValidator()">
+
+                            <button ng-click="deleteEntryPointEntry($index)" title="Delete entrypoint" type="submit"
+                                    class="btn btn-danger"
+                                    style="width: 40px; margin-right: 160px;margin-left: 3px;">
+                                <span class="fa fa-trash" style="font-size: large"></span>
+                            </button>
+                            </span>
+                        </div>
                     </div>
                     <div class="col-md-12">
                         <h4>Working directory
                             <small>(-w, --workdir)</small>
                         </h4>
-                        <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
-                               placeholder="container name">
+                        <input type="text" class="form-control" ng-model="workDir"
+                               placeholder="Specify a working directory">
                     </div>
 
                 </div>
@@ -155,57 +162,28 @@
                     <div class="col-md-12">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Publish all exposed ports to random ports (-P,
-                                --publish-all)
+                                <input type="checkbox" ng-model="publishAllPorts"> Publish all exposed ports as random assigned port (-P, --publish-all)
                             </label>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
-                               placeholder="container name">
-
-                    </div>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
-                               placeholder="container name">
-
-                    </div>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
-                               placeholder="container name">
-
-                    </div>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
-                               placeholder="container name">
-
-                    </div>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
-                               placeholder="container name">
-
-                    </div>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
+                    <div class="col-md-12">
+                        <h4>Publish ports
+                            <small>(--publish)</small>
+                        </h4>
+                        <input type="text" class="form-control" ng-model="newContainerName"
                                placeholder="container name">
 
                     </div>
                     <div class="col-md-12">
-                        <h4>Expose a port or a range of ports
+                        <h4>Expose ports
                             <small>(--expose)</small>
                         </h4>
-                        <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
+                        <input type="text" class="form-control" ng-model="newContainerName"
                                placeholder="container name">
-                        <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
-                               placeholder="container name">
-                        <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
-                               placeholder="container name">
-
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
     <div class="col-md-4">
         <div class="panel panel-danger">
@@ -219,17 +197,17 @@
                     </h4>
                 </div>
                 <div class="col-md-12">
-                    <h4>Entrypoint
+                    <h4>Entrypoints
                         <small>(--entrypoint)</small>
                     </h4>
-                    <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
+                    <input type="text" class="form-control" ng-model="newContainerName"
                            placeholder="container name">
                 </div>
                 <div class="col-md-12">
                     <h4>Working directory
                         <small>(-w, --workdir)</small>
                     </h4>
-                    <input type="text" class="form-control" id="newContainerName" ng-model="newContainerName"
+                    <input type="text" class="form-control" ng-model="newContainerName"
                            placeholder="container name">
                 </div>
 

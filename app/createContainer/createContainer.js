@@ -20,9 +20,11 @@ angular.module('createContainer', ['ngRoute'])
             $scope.privileged = false;
             $scope.validation = {};
             $scope.environmentVariables = [{}];
+            $scope.entryPoints = [{value: ""}];
+            $scope.workDir = "";
+            $scope.publishAllPorts = false;
+            $scope.publishedPorts = [{port: "", protocol: 'tcp', port2: ""}];
 
-
-            //
             //
             $scope.createContainer = function () {
                 // TODO add name format check
@@ -43,6 +45,8 @@ angular.module('createContainer', ['ngRoute'])
                 if (!isEmpty($scope.tty)) {
                     newContainerParameters.Tty = $scope.tty;
                 }
+
+                // converting env variables
                 if ($scope.environmentVariables.length > 1) {
                     var envs = [];
                     $scope.environmentVariables.forEach(function (envVar) {
@@ -53,14 +57,30 @@ angular.module('createContainer', ['ngRoute'])
                     newContainerParameters.Env = envs;
                 }
 
+                // generating entrypoint entry
+                if ($scope.entryPoints.length > 1) {
+                    var entryPointStrings = [];
+                    $scope.entryPoints.forEach(function (entryPoint) {
+                        entryPointStrings.push(entryPoint.value);
+                    });
+                    entryPointStrings.splice(entryPointStrings.length - 1, 1);
+                    newContainerParameters.Entrypoint = entryPointStrings;
+                }
+
+                if (!isEmpty($scope.workDir)) {
+                    newContainerParameters.WorkingDir = $scope.workDir;
+                }
+
+
                 //
                 newContainerParameters.HostConfig = {};
-                console.log($scope.privileged);
-                console.log(isEmpty($scope.privileged));
 
                 if ($scope.privileged == true) {
-                    console.log("benn");
                     newContainerParameters.HostConfig.Privileged = true;
+                }
+
+                if ($scope.publishAllPorts) {
+                    newContainerParameters.HostConfig.PublishAllPorts = true;
                 }
                 console.log(JSON.stringify(newContainerParameters));
                 //
@@ -102,6 +122,26 @@ angular.module('createContainer', ['ngRoute'])
                 var arrayLength = $scope.environmentVariables.length;
                 if (arrayLength > 1 && index < arrayLength - 1) {
                     $scope.environmentVariables.splice(index, 1);
+                }
+            }
+            $scope.entryPointValidator = function () {
+                var entryPoints = $scope.entryPoints;
+                var newEntryPoints = [];
+                entryPoints.forEach(function (entryPoint) {
+                    if (!isEmpty(entryPoint.value)) {
+                        newEntryPoints.push(entryPoint);
+                    }
+                });
+
+                newEntryPoints.push({value: ""});
+                console.log(JSON.stringify(newEntryPoints));
+                $scope.entryPoints = newEntryPoints;
+            }
+
+            $scope.deleteEntryPointEntry = function (index) {
+                var arrayLength = $scope.entryPoints.length;
+                if (arrayLength > 1 && index < arrayLength - 1) {
+                    $scope.entryPoints.splice(index, 1);
                 }
             }
         }
