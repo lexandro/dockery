@@ -28,8 +28,6 @@ angular.module('createContainer', ['ngRoute'])
             $scope.createContainer = function () {
                 // TODO add name format check
                 var validation = {};
-
-
                 var newContainerParameters = {};
                 if (!isEmpty($scope.imageName)) {
                     newContainerParameters.Image = $scope.imageName;
