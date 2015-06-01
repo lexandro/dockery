@@ -166,18 +166,24 @@
                             </label>
                         </div>
                     </div>
-                    <div class="col-md-11">
+                    <div class="col-md-12">
                         <h4>Expose ports
                             <small>(--expose)</small>
                         </h4>
-
-                        <div class="form-group input-group" ng-repeat="exposedPort in exposedPorts"
-                             ng-class="{'has-success':exposedPort.status=='valid','has-error':exposedPort.status=='invalid'}">
-                            <span class="input-group-btn">
+                    </div>
+                    <div class="form-group input-group" ng-repeat="exposedPort in exposedPorts"
+                         ng-class="{'has-success':exposedPort.status=='valid','has-error':exposedPort.status=='invalid'}">
+                        <div class="col-md-6">
                             <input type="text" class="form-control" ng-model="exposedPort.value"
                                    placeholder="1-65535"
                                    aria-describedby="exposedPortValidationStatus" ng-keyup="exposedPortValidator()">
-
+                        </div>
+                        <div class="col-md-4">
+                                <span class="input-group-btn">
+                                <select class="form-control" ng-model="exposedPort.type">
+                                    <option value="tcp">tcp</option>
+                                    <option value="udp">udp</option>
+                                </select>
                                 <button ng-click="deleteExposedPortEntry($index)" title="Delete entry" type="submit"
                                         class="btn btn-danger"
                                         style="width: 40px; margin-right: 160px;margin-left: 3px;">

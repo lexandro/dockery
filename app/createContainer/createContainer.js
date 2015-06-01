@@ -24,7 +24,7 @@ angular.module('createContainer', ['ngRoute'])
             $scope.workDir = "";
             $scope.publishAllPorts = false;
             $scope.publishedPorts = [{port: "", protocol: 'tcp', port2: ""}];
-            $scope.exposedPorts = [{value: "", type: "", status: ""}];
+            $scope.exposedPorts = [{value: "", type: "tcp", status: ""}];
             //
             $scope.createContainer = function () {
                 // TODO add name format check
@@ -167,7 +167,7 @@ angular.module('createContainer', ['ngRoute'])
                     return result;
                 }
             });
-            newExposedPorts.push({value: ""});
+            newExposedPorts.push({value: "", type: "tcp", status: ""});
             $scope.exposedPorts = newExposedPorts;
         };
 
