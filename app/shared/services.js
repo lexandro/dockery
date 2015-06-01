@@ -17,8 +17,8 @@ angular.module('services', [])
             newId: function () {
                 return Math.random().toString(36).substr(2, 9);
             },
-            isInteger: function (numberCandidate) {
-                return !isNaN(parseInt(numberCandidate)) && isFinite(numberCandidate);
+            isPositiveInteger: function (numberCandidate) {
+                return !isNaN(parseInt(numberCandidate)) && isFinite(numberCandidate) && parseInt(numberCandidate) >= 0;
             }
         }
     })

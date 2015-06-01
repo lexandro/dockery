@@ -68,11 +68,8 @@ angular.module('createContainer', ['ngRoute'])
                 if (!isEmpty($scope.workDir)) {
                     newContainerParameters.WorkingDir = $scope.workDir;
                 }
-
-
                 //
                 newContainerParameters.HostConfig = {};
-
                 if ($scope.privileged == true) {
                     newContainerParameters.HostConfig.Privileged = true;
                 }
@@ -80,6 +77,22 @@ angular.module('createContainer', ['ngRoute'])
                 if ($scope.publishAllPorts) {
                     newContainerParameters.HostConfig.PublishAllPorts = true;
                 }
+                //
+                if ($scope.exposedPorts.length > 1) {
+                    var exposedPortsData = $scope.exposedPorts;
+                    var newExposedPortsData = []
+                    var ExposedPorts = {};
+                    exposedPortsData.forEach(function (exposedPort) {
+                        if (!isEmpty(exposedPort.value)) {
+                            if (isPositiveInteger(exposedPort.value) && !isPortDuplicated(newExposedPortsData, exposedPort)) {
+                                newExposedPortsData.push(exposedPort);
+                                ExposedPorts[exposedPort.value + "/" + exposedPort.type] = {};
+                            }
+                        }
+                    });
+                    newContainerParameters.ExposedPorts = ExposedPorts;
+                }
+                //
                 console.log(JSON.stringify(newContainerParameters));
                 //
                 $scope.validation = validation;
@@ -132,7 +145,6 @@ angular.module('createContainer', ['ngRoute'])
                 });
 
                 newEntryPoints.push({value: ""});
-                console.log(JSON.stringify(newEntryPoints));
                 $scope.entryPoints = newEntryPoints;
             }
 
@@ -149,7 +161,7 @@ angular.module('createContainer', ['ngRoute'])
             var newExposedPorts = [];
             exposedPorts.forEach(function (port, index) {
                 if (!isEmpty(port.value)) {
-                    if (isInteger(port.value) && !duplicated(newExposedPorts, port)) {
+                    if (isPositiveInteger(port.value) && !isPortDuplicated(newExposedPorts, port)) {
                         port.status = "valid";
                     } else {
                         port.status = "invalid";
@@ -157,19 +169,21 @@ angular.module('createContainer', ['ngRoute'])
                     newExposedPorts.push(port);
                 }
 
-                function duplicated(newExposedPorts, port) {
-                    var result = false;
-                    newExposedPorts.forEach(function (newPort) {
-                        if (parseInt(newPort.value) == parseInt(port.value)) {
-                            result = true;
-                        }
-                    });
-                    return result;
-                }
+
             });
             newExposedPorts.push({value: "", type: "tcp", status: ""});
             $scope.exposedPorts = newExposedPorts;
         };
+
+        function isPortDuplicated(newExposedPorts, port) {
+            var result = false;
+            newExposedPorts.forEach(function (newPort) {
+                if (parseInt(newPort.value) == parseInt(port.value)) {
+                    result = true;
+                }
+            });
+            return result;
+        }
 
         $scope.deleteExposedPortEntry = function (index) {
             var arrayLength = $scope.exposedPorts.length;
@@ -182,8 +196,8 @@ angular.module('createContainer', ['ngRoute'])
             return Helpers.isEmpty(obj);
         }
 
-        function isInteger(obj) {
-            return Helpers.isInteger(obj);
+        function isPositiveInteger(obj) {
+            return Helpers.isPositiveInteger(obj);
         }
     }
     ])
