@@ -24,6 +24,7 @@ angular.module('createContainer', ['ngRoute'])
             $scope.workDir = "";
             $scope.publishAllPorts = false;
             $scope.publishedPorts = [{port: "", protocol: 'tcp', port2: ""}];
+            $scope.exposedPorts = [{value: "", type: "", status: ""}];
             //
             $scope.createContainer = function () {
                 // TODO add name format check
@@ -142,8 +143,47 @@ angular.module('createContainer', ['ngRoute'])
                 }
             }
         }
+
+        $scope.exposedPortValidator = function () {
+            var exposedPorts = $scope.exposedPorts;
+            var newExposedPorts = [];
+            exposedPorts.forEach(function (port, index) {
+                if (!isEmpty(port.value)) {
+                    if (isInteger(port.value) && !duplicated(newExposedPorts, port)) {
+                        port.status = "valid";
+                    } else {
+                        port.status = "invalid";
+                    }
+                    newExposedPorts.push(port);
+                }
+
+                function duplicated(newExposedPorts, port) {
+                    var result = false;
+                    newExposedPorts.forEach(function (newPort) {
+                        if (parseInt(newPort.value) == parseInt(port.value)) {
+                            result = true;
+                        }
+                    });
+                    return result;
+                }
+            });
+            newExposedPorts.push({value: ""});
+            $scope.exposedPorts = newExposedPorts;
+        };
+
+        $scope.deleteExposedPortEntry = function (index) {
+            var arrayLength = $scope.exposedPorts.length;
+            if (arrayLength > 1 && index < arrayLength - 1) {
+                $scope.exposedPorts.splice(index, 1);
+            }
+        };
+
         function isEmpty(obj) {
             return Helpers.isEmpty(obj);
+        }
+
+        function isInteger(obj) {
+            return Helpers.isInteger(obj);
         }
     }
     ])
