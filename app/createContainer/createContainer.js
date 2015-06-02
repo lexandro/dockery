@@ -176,6 +176,14 @@ angular.module('createContainer', ['ngRoute'])
             $scope.exposedPorts = newExposedPorts;
         };
 
+        $scope.portBindingValidator = function () {
+            console.log('portBindingValidator!!!');
+        };
+
+        $scope.deletePortBinding = function (index) {
+            console.log('deletePortBinding!!!');
+        };
+
         function isPortDuplicated(newExposedPorts, port) {
             var result = false;
             newExposedPorts.forEach(function (newPort) {
@@ -200,6 +208,5 @@ angular.module('createContainer', ['ngRoute'])
         function isPositiveInteger(obj) {
             return Helpers.isPositiveInteger(obj);
         }
-    }
-    ])
-;
+    }]
+);
