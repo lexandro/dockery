@@ -118,7 +118,7 @@
 
                                 <button ng-click="deleteEnvVarEntry($index)" title="Delete entry" type="submit"
                                         class="btn btn-danger"
-                                        style="width: 40px; margin-right: 160px;margin-left: 3px;">
+                                        style="width: 40px; margin-right: 0px;margin-left: 3px;">
                                     <span class="fa fa-trash" style="font-size: large"></span>
                                 </button>
                                 </span>
@@ -135,7 +135,7 @@
 
                             <button ng-click="deleteEntryPointEntry($index)" title="Delete entrypoint" type="submit"
                                     class="btn btn-danger"
-                                    style="width: 40px; margin-right: 160px;margin-left: 3px;">
+                                    style="width: 40px; margin-right: 0px;margin-left: 3px;">
                                 <span class="fa fa-trash" style="font-size: large"></span>
                             </button>
                             </span>
@@ -178,15 +178,15 @@
                                    placeholder="1-65535"
                                    aria-describedby="exposedPortValidationStatus" ng-keyup="exposedPortValidator()">
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6 input-group">
                                 <span class="input-group-btn">
-                                <select class="form-control" ng-model="exposedPort.type">
+                                <select class="form-control" ng-model="exposedPort.protocol">
                                     <option value="tcp">tcp</option>
                                     <option value="udp">udp</option>
                                 </select>
                                 <button ng-click="deleteExposedPortEntry($index)" title="Delete entry" type="submit"
                                         class="btn btn-danger"
-                                        style="width: 40px; margin-right: 160px;margin-left: 3px;">
+                                        style="width: 40px; margin-right: 180px;margin-left: 3px;">
                                     <span class="fa fa-trash" style="font-size: large"></span>
                                 </button>
                                 </span>
@@ -196,8 +196,47 @@
                         <h4>Publish exposed ports
                             <small>(--publish)</small>
                         </h4>
-                        <input type="text" class="form-control" ng-model="newContainerName"
-                               placeholder="container name">
+                    </div>
+                    <div class="col-md-6">
+                        <h5>
+                            Container
+                        </h5>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>
+                            Host
+                        </h5>
+                    </div>
+                    <div class="form-group input-group" ng-repeat="portBinding in portBindings"
+                         ng-class="{'has-success':portBinding.status=='valid','has-error':portBinding.status=='invalid'}">
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" ng-model="portBinding.port"
+                                   placeholder="1-65535"
+                                   aria-describedby="portBindingValidationStatus" ng-keyup="portBindingValidator()">
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control" ng-model="portBinding.protocol">
+                                <option value="tcp">tcp</option>
+                                <option value="udp">udp</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" ng-model="portBinding.hostIp"
+                                   placeholder="1-65535"
+                                   aria-describedby="portBindingValidationStatus" ng-keyup="portBindingValidator()">
+                        </div>
+                        <div class="col-md-2 input-group">
+                                <span class="input-group-btn">
+                                <input type="text" class="form-control" ng-model="portBinding.hostPort" maxlength="5" size="5"
+                                       placeholder="1-65535"
+                                       aria-describedby="portBindingValidationStatus" ng-keyup="portBindingValidator()">
+                                <button ng-click="deleteExposedPortEntry($index)" title="Delete entry" type="submit"
+                                        class="btn btn-danger"
+                                        style="width: 40px; margin-right: 58px;margin-left: 3px;">
+                                    <span class="fa fa-trash" style="font-size: large"></span>
+                                </button>
+                                </span>
+                        </div>
 
                     </div>
 

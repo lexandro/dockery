@@ -24,7 +24,8 @@ angular.module('createContainer', ['ngRoute'])
             $scope.workDir = "";
             $scope.publishAllPorts = false;
             $scope.publishedPorts = [{port: "", protocol: 'tcp', port2: ""}];
-            $scope.exposedPorts = [{value: "", type: "tcp", status: ""}];
+            $scope.exposedPorts = [{value: "", protocol: "tcp", status: ""}];
+            $scope.portBindings = [{port: "", protocol: "tcp", hostIp: "0.0.0.0", hostPort: "", status: ""}];
             //
             $scope.createContainer = function () {
                 // TODO add name format check
@@ -86,7 +87,7 @@ angular.module('createContainer', ['ngRoute'])
                         if (!isEmpty(exposedPort.value)) {
                             if (isPositiveInteger(exposedPort.value) && !isPortDuplicated(newExposedPortsData, exposedPort)) {
                                 newExposedPortsData.push(exposedPort);
-                                ExposedPorts[exposedPort.value + "/" + exposedPort.type] = {};
+                                ExposedPorts[exposedPort.value + "/" + exposedPort.protocol] = {};
                             }
                         }
                     });
@@ -171,7 +172,7 @@ angular.module('createContainer', ['ngRoute'])
 
 
             });
-            newExposedPorts.push({value: "", type: "tcp", status: ""});
+            newExposedPorts.push({value: "", protocol: "tcp", status: ""});
             $scope.exposedPorts = newExposedPorts;
         };
 
