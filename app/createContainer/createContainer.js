@@ -169,8 +169,6 @@ angular.module('createContainer', ['ngRoute'])
                     }
                     newExposedPorts.push(port);
                 }
-
-
             });
             newExposedPorts.push({value: "", protocol: "tcp", status: ""});
             $scope.exposedPorts = newExposedPorts;
