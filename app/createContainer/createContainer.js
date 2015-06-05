@@ -27,7 +27,7 @@ angular.module('createContainer', ['ngRoute'])
             $scope.exposedPorts = [{value: "", protocol: "tcp", status: ""}];
             $scope.portBindings = [{port: "", protocol: "tcp", hostIp: "0.0.0.0", hostPort: "", status: ""}];
             //
-            $scope.createContainer = function () {
+            $scope.createContainer = function (startFlag) {
                 // TODO add name format check
                 var validation = {};
                 var newContainerParameters = {};
@@ -102,14 +102,20 @@ angular.module('createContainer', ['ngRoute'])
 
                     function () {
                         console.log(JSON.stringify(createdContainer));
-                        Docker.containers().start({containerId: createdContainer.Id}, {});
+                        if (startFlag == true) {
+                            Docker.containers().start({containerId: createdContainer.Id}, {}, function () {
+                                $location.path('/containers');
+                            });
+                        } else {
+                            $location.path('/containers');
+                        }
                     }
                 )
             };
 
 
             $scope.createAndStartContainer = function () {
-                $scope.createContainer();
+                $scope.createContainer(true);
                 console.log('and start');
             };
             //
