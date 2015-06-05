@@ -9,31 +9,30 @@
             <span class="fa fa-play"></span> <strong>Create and start</strong>
         </button>
     </h1>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <h4 class="panel-title"><span class="fa fa-gears"></span> Basic settings</h4>
+    <div class="col-md-4">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="panel-title"><span class="fa fa-gears"></span> Basic settings</h4>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-3 vcenter text-right">
+                    <strong>Image</strong>
                 </div>
-                <div class="panel-body">
-                    <div class="col-md-3 vcenter text-right">
-                        <strong>Image</strong>
-                    </div>
-                    <div class="col-md-9 input-group has-feedback form-group"
-                         ng-class="{'has-error':!!imageNameForm.$error.required,'has-success':!imageNameForm.$error.required}">
-                        <form name="imageNameForm">
-                            <input type="text" class="form-control" ng-model="imageName" name="imageNameInput"
-                                   placeholder="Enter the image name" required ng-trim="true">
+                <div class="col-md-9 input-group has-feedback form-group"
+                     ng-class="{'has-error':!!imageNameForm.$error.required,'has-success':!imageNameForm.$error.required}">
+                    <form name="imageNameForm">
+                        <input type="text" class="form-control" ng-model="imageName" name="imageNameInput"
+                               placeholder="Enter the image name" required ng-trim="true">
                             <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"
                                   ng-show="!imageNameForm.$error.required"></span>
                             <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"
                                   ng-show="!!imageNameForm.$error.required"></span>
-                        </form>
-                    </div>
-                    <div class="col-md-3 vcenter text-right">
-                        <strong>Name</strong>
-                    </div>
-                    <div class="col-md-8 input-group">
+                    </form>
+                </div>
+                <div class="col-md-3 vcenter text-right">
+                    <strong>Name</strong>
+                </div>
+                <div class="col-md-8 input-group">
                         <span class="input-group-btn">
                             <input type="text" class="form-control" ng-model="newContainerName"
                                    placeholder="Enter or generate container name">
@@ -44,208 +43,29 @@
                                 <span class="fa fa-magic" style="font-size: large"></span>
                             </button>
                         </span>
-                    </div>
-                    <br/>
+                </div>
+                <br/>
 
-                    <div class="col-md-3 vcenter text-right">
-                        <strong>Command</strong>
-                    </div>
-                    <div class="col-md-9 input-group">
-                        <input type="text" class="form-control" ng-model="command"
-                               placeholder="Type your command if no entrypoint specified">
-                    </div>
-
-
-                    <div class="col-md-12">
-                        <!--Not existing in the remote api-->
-                        <!--<div class="checkbox">-->
-                        <!--<label>-->
-                        <!--<input type="checkbox" ng-model="rm"> remove after exit (&#45;&#45;rm)-->
-                        <!--</label>-->
-                        <!--</div>-->
-                        <!--<div class="checkbox">-->
-                        <!--<label>-->
-                        <!--<input type="checkbox" ng-model="detach"> detached mode (-d, &#45;&#45;detach)-->
-                        <!--</label>-->
-                        <!--</div>-->
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" ng-model="tty"> Allocate a pseudo-TTY (-t, --tty)
-                            </label>
-                        </div>
-                        <!--Not existing in the remote api-->
-                        <!--<div class="checkbox">-->
-                        <!--<label>-->
-                        <!--<input type="checkbox" ng-model="interactive"> Keep STDIN open even if not attached-->
-                        <!--(-i,-->
-                        <!--&#45;&#45;interactive=false)-->
-                        <!--</label>-->
-                        <!--</div>-->
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" ng-model="privileged"> Give extended privileges to this container
-                                (--privileged)
-                            </label>
-                        </div>
-                    </div>
+                <div class="col-md-3 vcenter text-right">
+                    <strong>Command</strong>
+                </div>
+                <div class="col-md-9 input-group">
+                    <input type="text" class="form-control" ng-model="command"
+                           placeholder="Type your command if no entrypoint specified">
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="tty"> Allocate a pseudo-TTY (-t, --tty)
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="privileged"> Give extended privileges to this container
+                        (--privileged)
+                    </label>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    <h4 class="panel-title"><span class="fa fa-tachometer"></span> Runtime settings</h4>
-                </div>
-                <div class="panel-body">
-                    <div class="col-md-12">
-                        <h4>Environment variables
-                            <small>(-e, --env)</small>
-                        </h4>
-                    </div>
-
-                    <div class="form-group" ng-repeat="envVar in environmentVariables">
-                        <div class="col-md-6"
-                             ng-class="{'has-success':!!envVar.name,'has-error':!envVar.name}">
-                            <input type="text" class="form-control" ng-model="envVar.name" placeholder="name"
-                                   aria-describedby="envNameValidationStatus"
-                                   ng-keyup="envVarValidator()">
-                        </div>
-                        <div class="col-md-5 input-group"
-                             ng-class="{'has-success':!!envVar.value,'has-error':!envVar.value}">
-                                <span class="input-group-btn">
-                                <input type="text" class="form-control" ng-model="envVar.value" placeholder="value"
-                                       ng-keyup="envVarValidator()">
-
-                                <button ng-click="deleteEnvVarEntry($index)" title="Delete entry" type="submit"
-                                        class="btn btn-danger"
-                                        style="width: 40px; margin-right: 0px;margin-left: 3px;">
-                                    <span class="fa fa-trash" style="font-size: large"></span>
-                                </button>
-                                </span>
-                        </div>
-                    </div>
-                    <div class="col-md-11">
-                        <h4>Entrypoint
-                            <small>(--entrypoint)</small>
-                        </h4>
-                        <div ng-repeat="entryPoint in entryPoints" class="form-group input-group">
-                            <span class="input-group-btn">
-                            <input type="text" class="form-control" ng-model="entryPoint.value"
-                                   placeholder="entrypoint command" ng-keyup="entryPointValidator()">
-
-                            <button ng-click="deleteEntryPointEntry($index)" title="Delete entrypoint" type="submit"
-                                    class="btn btn-danger"
-                                    style="width: 40px; margin-right: 0px;margin-left: 3px;">
-                                <span class="fa fa-trash" style="font-size: large"></span>
-                            </button>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <h4>Working directory
-                            <small>(-w, --workdir)</small>
-                        </h4>
-                        <input type="text" class="form-control" ng-model="workDir"
-                               placeholder="Specify a working directory">
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h4 class="panel-title"><span class="fa fa-sitemap"></span> Network</h4>
-                </div>
-                <div class="panel-body">
-                    <div class="col-md-12">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" ng-model="publishAllPorts"> Publish all exposed ports as random
-                                assigned port (-P, --publish-all)
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <h4>Expose ports
-                            <small>(--expose)</small>
-                        </h4>
-                    </div>
-                    <div class="form-group input-group" ng-repeat="exposedPort in exposedPorts"
-                         ng-class="{'has-success':exposedPort.status=='valid','has-error':exposedPort.status=='invalid'}">
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" ng-model="exposedPort.value"
-                                   placeholder="1-65535"
-                                   aria-describedby="exposedPortValidationStatus" ng-keyup="exposedPortValidator()">
-                        </div>
-                        <div class="col-md-6 input-group">
-                                <span class="input-group-btn">
-                                <select class="form-control" ng-model="exposedPort.protocol">
-                                    <option value="tcp">tcp</option>
-                                    <option value="udp">udp</option>
-                                </select>
-                                <button ng-click="deleteExposedPortEntry($index)" title="Delete entry" type="submit"
-                                        class="btn btn-danger"
-                                        style="width: 40px; margin-right: 180px;margin-left: 3px;">
-                                    <span class="fa fa-trash" style="font-size: large"></span>
-                                </button>
-                                </span>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <h4>Publish exposed ports
-                            <small>(--publish)</small>
-                        </h4>
-                    </div>
-                    <div class="col-md-6">
-                        <h5>
-                            Container
-                        </h5>
-                    </div>
-                    <div class="col-md-6">
-                        <h5>
-                            Host
-                        </h5>
-                    </div>
-                    <div class="form-group input-group" ng-repeat="portBinding in portBindings"
-                         ng-class="{'has-success':portBinding.status=='valid','has-error':portBinding.status=='invalid'}">
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" ng-model="portBinding.port"
-                                   placeholder="1-65535"
-                                   aria-describedby="portBindingValidationStatus" ng-keyup="portBindingValidator()">
-                        </div>
-                        <div class="col-md-3">
-                            <select class="form-control" ng-model="portBinding.protocol">
-                                <option value="tcp">tcp</option>
-                                <option value="udp">udp</option>
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" ng-model="portBinding.hostIp"
-                                   placeholder="1-65535"
-                                   aria-describedby="portBindingValidationStatus" ng-keyup="portBindingValidator()">
-                        </div>
-                        <div class="col-md-2 input-group">
-                                <span class="input-group-btn">
-                                <input type="text" class="form-control" ng-model="portBinding.hostPort" maxlength="5"
-                                       size="5"
-                                       placeholder="1-65535"
-                                       aria-describedby="portBindingValidationStatus" ng-keyup="portBindingValidator()">
-                                <button ng-click="deletePortBinding($index)" title="Delete entry" type="submit"
-                                        class="btn btn-danger"
-                                        style="width: 40px; margin-right: 57px;margin-left: 3px;">
-                                    <span class="fa fa-trash" style="font-size: large"></span>
-                                </button>
-                                </span>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
         <div class="panel panel-danger">
             <div class="panel-heading">
                 <h4 class="panel-title"><span class="fa fa-database"></span> Volumes</h4>
@@ -263,7 +83,7 @@
                             <strong>Path assignment</strong>
                         </td>
                         <td>
-                            <strong>Writeable?</strong>
+                            <strong>Writable?</strong>
                         </td>
                     </tr>
                     </thead>
@@ -313,7 +133,7 @@
                             <strong>Published path</strong>
                         </td>
                         <td>
-                            <strong>Writeable?</strong>
+                            <strong>Writable?</strong>
                         </td>
                     </tr>
                     </thead>
@@ -356,31 +176,31 @@
                 <h4>Share data volumes from other containers
                     <small>(--volumes-from)</small>
                 </h4>
-                <table class="table table-condensed table-hover table-striped table-bordered">
+                <table class="table table-condensed table-hover table-striped">
                     <thead>
-                    <tr class="success text-center">
+                    <tr class="text-center">
                         <td>
-                            Host container
+                            <strong>Host container</strong>
                         </td>
                         <td>
-                            Writeable?
+                            <strong>Writable?</strong>
                         </td>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="col-md-10">
+                    <tr ng-repeat="volumeFrom in volumesFrom">
+                        <td class="col-md-9">
                             <select ng-options="container.Id as container.Names[0] for container in containers"
-                                    ng-model="selected" class="form-control">></select>
+                                    ng-model="volumeFrom.containerId" class="form-control" ng-change="volumeFromValidator()"></select>
                         </td>
                         <td class="col-md-2">
                             <input
                                     bs-switch
-                                    ng-model="isSelected"
+                                    ng-model="volumeFrom.writable"
                                     type="radio"
                                     switch-active="true"
-                                    switch-on-text="Yes"
-                                    switch-off-text="No"
+                                    switch-on-text="Y"
+                                    switch-off-text="N"
                                     switch-on-color="success"
                                     switch-off-color="danger"
                                     switch-animate="true"
@@ -388,9 +208,169 @@
                                     switch-label-width="auto"
                                     switch-handle-width="auto">
                         </td>
+                        <td class="col-md-1">
+                             <span class="input-group-btn">
+                                <button ng-click="deleteVolumeFrom($index)" title="Delete entry" type="submit"
+                                        class="btn btn-danger"
+                                        style="width: 40px; margin-right: 0px;margin-left: 3px;">
+                                    <span class="fa fa-trash" style="font-size: large"></span>
+                                </button>
+                                </span>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4 class="panel-title"><span class="fa fa-tachometer"></span> Runtime settings</h4>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <h4>Environment variables
+                        <small>(-e, --env)</small>
+                    </h4>
+                </div>
+
+                <div class="form-group" ng-repeat="envVar in environmentVariables">
+                    <div class="col-md-6"
+                         ng-class="{'has-success':!!envVar.name,'has-error':!envVar.name}">
+                        <input type="text" class="form-control" ng-model="envVar.name" placeholder="name"
+                               aria-describedby="envNameValidationStatus"
+                               ng-keyup="envVarValidator()">
+                    </div>
+                    <div class="col-md-5 input-group"
+                         ng-class="{'has-success':!!envVar.value,'has-error':!envVar.value}">
+                                <span class="input-group-btn">
+                                <input type="text" class="form-control" ng-model="envVar.value" placeholder="value"
+                                       ng-keyup="envVarValidator()">
+
+                                <button ng-click="deleteEnvVarEntry($index)" title="Delete entry" type="submit"
+                                        class="btn btn-danger"
+                                        style="width: 40px; margin-right: 0px;margin-left: 3px;">
+                                    <span class="fa fa-trash" style="font-size: large"></span>
+                                </button>
+                                </span>
+                    </div>
+                </div>
+                <div class="col-md-11">
+                    <h4>Entrypoint
+                        <small>(--entrypoint)</small>
+                    </h4>
+                    <div ng-repeat="entryPoint in entryPoints" class="form-group input-group">
+                            <span class="input-group-btn">
+                            <input type="text" class="form-control" ng-model="entryPoint.value"
+                                   placeholder="entrypoint command" ng-keyup="entryPointValidator()">
+
+                            <button ng-click="deleteEntryPointEntry($index)" title="Delete entrypoint" type="submit"
+                                    class="btn btn-danger"
+                                    style="width: 40px; margin-right: 0px;margin-left: 3px;">
+                                <span class="fa fa-trash" style="font-size: large"></span>
+                            </button>
+                            </span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <h4>Working directory
+                        <small>(-w, --workdir)</small>
+                    </h4>
+                    <input type="text" class="form-control" ng-model="workDir"
+                           placeholder="Specify a working directory">
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h4 class="panel-title"><span class="fa fa-sitemap"></span> Network</h4>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="publishAllPorts"> Publish all exposed ports as random
+                            assigned port (-P, --publish-all)
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <h4>Expose ports
+                        <small>(--expose)</small>
+                    </h4>
+                </div>
+                <div class="form-group input-group" ng-repeat="exposedPort in exposedPorts"
+                     ng-class="{'has-success':exposedPort.status=='valid','has-error':exposedPort.status=='invalid'}">
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" ng-model="exposedPort.value"
+                               placeholder="1-65535"
+                               aria-describedby="exposedPortValidationStatus" ng-keyup="exposedPortValidator()">
+                    </div>
+                    <div class="col-md-6 input-group">
+                                <span class="input-group-btn">
+                                <select class="form-control" ng-model="exposedPort.protocol">
+                                    <option value="tcp">tcp</option>
+                                    <option value="udp">udp</option>
+                                </select>
+                                <button ng-click="deleteExposedPortEntry($index)" title="Delete entry" type="submit"
+                                        class="btn btn-danger"
+                                        style="width: 40px; margin-right: 180px;margin-left: 3px;">
+                                    <span class="fa fa-trash" style="font-size: large"></span>
+                                </button>
+                                </span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <h4>Publish exposed ports
+                        <small>(--publish)</small>
+                    </h4>
+                </div>
+                <div class="col-md-6">
+                    <h5>
+                        Container
+                    </h5>
+                </div>
+                <div class="col-md-6">
+                    <h5>
+                        Host
+                    </h5>
+                </div>
+                <div class="form-group input-group" ng-repeat="portBinding in portBindings"
+                     ng-class="{'has-success':portBinding.status=='valid','has-error':portBinding.status=='invalid'}">
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" ng-model="portBinding.port"
+                               placeholder="1-65535"
+                               aria-describedby="portBindingValidationStatus" ng-keyup="portBindingValidator()">
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-control" ng-model="portBinding.protocol">
+                            <option value="tcp">tcp</option>
+                            <option value="udp">udp</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" ng-model="portBinding.hostIp"
+                               placeholder="1-65535"
+                               aria-describedby="portBindingValidationStatus" ng-keyup="portBindingValidator()">
+                    </div>
+                    <div class="col-md-2 input-group">
+                                <span class="input-group-btn">
+                                <input type="text" class="form-control" ng-model="portBinding.hostPort" maxlength="5"
+                                       size="5"
+                                       placeholder="1-65535"
+                                       aria-describedby="portBindingValidationStatus" ng-keyup="portBindingValidator()">
+                                <button ng-click="deletePortBinding($index)" title="Delete entry" type="submit"
+                                        class="btn btn-danger"
+                                        style="width: 40px; margin-right: 57px;margin-left: 3px;">
+                                    <span class="fa fa-trash" style="font-size: large"></span>
+                                </button>
+                                </span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
