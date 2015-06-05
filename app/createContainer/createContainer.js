@@ -142,6 +142,7 @@ angular.module('createContainer', ['ngRoute'])
                     $scope.environmentVariables.splice(index, 1);
                 }
             }
+
             $scope.entryPointValidator = function () {
                 var entryPoints = $scope.entryPoints;
                 var newEntryPoints = [];
@@ -180,12 +181,36 @@ angular.module('createContainer', ['ngRoute'])
             $scope.exposedPorts = newExposedPorts;
         };
 
+        $scope.deleteExposedPortEntry = function (index) {
+            var arrayLength = $scope.exposedPorts.length;
+            if (arrayLength > 1 && index < arrayLength - 1) {
+                $scope.exposedPorts.splice(index, 1);
+            }
+        };
+
         $scope.portBindingValidator = function () {
-            console.log('portBindingValidator!!!');
+            var portBindings = $scope.portBindings;
+            var newBindings = [];
+            portBindings.forEach(function (portBinding, index) {
+                if (!isEmpty(portBinding.port) || !isEmpty(portBinding.hostPort)) {
+                    if (isPositiveInteger(portBinding.port) && !isBindingDuplicated(newBindings, portBinding) && isPositiveInteger(portBinding.hostPort)) {
+                        portBinding.status = "valid";
+                    } else {
+                        portBinding.status = "invalid";
+                    }
+                    newBindings.push(portBinding);
+                }
+            });
+            newBindings.push({port: "", protocol: "tcp", hostIp: "0.0.0.0", hostPort: "", status: ""});
+            $scope.portBindings = newBindings;
+
         };
 
         $scope.deletePortBinding = function (index) {
-            console.log('deletePortBinding!!!');
+            var arrayLength = $scope.portBindings.length;
+            if (arrayLength > 1 && index < arrayLength - 1) {
+                $scope.portBindings.splice(index, 1);
+            }
         };
 
         function isPortDuplicated(newExposedPorts, port) {
@@ -198,12 +223,18 @@ angular.module('createContainer', ['ngRoute'])
             return result;
         }
 
-        $scope.deleteExposedPortEntry = function (index) {
-            var arrayLength = $scope.exposedPorts.length;
-            if (arrayLength > 1 && index < arrayLength - 1) {
-                $scope.exposedPorts.splice(index, 1);
-            }
-        };
+        function isBindingDuplicated(newBindings, portBinding) {
+            var result = false;
+            newBindings.forEach(function (newPortBinding) {
+                if ((parseInt(newPortBinding.port) == parseInt(portBinding.port))
+                    ||
+                    (parseInt(newPortBinding.hostPort) == parseInt(portBinding.hostPort))) {
+                    result = true;
+                }
+            });
+            return result;
+        }
+
 
         function isEmpty(obj) {
             return Helpers.isEmpty(obj);
