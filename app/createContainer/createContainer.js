@@ -81,8 +81,8 @@ angular.module('createContainer', ['ngRoute'])
                 //
                 if ($scope.exposedPorts.length > 1) {
                     var exposedPortsData = $scope.exposedPorts;
-                    var newExposedPortsData = []
                     var ExposedPorts = {};
+                    var newExposedPortsData = [];
                     exposedPortsData.forEach(function (exposedPort) {
                         if (!isEmpty(exposedPort.value)) {
                             if (isPositiveInteger(exposedPort.value) && !isPortDuplicated(newExposedPortsData, exposedPort)) {
@@ -92,6 +92,23 @@ angular.module('createContainer', ['ngRoute'])
                         }
                     });
                     newContainerParameters.ExposedPorts = ExposedPorts;
+                }
+                //
+                if ($scope.portBindings.length > 1) {
+                    var portBindingsData = $scope.portBindings;
+                    var newBindings = [];
+                    var PortBindings = {};
+                    portBindingsData.forEach(function (portBinding) {
+
+                        if (!isEmpty(portBinding.port) || !isEmpty(portBinding.hostPort)) {
+                            if (isPositiveInteger(portBinding.port) && !isBindingDuplicated(newBindings, portBinding) && isPositiveInteger(portBinding.hostPort)) {
+                                PortBindings[portBinding.port + "/" + portBinding.protocol] =
+                                    [{hostIp: portBinding.hostIp, hostPort: portBinding.hostPort}];
+                                newBindings.push(portBinding);
+                            }
+                        }
+                    });
+                    newContainerParameters.HostConfig.PortBindings = PortBindings;
                 }
                 //
                 console.log(JSON.stringify(newContainerParameters));
