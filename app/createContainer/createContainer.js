@@ -28,6 +28,7 @@ angular.module('createContainer', ['ngRoute'])
             $scope.portBindings = [{port: "", protocol: "tcp", hostIp: "0.0.0.0", hostPort: "", status: ""}];
             $scope.hostVolumeBindings = [{value: "", writable: true, status: ""}];
             $scope.volumeBindings = [{value: "", writable: true, status: ""}];
+            $scope.volumesFrom = [{containerId: "", writable: true, status: ""}];
             // !!!!!!!!!!!!
             $scope.containerListing = true;
 
@@ -153,7 +154,7 @@ angular.module('createContainer', ['ngRoute'])
             $scope.envVarValidator = function () {
                 var envVars = $scope.environmentVariables;
                 var newEnvVars = [];
-                envVars.forEach(function (env, index) {
+                envVars.forEach(function (env) {
                     if (!isEmpty(env.name) || !isEmpty(env.value)) {
                         newEnvVars.push(env);
                     }
@@ -181,7 +182,7 @@ angular.module('createContainer', ['ngRoute'])
         $scope.exposedPortValidator = function () {
             var exposedPorts = $scope.exposedPorts;
             var newExposedPorts = [];
-            exposedPorts.forEach(function (port, index) {
+            exposedPorts.forEach(function (port) {
                 if (!isEmpty(port.value)) {
                     if (isPositiveInteger(port.value) && !isPortDuplicated(newExposedPorts, port)) {
                         port.status = "valid";
@@ -198,7 +199,7 @@ angular.module('createContainer', ['ngRoute'])
         $scope.portBindingValidator = function () {
             var portBindings = $scope.portBindings;
             var newBindings = [];
-            portBindings.forEach(function (portBinding, index) {
+            portBindings.forEach(function (portBinding) {
                 if (!isEmpty(portBinding.port) || !isEmpty(portBinding.hostPort)) {
                     if (isPositiveInteger(portBinding.port) && !isBindingDuplicated(newBindings, portBinding) && isPositiveInteger(portBinding.hostPort)) {
                         portBinding.status = "valid";
@@ -216,7 +217,7 @@ angular.module('createContainer', ['ngRoute'])
         $scope.hostVolumeBindingValidator = function () {
             var hostVolumeBindings = $scope.hostVolumeBindings;
             var newHostVolumeBindings = [];
-            hostVolumeBindings.forEach(function (hostVolumeBinding, index) {
+            hostVolumeBindings.forEach(function (hostVolumeBinding) {
                 if (!isEmpty(hostVolumeBinding.value)) {
                     newHostVolumeBindings.push(hostVolumeBinding);
                 }
@@ -226,15 +227,26 @@ angular.module('createContainer', ['ngRoute'])
         };
 
         $scope.volumeBindingValidator = function () {
-            var VolumeBindings = $scope.volumeBindings;
+            var volumeBindings = $scope.volumeBindings;
             var newVolumeBindings = [];
-            VolumeBindings.forEach(function (volumeBinding, index) {
+            volumeBindings.forEach(function (volumeBinding) {
                 if (!isEmpty(volumeBinding.value)) {
                     newVolumeBindings.push(volumeBinding);
                 }
             });
             newVolumeBindings.push({value: "", writable: true, status: ""});
             $scope.volumeBindings = newVolumeBindings;
+        };
+        $scope.volumeFromValidator = function () {
+            var volumesFrom = $scope.volumesFrom;
+            var newVolumesFrom = [];
+            volumesFrom.forEach(function (volumeFrom) {
+                if (!isEmpty(volumeFrom.containerId)) {
+                    newVolumesFrom.push(volumeFrom);
+                }
+            });
+            newVolumesFrom.push({containerId: "", writable: true, status: ""});
+            $scope.volumesFrom = newVolumesFrom;
         };
 
 
@@ -260,6 +272,15 @@ angular.module('createContainer', ['ngRoute'])
 
         $scope.deleteVolumeBinding = function (index) {
             $scope.deleteFromArray($scope.volumeBindings, index);
+        };
+
+        $scope.deleteVolumeFrom = function (index) {
+            if ($scope.volumesFrom.length == 1) {
+                $scope.volumesFrom[0].containerId = "";
+
+            } else {
+                $scope.deleteFromArray($scope.volumesFrom, index);
+            }
         };
 
         $scope.deleteFromArray = function (array, index) {
