@@ -26,29 +26,17 @@ angular.module('createContainer', ['ngRoute'])
             $scope.publishedPorts = [{port: "", protocol: 'tcp', port2: ""}];
             $scope.exposedPorts = [{value: "", protocol: "tcp", status: ""}];
             $scope.portBindings = [{port: "", protocol: "tcp", hostIp: "0.0.0.0", hostPort: "", status: ""}];
+            $scope.hostVolumeBindings = [{value: "", writable: true, status: ""}];
+            $scope.volumeBindings = [{value: "", writable: true, status: ""}];
+
+
             // TODO !!!!!!
-            $scope.isSelected = 'nope';
-            $scope.onText = 'Y';
-            $scope.offText = 'N';
-            $scope.isActive = true;
-            $scope.size = 'mini';
-            $scope.animate = true;
-            $scope.radioOff = true;
-            $scope.handleWidth = "auto";
-            $scope.labelWidth = "auto";
-            $scope.inverse = true;
+            $scope.isSelected = true;
 
             $scope.$watch('isSelected', function () {
-                console.log('Selection changed.');
+                console.log('Selection changed.' + $scope.isSelected);
             });
 
-            $scope.toggle = function () {
-                $scope.isSelected = $scope.isSelected === 'yep' ? 'nope' : 'yep';
-            };
-
-            $scope.toggleActivation = function () {
-                $scope.isActive = !$scope.isActive;
-            }
             //
             $scope.createContainer = function (startFlag) {
                 // TODO add name format check
@@ -176,13 +164,6 @@ angular.module('createContainer', ['ngRoute'])
 
             };
 
-            $scope.deleteEnvVarEntry = function (index) {
-                var arrayLength = $scope.environmentVariables.length;
-                if (arrayLength > 1 && index < arrayLength - 1) {
-                    $scope.environmentVariables.splice(index, 1);
-                }
-            }
-
             $scope.entryPointValidator = function () {
                 var entryPoints = $scope.entryPoints;
                 var newEntryPoints = [];
@@ -196,12 +177,6 @@ angular.module('createContainer', ['ngRoute'])
                 $scope.entryPoints = newEntryPoints;
             }
 
-            $scope.deleteEntryPointEntry = function (index) {
-                var arrayLength = $scope.entryPoints.length;
-                if (arrayLength > 1 && index < arrayLength - 1) {
-                    $scope.entryPoints.splice(index, 1);
-                }
-            }
         }
 
         $scope.exposedPortValidator = function () {
@@ -221,13 +196,6 @@ angular.module('createContainer', ['ngRoute'])
             $scope.exposedPorts = newExposedPorts;
         };
 
-        $scope.deleteExposedPortEntry = function (index) {
-            var arrayLength = $scope.exposedPorts.length;
-            if (arrayLength > 1 && index < arrayLength - 1) {
-                $scope.exposedPorts.splice(index, 1);
-            }
-        };
-
         $scope.portBindingValidator = function () {
             var portBindings = $scope.portBindings;
             var newBindings = [];
@@ -243,13 +211,62 @@ angular.module('createContainer', ['ngRoute'])
             });
             newBindings.push({port: "", protocol: "tcp", hostIp: "0.0.0.0", hostPort: "", status: ""});
             $scope.portBindings = newBindings;
+        };
 
+
+        $scope.hostVolumeBindingValidator = function () {
+            var hostVolumeBindings = $scope.hostVolumeBindings;
+            var newHostVolumeBindings = [];
+            hostVolumeBindings.forEach(function (hostVolumeBinding, index) {
+                if (!isEmpty(hostVolumeBinding.value)) {
+                    newHostVolumeBindings.push(hostVolumeBinding);
+                }
+            });
+            newHostVolumeBindings.push({value: "", writable: true, status: ""});
+            $scope.hostVolumeBindings = newHostVolumeBindings;
+        };
+
+        $scope.volumeBindingValidator = function () {
+            var VolumeBindings = $scope.volumeBindings;
+            var newVolumeBindings = [];
+            VolumeBindings.forEach(function (volumeBinding, index) {
+                if (!isEmpty(volumeBinding.value)) {
+                    newVolumeBindings.push(volumeBinding);
+                }
+            });
+            newVolumeBindings.push({value: "", writable: true, status: ""});
+            $scope.volumeBindings = newVolumeBindings;
+        };
+
+
+        $scope.deleteEnvVarEntry = function (index) {
+            $scope.deleteFromArray($scope.environmentVariables, index);
+        };
+
+        $scope.deleteEntryPointEntry = function (index) {
+            $scope.deleteFromArray($scope.entryPoints, index);
+        };
+
+        $scope.deleteExposedPortEntry = function (index) {
+            $scope.deleteFromArray($scope.exposedPorts, index);
         };
 
         $scope.deletePortBinding = function (index) {
-            var arrayLength = $scope.portBindings.length;
+            $scope.deleteFromArray($scope.portBindings, index);
+        };
+
+        $scope.deleteHostVolumeBinding = function (index) {
+            $scope.deleteFromArray($scope.hostVolumeBindings, index);
+        };
+
+        $scope.deleteVolumeBinding = function (index) {
+            $scope.deleteFromArray($scope.volumeBindings, index);
+        };
+
+        $scope.deleteFromArray = function (array, index) {
+            var arrayLength = array.length;
             if (arrayLength > 1 && index < arrayLength - 1) {
-                $scope.portBindings.splice(index, 1);
+                array.splice(index, 1);
             }
         };
 

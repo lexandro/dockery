@@ -251,53 +251,146 @@
                 <h4 class="panel-title"><span class="fa fa-database"></span> Volumes</h4>
             </div>
             <div class="panel-body">
-                <div class="col-md-12">
-                    <h4>Share data between host and container
-                        <small>(-v, --volume=[host_path:container_path])</small>
-                    </h4>
-                    <input type="text" class="form-control" ng-model="newContainerName"
-                           placeholder="/host path:/container path">
-                </div>
+                <h4>Share data between host and container
+                </h4>
+                <h4>
+                    <small>(-v, --volume=[host_path:container_path])</small>
+                </h4>
+                <table class="table table-condensed table-hover table-striped">
+                    <thead>
+                    <tr class="text-center">
+                        <td>
+                            <strong>Path assignment</strong>
+                        </td>
+                        <td>
+                            <strong>Writeable?</strong>
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="hostVolumeBinding in hostVolumeBindings">
+                        <td class="col-md-9">
+                            <input type="text" class="form-control" ng-model="hostVolumeBinding.value"
+                                   placeholder="/host path:/container path"
+                                   ng-keyup="hostVolumeBindingValidator()">
+                        </td>
+                        <td class="col-md-2">
+                            <input class="form-control"
+                                   bs-switch
+                                   ng-model="hostVolumeBinding.writable"
+                                   type="radio"
+                                   switch-active="true"
+                                   switch-on-text="Y"
+                                   switch-off-text="N"
+                                   switch-on-color="success"
+                                   switch-off-color="danger"
+                                   switch-animate="true"
+                                   switch-radio-off="true"
+                                   switch-label-width="auto"
+                                   switch-handle-width="auto">
+                        </td>
+                        <td class="col-md-1">
+                                  <span class="input-group-btn">
 
-                <div class="col-md-12">
-                    <h4>Publish data volumes to other containers
-                        <small>(-v, --volume=[container volume])</small>
-                    </h4>
-                    <input type="text" class="form-control" ng-model="newContainerName"
-                           placeholder="/path on container to share">
-                </div>
+                                <button ng-click="deleteHostVolumeBinding($index)" title="Delete entry" type="submit"
+                                        class="btn btn-danger"
+                                        style="width: 40px; margin-right: 0px;margin-left: 3px;">
+                                    <span class="fa fa-trash" style="font-size: large"></span>
+                                </button>
+                                </span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
-                <div class="col-md-12">
-                    <h4>Share data volume with other containers
-                        <small>(--volumes-from)</small>
-                    </h4>
-                    <input type="text" class="form-control" ng-model="newContainerName"
-                           placeholder="container name">
+                <h4>Publish data volumes to other containers
+                    <small>(-v, --volume=[container volume])</small>
+                </h4>
+                <table class="table table-condensed table-hover table-striped">
+                    <thead>
+                    <tr class="text-center">
+                        <td>
+                            <strong>Published path</strong>
+                        </td>
+                        <td>
+                            <strong>Writeable?</strong>
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="volumeBinding in volumeBindings">
+                        <td class="col-md-9">
+                            <input type="text" class="form-control" ng-model="volumeBinding.value"
+                                   placeholder="/path on container to share"
+                                   ng-keyup="volumeBindingValidator()">
+                        </td>
+                        <td class="col-md-2">
+                            <input class="form-control"
+                                   bs-switch
+                                   ng-model="volumeBinding.writable"
+                                   type="radio"
+                                   switch-active="true"
+                                   switch-on-text="Y"
+                                   switch-off-text="N"
+                                   switch-on-color="success"
+                                   switch-off-color="danger"
+                                   switch-animate="true"
+                                   switch-radio-off="true"
+                                   switch-label-width="auto"
+                                   switch-handle-width="auto">
+                        </td>
+                        <td class="col-md-1">
+                                  <span class="input-group-btn">
 
-                    <input
-                            bs-switch
-                            ng-model="isSelected"
-                            type="radio"
-                            switch-active="{{ isActive }}"
-                            switch-on-text="{{ onText }}"
-                            switch-off-text="{{ offText }}"
-                            switch-on-color="{{ onColor }}"
-                            switch-off-color="{{ offColor }}"
-                            switch-animate="{{ animate }}"
-                            switch-size="{{ size }}"
-                            switch-label="{{ label }}"
-                            switch-icon="{{ icon }}"
-                            switch-radio-off="{{ radioOff }}"
-                            switch-label-width="{{ labelWidth }}"
-                            switch-handle-width="{{ handleWidth }}"
-                            switch-wrapper="{{ wrapper }}"
-                            ng-value="'dos'"
-                            ng-true-value="'yep'"
-                            ng-false-value="'nope'"
-                            switch-inverse="{{ !inverse }}">
+                                <button ng-click="deleteVolumeBinding($index)" title="Delete entry" type="submit"
+                                        class="btn btn-danger"
+                                        style="width: 40px; margin-right: 0px;margin-left: 3px;">
+                                    <span class="fa fa-trash" style="font-size: large"></span>
+                                </button>
+                                </span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
-                    {{ isSelected }}
-                </div>
+                <h4>Share data volumes from other containers
+                    <small>(--volumes-from)</small>
+                </h4>
+                <table class="table table-condensed table-hover table-striped table-bordered">
+                    <thead>
+                    <tr class="success text-center">
+                        <td>
+                            Path in container
+                        </td>
+                        <td>
+                            Writeable?
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="col-md-10">
+                            <input type="text" class="form-control" ng-model="newContainerName"
+                                   placeholder="container name">
+                        </td>
+                        <td class="col-md-2">
+                            <input
+                                    bs-switch
+                                    ng-model="isSelected"
+                                    type="radio"
+                                    switch-active="true"
+                                    switch-on-text="Yes"
+                                    switch-off-text="No"
+                                    switch-on-color="success"
+                                    switch-off-color="danger"
+                                    switch-animate="true"
+                                    switch-radio-off="true"
+                                    switch-label-width="auto"
+                                    switch-handle-width="auto">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
