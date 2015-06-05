@@ -15,7 +15,8 @@ angular.module('dockermon', [
     'containerDetails',
     'createContainer',
     'images',
-    'imageDetails'
+    'imageDetails',
+    'frapontillo.bootstrap-switch'
 ])
     .directive('ngEnter', function () {
         return function (scope, element, attrs) {

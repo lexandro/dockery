@@ -26,6 +26,29 @@ angular.module('createContainer', ['ngRoute'])
             $scope.publishedPorts = [{port: "", protocol: 'tcp', port2: ""}];
             $scope.exposedPorts = [{value: "", protocol: "tcp", status: ""}];
             $scope.portBindings = [{port: "", protocol: "tcp", hostIp: "0.0.0.0", hostPort: "", status: ""}];
+            // TODO !!!!!!
+            $scope.isSelected = 'nope';
+            $scope.onText = 'Y';
+            $scope.offText = 'N';
+            $scope.isActive = true;
+            $scope.size = 'mini';
+            $scope.animate = true;
+            $scope.radioOff = true;
+            $scope.handleWidth = "auto";
+            $scope.labelWidth = "auto";
+            $scope.inverse = true;
+
+            $scope.$watch('isSelected', function () {
+                console.log('Selection changed.');
+            });
+
+            $scope.toggle = function () {
+                $scope.isSelected = $scope.isSelected === 'yep' ? 'nope' : 'yep';
+            };
+
+            $scope.toggleActivation = function () {
+                $scope.isActive = !$scope.isActive;
+            }
             //
             $scope.createContainer = function (startFlag) {
                 // TODO add name format check

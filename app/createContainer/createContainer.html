@@ -227,7 +227,8 @@
                         </div>
                         <div class="col-md-2 input-group">
                                 <span class="input-group-btn">
-                                <input type="text" class="form-control" ng-model="portBinding.hostPort" maxlength="5" size="5"
+                                <input type="text" class="form-control" ng-model="portBinding.hostPort" maxlength="5"
+                                       size="5"
                                        placeholder="1-65535"
                                        aria-describedby="portBindingValidationStatus" ng-keyup="portBindingValidator()">
                                 <button ng-click="deletePortBinding($index)" title="Delete entry" type="submit"
@@ -251,25 +252,52 @@
             </div>
             <div class="panel-body">
                 <div class="col-md-12">
-                    <h4>Environment variables
-                        <small>(-e, --env)</small>
-                    </h4>
-                </div>
-                <div class="col-md-12">
-                    <h4>Entrypoints
-                        <small>(--entrypoint)</small>
+                    <h4>Share data between host and container
+                        <small>(-v, --volume=[host_path:container_path])</small>
                     </h4>
                     <input type="text" class="form-control" ng-model="newContainerName"
-                           placeholder="container name">
-                </div>
-                <div class="col-md-12">
-                    <h4>Working directory
-                        <small>(-w, --workdir)</small>
-                    </h4>
-                    <input type="text" class="form-control" ng-model="newContainerName"
-                           placeholder="container name">
+                           placeholder="/host path:/container path">
                 </div>
 
+                <div class="col-md-12">
+                    <h4>Publish data volumes to other containers
+                        <small>(-v, --volume=[container volume])</small>
+                    </h4>
+                    <input type="text" class="form-control" ng-model="newContainerName"
+                           placeholder="/path on container to share">
+                </div>
+
+                <div class="col-md-12">
+                    <h4>Share data volume with other containers
+                        <small>(--volumes-from)</small>
+                    </h4>
+                    <input type="text" class="form-control" ng-model="newContainerName"
+                           placeholder="container name">
+
+                    <input
+                            bs-switch
+                            ng-model="isSelected"
+                            type="radio"
+                            switch-active="{{ isActive }}"
+                            switch-on-text="{{ onText }}"
+                            switch-off-text="{{ offText }}"
+                            switch-on-color="{{ onColor }}"
+                            switch-off-color="{{ offColor }}"
+                            switch-animate="{{ animate }}"
+                            switch-size="{{ size }}"
+                            switch-label="{{ label }}"
+                            switch-icon="{{ icon }}"
+                            switch-radio-off="{{ radioOff }}"
+                            switch-label-width="{{ labelWidth }}"
+                            switch-handle-width="{{ handleWidth }}"
+                            switch-wrapper="{{ wrapper }}"
+                            ng-value="'dos'"
+                            ng-true-value="'yep'"
+                            ng-false-value="'nope'"
+                            switch-inverse="{{ !inverse }}">
+
+                    {{ isSelected }}
+                </div>
             </div>
         </div>
     </div>
