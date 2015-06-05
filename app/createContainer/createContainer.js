@@ -28,15 +28,14 @@ angular.module('createContainer', ['ngRoute'])
             $scope.portBindings = [{port: "", protocol: "tcp", hostIp: "0.0.0.0", hostPort: "", status: ""}];
             $scope.hostVolumeBindings = [{value: "", writable: true, status: ""}];
             $scope.volumeBindings = [{value: "", writable: true, status: ""}];
+            // !!!!!!!!!!!!
+            $scope.containerListing = true;
 
-
-            // TODO !!!!!!
-            $scope.isSelected = true;
-
-            $scope.$watch('isSelected', function () {
-                console.log('Selection changed.' + $scope.isSelected);
+            //
+            var containers = Docker.containers().query({all: 1}, function () {
+                $scope.containerListing = false;
+                $scope.containers = containers;
             });
-
             //
             $scope.createContainer = function (startFlag) {
                 // TODO add name format check

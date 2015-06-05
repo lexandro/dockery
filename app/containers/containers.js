@@ -181,7 +181,7 @@ angular.module('containers', ['ngRoute'])
         function upsertContainerData(containerDataList, containerData) {
             var i = getContainerDataIndex(containerDataList, containerData.container.Id);
             if (i > -1) {
-                ontainerDataList[i] = containerData;
+                containerDataList[i] = containerData;
             } else {
                 containerDataList.push(containerData);
             }

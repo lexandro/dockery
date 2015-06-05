@@ -360,7 +360,7 @@
                     <thead>
                     <tr class="success text-center">
                         <td>
-                            Path in container
+                            Host container
                         </td>
                         <td>
                             Writeable?
@@ -370,8 +370,8 @@
                     <tbody>
                     <tr>
                         <td class="col-md-10">
-                            <input type="text" class="form-control" ng-model="newContainerName"
-                                   placeholder="container name">
+                            <select ng-options="container.Id as container.Names[0] for container in containers"
+                                    ng-model="selected" class="form-control">></select>
                         </td>
                         <td class="col-md-2">
                             <input
