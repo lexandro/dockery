@@ -157,6 +157,22 @@ angular.module('createContainer', ['ngRoute'])
                     newContainerParameters.Volumes = Volumes;
                 }
 
+                if ($scope.volumesFrom.length > 1) {
+                    var volumesFromData = $scope.volumesFrom;
+                    var newVolumesFrom = [];
+                    var VolumesFrom = [];
+                    volumesFromData.forEach(function (volumesFromEntry) {
+                        if (!isEmpty(volumesFromEntry.containerId) && !isHostVolumeBindingDuplicated(newVolumesFrom, volumesFromEntry)) {
+                            var volumesFromString = volumesFromEntry.containerId;
+                            if (volumesFromEntry["writable"] != true) {
+                                volumesFromString += ":ro";
+                            }
+                            VolumesFrom.push(volumesFromString)
+                            newVolumesFrom.push(volumesFromEntry);
+                        }
+                    });
+                    newContainerParameters.HostConfig.VolumesFrom = VolumesFrom;
+                }
                 //
                 console.log(JSON.stringify(newContainerParameters));
                 //
