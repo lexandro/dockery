@@ -26,6 +26,9 @@ angular.module('containers', ['ngRoute'])
             //
             $scope.switchSelected = function (containerData) {
                 containerData.selected = !containerData.selected;
+                if (!containerData.selected) {
+                    $scope.selectAllFlag = false;
+                }
             };
             $scope.switchSelectAllFlag = function () {
                 $scope.selectAllFlag = !$scope.selectAllFlag;
@@ -209,6 +212,7 @@ angular.module('containers', ['ngRoute'])
         function refreshContainers() {
             var containerDataList = [];
             var containerParam = {};
+            $scope.selectAllFlag = false;
             if ($scope.showAllContainersFlag == true) {
                 containerParam.all = 1;
             }
@@ -243,7 +247,6 @@ angular.module('containers', ['ngRoute'])
 
                 });
                 $scope.containerDataList = containerDataList;
-                setSelected($scope.selectAllFlag);
             });
             if ($scope.showContainerSizeFlag == true) {
                 containerParam = {};

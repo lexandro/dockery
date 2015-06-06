@@ -75,7 +75,7 @@ Here's the list of active, scheduled, planned and finished development goals
 
 0.2.1
 - Add: create container page - basic
-- Fix: use image ID in containerlist link, because the 'namespace/repo:tag' is forwarding to wrong place
+- Fix: use image ID in container list link, because the 'namespace/repo:tag' is forwarding to wrong place
 - Fix: select all in containers can't be change (it' all or nothing)
 
 ## Roadmap /by priority/
@@ -93,7 +93,7 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: filter by table header fields in images list
 
 0.2.5
-- Add: containerdetails/volumes-from (get volume from other containers)
+- Add: container details/volumes-from (get volume from other containers)
 - Add: privilege containers should show warning color in details or maybe in the lists too
 - Add: display privileged container on container details page
 - Add: mark privileged containers on container list page
@@ -167,6 +167,7 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add copyright when released or published (xterm.js, json-formatter)
 
 ## Far future, not decided yet
+- Better error handling for create container. Much better.
 - Presets for create container page
 - Make features docker host remote api version aware. Hide non-existing functions
 - Redesign layout from top menu to side menu

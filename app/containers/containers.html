@@ -111,7 +111,7 @@
         <tbody>
         <tr ng-repeat="containerData in containerDataList | orderBy: '[containerStatus]'" class="text-center">
             <td align="center">
-                 <span ng-class="{'glyphicon glyphicon-check':selectAllFlag||containerData.selected, 'glyphicon glyphicon-unchecked':!(selectAllFlag||containerData.selected)}"
+                 <span ng-class="{'glyphicon glyphicon-check':containerData.selected, 'glyphicon glyphicon-unchecked':!containerData.selected}"
                        ng-click="switchSelected(containerData)">
                 </span>
             </td>
@@ -169,7 +169,7 @@
                         ng-click="renameContainer(containerData)" title="Rename container"></button>
             </td>
             <td class="text-center">
-                <a ng-href="#/imageDetails/{{containerData.container.Image }}">
+                <a ng-href="#/imageDetails/{{containerData.containerDetails.Image }}">
                     {{containerData.container.Image | shorten:true:30}}</a>
             </td>
             <td class="text-left">{{containerData.container.Command | shorten:true:80}}</td>
