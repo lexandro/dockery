@@ -43,7 +43,7 @@ angular.module('createContainer', ['ngRoute'])
                 // TODO add name format check
                 var validation = {};
                 var newContainerParameters = {};
-                if (!isEmpty($scope.imageName) && Helpers.hasValidContainerName($scope.imageName)) {
+                if (!isEmpty($scope.imageName)) {
                     newContainerParameters.Image = $scope.imageName;
                 } else {
                     validation.imageNameRequired = true;
