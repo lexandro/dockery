@@ -29,6 +29,7 @@ angular.module('createContainer', ['ngRoute'])
             $scope.hostVolumeBindings = [{value: "", writable: true, status: ""}];
             $scope.volumeBindings = [{value: "", writable: true, status: ""}];
             $scope.volumesFrom = [{containerId: "", writable: true, status: ""}];
+            $scope.containerNameStatus = true;
             // !!!!!!!!!!!!
             $scope.containerListing = true;
 
@@ -42,7 +43,7 @@ angular.module('createContainer', ['ngRoute'])
                 // TODO add name format check
                 var validation = {};
                 var newContainerParameters = {};
-                if (!isEmpty($scope.imageName)) {
+                if (!isEmpty($scope.imageName) && Helpers.hasValidContainerName($scope.imageName)) {
                     newContainerParameters.Image = $scope.imageName;
                 } else {
                     validation.imageNameRequired = true;
@@ -230,6 +231,10 @@ angular.module('createContainer', ['ngRoute'])
             }
 
         }
+        $scope.validateContainerName = function () {
+            var containerName = $scope.newContainerName;
+            $scope.containerNameStatus = Helpers.hasValidContainerName(containerName) || isEmpty(containerName);
+        };
 
         $scope.exposedPortValidator = function () {
             var exposedPorts = $scope.exposedPorts;

@@ -32,10 +32,10 @@
                 <div class="col-md-3 vcenter text-right">
                     <strong>Name</strong>
                 </div>
-                <div class="col-md-8 input-group">
+                <div class="col-md-8 form-group input-group" ng-class="{'has-error':!containerNameStatus ,'has-success':containerNameStatus}">
                         <span class="input-group-btn">
                             <input type="text" class="form-control" ng-model="newContainerName"
-                                   placeholder="Enter or generate container name">
+                                   placeholder="Enter or generate container name" ng-keyup="validateContainerName()">
 
                             <button ng-click="generateContainerName()" title="Generate random name" type="submit"
                                     class="btn btn-info"
@@ -44,9 +44,8 @@
                             </button>
                         </span>
                 </div>
-                <br/>
 
-                <div class="col-md-3 vcenter text-right">
+                <div class="col-md-3 vcenter form-group text-right">
                     <strong>Command</strong>
                 </div>
                 <div class="col-md-9 input-group">

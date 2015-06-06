@@ -19,6 +19,11 @@ angular.module('services', [])
             },
             isPositiveInteger: function (numberCandidate) {
                 return !isNaN(parseInt(numberCandidate)) && isFinite(numberCandidate) && parseInt(numberCandidate) >= 0;
+            },
+            hasValidContainerName: function (containerName) {
+                var rx = new RegExp('^\/?[a-zA-Z0-9][a-zA-Z0-9_.-]+$');
+
+                return rx.test(containerName);
             }
         }
     })
@@ -108,6 +113,11 @@ angular.module('services', [])
                         url: $rootScope.hostUrl + '/images/:imageId/history',
                         isArray: true
 
+                    },
+                    remove: {
+                        url: $rootScope.hostUrl + '/images/:imageId',
+                        method: "DELETE",
+                        isArray: true
                     }
                 });
             },

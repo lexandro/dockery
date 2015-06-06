@@ -73,16 +73,11 @@ Here's the list of active, scheduled, planned and finished development goals
 
 ## Under development
 
-0.2.2
-- Add: image deletion to the image list view
-- Add: create container: name format check 
-
-## Roadmap /by priority/
-
-
 0.2.3
 - Add: sort by table header fields in containers list
 - Add: sort by table header fields in images list
+
+## Roadmap /by priority/
 
 0.2.4
 - Add: filter by table header fields in containers list
@@ -230,3 +225,7 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: create container page - basic
 - Fix: use image ID in container list link, because the 'namespace/repo:tag' is forwarding to wrong place
 - Fix: select all in containers can't be change (it' all or nothing)
+
+0.2.2
+- Add: image deletion to the image list view
+- Add: create container: name format check 
