@@ -17,6 +17,7 @@ angular.module('images', ['ngRoute'])
 
             $scope.showAllImagesFlag = false;
             $scope.showUntaggedImagesFlag = false;
+            $scope.selectAllImagesFlag = false;
             refreshImages();
 
 
@@ -38,13 +39,36 @@ angular.module('images', ['ngRoute'])
             };
         }
 
+
+        $scope.removeSelectedImages = function () {
+            $scope.images.forEach(function (image) {
+                if (image.selected) {
+                    Docker.images().remove({imageId: image.Id, force: 1}, {}, function () {
+                            refreshImages();
+                        }
+                    );
+                }
+            });
+        };
+
+        $scope.switchSelectAllImagesFlag = function () {
+            $scope.selectAllImagesFlag = !$scope.selectAllImagesFlag;
+            setSelectedImages($scope.selectAllImagesFlag);
+        };
+
+        $scope.switchSelectedImage = function (image) {
+            image.selected = !image.selected;
+        };
+
         function refreshImages() {
             $scope.imageListing = true;
+            $scope.selectAllImagesFlag = false;
             $scope.imageListingMessage = 'Loading image data';
             var images = Docker.images().query({showAllImagesFlag: $scope.showAllImagesFlag ? 1 : 0}, function () {
                     var result = [];
                     images.forEach(function (image) {
                         image.tagString = image.RepoTags.join(', ');
+                        image.selected = false;
                         if ($scope.showUntaggedImagesFlag == true) {
                             result.push(image);
                         } else if (image.RepoTags[0] != "<none>:<none>") {
@@ -55,6 +79,12 @@ angular.module('images', ['ngRoute'])
                     $scope.images = result;
                 }
             );
+        }
+
+        function setSelectedImages(selectedFlag) {
+            $scope.images.forEach(function (image) {
+                image.selected = selectedFlag;
+            });
         }
 
 

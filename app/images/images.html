@@ -1,7 +1,15 @@
 <div class="col-md-12 pull-right">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <h3>Images on: <strong>{{$root.hostUrl}}</strong></h3>
+        </div>
+        <div class="col-md-6">
+            <div class="pull-right " style=" vertical-align: middle;margin-top: 21px">
+                <button class="btn btn-danger btn-sm"
+                        ng-click="removeSelectedImages()">
+                    <span class="glyphicon glyphicon glyphicon-trash"></span><strong> remove</strong>
+                </button>
+            </div>
         </div>
     </div>
     <hr/>
@@ -9,9 +17,10 @@
         <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span> {{imageListingMessage}}</h3>
     </div>
     <table class="table table-condensed table-hover table-striped table-bordered">
+        <thead>
         <tr class="success">
             <td colspan="5">
-                <div class="col-md-4">
+                <div class="col-md-4 vcenter">
                     <button type="button" ng-click="refreshImages()" class="btn btn-primary btn-sm"><span
                             class="glyphicon glyphicon-refresh"></span><strong> Refresh</strong>
                     </button>
@@ -29,13 +38,27 @@
                 </div>
             </td>
         </tr>
+        </thead>
+        <tbody>
         <tr>
+            <td width="1%" class="text-center">
+                    <span ng-class="{'glyphicon glyphicon-check':selectAllImagesFlag, 'glyphicon glyphicon-unchecked':!selectAllImagesFlag}"
+                          class="vcenter"
+                          ng-click="switchSelectAllImagesFlag()">
+                </span>
+            </td>
             <td width="1%" class="text-center"><strong>Image ID</strong></td>
-            <td width="20%" class="text-center"><strong>Repository tags</strong></td>
+            <td width="30%" class="text-center"><strong>Repository tags</strong></td>
             <td width="7%" class="text-center"><strong>Size (Virtual size)</strong></td>
             <td width="5%" class="text-center"><strong>Created</strong></td>
         </tr>
         <tr ng-repeat="image in images | orderBy:RepoTags[0]">
+            <td class="text-center">
+                 <span ng-class="{'glyphicon glyphicon-check':image.selected, 'glyphicon glyphicon-unchecked':!image.selected}"
+                       class="vcenter"
+                       ng-click="switchSelectedImage(image)">
+                </span>
+            </td>
             <td class="text-center">
                 <button class="btn btn-info btn-block btn-sm" ng-click="goImageDetails(image.Id)">
                     <strong>{{image.Id | limitTo:12}}</strong>
@@ -45,8 +68,9 @@
                 <!--<p ng-repeat="tag in image.RepoTags | orderBy: tag">{{tag}}</p>-->
                 {{image.tagString}}
             </td>
-            <td class="text-left">{{image.Size | bytes:2}} ({{image.VirtualSize| bytes:2}})</td>
-            <td class="text-left">{{image.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
+            <td class="text-center">{{image.Size | bytes:2}} ({{image.VirtualSize| bytes:2}})</td>
+            <td class="text-center">{{image.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
         </tr>
+        </tbody>
     </table>
 </div>
