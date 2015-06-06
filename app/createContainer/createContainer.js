@@ -122,6 +122,24 @@ angular.module('createContainer', ['ngRoute'])
                     newContainerParameters.HostConfig.PortBindings = PortBindings;
                 }
                 //
+                newContainerParameters.HostConfig.Binds = [];
+                if ($scope.hostVolumeBindings.length > 1) {
+                    var hostVolumeBindingsData = $scope.hostVolumeBindings;
+                    var newHostVolumeBindingsData = [];
+                    var Binds = [];
+                    hostVolumeBindingsData.forEach(function (hostVolumeBinding) {
+                        if (!isEmpty(hostVolumeBinding.value) && !isHostVolumeBindingDuplicated(newHostVolumeBindingsData, hostVolumeBinding)) {
+                            var hostVolumeBindingString = hostVolumeBinding.value;
+                            if (hostVolumeBinding["writable"] == true) {
+                                hostVolumeBindingString += ":ro";
+                            }
+                            Binds.push(hostVolumeBindingString);
+                            newHostVolumeBindingsData.push(hostVolumeBinding);
+                        }
+                    });
+                    newContainerParameters.HostConfig.Binds = Binds;
+                }
+                //
                 console.log(JSON.stringify(newContainerParameters));
                 //
                 $scope.validation = validation;
@@ -306,6 +324,16 @@ angular.module('createContainer', ['ngRoute'])
                 if ((parseInt(newPortBinding.port) == parseInt(portBinding.port))
                     ||
                     (parseInt(newPortBinding.hostPort) == parseInt(portBinding.hostPort))) {
+                    result = true;
+                }
+            });
+            return result;
+        }
+
+        function isHostVolumeBindingDuplicated(newHostVolumeBindingsData, hostVolumeBinding) {
+            var result = false;
+            newHostVolumeBindingsData.forEach(function (newHostVolumeBinding) {
+                if (newHostVolumeBinding.value == hostVolumeBinding.value) {
                     result = true;
                 }
             });
