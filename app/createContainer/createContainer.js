@@ -130,7 +130,7 @@ angular.module('createContainer', ['ngRoute'])
                     hostVolumeBindingsData.forEach(function (hostVolumeBinding) {
                         if (!isEmpty(hostVolumeBinding.value) && !isHostVolumeBindingDuplicated(newHostVolumeBindingsData, hostVolumeBinding)) {
                             var hostVolumeBindingString = hostVolumeBinding.value;
-                            if (hostVolumeBinding["writable"] == true) {
+                            if (hostVolumeBinding["writable"] != true) {
                                 hostVolumeBindingString += ":ro";
                             }
                             Binds.push(hostVolumeBindingString);
@@ -139,6 +139,24 @@ angular.module('createContainer', ['ngRoute'])
                     });
                     newContainerParameters.HostConfig.Binds = Binds;
                 }
+
+                if ($scope.volumeBindings.length > 1) {
+                    var volumeBindingsData = $scope.volumeBindings;
+                    var newVolumeBindingsData = [];
+                    var Volumes = {};
+                    volumeBindingsData.forEach(function (volumeBinding) {
+                        if (!isEmpty(volumeBinding.value) && !isHostVolumeBindingDuplicated(newVolumeBindingsData, volumeBinding)) {
+                            var volumeBindingString = volumeBinding.value;
+                            if (volumeBinding["writable"] != true) {
+                                volumeBindingString += ":ro";
+                            }
+                            Volumes[volumeBindingString] = {};
+                            newVolumeBindingsData.push(volumeBinding);
+                        }
+                    });
+                    newContainerParameters.Volumes = Volumes;
+                }
+
                 //
                 console.log(JSON.stringify(newContainerParameters));
                 //
