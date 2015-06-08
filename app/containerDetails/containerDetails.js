@@ -165,7 +165,6 @@ angular.module('containerDetails', ['ngRoute'])
                     logSettings["stdErrTimestamp"] = !logSettings["stdErrTimestamp"];
                     $scope.refreshStdErrLogs();
                 };
-
                 $scope.switchStdErrTailAll = function () {
                     logSettings["stdErrTailAll"] = !logSettings["stdErrTailAll"];
                     $scope.refreshStdErrLogs();
