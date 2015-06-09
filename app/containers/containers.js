@@ -236,7 +236,6 @@ angular.module('containers', ['ngRoute'])
                         } else {
                             containerStatus = 'stopped';
                         }
-
                     }
                     containerData.containerStatus = containerStatus;
                     upsertContainerData(containerDataList, containerData);
