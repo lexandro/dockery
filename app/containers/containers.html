@@ -81,35 +81,39 @@
             <td width="12%" class="text-center">
                 <div class="vcenter"><strong>Control</strong></div>
             </td>
-            <td width="5%" class="text-center vcenter">
-                <div class="vcenter"><strong>Status</strong></div>
+            <td width="5%" class="text-center vcenter" ng-click="changeSorting('Status')">
+                <div class="vcenter">
+                    <strong>Status </strong>
+                    <span class='fa'
+                          ng-class="{'fa-sort':sort.column!='Status','fa-sort-desc':sort.column=='Status' && sort.descending,'fa-sort-asc':sort.column=='Status' && sort.descending!=true}"></span>
+                </div>
             </td>
-            <td width="5%" class="text-center">
+            <td width="5%" class="text-center" ng-click="changeSorting('Id')">
                 <div class="vcenter"><strong>ID</strong></div>
             </td>
-            <td width="5%" class="text-center vcenter">
+            <td width="5%" class="text-center vcenter" ng-click="changeSorting('ContainerName')">
                 <div class="vcenter"><strong>Name</strong></div>
             </td>
             <td width="3%" class="text-center vcenter">
                 <div class="vcenter"><strong>Edit</strong></div>
             </td>
-            <td width="15%" class="text-center vcenter">
+            <td width="15%" class="text-center vcenter" ng-click="changeSorting('ImageName')">
                 <div class="vcenter"><strong>Image</strong></div>
             </td>
-            <td width="35%" class="text-center vcenter">
+            <td width="35%" class="text-center vcenter" ng-click="changeSorting('Command')">
                 <div class="vcenter"><strong>Command</strong></div>
             </td>
 
-            <td width="8%" class="text-center vcenter">
+            <td width="8%" class="text-center vcenter" ng-click="changeSorting('Size')">
                 <div class="vcenter"><strong>Diff / Virt. size</strong></div>
             </td>
-            <td width="11%" class="text-center vcenter">
+            <td width="11%" class="text-center vcenter" ng-click="changeSorting('Created')">
                 <div class="vcenter"><strong>Created</strong></div>
             </td>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="containerData in containerDataList | orderBy: '[containerStatus]'" class="text-center">
+        <tr ng-repeat="containerData in containerDataList|orderBy:sort.column:sort.descending" class="text-center">
             <td align="center">
                  <span ng-class="{'glyphicon glyphicon-check':containerData.selected, 'glyphicon glyphicon-unchecked':!containerData.selected}"
                        ng-click="switchSelected(containerData)">
@@ -117,36 +121,36 @@
             </td>
             <td align="left">
                 <button class="btn btn-success btn-sm"
-                        ng-show="['created', 'stopped'].indexOf(containerData.containerStatus)>-1"
+                        ng-show="['created', 'stopped'].indexOf(containerData.Status)>-1"
                         ng-click="startContainer(containerData.container.Id)">
                     <span class="glyphicon glyphicon glyphicon-play"></span><strong> start</strong>
                 </button>
-                <button class="btn btn-warning btn-sm" ng-show="['running'].indexOf(containerData.containerStatus)>-1"
+                <button class="btn btn-warning btn-sm" ng-show="['running'].indexOf(containerData.Status)>-1"
                         ng-click="pauseContainer(containerData.container.Id)">
                     <span class="glyphicon glyphicon glyphicon-pause"></span><strong> pause</strong>
                 </button>
-                <button class="btn btn-info btn-sm" ng-show="['paused'].indexOf(containerData.containerStatus)>-1"
+                <button class="btn btn-info btn-sm" ng-show="['paused'].indexOf(containerData.Status)>-1"
                         ng-click="unpauseContainer(containerData.container.Id)">
                     <span class="glyphicon glyphicon glyphicon-pause"></span><strong> unpause</strong>
                 </button>
-                <button class="btn btn-danger btn-sm" ng-show="['running'].indexOf(containerData.containerStatus)>-1"
+                <button class="btn btn-danger btn-sm" ng-show="['running'].indexOf(containerData.Status)>-1"
                         ng-click="stopContainer(containerData.container.Id)">
                     <span class="glyphicon glyphicon glyphicon-stop"></span><strong> stop</strong>
                 </button>
                 <button class="btn btn-danger btn-sm"
-                        ng-show="['created', 'stopped'].indexOf(containerData.containerStatus)>-1"
+                        ng-show="['created', 'stopped'].indexOf(containerData.Status)>-1"
                         ng-click="removeContainer(containerData.container.Id)">
                     <span class="glyphicon glyphicon glyphicon-trash"></span><strong> remove</strong>
                 </button>
             </td>
             <td>
                 <p class="label" style="font-size:0.9em;"
-                   ng-class="{'label-success': containerData.containerStatus=='running', 'label-warning': containerData.containerStatus=='paused', 'label-danger': containerData.containerStatus=='stopped','label-info': containerData.containerStatus=='created'}">
-                    {{containerData.containerStatus}}</p>
+                   ng-class="{'label-success': containerData.Status=='running', 'label-warning': containerData.Status=='paused', 'label-danger': containerData.Status=='stopped','label-info': containerData.Status=='created'}">
+                    {{containerData.Status}}</p>
             </td>
             <td>
-                <a ng-href="#/containerDetails/{{containerData.container.Id }}">
-                    {{containerData.container.Id | limitTo:12}}</a>
+                <a ng-href="#/containerDetails/{{containerData.Id }}">
+                    {{containerData.Id | limitTo:12}}</a>
             </td>
             <td class="text-right">
                 <input ng-model="containerData.newName"
@@ -157,9 +161,8 @@
                 <div ng-show="!containerData.renameContainerEnabled">
                     <strong>
                         <a ng-href="#/containerDetails/{{containerData.container.Id }}">
-                            {{containerData.containerDetails.Name.charAt(0) === '/' ?
-                            containerData.containerDetails.Name.substr(1) : containerData.containerDetails.Name |
-                            shorten:true:30}}</a>
+                            {{containerData.ContainerName.charAt(0) === '/' ?
+                            containerData.ContainerName.substr(1) : containerData.ContainerName | shorten:true:30}}</a>
                     </strong>
                 </div>
             </td>
@@ -169,14 +172,14 @@
                         ng-click="renameContainer(containerData)" title="Rename container"></button>
             </td>
             <td class="text-center">
-                <a ng-href="#/imageDetails/{{containerData.containerDetails.Image }}">
-                    {{containerData.container.Image | shorten:true:30}}</a>
+                <a ng-href="#/imageDetails/{{containerData.ImageName}}">
+                    {{containerData.ImageName | shorten:true:30}}</a>
             </td>
-            <td class="text-left">{{containerData.container.Command | shorten:true:80}}</td>
+            <td class="text-left">{{containerData.Command | shorten:true:80}}</td>
             <td class="text-left">{{showContainerSizeFlag==true?containerData.container.SizeRw:NAN | bytes:2 }}
                 ({{showContainerSizeFlag==true?containerData.container.SizeRootFs:NAN | bytes:2 }})
             </td>
-            <td class="text-left">{{containerData.container.Created * 1000 | date:'dd, MMM yyyy HH:mm:ss'}}</td>
+            <td class="text-left">{{containerData.Created * 1000 | date:'dd, MMM yyyy HH:mm:ss'}}</td>
         </tr>
         </tbody>
     </table>

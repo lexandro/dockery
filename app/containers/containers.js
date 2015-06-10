@@ -14,7 +14,10 @@ angular.module('containers', ['ngRoute'])
             $scope.showAllContainersFlag = false;
             $scope.showContainerSizeFlag = false;
             $scope.selectAllFlag = false;
-
+            var sort = {};
+            sort.column = 'Id'
+            sort.descending = true;
+            $scope.sort = sort;
 
             refreshContainers();
 
@@ -174,6 +177,19 @@ angular.module('containers', ['ngRoute'])
                     containerData.renameContainerEnabled = false;
                 }
             };
+
+            $scope.changeSorting = function (column) {
+                var sort = $scope.sort;
+                if (sort.column === column) {
+                    sort.descending = !sort.descending;
+                } else {
+                    sort.column = column;
+                    sort.descending = false;
+
+                }
+                $scope.sort = sort;
+                console.log(JSON.stringify(sort));
+            };
         }
 
         function getContainerData(containerDataList, containerId) {
@@ -222,7 +238,7 @@ angular.module('containers', ['ngRoute'])
                     var containerData = {};
                     containerData.container = container;
                     containerData.renameContainerEnabled = false;
-
+                    //
                     var containerStatus = '';
                     if (container.Status.indexOf('Up') == 0 || container.Status.indexOf('Restarting') == 0 || container.Status.indexOf('Removal') == 0) {
                         if (container.Status.indexOf('Paused') > -1 || container.Status.indexOf('Removal') == 0) {
@@ -237,11 +253,18 @@ angular.module('containers', ['ngRoute'])
                             containerStatus = 'stopped';
                         }
                     }
-                    containerData.containerStatus = containerStatus;
+                    containerData.Status = containerStatus;
+                    containerData.Id = container.Id;
+                    containerData.ImageName = container.Image;
+                    containerData.Command = container.Command;
+                    containerData.Diff = container.SizeRw;
+                    containerData.Created = container.Created;
                     upsertContainerData(containerDataList, containerData);
                     var containerDetails = Docker.containers().get({containerId: container.Id}, function () {
                         $scope.containerDetails = containerDetails;
                         containerData.containerDetails = containerDetails;
+                        //
+                        containerData.ContainerName = containerDetails.Name;
                     });
 
                 });

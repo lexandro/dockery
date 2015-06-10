@@ -158,6 +158,7 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add copyright when released or published (xterm.js, json-formatter)
 
 ## Far future, not decided yet
+- Customize fields in lists (show,noshow)
 - Better error handling for create container. Much better.
 - Presets for create container page
 - Make features docker host remote api version aware. Hide non-existing functions
