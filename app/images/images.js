@@ -73,20 +73,19 @@ angular.module('images', ['ngRoute'])
             $scope.selectAllImagesFlag = false;
             $scope.imageListingMessage = 'Loading image data';
             var images = Docker.images().query({showAllImagesFlag: $scope.showAllImagesFlag ? 1 : 0}, function () {
-                    var result = [];
-                    images.forEach(function (image) {
-                        image.tagString = image.RepoTags.join(', ');
-                        image.selected = false;
-                        if ($scope.showUntaggedImagesFlag == true) {
-                            result.push(image);
-                        } else if (image.RepoTags[0] != "<none>:<none>") {
-                            result.push(image);
-                        }
-                    });
-                    $scope.imageListing = false;
-                    $scope.images = result;
-                }
-            );
+                var result = [];
+                images.forEach(function (image) {
+                    image.tagString = image.RepoTags.join(', ');
+                    image.selected = false;
+                    if ($scope.showUntaggedImagesFlag == true) {
+                        result.push(image);
+                    } else if (image.RepoTags[0] != "<none>:<none>") {
+                        result.push(image);
+                    }
+                });
+                $scope.imageListing = false;
+                $scope.images = result;
+            });
         }
 
         function setSelectedImages(selectedFlag) {
@@ -94,7 +93,4 @@ angular.module('images', ['ngRoute'])
                 image.selected = selectedFlag;
             });
         }
-
-
-    }])
-;
+    }]);

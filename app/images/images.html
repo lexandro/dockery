@@ -19,7 +19,7 @@
     <table class="table table-condensed table-hover table-striped table-bordered">
         <thead>
         <tr class="success">
-            <td colspan="5">
+            <td colspan="6">
                 <div class="col-md-4 vcenter">
                     <button type="button" ng-click="refreshImages()" class="btn btn-primary btn-sm"><span
                             class="glyphicon glyphicon-refresh"></span><strong> Refresh</strong>
@@ -47,12 +47,39 @@
                           ng-click="switchSelectAllImagesFlag()">
                 </span>
             </td>
-            <td width="1%" class="text-center"><strong>Image ID</strong></td>
-            <td width="30%" class="text-center"><strong>Repository tags</strong></td>
-            <td width="7%" class="text-center"><strong>Size (Virtual size)</strong></td>
-            <td width="5%" class="text-center"><strong>Created</strong></td>
+            <td width="1%" class="text-center" ng-click="changeSorting('Id')">
+                <strong>Image ID</strong>
+                    <span class='fa'
+                          ng-class="{'fa-sort-amount-desc ':sort.column=='Id' && sort.direction==='descending','fa-sort-amount-asc':sort.column=='Id' && sort.direction==='ascending'}">
+                    </span>
+            </td>
+            <td width="30%" class="text-center" ng-click="changeSorting('tagString')">
+                <strong>Repository tags</strong>
+                    <span class='fa'
+                          ng-class="{'fa-sort-amount-desc ':sort.column=='tagString' && sort.direction==='descending','fa-sort-amount-asc':sort.column=='tagString' && sort.direction==='ascending'}">
+                    </span>
+            </td>
+            <td width="7%" class="text-center" ng-click="changeSorting('Size')">
+                <strong>Size</strong>
+                    <span class='fa'
+                          ng-class="{'fa-sort-amount-desc ':sort.column=='Size' && sort.direction==='descending','fa-sort-amount-asc':sort.column=='Size' && sort.direction==='ascending'}">
+                    </span>
+            </td>
+            <td width="7%" class="text-center" ng-click="changeSorting('VirtualSize')">
+                <strong>Virtual size</strong>
+                    <span class='fa'
+                          ng-class="{'fa-sort-amount-desc ':sort.column=='VirtualSize' && sort.direction==='descending','fa-sort-amount-asc':sort.column=='VirtualSize' && sort.direction==='ascending'}">
+                    </span>
+            </td>
+            <td width="5%" class="text-center" ng-click="changeSorting('Created')">
+                <strong>Created</strong>
+                    <span class='fa'
+                          ng-class="{'fa-sort-amount-desc ':sort.column=='Created' && sort.direction==='descending','fa-sort-amount-asc':sort.column=='Created' && sort.direction==='ascending'}">
+                    </span>
+            </td>
         </tr>
-        <tr ng-repeat="image in images | orderBy:RepoTags[0]">
+        <tr ng-repeat="image in images | orderBy:sort.column:sort.desc">
+            <!--<tr ng-repeat="image in images | orderBy:RepoTags[0]">-->
             <td class="text-center">
                  <span ng-class="{'glyphicon glyphicon-check':image.selected, 'glyphicon glyphicon-unchecked':!image.selected}"
                        class="vcenter"
@@ -60,7 +87,7 @@
                 </span>
             </td>
             <td class="text-center">
-                <button class="btn btn-info btn-block btn-sm" ng-click="goImageDetails(image.Id)">
+                <button class="btn btn-info btn-block btn-sm" ng-click="goImageDetails('image.Id')">
                     <strong>{{image.Id | limitTo:12}}</strong>
                 </button>
             </td>
@@ -68,7 +95,8 @@
                 <!--<p ng-repeat="tag in image.RepoTags | orderBy: tag">{{tag}}</p>-->
                 {{image.tagString}}
             </td>
-            <td class="text-center">{{image.Size | bytes:2}} ({{image.VirtualSize| bytes:2}})</td>
+            <td class="text-center">{{image.Size | bytes:2}}</td>
+            <td class="text-center">{{image.VirtualSize| bytes:2}}</td>
             <td class="text-center">{{image.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
         </tr>
         </tbody>
