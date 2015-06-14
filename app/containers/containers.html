@@ -48,7 +48,7 @@
         <thead>
         <tr class="success">
             <td colspan="10">
-                <div class="col-md-3 vcenter">
+                <div class="col-md-5 vcenter">
                     <button type="button" class="btn btn-primary btn-sm" ng-click="refreshContainers()"><span
                             class="glyphicon glyphicon-refresh"></span><strong> Refresh</strong>
                     </button>
@@ -64,6 +64,7 @@
                             title="Create new container"><span
                             class="glyphicon glyphicon-plus"></span><strong> Create</strong>
                     </button>
+                    <label>Filter: <input ng-model="search.$"></label>
                 </div>
 
                 <div class="col-md-6 vcenter">
@@ -138,7 +139,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="containerData in containerDataList|orderBy:sort.column:sort.desc" class="text-center">
+        <tr ng-repeat="containerData in containerDataList | filter:search | orderBy:sort.column:sort.desc" class="text-center">
             <td align="center">
                  <span ng-class="{'glyphicon glyphicon-check':containerData.selected, 'glyphicon glyphicon-unchecked':!containerData.selected}"
                        ng-click="switchSelected(containerData)">
