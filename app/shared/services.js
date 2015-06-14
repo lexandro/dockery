@@ -24,6 +24,23 @@ angular.module('services', [])
                 var rx = new RegExp('^\/?[a-zA-Z0-9][a-zA-Z0-9_.-]+$');
 
                 return rx.test(containerName);
+            },
+            changeSorting: function (sort, column) {
+                if (sort.column === column) {
+                    if (sort.direction === 'ascending') {
+                        sort.direction = 'descending';
+                        sort.desc = true;
+                    } else if (sort.direction === 'descending') {
+                        sort.column = null;
+                        sort.direction = null;
+                        sort.desc = null;
+                    }
+                } else {
+                    sort.column = column;
+                    sort.direction = 'ascending';
+                    sort.desc = false;
+                }
+                return sort;
             }
         }
     })

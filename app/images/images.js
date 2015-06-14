@@ -14,13 +14,18 @@ angular.module('images', ['ngRoute'])
             $location.path('/hosts');
         } else {
             //
-
             $scope.showAllImagesFlag = false;
             $scope.showUntaggedImagesFlag = false;
             $scope.selectAllImagesFlag = false;
+            //
+            var sort = {};
+            sort.column = 'Id'
+            sort.direction = 'ascending';
+            sort.desc = false;
+            $scope.sort = sort;
+            //
             refreshImages();
-
-
+            //
             $scope.switchShowAllFlag = function () {
                 $scope.showAllImagesFlag = !$scope.showAllImagesFlag;
                 refreshImages();
@@ -39,6 +44,9 @@ angular.module('images', ['ngRoute'])
             };
         }
 
+        $scope.changeSorting = function (column) {
+            $scope.sort = Helpers.changeSorting($scope.sort, column);
+        };
 
         $scope.removeSelectedImages = function () {
             $scope.images.forEach(function (image) {
