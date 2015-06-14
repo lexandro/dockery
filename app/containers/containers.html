@@ -85,36 +85,60 @@
                 <div class="vcenter">
                     <strong>Status </strong>
                     <span class='fa'
-
-                          ng-class="{'fa-sort':sort.column!='Status','fa-sort-desc':sort.column=='Status' && sort.descending,'fa-sort-asc':sort.column=='Status' && sort.descending!=true}"></span>
+                          ng-class="{'fa-sort-amount-desc':sort.column=='Status' && sort.direction==='descending','fa-sort-amount-asc':sort.column=='Status' && sort.direction==='ascending'}">
+                    </span>
                 </div>
             </td>
             <td width="5%" class="text-center" ng-click="changeSorting('Id')">
-                <div class="vcenter"><strong>ID</strong></div>
+                <div class="vcenter">
+                    <strong>ID</strong>
+                    <span class='fa'
+                          ng-class="{'fa-sort-amount-desc ':sort.column=='Id' && sort.direction==='descending','fa-sort-amount-asc':sort.column=='Id' && sort.direction==='ascending'}">
+                    </span>
+                </div>
             </td>
             <td width="5%" class="text-center vcenter" ng-click="changeSorting('ContainerName')">
-                <div class="vcenter"><strong>Name</strong></div>
+                <div class="vcenter">
+                    <strong>Name</strong>
+                    <span class='fa'
+                          ng-class="{'fa-sort-amount-desc ':sort.column=='ContainerName' && sort.direction==='descending','fa-sort-amount-asc':sort.column=='ContainerName' && sort.direction==='ascending'}">
+                    </span>
+                </div>
             </td>
             <td width="3%" class="text-center vcenter">
                 <div class="vcenter"><strong>Edit</strong></div>
             </td>
             <td width="15%" class="text-center vcenter" ng-click="changeSorting('ImageName')">
-                <div class="vcenter"><strong>Image</strong></div>
+                <div class="vcenter">
+                    <strong>Image</strong>
+                    <span class='fa'
+                          ng-class="{'fa-sort-amount-desc ':sort.column=='ImageName' && sort.direction==='descending','fa-sort-amount-asc':sort.column=='ImageName' && sort.direction==='ascending'}">
+                    </span>
+                </div>
             </td>
             <td width="35%" class="text-center vcenter" ng-click="changeSorting('Command')">
-                <div class="vcenter"><strong>Command</strong></div>
+                <div class="vcenter">
+                    <strong>Command</strong>
+                    <span class='fa'
+                          ng-class="{'fa-sort-amount-desc ':sort.column=='Command' && sort.direction==='descending','fa-sort-amount-asc':sort.column=='Command' && sort.direction==='ascending'}">
+                    </span>
+                </div>
             </td>
-
-            <td width="8%" class="text-center vcenter" ng-click="changeSorting('Size')">
+            <td width="8%" class="text-center vcenter">
                 <div class="vcenter"><strong>Diff / Virt. size</strong></div>
             </td>
             <td width="11%" class="text-center vcenter" ng-click="changeSorting('Created')">
-                <div class="vcenter"><strong>Created</strong></div>
+                <div class="vcenter">
+                    <strong>Created</strong>
+                    <span class='fa'
+                          ng-class="{'fa-sort-amount-desc ':sort.column=='Created' && sort.direction==='descending','fa-sort-amount-asc':sort.column=='Created' && sort.direction==='ascending'}">
+                    </span>
+                </div>
             </td>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="containerData in containerDataList|orderBy:sort.column:sort.descending" class="text-center">
+        <tr ng-repeat="containerData in containerDataList|orderBy:sort.column:sort.desc" class="text-center">
             <td align="center">
                  <span ng-class="{'glyphicon glyphicon-check':containerData.selected, 'glyphicon glyphicon-unchecked':!containerData.selected}"
                        ng-click="switchSelected(containerData)">

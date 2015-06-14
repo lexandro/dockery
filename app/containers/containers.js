@@ -15,12 +15,15 @@ angular.module('containers', ['ngRoute'])
             $scope.showContainerSizeFlag = false;
             $scope.selectAllFlag = false;
             var sort = {};
+            //
             sort.column = 'Id'
-            sort.descending = true;
+            sort.direction = 'ascending';
+            sort.desc = false;
             $scope.sort = sort;
-
+            console.log(JSON.stringify(sort));
+            //
             refreshContainers();
-
+            //
             $scope.refreshContainers = function () {
                 $scope.containerListing = true;
                 $scope.containerListingMessage = 'Loading container list';
@@ -181,15 +184,24 @@ angular.module('containers', ['ngRoute'])
             $scope.changeSorting = function (column) {
                 var sort = $scope.sort;
                 if (sort.column === column) {
-                    sort.descending = !sort.descending;
+                    if (sort.direction === 'ascending') {
+                        sort.direction = 'descending';
+                        sort.desc = true;
+                    } else if (sort.direction === 'descending') {
+                        sort.column = null;
+                        sort.direction = null;
+                        sort.desc = null;
+                    }
                 } else {
                     sort.column = column;
-                    sort.descending = false;
+                    sort.direction = 'ascending';
+                    sort.desc = false;
 
                 }
                 $scope.sort = sort;
                 console.log(JSON.stringify(sort));
             };
+
         }
 
         function getContainerData(containerDataList, containerId) {
