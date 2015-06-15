@@ -105,9 +105,9 @@ angular.module('containers', ['ngRoute'])
             //
             $scope.renameContainer = function (containerData) {
                 containerData.renameContainerEnabled = !containerData.renameContainerEnabled;
-                if (!containerData.renameContainerEnabled && containerData.newName != containerData.containerDetails.Name) {
+                if (!containerData.renameContainerEnabled && containerData.newName != containerData.ContainerName) {
                     Docker.containers().rename({
-                        containerId: containerData.containerDetails.Id,
+                        containerId: containerData.Id,
                         name: containerData.newName
                     }, {}, function () {
                         refreshContainers();
@@ -115,56 +115,56 @@ angular.module('containers', ['ngRoute'])
                         refreshContainers();
                     });
                 } else {
-                    containerData.newName = containerData.containerDetails.Name;
+                    containerData.newName = containerData.ContainerName;
                 }
             };
             //
             $scope.startSelectedContainers = function () {
                 $scope.containerDataList.forEach(function (containerData) {
                     if (containerData.selected) {
-                        $scope.startContainer(containerData.container.Id);
+                        $scope.startContainer(containerData.Id);
                     }
                 });
             };
             $scope.stopSelectedContainers = function () {
                 $scope.containerDataList.forEach(function (containerData) {
                     if (containerData.selected) {
-                        $scope.stopContainer(containerData.container.Id);
+                        $scope.stopContainer(containerData.Id);
                     }
                 });
             };
             $scope.restartSelectedContainers = function () {
                 $scope.containerDataList.forEach(function (containerData) {
                     if (containerData.selected) {
-                        $scope.restartContainer(containerData.container.Id);
+                        $scope.restartContainer(containerData.Id);
                     }
                 });
             };
             $scope.killSelectedContainers = function () {
                 $scope.containerDataList.forEach(function (containerData) {
                     if (containerData.selected) {
-                        $scope.killContainer(containerData.container.Id);
+                        $scope.killContainer(containerData.Id);
                     }
                 });
             };
             $scope.pauseSelectedContainers = function () {
                 $scope.containerDataList.forEach(function (containerData) {
                     if (containerData.selected) {
-                        $scope.pauseContainer(containerData.container.Id);
+                        $scope.pauseContainer(containerData.Id);
                     }
                 });
             };
             $scope.unpauseSelectedContainers = function () {
                 $scope.containerDataList.forEach(function (containerData) {
                     if (containerData.selected) {
-                        $scope.unpauseContainer(containerData.container.Id);
+                        $scope.unpauseContainer(containerData.Id);
                     }
                 });
             };
             $scope.removeSelectedContainers = function () {
                 $scope.containerDataList.forEach(function (containerData) {
                     if (containerData.selected) {
-                        $scope.removeContainer(containerData.container.Id);
+                        $scope.removeContainer(containerData.Id);
                     }
                 });
 
@@ -191,7 +191,7 @@ angular.module('containers', ['ngRoute'])
         }
 
         function upsertContainerData(containerDataList, containerData) {
-            var i = getContainerDataIndex(containerDataList, containerData.container.Id);
+            var i = getContainerDataIndex(containerDataList, containerData.Id);
             if (i > -1) {
                 containerDataList[i] = containerData;
             } else {
@@ -203,7 +203,7 @@ angular.module('containers', ['ngRoute'])
             var found = false;
             var i = 0;
             while (i < containerDataList.length && !found) {
-                if (containerDataList[i].container.Id === containerId) {
+                if (containerDataList[i].Id === containerId) {
                     found = true;
                 } else {
                     i++;
@@ -229,7 +229,6 @@ angular.module('containers', ['ngRoute'])
                 $scope.containerListing = false;
                 containers.forEach(function (container) {
                     var containerData = {};
-                    containerData.container = container;
                     containerData.renameContainerEnabled = false;
                     //
                     var containerStatus = '';
@@ -254,10 +253,8 @@ angular.module('containers', ['ngRoute'])
                     containerData.Created = container.Created;
                     upsertContainerData(containerDataList, containerData);
                     var containerDetails = Docker.containers().get({containerId: container.Id}, function () {
-                        $scope.containerDetails = containerDetails;
-                        containerData.containerDetails = containerDetails;
                         //
-                        containerData.ContainerName = containerDetails.Name;
+                        containerData.ContainerName = containerDetails.ContainerName;
                     });
 
                 });
@@ -276,8 +273,9 @@ angular.module('containers', ['ngRoute'])
                 var containersWithSize = Docker.containers().query(containerParam, function () {
                     containersWithSize.forEach(function (containerWithSize) {
                         var containerData = getContainerData(containerDataList, containerWithSize.Id);
-                        if (containerWithSize.Id == containerData.container.Id) {
-                            containerData.container = containerWithSize;
+                        if (containerWithSize.Id == containerData.Id) {
+                            containerData.SizeRw = containerWithSize.SizeRw;
+                            containerData.SizeRootFs = containerWithSize.SizerRootFs;
                         }
                     });
                     $scope.containerSizeListing = false;

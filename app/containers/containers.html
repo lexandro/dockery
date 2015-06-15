@@ -48,7 +48,7 @@
         <thead>
         <tr class="success">
             <td colspan="10">
-                <div class="col-md-5 vcenter">
+                <div class="col-md-12 vcenter form-group">
                     <button type="button" class="btn btn-primary btn-sm" ng-click="refreshContainers()"><span
                             class="glyphicon glyphicon-refresh"></span><strong> Refresh</strong>
                     </button>
@@ -65,9 +65,6 @@
                             class="glyphicon glyphicon-plus"></span><strong> Create</strong>
                     </button>
                     <label>Filter: <input ng-model="search.$"></label>
-                </div>
-
-                <div class="col-md-6 vcenter">
                     <strong> Items listed: <span class="badge">{{containerDataList.length}}</span></strong>
                 </div>
             </td>
@@ -148,24 +145,24 @@
             <td align="left">
                 <button class="btn btn-success btn-sm"
                         ng-show="['created', 'stopped'].indexOf(containerData.Status)>-1"
-                        ng-click="startContainer(containerData.container.Id)">
+                        ng-click="startContainer(containerData.Id)">
                     <span class="glyphicon glyphicon glyphicon-play"></span><strong> start</strong>
                 </button>
                 <button class="btn btn-warning btn-sm" ng-show="['running'].indexOf(containerData.Status)>-1"
-                        ng-click="pauseContainer(containerData.container.Id)">
+                        ng-click="pauseContainer(containerData.Id)">
                     <span class="glyphicon glyphicon glyphicon-pause"></span><strong> pause</strong>
                 </button>
                 <button class="btn btn-info btn-sm" ng-show="['paused'].indexOf(containerData.Status)>-1"
-                        ng-click="unpauseContainer(containerData.container.Id)">
+                        ng-click="unpauseContainer(containerData.Id)">
                     <span class="glyphicon glyphicon glyphicon-pause"></span><strong> unpause</strong>
                 </button>
                 <button class="btn btn-danger btn-sm" ng-show="['running'].indexOf(containerData.Status)>-1"
-                        ng-click="stopContainer(containerData.container.Id)">
+                        ng-click="stopContainer(containerData.Id)">
                     <span class="glyphicon glyphicon glyphicon-stop"></span><strong> stop</strong>
                 </button>
                 <button class="btn btn-danger btn-sm"
                         ng-show="['created', 'stopped'].indexOf(containerData.Status)>-1"
-                        ng-click="removeContainer(containerData.container.Id)">
+                        ng-click="removeContainer(containerData.Id)">
                     <span class="glyphicon glyphicon glyphicon-trash"></span><strong> remove</strong>
                 </button>
             </td>
@@ -186,7 +183,7 @@
 
                 <div ng-show="!containerData.renameContainerEnabled">
                     <strong>
-                        <a ng-href="#/containerDetails/{{containerData.container.Id }}">
+                        <a ng-href="#/containerDetails/{{containerData.Id }}">
                             {{containerData.ContainerName.charAt(0) === '/' ?
                             containerData.ContainerName.substr(1) : containerData.ContainerName | shorten:true:30}}</a>
                     </strong>
@@ -202,8 +199,8 @@
                     {{containerData.ImageName | shorten:true:30}}</a>
             </td>
             <td class="text-left">{{containerData.Command | shorten:true:80}}</td>
-            <td class="text-left">{{showContainerSizeFlag==true?containerData.container.SizeRw:NAN | bytes:2 }}
-                ({{showContainerSizeFlag==true?containerData.container.SizeRootFs:NAN | bytes:2 }})
+            <td class="text-left">{{showContainerSizeFlag==true?containerData.SizeRw:NAN | bytes:2 }}
+                ({{showContainerSizeFlag==true?containerData.SizeRootFs:NAN | bytes:2 }})
             </td>
             <td class="text-left">{{containerData.Created * 1000 | date:'dd, MMM yyyy HH:mm:ss'}}</td>
         </tr>
