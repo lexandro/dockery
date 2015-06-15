@@ -73,18 +73,24 @@ angular.module('images', ['ngRoute'])
             $scope.selectAllImagesFlag = false;
             $scope.imageListingMessage = 'Loading image data';
             var images = Docker.images().query({showAllImagesFlag: $scope.showAllImagesFlag ? 1 : 0}, function () {
-                var result = [];
+                var results = [];
                 images.forEach(function (image) {
-                    image.tagString = image.RepoTags.join(', ');
-                    image.selected = false;
+                    var result = {};
+                    result.Id = image.Id;
+                    result.Size = image.Size;
+                    result.VirtualSize = image.VirtualSize;
+                    result.Created = image.Created;
+
+                    result.tagString = image.RepoTags.join(', ');
+                    result.selected = false;
                     if ($scope.showUntaggedImagesFlag == true) {
-                        result.push(image);
+                        results.push(result);
                     } else if (image.RepoTags[0] != "<none>:<none>") {
-                        result.push(image);
+                        results.push(result);
                     }
                 });
                 $scope.imageListing = false;
-                $scope.images = result;
+                $scope.images = results;
             });
         }
 

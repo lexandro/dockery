@@ -46,27 +46,25 @@
     </div>
     <table class="table table-condensed table-hover table-striped table-bordered">
         <thead>
-        <tr class="success">
+        <tr class="success vcenter form-group">
             <td colspan="10">
-                <div class="col-md-12 vcenter form-group">
-                    <button type="button" class="btn btn-primary btn-sm" ng-click="refreshContainers()"><span
-                            class="glyphicon glyphicon-refresh"></span><strong> Refresh</strong>
-                    </button>
-                    <button type="button" class="btn btn-primary btn-sm" ng-click="switchShowAllContainersFlag()">
-                        <span ng-class="{'glyphicon glyphicon-unchecked':!showAllContainersFlag, 'glyphicon glyphicon-check':showAllContainersFlag}"></span><strong>
-                        All</strong>
-                    </button>
-                    <button type="button" class="btn btn-primary btn-sm" ng-click="switchShowContainerSizeFlag()"><span
-                            ng-class="{'glyphicon glyphicon-unchecked':!showContainerSizeFlag, 'glyphicon glyphicon-check':showContainerSizeFlag}"></span>
-                        <strong> Show size</strong>
-                    </button>
-                    <button type="button" class="btn btn-success btn-sm" ng-click='createContainer()'
-                            title="Create new container"><span
-                            class="glyphicon glyphicon-plus"></span><strong> Create</strong>
-                    </button>
-                    <label>Filter: <input ng-model="search.$"></label>
-                    <strong> Items listed: <span class="badge">{{containerDataList.length}}</span></strong>
-                </div>
+                <button type="button" class="btn btn-primary btn-sm" ng-click="refreshContainers()"><span
+                        class="glyphicon glyphicon-refresh"></span><strong> Refresh</strong>
+                </button>
+                <button type="button" class="btn btn-primary btn-sm" ng-click="switchShowAllContainersFlag()">
+                    <span ng-class="{'glyphicon glyphicon-unchecked':!showAllContainersFlag, 'glyphicon glyphicon-check':showAllContainersFlag}"></span><strong>
+                    All</strong>
+                </button>
+                <button type="button" class="btn btn-primary btn-sm" ng-click="switchShowContainerSizeFlag()"><span
+                        ng-class="{'glyphicon glyphicon-unchecked':!showContainerSizeFlag, 'glyphicon glyphicon-check':showContainerSizeFlag}"></span>
+                    <strong> Show size</strong>
+                </button>
+                <button type="button" class="btn btn-success btn-sm" ng-click='createContainer()'
+                        title="Create new container"><span
+                        class="glyphicon glyphicon-plus"></span><strong> Create</strong>
+                </button>
+                <label>Filter: <input ng-model="search.$"></label>
+                <strong> Items listed: <span class="badge">{{containerDataList.length}}</span></strong>
             </td>
         </tr>
         <tr>
@@ -136,7 +134,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="containerData in containerDataList | filter:search | orderBy:sort.column:sort.desc" class="text-center">
+        <tr ng-repeat="containerData in containerDataList | filter:search | orderBy:sort.column:sort.desc"
+            class="text-center">
             <td align="center">
                  <span ng-class="{'glyphicon glyphicon-check':containerData.selected, 'glyphicon glyphicon-unchecked':!containerData.selected}"
                        ng-click="switchSelected(containerData)">
