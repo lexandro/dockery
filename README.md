@@ -73,10 +73,10 @@ Here's the list of active, scheduled, planned and finished development goals
 
 ## Under development
 0.2.5
-- Add: container details/volumes-from (get volume from other containers)
-- Add: privilege containers should show warning color in details or maybe in the lists too
-- Add: display privileged container on container details page
-- Add: mark privileged containers on container list page
++ Add: container details/volumes-from (get volume from other containers)
++ Add: privileged containers should show warning color in details or maybe in the lists too
++ Add: display privileged container on container details page
++ Add: mark privileged containers on container list page
 - Add: Show environment variables on container details page
 
 ## Roadmap /by priority/

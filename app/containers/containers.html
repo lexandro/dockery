@@ -85,7 +85,7 @@
                     </span>
                 </div>
             </td>
-            <td width="5%" class="text-center" ng-click="changeSorting('Id')">
+            <td width="7%" class="text-center" ng-click="changeSorting('Id')">
                 <div class="vcenter">
                     <strong>ID</strong>
                     <span class='fa'
@@ -93,7 +93,7 @@
                     </span>
                 </div>
             </td>
-            <td width="5%" class="text-center vcenter" ng-click="changeSorting('ContainerName')">
+            <td width="7%" class="text-center vcenter" ng-click="changeSorting('ContainerName')">
                 <div class="vcenter">
                     <strong>Name</strong>
                     <span class='fa'
@@ -170,9 +170,16 @@
                    ng-class="{'label-success': containerData.Status=='running', 'label-warning': containerData.Status=='paused', 'label-danger': containerData.Status=='stopped','label-info': containerData.Status=='created'}">
                     {{containerData.Status}}</p>
             </td>
-            <td>
-                <a ng-href="#/containerDetails/{{containerData.Id }}">
-                    {{containerData.Id | limitTo:12}}</a>
+            <td class="form-groupID">
+                <div ng-show="containerData.Privileged==true">
+                    <span class="fa fa-exclamation-triangle" style="color: red"></span>
+                    <a ng-href="#/containerDetails/{{containerData.Id }}">
+                        {{containerData.Id | limitTo:12}}</a>
+                </div>
+                <div ng-hide="containerData.Privileged==true">
+                    <a ng-href="#/containerDetails/{{containerData.Id }}">
+                        {{containerData.Id | limitTo:12}}</a>
+                </div>
             </td>
             <td class="text-right">
                 <input ng-model="containerData.newName"
@@ -205,4 +212,5 @@
         </tr>
         </tbody>
     </table>
+    <span class="fa fa-exclamation-triangle" style="color: red"></span> - privileged
 </div>

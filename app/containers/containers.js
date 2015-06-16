@@ -254,7 +254,9 @@ angular.module('containers', ['ngRoute'])
                     upsertContainerData(containerDataList, containerData);
                     var containerDetails = Docker.containers().get({containerId: container.Id}, function () {
                         //
-                        containerData.ContainerName = containerDetails.ContainerName;
+                        console.log(containerDetails.ContainerName);
+                        containerData.ContainerName = containerDetails.Name;
+                        containerData.Privileged = containerDetails.HostConfig.Privileged;
                     });
 
                 });
