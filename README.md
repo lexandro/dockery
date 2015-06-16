@@ -72,19 +72,12 @@ These screenshots are not representing the final version!
 Here's the list of active, scheduled, planned and finished development goals
 
 ## Under development
-0.2.5
-+ Add: container details/volumes-from (get volume from other containers)
-+ Add: privileged containers should show warning color in details or maybe in the lists too
-+ Add: display privileged container on container details page
-+ Add: mark privileged containers on container list page
-- Add: Show environment variables on container details page
-
-## Roadmap /by priority/
 0.2.6
 - Add: containers: command popover to show the whole command
 - Add: tag list to the image details
 - Fix: show image name in the image details
 
+## Roadmap /by priority/
 0.2.7
 - Add: list active containers related to the image in image details
 
@@ -228,3 +221,10 @@ Here's the list of active, scheduled, planned and finished development goals
 0.2.4
 - Add: filter by table header fields in containers list
 - Add: filter by table header fields in images list
+
+0.2.5
+- Add: container details/volumes-from (get volume from other containers)
+- Add: privileged containers should show warning color in details or maybe in the lists too
+- Add: display privileged container on container details page
+- Add: mark privileged containers on container list page
+- Add: Show environment variables on container details page
