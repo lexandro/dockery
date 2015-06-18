@@ -4,20 +4,27 @@
 
 // Declare app level module which depends on views, and components
 angular.module('dockermon', [
-    'ngRoute',
-    'ngResource',
-    'jsonFormatter',
-    'filters',
-    'services',
-    'hosts',
-    'hostDetails',
-    'containers',
-    'containerDetails',
-    'createContainer',
-    'images',
-    'imageDetails',
-    'frapontillo.bootstrap-switch'
-])
+        'ngRoute',
+        'ngResource',
+        'jsonFormatter',
+        'filters',
+        'services',
+        'hosts',
+        'hostDetails',
+        'containers',
+        'containerDetails',
+        'createContainer',
+        'images',
+        'imageDetails',
+        'frapontillo.bootstrap-switch'],
+    function ($provide) {
+        // Prevent Angular from sniffing for the history API
+        // since it's not supported in packaged apps.
+        $provide.decorator('$window', function ($delegate) {
+            $delegate.history = null;
+            return $delegate;
+        });
+    })
     .directive('ngEnter', function () {
         return function (scope, element, attrs) {
             element.bind("keydown keypress", function (event) {
@@ -32,8 +39,20 @@ angular.module('dockermon', [
         };
     })
     .run(function ($rootScope) {
+        if (window.chrome && chrome.app && chrome.app.runtime) {
+            $rootScope.chrome = true;
+            chrome.app.window.current().maximize();
+        } else {
+            $rootScope.chrome = false;
+        }
     }).config(['$routeProvider', function ($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/hosts'});
-    }]);
+    }])
+    .config([
+        '$compileProvider',
+        function ($compileProvider) {
+            $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension):/);
+        }
+    ]);
 
 
