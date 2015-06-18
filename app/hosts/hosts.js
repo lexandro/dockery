@@ -8,6 +8,7 @@ angular.module('hosts', ['ngRoute'])
         });
     }])
     .controller('HostCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'HostService', 'Helpers', 'Docker', function ($rootScope, $scope, $location, $timeout, HostService, Helpers, Docker) {
+
         // do we have previously set ping interval?
         if (!hasOwnProperty.call($rootScope, 'lastPingInterval')) {
             // no, initialize
@@ -15,23 +16,40 @@ angular.module('hosts', ['ngRoute'])
         }
         $scope.pingInterval = $rootScope.lastPingInterval;
         var hosts = [];
+
         try {
-            hosts = HostService.load();
+            HostService.load(function (loadedHosts) {
+
+
+                loadedHosts.forEach(function (host) {
+                    host.status = false;
+                    host.editHostEnabled = false;
+                    host.selected = false;
+                    host.pinging = true;
+
+                    if (!Helpers.isEmpty($rootScope.hostUrl)) {
+                        host.selected = (host.url == $rootScope.hostUrl);
+                    }
+                });
+                $scope.hosts = loadedHosts;
+                hosts = loadedHosts;
+
+                if (!hasOwnProperty.call($rootScope, 'tick') || $rootScope.tick == false) {
+                    updateStatus();
+                }
+            });
         } catch (err) {
             console.log("Error loading hosts data: " + err);
         }
-        hosts.forEach(function (host) {
-            host.status = false;
-            host.editHostEnabled = false;
-            host.selected = false;
-            host.pinging = true;
 
-            if (!Helpers.isEmpty($rootScope.hostUrl)) {
-                host.selected = (host.url == $rootScope.hostUrl);
-            }
-        });
-        $scope.hosts = hosts;
+        function updateStatus() {
+            $rootScope.tick = true;
+            tick();
+        }
 
+        $scope.updateStatus = function () {
+            updateStatus();
+        };
         function pingHost(host) {
             host.pinging = true;
             Docker.ping(host.url).get(function () {
@@ -159,14 +177,4 @@ angular.module('hosts', ['ngRoute'])
             });
             saveHosts();
         };
-
-        $scope.updateStatus = function () {
-            $rootScope.tick = true;
-            tick();
-        };
-
-        if (!hasOwnProperty.call($rootScope, 'tick') || $rootScope.tick == false) {
-            $scope.updateStatus();
-        }
-
     }]);

@@ -167,22 +167,51 @@ angular.module('services', [])
     })
     .factory('HostService', ['$rootScope', 'Helpers', function ($rootScope, Helpers) {
         return {
-            load: function () {
-                //localStorage.clear();
-                var hosts = JSON.parse(localStorage.getItem("hosts"));
-                if (Helpers.isEmpty(hosts)) {
-                    hosts = [];
-                } else {
-                    hosts.forEach(function (host) {
-                        if (host.default) {
-                            $rootScope.hostUrl = host;
-                        }
+            load: function (callback) {
+                //
+                var hosts = [];
+                var host = {};
+                if ($rootScope.chrome === true) {
+                    console.log('chrome storage');
+                    //host.id = Helpers.newId();
+                    //host.name = 'localhost'
+                    //host.url = 'http://localhost:2375';
+                    //host.created = new Date();
+                    //host.lastConnected = null;
+                    //host.status = false;
+                    //host.defaultConnection = true;
+                    //host.selected = false;
+                    //hosts.push(host);
+                    //callback(hosts);
+                    chrome.storage.local.get("hosts", function (result) {
+                        console.log(JSON.stringify(result));
+                        callback(JSON.parse(result.hosts));
                     });
+
+                } else {
+                    //localStorage.clear();
+                    var hosts = JSON.parse(localStorage.getItem("hosts"));
+                    if (Helpers.isEmpty(hosts)) {
+                        hosts = [];
+                    } else {
+                        hosts.forEach(function (host) {
+                            if (host.default) {
+                                $rootScope.hostUrl = host;
+                            }
+                        });
+                    }
+                    callback(hosts);
                 }
-                return hosts;
             },
             save: function (hosts) {
-                localStorage.setItem("hosts", JSON.stringify(hosts));
+                if ($rootScope.chrome === true) {
+                    chrome.storage.local.set({'hosts': angular.toJson(hosts)}, function () {
+                        //console.log('Settings saved: ' + angular.toJson(hosts));
+                    });
+                } else {
+                    localStorage.setItem("hosts", angular.toJson(hosts));
+                }
+
             }
         }
     }]);
