@@ -2,6 +2,10 @@
 
 Blueprint web application for my bigger idea to make docker based systems more manageable. This is a standalone solution 
 to manage few docker hosts and do some regular tasks on containers and images. 
+
+<a target="_blank" href="https://chrome.google.com/webstore/detail/dockery-light/cefhojablgaokgccloekpocgmffgecmm">
+<img alt="Try it now" src="https://raw.github.com/GoogleChrome/chrome-app-samples/master/tryitnowbutton_small.png" title="Click here to install this app from the Chrome Web Store"></img>
+</a>
  
 ### Table of Contents
 **[Enable remote access to a Docker daemon](#enable-remote-access-to-a-docker-daemon)**  
