@@ -67,96 +67,106 @@
         <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span>
             {{containerDetailsLoadingMessage}}</h3>
     </div>
-    <div class="row">
-        <div class="col-md-1 text-right"><strong>Full name</strong></div>
-        <div class="col-md-3">{{containerDetails.Name.toUpperCase()}}</div>
-        <div class="col-md-1 text-right"><strong>Network mode</strong></div>
-        <div class="col-md-3">{{containerDetails.HostConfig.NetworkMode}}</div>
-        <div class="col-md-1 text-right"><strong>CPU share</strong></div>
-        <div class="col-md-3">{{containerDetails.Config.CpuShares}}</div>
-    </div>
-    <div class="row">
-        <div class="col-md-1 text-right"><strong>Hostname</strong></div>
-        <div class="col-md-3">{{containerDetails.Config.Hostname}}</div>
-        <div class="col-md-1 text-right"><strong>Host bridge</strong></div>
-        <div class="col-md-3">{{containerDetails.NetworkSettings.Bridge}}</div>
-        <div class="col-md-1 text-right"><strong>CPU set</strong></div>
-        <div class="col-md-3">{{containerDetails.Config.Cpuset}}</div>
-    </div>
-    <div class="row">
-        <div class="col-md-1 text-right"><strong>Image</strong></div>
-        <div class="col-md-3"><a ng-href="#/imageDetails/{{containerDetails.Image}}">
-            <samp>
-                <span class="label label-primary">{{containerDetails.Config.Image | limitTo:50}}</span>
-            </samp></a>
-        </div>
-        <div class="col-md-1 text-right"><strong>IPv4</strong></div>
-        <div class="col-md-3">
-            {{containerDetails.NetworkSettings.IPAddress}}/{{containerDetails.NetworkSettings.IPPrefixLen}}
-        </div>
-        <div class="col-md-1 text-right"><strong>PID on host</strong></div>
-        <div class="col-md-3">{{containerDetails.State.Pid}}</div>
-    </div>
-    <div class="row">
-        <div class="col-md-1 text-right"><strong>Created</strong></div>
-        <div class="col-md-3">{{containerDetails.Created | date:'medium'}}</div>
-        <div class="col-md-1 text-right"><strong>Gateway</strong></div>
-        <div class="col-md-3">{{containerDetails.NetworkSettings.Gateway}}</div>
-        <div class="col-md-1 text-right"><strong>Driver</strong></div>
-        <div class="col-md-3">{{containerDetails.Driver}}</div>
-    </div>
-    <div class="row">
-        <div class="col-md-1 text-right"><strong>Started</strong></div>
-        <div class="col-md-3">{{containerDetails.State.StartedAt| date:'medium'}}</div>
-        <div class="col-md-1 text-right"><strong>DNS</strong></div>
-        <div class="col-md-3">{{containerDetails.HostConfig.Dns}}</div>
-        <div class="col-md-1 text-right"><strong>ExecDriver</strong></div>
-        <div class="col-md-3">{{containerDetails.ExecDriver}}</div>
-    </div>
-    <div class="row">
-        <div class="col-md-1 text-right"><strong>Finished</strong></div>
-        <div class="col-md-3">{{containerDetails.State.Running==true?"No":containerDetails.State.FinishedAt|
-            date:'medium'}}
-        </div>
-        <div class="col-md-1"></div>
-        <div class="col-md-3"></div>
-        <div class="col-md-1 text-right"><strong>Restart count</strong></div>
-        <div class="col-md-3">{{containerDetails.RestartCount}}</div>
-    </div>
-    <div class="row">
-        <div class="col-md-1 text-right"><strong>Working dir</strong></div>
-        <div class="col-md-3">{{containerDetails.Config.WorkingDir}}</div>
-        <div class="col-md-1"></div>
-        <div class="col-md-3"></div>
-        <div class="col-md-1 text-right"><strong>Privileged:</strong></div>
-        <div class="col-md-3">{{containerDetails.HostConfig.Privileged}}</div>
-    </div>
-    <div class="row">
-        <div class="col-md-1 text-right"><strong>Command</strong></div>
-        <div class="col-md-11"><code>{{containerDetails.Config.Cmd.join(' ')}}</code></div>
-    </div>
-    <div class="row">
-        <div class="col-md-1 text-right"><strong>Entry point</strong></div>
-        <div class="col-md-11"><code>{{containerDetails.Config.Entrypoint.join(' ')}}</code></div>
-    </div>
-    <ul class="nav nav-tabs">
-        <li role="presentation" ng-class="{'active':activeTab=='info'}"><a
-                ng-click="showInfo(containerDetails.Id.substr(0,12))">Info</a></li>
-        <li role="presentation" ng-class="{'active':activeTab=='top'}"><a
-                ng-click="showProcesses(containerDetails.Id.substr(0,12))">Processes</a></li>
-        <li role="presentation" ng-class="{'active':activeTab=='logs'}"><a
-                ng-click="showLogs(containerDetails.Id.substr(0,12))">Logs</a></li>
-        <li role="presentation" ng-class="{'active':activeTab=='diff'}"><a
-                ng-click="showDiff(containerDetails.Id.substr(0,12))">Diff</a></li>
-        <li role="presentation" ng-class="{'active':activeTab=='tty'}"><a
-                ng-click="showTty(containerDetails.Id.substr(0,12))">TTY</a></li>
-        <li role="presentation" ng-class="{'active':activeTab=='json'}"><a
-                ng-click="showJson(containerDetails.Id.substr(0,12))">Pure json</a></li>
-    </ul>
-    <br/>
 
-    <div ng-show="activeTab=='info'">
+    </h1>
+    <div class="col-md-4">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="panel-title"><span class="fa fa-gears"></span> Basic settings</h4>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-3 text-right"><strong>Full name</strong></div>
+                <div class="col-md-9">{{containerDetails.Name.toUpperCase()}}</div>
+                <div class="col-md-3 text-right"><strong>Hostname</strong></div>
+                <div class="col-md-9">{{containerDetails.Config.Hostname}}</div>
+                <div class="col-md-3 text-right"><strong>Image</strong></div>
+                <div class="col-md-9"><a ng-href="#/imageDetails/{{containerDetails.Image}}">
+                    <samp>
+                        <span class="label label-primary">{{containerDetails.Config.Image | limitTo:50}}</span>
+                    </samp></a>
+                </div>
+                <div class="col-md-3 text-right"><strong>Created</strong></div>
+                <div class="col-md-9">{{containerDetails.Created | date:'medium'}}</div>
+                <div class="col-md-3 text-right"><strong>Started</strong></div>
+                <div class="col-md-9">{{containerDetails.State.StartedAt| date:'medium'}}</div>
+                <div class="col-md-3 text-right"><strong>Finished</strong></div>
+                <div class="col-md-9">{{containerDetails.State.Running==true?"No":containerDetails.State.FinishedAt| date:'medium'}}</div>
+                <div class="col-md-3 text-right"><strong>Working dir</strong></div>
+                <div class="col-md-9">{{containerDetails.Config.WorkingDir}}&nbsp;</div>
+                <div class="col-md-3 text-right"><strong>Command</strong></div>
+                <div class="col-md-9"><code>{{containerDetails.Config.Cmd.join(' ')}}</code></div>
+                <div class="col-md-3 text-right"><strong>Entry point</strong></div>
+                <div class="col-md-9"><code>{{containerDetails.Config.Entrypoint.join(' ')}}</code></div>
 
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4 class="panel-title"><span class="fa fa-tachometer"></span> Runtime settings</h4>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-3 text-right"><strong>CPU share</strong></div>
+                <div class="col-md-9">{{containerDetails.Config.CpuShares}}</div>
+                <div class="col-md-3 text-right"><strong>CPU set</strong></div>
+                <div class="col-md-9">{{containerDetails.Config.Cpuset}}&nbsp;</div>
+                <div class="col-md-3 text-right"><strong>PID on host</strong></div>
+                <div class="col-md-9">{{containerDetails.State.Pid}}</div>
+                <div class="col-md-3 text-right"><strong>Driver</strong></div>
+                <div class="col-md-9">{{containerDetails.Driver}}</div>
+                <div class="col-md-3 text-right"><strong>ExecDriver</strong></div>
+                <div class="col-md-9">{{containerDetails.ExecDriver}}</div>
+                <div class="col-md-3 text-right"><strong>Restart count</strong></div>
+                <div class="col-md-9">{{containerDetails.RestartCount}}</div>
+                <div class="col-md-3 text-right"><strong>Privileged:</strong></div>
+                <div class="col-md-9">{{containerDetails.HostConfig.Privileged}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h4 class="panel-title"><span class="fa fa-sitemap"></span> Network settings</h4>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-3 text-right"><strong>Network mode</strong></div>
+                <div class="col-md-9">{{containerDetails.HostConfig.NetworkMode}}&nbsp;</div>
+                <div class="col-md-3 text-right"><strong>Host bridge</strong></div>
+                <div class="col-md-9">{{containerDetails.NetworkSettings.Bridge}}&nbsp;</div>
+                <div class="col-md-3 text-right"><strong>IPv4</strong></div>
+                <div class="col-md-9">
+                    {{containerDetails.NetworkSettings.IPAddress}}/{{containerDetails.NetworkSettings.IPPrefixLen}}&nbsp;
+                </div>
+                <div class="col-md-3 text-right"><strong>Gateway</strong></div>
+                <div class="col-md-9">{{containerDetails.NetworkSettings.Gateway}}&nbsp;</div>
+                <div class="col-md-3 text-right"><strong>DNS</strong></div>
+                <div class="col-md-9">{{containerDetails.HostConfig.Dns}}&nbsp;</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <ul class="nav nav-tabs">
+            <li role="presentation" ng-class="{'active':activeTab=='info'}"><a
+                    ng-click="showInfo(containerDetails.Id.substr(0,12))">Info</a></li>
+            <li role="presentation" ng-class="{'active':activeTab=='top'}"><a
+                    ng-click="showProcesses(containerDetails.Id.substr(0,12))">Processes</a></li>
+            <li role="presentation" ng-class="{'active':activeTab=='logs'}"><a
+                    ng-click="showLogs(containerDetails.Id.substr(0,12))">Logs</a></li>
+            <li role="presentation" ng-class="{'active':activeTab=='diff'}"><a
+                    ng-click="showDiff(containerDetails.Id.substr(0,12))">Diff</a></li>
+            <li role="presentation" ng-class="{'active':activeTab=='tty'}"><a
+                    ng-click="showTty(containerDetails.Id.substr(0,12))">TTY</a></li>
+            <li role="presentation" ng-class="{'active':activeTab=='json'}"><a
+                    ng-click="showJson(containerDetails.Id.substr(0,12))">Pure json</a></li>
+        </ul>
+    </div>
+    <div class="col-md-12">
+        <br/>
+    </div>
+    <div ng-show="activeTab=='info'" class="col-md-12">
         <div class="alert alert-info" role="alert" ng-show="containerDetailsLoading">
             <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span>
                 {{containerDetailsLoadingMessage}}</h3>
@@ -190,7 +200,26 @@
 
                 </div>
             </div>
+        </div>
+        <div class="col-md-8">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="fa fa-plug"> </span>
+                        Environment variables
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-condensed table-hover table-striped" ng-show="true">
+                        <tbody>
+                        <tr ng-repeat="env in containerDetails.Config.Env | orderBy:env">
+                            <td>{{env}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
 
+                </div>
+            </div>
         </div>
         <div class="col-md-12">
             <div class="panel panel-success">
@@ -224,7 +253,7 @@
         </div>
     </div>
 
-    <div ng-show="activeTab=='top'">
+    <div ng-show="activeTab=='top'" class="col-md-12">
         <div class="alert alert-info" role="alert" ng-show="containerTopLoading">
             <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span>
                 {{containerTopLoadingMessage}}</h3>
@@ -246,7 +275,7 @@
             </tbody>
         </table>
     </div>
-    <div ng-show="activeTab=='logs'">
+    <div ng-show="activeTab=='logs'" class="col-md-12">
         <div class="alert alert-info" role="alert" ng-show="containerLogsLoading">
             <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span>
                 {{containerLogsLoadingMessage}}</h3>
@@ -331,7 +360,7 @@
         </div>
     </div>
 
-    <div ng-show="activeTab=='diff'">
+    <div ng-show="activeTab=='diff'" class="col-md-12">
         <div class="alert alert-info" role="alert" ng-show="containerDiffLoading">
             <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span>
                 {{containerDiffLoadingMessage}}</h3>
@@ -387,12 +416,12 @@
             Items listed: {{ diffSettings["startIndex"]}} - {{ diffSettings["endIndex"]}}
         </div>
     </div>
-    <div ng-show="activeTab=='tty'">
+    <div ng-show="activeTab=='tty'" class="col-md-12">
         <div class="col-md-offset-2 col-md-8">
             <pre id="terminal" style="line-height: 1;"></pre>
         </div>
     </div>
-    <div ng-show="activeTab=='json'">
+    <div ng-show="activeTab=='json'" class="col-md-12">
         <json-formatter json="containerDetails" open="10"></json-formatter>
     </div>
 </div>

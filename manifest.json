@@ -3,6 +3,8 @@
   "description": "Docker managing frontend",
   "version": "0.2.6",
   "manifest_version": 2,
+  "default_locale": "en",
+  "homepage_url": "https://github.com/lexandro/dockermon",
   "app": {
     "background": {
       "scripts": [
@@ -11,8 +13,8 @@
     }
   },
   "icons": {
-    "16": "calculator-16.png",
-    "128": "calculator-128.png"
+    "16": "assets/img/dockery_icon_16.png",
+    "128": "assets/img/dockery_icon.png"
   },
   "permissions": [
     "http://*/",
