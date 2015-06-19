@@ -83,6 +83,7 @@ angular.module('images', ['ngRoute'])
 
                     result.tagString = image.RepoTags.join(', ');
                     result.selected = false;
+                    result.RepoTags = image.RepoTags;
                     if ($scope.showUntaggedImagesFlag == true) {
                         results.push(result);
                     } else if (image.RepoTags[0] != "<none>:<none>") {
@@ -91,6 +92,7 @@ angular.module('images', ['ngRoute'])
                 });
                 $scope.imageListing = false;
                 $scope.images = results;
+                $rootScope.images = results;
             });
         }
 

@@ -1,7 +1,7 @@
 <div class="col-md-12 pull-right">
     <div class="row">
         <div class="col-md-12">
-            <h3>Image: **first image tag**
+            <h3>Image: {{imageDetails.RepoTags[0]}}
             </h3>
         </div>
     </div>
@@ -35,7 +35,8 @@
         <div class="col-md-1">Docker version:</div>
         <div class="col-md-4">{{imageDetails.DockerVersion}}</div>
         <div class="col-md-2">Entry point:</div>
-        <div class="col-md-5"><code ng-show="imageDetails.Config.Entrypoint.length>0">{{imageDetails.Config.Entrypoint[0]}}</code></div>
+        <div class="col-md-5"><code ng-show="imageDetails.Config.Entrypoint.length>0">{{imageDetails.Config.Entrypoint[0]}}</code>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-1">Size (virtual size):</div>
@@ -51,7 +52,8 @@
     </div>
     <div class="row">
         <div class="col-md-2 col-md-offset-5">Working dir:</div>
-        <div class="col-md-5"><code ng-show="imageDetails.Config.WorkingDir.length>0">{{imageDetails.Config.WorkingDir}}</code></div>
+        <div class="col-md-5"><code
+                ng-show="imageDetails.Config.WorkingDir.length>0">{{imageDetails.Config.WorkingDir}}</code></div>
     </div>
     <hr/>
     <div class="table-responsive">

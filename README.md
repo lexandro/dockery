@@ -79,7 +79,7 @@ Here's the list of active, scheduled, planned and finished development goals
 0.2.6
 - Add: containers: command popover to show the whole command
 - Add: tag list to the image details
-- Fix: show image name in the image details
++ Fix: show image name in the image details
 
 ## Roadmap /by priority/
 0.2.7
