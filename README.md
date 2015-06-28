@@ -1,4 +1,4 @@
-# Dockermon
+# dockery
 
 Blueprint web application for my bigger idea to make docker based systems more manageable. This is a standalone solution 
 to manage few docker hosts and do some regular tasks on containers and images. 
@@ -16,7 +16,7 @@ to manage few docker hosts and do some regular tasks on containers and images.
 
 ## Enable remote access to a Docker daemon
 
-To manage your docker host(s) with **dockermon** please please add the following parameters to your Docker daemon launcher:
+To manage your docker host(s) with **dockery** please please add the following parameters to your Docker daemon launcher:
 
 ```bash
  $ docker -d -H=0.0.0.0:2375 -api-enable-cors
@@ -39,17 +39,17 @@ then issue the following command to activate changes:
 service docker restart
 ```
 ## Run as docker container
-Dockermon is released as an nginx backed docker image to make it easier to use. The image is auto updated by every push with the **latest** tag, the versioning will be added 
+dockery is released as an nginx backed docker image to make it easier to use. The image is auto updated by every push with the **latest** tag, the versioning will be added 
 after the first official releaseing
 
 **get the image**
 ```bash
-docker pull lexandro/dockermon
+docker pull lexandro/dockery
 ```
 
 **start the image**
 ```bash
-docker run -d -p 80:80 --name dockermon lexandro/dockermon
+docker run -d -p 80:80 --name dockery lexandro/dockery
 ```
 ## Beta screenshots
 These screenshots are not representing the final version!
@@ -204,7 +204,7 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: rename container to container list view - Remote api version dependent feature
 - Add: release automatically in docker image format
 - Fix: display port assignments [exposed image without public, exposed with -P, exposed with -p, portless image with -P, portless image with -p]
-- Fix: image non-port exposure issue at: http://localhost:63342/dockermon/app/imageDetails/imageDetails.js:23:63
+- Fix: image non-port exposure issue at: http://localhost:63342/dockery/app/imageDetails/imageDetails.js:23:63
 
 0.2.0
 - Rescheduled

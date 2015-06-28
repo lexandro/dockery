@@ -2,7 +2,7 @@
   "name": "docker|mon",
   "description": "Docker monitoring and host administration tool",
   "version": "0.2.6-beta",
-  "homepage": "https://github.com/lexandro/dockermon",
+  "homepage": "https://github.com/lexandro/dockery",
   "private": false,
   "dependencies": {
     "angular": "1.3.x",

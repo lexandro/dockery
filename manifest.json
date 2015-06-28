@@ -1,10 +1,9 @@
 {
-  "name": "Dockery",
-  "description": "Docker managing frontend",
-  "version": "0.2.6",
+  "name": "Dockery light",
+  "short_name": "Dockery light",
+  "description": "Docker managing frontend applicaton",
+  "version": "0.2.7",
   "manifest_version": 2,
-  "default_locale": "en",
-  "homepage_url": "https://github.com/lexandro/dockermon",
   "app": {
     "background": {
       "scripts": [

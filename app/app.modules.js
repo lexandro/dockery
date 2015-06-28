@@ -3,7 +3,7 @@
 // TODO add better logging
 
 // Declare app level module which depends on views, and components
-angular.module('dockermon', [
+angular.module('dockery', [
         'ngRoute',
         'ngResource',
         'jsonFormatter',
