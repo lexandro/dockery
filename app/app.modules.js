@@ -39,6 +39,7 @@ angular.module('dockery', [
         };
     })
     .directive('toggle', function () {
+        // http://www.bootply.com/H4Zii7Mb6l
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
