@@ -76,27 +76,28 @@
             </div>
             <div class="panel-body">
                 <div class="col-md-3 text-right"><strong>Full name</strong></div>
-                <div class="col-md-9">{{containerDetails.Name.toUpperCase()}}</div>
+                <div class="col-md-9">{{containerDetails.Name.toUpperCase()}}&nbsp;</div>
                 <div class="col-md-3 text-right"><strong>Hostname</strong></div>
-                <div class="col-md-9">{{containerDetails.Config.Hostname}}</div>
+                <div class="col-md-9">{{containerDetails.Config.Hostname}}&nbsp;</div>
                 <div class="col-md-3 text-right"><strong>Image</strong></div>
                 <div class="col-md-9"><a ng-href="#/imageDetails/{{containerDetails.Image}}">
                     <samp>
                         <span class="label label-primary">{{containerDetails.Config.Image | limitTo:50}}</span>
                     </samp></a>
+                    &nbsp;
                 </div>
                 <div class="col-md-3 text-right"><strong>Created</strong></div>
-                <div class="col-md-9">{{containerDetails.Created | date:'medium'}}</div>
+                <div class="col-md-9">{{containerDetails.Created | date:'medium'}}&nbsp;</div>
                 <div class="col-md-3 text-right"><strong>Started</strong></div>
-                <div class="col-md-9">{{containerDetails.State.StartedAt| date:'medium'}}</div>
+                <div class="col-md-9">{{containerDetails.State.StartedAt| date:'medium'}}&nbsp;</div>
                 <div class="col-md-3 text-right"><strong>Finished</strong></div>
-                <div class="col-md-9">{{containerDetails.State.Running==true?"No":containerDetails.State.FinishedAt| date:'medium'}}</div>
+                <div class="col-md-9">{{containerDetails.State.Running==true?"No":containerDetails.State.FinishedAt| date:'medium'}}&nbsp;</div>
                 <div class="col-md-3 text-right"><strong>Working dir</strong></div>
                 <div class="col-md-9">{{containerDetails.Config.WorkingDir}}&nbsp;</div>
                 <div class="col-md-3 text-right"><strong>Command</strong></div>
-                <div class="col-md-9"><code>{{containerDetails.Config.Cmd.join(' ')}}</code></div>
+                <div class="col-md-9"><code>{{containerDetails.Config.Cmd.join(' ')}}</code>&nbsp;</div>
                 <div class="col-md-3 text-right"><strong>Entry point</strong></div>
-                <div class="col-md-9"><code>{{containerDetails.Config.Entrypoint.join(' ')}}</code></div>
+                <div class="col-md-9"><code>{{containerDetails.Config.Entrypoint.join(' ')}}</code>&nbsp;</div>
 
             </div>
         </div>
@@ -109,19 +110,19 @@
             </div>
             <div class="panel-body">
                 <div class="col-md-3 text-right"><strong>CPU share</strong></div>
-                <div class="col-md-9">{{containerDetails.Config.CpuShares}}</div>
+                <div class="col-md-9">{{containerDetails.Config.CpuShares}}&nbsp;</div>
                 <div class="col-md-3 text-right"><strong>CPU set</strong></div>
                 <div class="col-md-9">{{containerDetails.Config.Cpuset}}&nbsp;</div>
                 <div class="col-md-3 text-right"><strong>PID on host</strong></div>
-                <div class="col-md-9">{{containerDetails.State.Pid}}</div>
+                <div class="col-md-9">{{containerDetails.State.Pid}}&nbsp;</div>
                 <div class="col-md-3 text-right"><strong>Driver</strong></div>
-                <div class="col-md-9">{{containerDetails.Driver}}</div>
+                <div class="col-md-9">{{containerDetails.Driver}}&nbsp;</div>
                 <div class="col-md-3 text-right"><strong>ExecDriver</strong></div>
-                <div class="col-md-9">{{containerDetails.ExecDriver}}</div>
+                <div class="col-md-9">{{containerDetails.ExecDriver}}&nbsp;</div>
                 <div class="col-md-3 text-right"><strong>Restart count</strong></div>
-                <div class="col-md-9">{{containerDetails.RestartCount}}</div>
+                <div class="col-md-9">{{containerDetails.RestartCount}}&nbsp;</div>
                 <div class="col-md-3 text-right"><strong>Privileged:</strong></div>
-                <div class="col-md-9">{{containerDetails.HostConfig.Privileged}}</div>
+                <div class="col-md-9">{{containerDetails.HostConfig.Privileged}}&nbsp;</div>
             </div>
         </div>
     </div>

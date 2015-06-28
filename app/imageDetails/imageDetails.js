@@ -25,12 +25,20 @@ angular.module('imageDetails', ['ngRoute'])
 
                 var images = $rootScope.images;
                 images.forEach(function (image) {
-                    console.log(image);
                     if (image.Id == imageDetails.Id) {
                         imageDetails.RepoTags = image.RepoTags;
                     }
                 });
                 $scope.imageDetails = imageDetails;
+
+                var images = Docker.images().query({showAllImagesFlag: 1}, function () {
+                    images.forEach(function (image) {
+                        if (image.Id == imageDetails.Id) {
+                            imageDetails.RepoTags = image.RepoTags;
+                            $scope.imageDetails = imageDetails;
+                        }
+                    });
+                });
             });
 
 

@@ -38,8 +38,21 @@ angular.module('dockery', [
             });
         };
     })
+    .directive('toggle', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+                if (attrs.toggle == "tooltip") {
+                    $(element).tooltip();
+                }
+                if (attrs.toggle == "popover") {
+                    $(element).popover();
+                }
+            }
+        };
+    })
     .run(function ($rootScope) {
-        $rootScope.appName='dockery';
+        $rootScope.appName = 'dockery';
         if (window.chrome && chrome.app && chrome.app.runtime) {
             $rootScope.chrome = true;
             chrome.app.window.current().maximize();

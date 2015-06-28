@@ -76,16 +76,10 @@ These screenshots are not representing the final version!
 Here's the list of active, scheduled, planned and finished development goals
 
 ## Under development
-0.2.6
-- Add: containers: command popover to show the whole command
-- Add: tag list to the image details
-+ Fix: show image name in the image details
-+ Fix: use image ID in container list link, because the 'namespace/repo:tag' is forwarding to wrong place
-
-## Roadmap /by priority/
 0.2.7
 - Add: list active containers related to the image in image details
 
+## Roadmap /by priority/
 0.2.8
 - Add: image pulling to the image list view
 
@@ -232,3 +226,8 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: display privileged container on container details page
 - Add: mark privileged containers on container list page
 - Add: Show environment variables on container details page
+
+0.2.6
+- Add: tag list to the image details
+- Fix: show image name in the image details
+- Fix: use image ID in container list link, because the 'namespace/repo:tag' is forwarding to wrong place
