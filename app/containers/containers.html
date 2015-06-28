@@ -201,7 +201,7 @@
                         ng-click="renameContainer(containerData)" title="Rename container"></button>
             </td>
             <td class="text-center">
-                <a ng-href="#/imageDetails/{{containerData.ImageName}}">
+                <a ng-href="#/imageDetails/{{containerData.ImageId}}">
                     {{containerData.ImageName | shorten:true:30}}</a>
             </td>
             <td class="text-left">{{containerData.Command | shorten:true:80}}</td>

@@ -80,6 +80,7 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: containers: command popover to show the whole command
 - Add: tag list to the image details
 + Fix: show image name in the image details
++ Fix: use image ID in container list link, because the 'namespace/repo:tag' is forwarding to wrong place
 
 ## Roadmap /by priority/
 0.2.7
@@ -211,7 +212,6 @@ Here's the list of active, scheduled, planned and finished development goals
 
 0.2.1
 - Add: create container page - basic
-- Fix: use image ID in container list link, because the 'namespace/repo:tag' is forwarding to wrong place
 - Fix: select all in containers can't be change (it' all or nothing)
 
 0.2.2
