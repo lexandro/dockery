@@ -81,7 +81,7 @@ Here's the list of active, scheduled, planned and finished development goals
 
 ## Roadmap /by priority/
 0.2.8
-- Add: image pulling to the image list view
+- Add: image search/pull to the image list view (from the public repo)
 
 0.2.9
 - Add: link containers in Create
@@ -91,6 +91,7 @@ Here's the list of active, scheduled, planned and finished development goals
 
 0.3.1
 - Add: helper links to the known fields/information pieces to help understand
+- Add: In Chrome mode add Settings view to enable synced storage usage  
 
 0.3.2
 - Add: exit code filter to container list view 
@@ -112,7 +113,6 @@ Here's the list of active, scheduled, planned and finished development goals
 - Fix: make it more responsive
 
 0.5.1
-
 - Add: option to show containers logs as formatted/raw 
 - Fix: TTY terminal doubling characters in some cases.  
 
