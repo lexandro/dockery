@@ -78,6 +78,7 @@ Here's the list of active, scheduled, planned and finished development goals
 ## Under development
 0.2.7
 - Add: list active containers related to the image in image details
+- Fix: add http/https prefix selector to host URL
 
 ## Roadmap /by priority/
 0.2.8
@@ -99,6 +100,7 @@ Here's the list of active, scheduled, planned and finished development goals
 
 0.3.3
 - Add: login into the docker hub and/or private repo(s) 
+- Add: search/pull image from private repo(s) 
 
 0.4.0
 - Fix: redesign host information page...drastically++ :)
@@ -113,6 +115,7 @@ Here's the list of active, scheduled, planned and finished development goals
 - Fix: make it more responsive
 
 0.5.1
+
 - Add: option to show containers logs as formatted/raw 
 - Fix: TTY terminal doubling characters in some cases.  
 
