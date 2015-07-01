@@ -1,7 +1,7 @@
 <div class="col-md-12 pull-right">
     <div class="row">
         <div class="col-md-12">
-            <h3>Image: {{imageDetails.RepoTags[0]}}
+            <h3>Image: <strong>{{imageDetails.RepoTags[0]}}</strong>
             </h3>
         </div>
     </div>
@@ -62,9 +62,33 @@
         </div>
     </div>
 
+    <div class="col-md-4">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h4 class="panel-title"><span class="fa fa-cubes"></span> Containers</h4>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-2"><strong>OS/Architecture:</strong></div>
+                <div class="col-md-9">{{imageDetails.Os}}/{{imageDetails.Architecture}}&nbsp;</div>
+                <div class="col-md-2"><strong>Command:</strong></div>
+                <div class="col-md-9"><code ng-show="imageDetails.ContainerConfig.Cmd.length>0"><span
+                        ng-repeat="cmd in imageDetails.ContainerConfig.Cmd"> {{cmd}}</span></code>&nbsp;</div>
+                <div class="col-md-2"><strong>Entry point:</strong></div>
+                <div class="col-md-9"><code ng-show="imageDetails.Config.Entrypoint.length>0">{{imageDetails.Config.Entrypoint[0]}}</code>&nbsp;</div>
+                <div class="col-md-2"><strong>Exposed ports:</strong></div>
+                <div class="col-md-9">{{imageDetails.Config.ExposedPorts}}&nbsp;</div>
+                <div class="col-md-2"><strong>Environment variables:</strong></div>
+                <div class="col-md-9"><code ng-repeat="env in imageDetails.Config.Env">{{env}}<br ng-show="!$last"/></code>&nbsp;</div>
+                <div class="col-md-2"><strong>Working dir:</strong></div>
+                <div class="col-md-9"><code ng-show="imageDetails.Config.WorkingDir.length>0">{{imageDetails.Config.WorkingDir}}</code>&nbsp;</div>
+            </div>
+        </div>
+    </div>
+
+
     <br/>
 
-    <div class="table-responsive col-md-12">
+    <div class="table-responsive col-md-8">
         <table class="table table-condensed table-hover table-striped table-bordered">
             <thead>
             <tr class="success">
@@ -77,9 +101,9 @@
 
             <tr>
                 <td width="3%" class="text-center"><strong>Id</strong></td>
-                <td width="5%" class="text-center"><strong>Created</strong></td>
-                <td width="40%" class="text-center"><strong>Command (first 160 chars)</strong></td>
-                <td width="3%" class="text-center"><strong>Size</strong></td>
+                <td width="7%" class="text-center"><strong>Created</strong></td>
+                <td width="40%" class="text-center"><strong>Command (first 80 chars)</strong></td>
+                <td width="5%" class="text-center"><strong>Size</strong></td>
             </tr>
             </thead>
             <tbody>
@@ -87,7 +111,7 @@
                 <td class="text-center"><a ng-href="#/imageDetails/{{imageHistory.Id}}"><samp><span
                         class="label label-info">{{imageHistory.Id | limitTo:12}}</span></samp></a></td>
                 <td>{{imageHistory.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
-                <td><code>{{imageHistory.CreatedBy| shorten:true:160}}</code></td>
+                <td><code>{{imageHistory.CreatedBy| shorten:true:80}}</code></td>
                 <td>{{imageHistory.Size | bytes:2}}</td>
             </tr>
             </tbody>
