@@ -76,14 +76,10 @@ These screenshots are not representing the final version!
 Here's the list of active, scheduled, planned and finished development goals
 
 ## Under development
-0.2.7
-- Add: list active containers related to the image in image details
-- Fix: add http/https prefix selector to host URL
-
-## Roadmap /by priority/
 0.2.8
 - Add: image search/pull to the image list view (from the public repo)
 
+## Roadmap /by priority/
 0.2.9
 - Add: link containers in Create
 
@@ -234,3 +230,7 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: tag list to the image details
 - Fix: show image name in the image details
 - Fix: use image ID in container list link, because the 'namespace/repo:tag' is forwarding to wrong place
+
+0.2.7
+- Add: list active containers related to the image in image details
+- Fix: add http/https prefix selector to host URL
