@@ -135,6 +135,11 @@ angular.module('services', [])
                         url: $rootScope.hostUrl + '/images/:imageId',
                         method: "DELETE",
                         isArray: true
+                    },
+                    search: {
+                        url: $rootScope.hostUrl + '/images/search',
+                        method: "GET",
+                        isArray: true
                     }
                 });
             },
@@ -165,6 +170,21 @@ angular.module('services', [])
             }
         }
     })
+    //.factory('Registry', function ($resource, $http, $rootScope) {
+    //    return {
+    //        containerLogs: function (containerId, logParams, callback) {
+    //            $http({
+    //                method: 'GET',
+    //                url: $rootScope.hostUrl + '/containers/' + containerId + '/logs',
+    //                params: logParams
+    //            })
+    //                .success(callback)
+    //                .error(function (data, status, headers, config) {
+    //                    console.log('error', data);
+    //                });
+    //        }
+    //    }
+    //})
     .factory('HostService', ['$rootScope', 'Helpers', function ($rootScope, Helpers) {
         return {
             load: function (callback) {

@@ -82,6 +82,7 @@ Here's the list of active, scheduled, planned and finished development goals
 ## Roadmap /by priority/
 0.2.9
 - Add: link containers in Create
+- Add: download logs as file.
 
 0.3.0
 - Add: add search for container diff
