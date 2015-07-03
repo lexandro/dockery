@@ -5,7 +5,12 @@
     <form class="form-inline" role="form">
         <div class="form-group">
             <input type="text" class="form-control" id="newHostName" ng-model="newHostName" placeholder="name">
-            <input type="url" class="form-control" id="newHostUrl" ng-model="newHostUrl" placeholder="docker host address">
+
+            <select ng-model="newHostPrefix" class="form-control">
+                <option value="http://">http://</option>
+                <!--<option value="https://">https://</option>-->
+            </select>
+            <input class="form-control" id="newHostUrl" ng-model="newHostUrl" placeholder="docker host address">
         </div>
         <button type="submit" class="btn btn-success " ng-click="addHost()"><span class="glyphicon glyphicon-plus"></span> Add</button>
         <br/>

@@ -15,6 +15,7 @@ angular.module('hosts', ['ngRoute'])
             $rootScope.lastPingInterval = 60000;
         }
         $scope.pingInterval = $rootScope.lastPingInterval;
+        $scope.newHostPrefix = 'http://';
         var hosts = [];
 
         try {
@@ -143,7 +144,7 @@ angular.module('hosts', ['ngRoute'])
                 var host = {};
                 host.id = Helpers.newId();
                 host.name = $scope.newHostName;
-                host.url = $scope.newHostUrl;
+                host.url = $scope.newHostPrefix + $scope.newHostUrl;
                 host.created = new Date();
                 host.lastConnected = null;
                 host.status = false;
