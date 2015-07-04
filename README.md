@@ -159,5 +159,6 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: list before filter to container list view
 
 ## Release notes
-You could find the release not on [this wiki page!](wiki)
+
+You could find the release not on [this wiki page!](https://github.com/lexandro/dockery/wiki)
 
