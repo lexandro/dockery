@@ -12,6 +12,7 @@ to manage few docker hosts and do some regular tasks on containers and images.
 **[Run as docker container](#run-as-docker-container)**  
 **[Beta screenshots](#beta-screenshots)**  
 **[Development roadmap](#development-roadmap)**  
+**[Release notes](#release-notes)**
  
 
 ## Enable remote access to a Docker daemon
@@ -140,25 +141,9 @@ Here's the list of active, scheduled, planned and finished development goals
 - docker image with version check in the webapp
 - Add copyright when released or published (xterm.js, json-formatter)
 
-## Far future, not decided yet
-- Customize fields in lists (show,noshow)
-- Better error handling for create container. Much better.
-- Presets for create container page
-- Make features docker host remote api version aware. Hide non-existing functions
-- Redesign layout from top menu to side menu
-- Add repeated pinging to containers (the list and per container)
-- Detect fig/compose naming pattern
-- Grep colored logs on container with pluggable patterns
-- Multiple container log tailing with one click/window
-- Ping open ports for spring actuator endpoints (health, ping, info, etc...) Risky...
-- Ping open ports for swagger endpoint (/api_docs)
-- Swarm support
-- compose yml support
-- Add: list last n items to container list view
-- Add: list since filter to container list view 
-- Add: list before filter to container list view
+## Possible future development ideas
+I collected some undecided features [on this page!](https://github.com/lexandro/dockery/wiki/Development-ideas)
 
-## Release notes
-
-You could find the release not on [this wiki page!](https://github.com/lexandro/dockery/wiki)
+# Release notes
+You could find the release notes on [this wiki page!](https://github.com/lexandro/dockery/wiki)
 
