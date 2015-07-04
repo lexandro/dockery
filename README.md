@@ -83,6 +83,7 @@ Here's the list of active, scheduled, planned and finished development goals
 0.2.9
 - Add: link containers in Create
 - Add: download logs as file.
+- Add: back button/listener to screens in chrome mode
 
 0.3.0
 - Add: add search for container diff
@@ -157,81 +158,6 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: list since filter to container list view 
 - Add: list before filter to container list view
 
-## Done
-0.1.1
-- Add: log view to containers/container details/diff listing
+## Release notes
+You could find the release not on [this wiki page!](wiki)
 
-0.1.0
-- Add: go first, go last to containers/container details/diff listing
-
-0.1.2
-- Add: TTY view to containers/container details/tty listing
-
-0.1.3 
-- Add: container details diff view: refresh button 
-- Fix: finish container details page TBD items
-- Fix: make containers/container details head smaller
-- Fix: Don't call top when container is stopped
-- *not fixed*: Don't cut down first character on displayed container name when the first char differ from '/' - replaced with Full name feature.
-
-0.1.4
-- Add: "Please wait..." view/anim for time consuming operations (container size, diff, ps, etc...)
-- Fix: default connection issue (two green buttons on hosts view)
-- Fix: image details view error with root images/no port exposed images because of a missing property
-
-0.1.5
-- Add: start/stop/pause/kill/etc.. button to container list view to manage containers
-- Fix: select all containers, not selected all containers properly.
-
-0.1.6
-- Add: start/stop/pause/kill/etc.. button to container details view to manage a container
-- Add: group containers by their state [running, paused, stopped]
-- Fix: loading process always displayed on stopped containers
-- Fix: no previuously loaded top data shown for just stopped containers on the containersdetails page
-
-0.1.7
-- Add: containerdetails/volumes
-  
-0.1.8
-- Rescheduled
-
-0.1.9
-- Add: rename container to container list view - Remote api version dependent feature
-- Add: release automatically in docker image format
-- Fix: display port assignments [exposed image without public, exposed with -P, exposed with -p, portless image with -P, portless image with -p]
-- Fix: image non-port exposure issue at: http://localhost:63342/dockery/app/imageDetails/imageDetails.js:23:63
-
-0.2.0
-- Rescheduled
-
-0.2.1
-- Add: create container page - basic
-- Fix: select all in containers can't be change (it' all or nothing)
-
-0.2.2
-- Add: image deletion to the image list view
-- Add: create container: name format check 
-
-0.2.3
-- Add: sort by table header fields in containers list
-- Add: sort by table header fields in images list
-
-0.2.4
-- Add: filter by table header fields in containers list
-- Add: filter by table header fields in images list
-
-0.2.5
-- Add: container details/volumes-from (get volume from other containers)
-- Add: privileged containers should show warning color in details or maybe in the lists too
-- Add: display privileged container on container details page
-- Add: mark privileged containers on container list page
-- Add: Show environment variables on container details page
-
-0.2.6
-- Add: tag list to the image details
-- Fix: show image name in the image details
-- Fix: use image ID in container list link, because the 'namespace/repo:tag' is forwarding to wrong place
-
-0.2.7
-- Add: list active containers related to the image in image details
-- Fix: add http/https prefix selector to host URL
