@@ -1,7 +1,7 @@
 # dockery
 
-Blueprint web application for my bigger idea to make docker based systems more manageable. This is a standalone solution 
-to manage few docker hosts and do some regular tasks on containers and images. 
+Dockery is a lightweight docker management and monitoring application for Developers. If you are new with container technologies and lxc based containerization, use Dockery 
+for easier management and more productivity. Dockery is available as Chrome application, Docker image or Github repository.
 
 <a target="_blank" href="https://chrome.google.com/webstore/detail/dockery-light/cefhojablgaokgccloekpocgmffgecmm">
 <img alt="Try it now" src="https://raw.github.com/GoogleChrome/chrome-app-samples/master/tryitnowbutton_small.png" title="Click here to install this app from the Chrome Web Store"></img>
@@ -78,7 +78,7 @@ Here's the list of active, scheduled, planned and finished development goals
 
 ## Under development
 0.2.8
-- Add: image search/pull to the image list view (from the public repo)
+- Add: image search/pull (from the public repo)
 
 ## Roadmap /by priority/
 0.2.9

@@ -1,0 +1,62 @@
+<div class="col-md-12 pull-right">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Search/Pull images</h3>
+        </div>
+    </div>
+    <hr/>
+    <table class="table table-condensed table-hover table-striped table-bordered">
+        <thead>
+        <tr class="success">
+            <td colspan="8">
+                <div class="input-group col-md-3">
+                    <label class="sr-only" for="search"></label>
+                    <input type="text" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required" id="search"
+                           style="width: 100% !important;margin-top: 2px" ng-model='searchImageName' placeholder="Type image name here">
+                            <span class="input-group-btn">
+                        </span>
+                    <button type="button" class="btn btn-success form-control" ng-click="searchImage()"><span
+                            class="fa fa-search"></span><strong>
+                        Search</strong>
+                    </button>
+
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td width="3%" class="text-center">
+                <span class="vcenter" ng-class="{'glyphicon glyphicon-check':selectAllImagesFlag, 'glyphicon glyphicon-unchecked':!selectAllImagesFlag}"
+                      class="vcenter" ng-click="switchSelectAllImagesFlag()">
+                </span>
+            </td>
+            <td width="25%" class="text-center"><strong>Name</strong></td>
+            <td width="5%" class="text-center"><strong>Official</strong></td>
+            <td width="5%" class="text-center"><strong>Trusted</strong></td>
+            <td width="5%" class="text-center"><strong>Automated</strong></td>
+            <td width="5%" class="text-center"><strong>Rating</strong></td>
+            <td width="55%" class="text-center"><strong>Description</strong></td>
+            <td width="5%" class="text-center"><strong>Actions</strong></td>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        <tr ng-repeat="searchResult in searchResults">
+            <td class="text-center vcenter">
+                <span class="vcenter" ng-class="{'glyphicon glyphicon-check':selectAllImagesFlag, 'glyphicon glyphicon-unchecked':!selectAllImagesFlag}"
+                      ng-click="switchSelectAllImagesFlag()">
+                </span>
+            </td>
+            <td>{{searchResult.name}}</td>
+            <td>{{searchResult.is_official}}</td>
+            <td>{{searchResult.is_trusted}}</td>
+            <td>{{searchResult.is_automated}}</td>
+            <td>{{searchResult.star_count}}</td>
+            <td style="max-width: 500px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{searchResult.description}}</td>
+            <td>DL</td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
