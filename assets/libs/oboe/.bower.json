@@ -1,0 +1,29 @@
+{
+  "name": "oboe",
+  "version": "2.1.2",
+  "main": "dist/oboe-browser.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "writing",
+    "src",
+    "examples",
+    "build",
+    "benchmarking",
+    "package.json",
+    "Gruntfile.js",
+    "test"
+  ],
+  "homepage": "https://github.com/jimhigson/oboe.js",
+  "_release": "2.1.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.1.2",
+    "commit": "befce74dec8bdc084c5e02f5aef856bc8202946e"
+  },
+  "_source": "git://github.com/jimhigson/oboe.js.git",
+  "_target": "~2.1.2",
+  "_originalSource": "oboe",
+  "_direct": true
+}
