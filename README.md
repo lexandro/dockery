@@ -79,6 +79,7 @@ Here's the list of active, scheduled, planned and finished development goals
 ## Under development
 0.2.8
 - Add: image search/pull (from the public repo)
+- Add copyright when released or published (xterm.js, json-formatter)
 
 ## Roadmap /by priority/
 0.2.9
@@ -139,7 +140,7 @@ Here's the list of active, scheduled, planned and finished development goals
 ## Not scheduled
 - Help
 - docker image with version check in the webapp
-- Add copyright when released or published (xterm.js, json-formatter)
+
 
 ## Possible future development ideas
 I collected some undecided features [on this page!](https://github.com/lexandro/dockery/wiki/Development-ideas)
@@ -147,3 +148,11 @@ I collected some undecided features [on this page!](https://github.com/lexandro/
 # Release notes
 You could find the release notes on [this wiki page!](https://github.com/lexandro/dockery/wiki)
 
+## Stack
+* [Angular.js](https://github.com/angular/angular.js)
+* [Bootstrap](http://getbootstrap.com/)
+* [Angular-Bootstrap switch](https://github.com/frapontillo/angular-bootstrap-switch)
+* [JSON formatter](https://github.com/mohsen1/json-formatter)
+* [xterm.js](http://xtermjs.readthedocs.org/en/latest/)
+
+Please let me know if I forgot anyone.
