@@ -14,7 +14,7 @@
     "angular-bootstrap-switch": "0.4.x",
     "json-formatter": "~0.2.7",
     "xterm.js": "~0.9.3",
-    "font-awesome": "~4.3.0"
+    "font-awesome": "~4.3.0",
     "oboe": "~2.1.x"
   }
 }
