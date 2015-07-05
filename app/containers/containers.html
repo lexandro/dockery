@@ -75,7 +75,7 @@
                        ng-click="switchSelectAllFlag()">
                 </span>
             </td>
-            <td width="12%" class="text-center">
+            <td width="10%" class="text-center">
                 <div class="vcenter"><strong>Control</strong></div>
             </td>
             <td width="5%" class="text-center vcenter" ng-click="changeSorting('Status')">
@@ -105,7 +105,7 @@
             <td width="3%" class="text-center vcenter">
                 <div class="vcenter"><strong>Edit</strong></div>
             </td>
-            <td width="15%" class="text-center vcenter" ng-click="changeSorting('ImageName')">
+            <td width="14%" class="text-center vcenter" ng-click="changeSorting('ImageName')">
                 <div class="vcenter">
                     <strong>Image</strong>
                     <span class='fa'
@@ -174,11 +174,11 @@
             <td class="form-groupID">
                 <div ng-show="containerData.Privileged==true">
                     <span class="fa fa-exclamation-triangle" style="color: red"></span>
-                    <a ng-href="#/containerDetails/{{containerData.Id }}">
+                    <a ng-href="#/containerDetails/{{containerData.Id}}" data-toggle="tooltip" ng-attr-title="{{containerData.Id}}">
                         {{containerData.Id | limitTo:12}}</a>
                 </div>
                 <div ng-hide="containerData.Privileged==true">
-                    <a ng-href="#/containerDetails/{{containerData.Id }}">
+                    <a ng-href="#/containerDetails/{{containerData.Id}}" data-toggle="tooltip" ng-attr-title="{{containerData.Id}}">
                         {{containerData.Id | limitTo:12}}</a>
                 </div>
             </td>
@@ -190,7 +190,7 @@
 
                 <div ng-show="!containerData.renameContainerEnabled">
                     <strong>
-                        <a ng-href="#/containerDetails/{{containerData.Id }}">
+                        <a ng-href="#/containerDetails/{{containerData.Id}}" data-toggle="tooltip" ng-attr-title="{{containerData.ContainerName}}">
                             {{containerData.ContainerName.charAt(0) === '/' ?
                             containerData.ContainerName.substr(1) : containerData.ContainerName | shorten:true:30}}</a>
                     </strong>
@@ -202,10 +202,12 @@
                         ng-click="renameContainer(containerData)" title="Rename container"></button>
             </td>
             <td class="text-center">
-                <a ng-href="#/imageDetails/{{containerData.ImageId}}">
+                <a ng-href="#/imageDetails/{{containerData.ImageId}}" data-toggle="tooltip" ng-attr-title="{{containerData.ImageName}}">
                     {{containerData.ImageName | shorten:true:30}}</a>
             </td>
-            <td class="text-left">{{containerData.Command | shorten:true:80}}</td>
+            <td class="text-left" style="max-width: 500px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" data-toggle="tooltip" ng-attr-title="{{containerData.Command}}">
+                {{containerData.Command}}
+            </td>
             <td class="text-left">{{showContainerSizeFlag==true?containerData.SizeRw:NAN | bytes:2 }}
                 ({{showContainerSizeFlag==true?containerData.SizeRootFs:NAN | bytes:2 }})
             </td>
