@@ -9,7 +9,7 @@
         <h3 class="panel-title"><span class="fa fa-refresh fa-spin"></span> Searching for <strong>{{searchText}}</strong></h3>
     </div>
     <div class="alert alert-danger" role="alert" ng-show="repositorySearchingError">
-        <h3 class="panel-title"><span class="fa fa-frown-o"></span> Error occured during searching for <strong>{{searchImageName}}</strong></h3>
+        <h3 class="panel-title"><span class="fa fa-frown-o"></span> Error occurred during searching for <strong>{{searchImageName}}</strong></h3>
 
         <div class="panel-body">
             <div class="col-md-1 text-right"><strong>Message:</strong></div>
@@ -20,25 +20,26 @@
     </div>
     <table class="table table-condensed table-hover table-striped table-bordered">
         <thead>
-        <tr class="success">
+        <tr class="success vcenter form-group">
             <td colspan="8">
-                <div class="input-group col-md-3">
-                    <label class="sr-only" for="search"></label>
-                    <input type="text" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required " id="search"
-                           style="width: 100% !important;margin-top: 2px" ng-model='searchImageName' placeholder="Type image name here"
-                           ng-enter="searchImage()">
-                            <span class="input-group-btn">
-                        </span>
-                    <button type="button" class="btn btn-success form-control" ng-click="searchImage()"><span
-                            class="fa fa-search"></span><strong>
-                        Search</strong>
-                    </button>
-                    <button type="button" class="btn btn-success form-control" ng-click="downloadImage('lexandro/echo-repeat')"><span
-                            class="fa fa-cloud-download"></span><strong>
-                        Pull echo-repeat</strong>
-                    </button>
+                <label class="sr-only" for="search"></label>
+                <input type="text" class="ng-pristine ng-untouched ng-invalid ng-invalid-required " id="search"
+                       ng-model='searchImageName' placeholder="Type image name here"
+                       ng-enter="searchImage()">
 
-                </div>
+                <button type="button" class="btn btn-primary btn-sm" ng-click="searchImage()"><span
+                        class="fa fa-search"></span><strong>
+                    Search</strong>
+                </button>
+
+                <button type="button" class="btn btn-success btn-sm" ng-click="downloadSelectedImages()"><span
+                        class="fa fa-cloud-download"></span><strong>
+                    Pull selected</strong>
+                </button>
+                <button type="button" class="btn btn-danger btn-sm" ng-click="downloadImage('lexandro/echo-repeat')"><span
+                        class="fa fa-cloud-download"></span><strong>
+                    Pull echo-repeat</strong>
+                </button>
             </td>
         </tr>
 
@@ -48,23 +49,27 @@
                       class="vcenter" ng-click="switchSelectAllImagesFlag()">
                 </span>
             </td>
+            <td width="5%" class="text-center"><strong>Actions</strong></td>
             <td width="25%" class="text-center"><strong>Name</strong></td>
             <td width="5%" class="text-center"><strong>Official</strong></td>
             <td width="5%" class="text-center"><strong>Trusted</strong></td>
             <td width="5%" class="text-center"><strong>Automated</strong></td>
             <td width="5%" class="text-center"><strong>Rating</strong></td>
             <td width="55%" class="text-center"><strong>Description</strong></td>
-            <td width="5%" class="text-center"><strong>Actions</strong></td>
         </tr>
         </thead>
         <tbody>
-
-
         <tr ng-repeat="searchResult in searchResults" ng-class="{'success': searchResult.is_official}">
             <td class="text-center vcenter">
-                <span class="vcenter" ng-class="{'glyphicon glyphicon-check':selectAllImagesFlag, 'glyphicon glyphicon-unchecked':!selectAllImagesFlag}"
-                      ng-click="switchSelectAllImagesFlag()">
+                <span class="vcenter" ng-class="{'glyphicon glyphicon-check':searchResult.selected, 'glyphicon glyphicon-unchecked':!searchResult.selected}"
+                      ng-click="selectImageFlag(searchResult)">
                 </span>
+            </td>
+            <td>
+                <button type="button" class="btn btn-success form-control" ng-click="downloadImage(searchResult.name)"><span
+                        class="fa fa-cloud-download"></span><strong>
+                    Pull</strong>
+                </button>
             </td>
             <td><strong>{{searchResult.name}}</strong></td>
             <td class="text-center"><span class="fa fa-check" ng-show="searchResult.is_official"></span>&nbsp;</td>
@@ -74,12 +79,7 @@
             <td style="max-width: 500px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" data-toggle="tooltip"
                 ng-attr-title="{{searchResult.description}}">{{searchResult.description}}
             </td>
-            <td>
-                <button type="button" class="btn btn-success form-control" ng-click="downloadImage(searchResult.name)"><span
-                        class="fa fa-cloud-download"></span><strong>
-                    Pull</strong>
-                </button>
-            </td>
+
         </tr>
         </tbody>
     </table>
