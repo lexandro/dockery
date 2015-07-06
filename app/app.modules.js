@@ -17,6 +17,9 @@ angular.module('dockery', [
         'images',
         'imageDetails',
         'repository',
+        'tasks',
+        'events',
+        'about',
         'frapontillo.bootstrap-switch'],
     function ($provide) {
         // Prevent Angular from sniffing for the history API
