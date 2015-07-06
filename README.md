@@ -79,7 +79,10 @@ Here's the list of active, scheduled, planned and finished development goals
 ## Under development
 0.2.8
 - Add: image search/pull (from the public repo)
-- Add copyright when released or published (xterm.js, json-formatter)
+- Add: copyright when released or published (xterm.js, json-formatter)
+- Add: version info
+- Fix: clicking on image in container list causes error (need to load all images into the rootscope)
+- Add: remove button/entry to images list
 
 ## Roadmap /by priority/
 0.2.9
@@ -89,6 +92,8 @@ Here's the list of active, scheduled, planned and finished development goals
 
 0.3.0
 - Add: add search for container diff
+- Add: commit container as image
+- Add: push image to the repository
 
 0.3.1
 - Add: helper links to the known fields/information pieces to help understand
@@ -109,6 +114,7 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: download file link to containers/container details/diff listing items
 
 0.4.2
+- Add: Events view to receive docker activities (with max size)
 - Add: also add tooltips to these items on all views
 
 0.5.0
@@ -140,7 +146,6 @@ Here's the list of active, scheduled, planned and finished development goals
 ## Not scheduled
 - Help
 - docker image with version check in the webapp
-
 
 ## Possible future development ideas
 I collected some undecided features [on this page!](https://github.com/lexandro/dockery/wiki/Development-ideas)
