@@ -83,7 +83,7 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: version info
 - Add: remove button/entry to images list
 - Fix: clicking on image in container list causes error (need to load all images into the rootscope)
-- Fix: scrolling in window not enabled as chrome app
++ Fix: scrolling in window not enabled as chrome app
 - Fix: stopping multiple containers  is not working properly on huge list with already stopped containers
 
 ## Roadmap /by priority/
@@ -161,5 +161,6 @@ You could find the release notes on [this wiki page!](https://github.com/lexandr
 * [Angular-Bootstrap switch](https://github.com/frapontillo/angular-bootstrap-switch)
 * [JSON formatter](https://github.com/mohsen1/json-formatter)
 * [xterm.js](http://xtermjs.readthedocs.org/en/latest/)
+* [toastr.js](https://github.com/CodeSeven/toastr)
 
 Please let me know if I forgot anyone.
