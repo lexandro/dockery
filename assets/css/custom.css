@@ -3,6 +3,14 @@
     margin-top: 6px
 }
 
+.mygrid-wrapper-div {
+    overflow: scroll;
+}
+
+html {
+    overflow-y: auto;
+}
+
 pre {
     overflow: auto;
     word-wrap: normal;
