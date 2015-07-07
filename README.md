@@ -81,8 +81,10 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: image search/pull (from the public repo)
 - Add: copyright when released or published (xterm.js, json-formatter)
 - Add: version info
-- Fix: clicking on image in container list causes error (need to load all images into the rootscope)
 - Add: remove button/entry to images list
+- Fix: clicking on image in container list causes error (need to load all images into the rootscope)
+- Fix: scrolling in window not enabled as chrome app
+- Fix: stopping multiple containers  is not working properly on huge list with already stopped containers
 
 ## Roadmap /by priority/
 0.2.9
