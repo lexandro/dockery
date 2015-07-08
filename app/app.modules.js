@@ -59,6 +59,7 @@ angular.module('dockery', [
     .run(function ($rootScope) {
         $rootScope.appName = 'dockery';
         $rootScope.appVersion = '0.2.8';
+        $rootScope.tasks = [];
         if (window.chrome && chrome.app && chrome.app.runtime) {
             $rootScope.chrome = true;
             chrome.app.window.current().maximize();

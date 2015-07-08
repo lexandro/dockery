@@ -49,6 +49,22 @@ angular.module('repository', ['ngRoute'])
                                 if (item.status === "Status: Downloaded newer image for lexandro/echo-repeat:latest") {
                                     console.log('Finito');
                                     this.abort();
+                                } else {
+                                    var tasks = $rootScope.tasks;
+                                    var pos = -1;
+                                    tasks.forEach(function (task, index) {
+                                        if (task.id == item.id) {
+                                            pos = index;
+                                        }
+                                    });
+                                    if (!Helpers.isEmpty(item.id) && pos == -1) {
+                                        tasks.push(item);
+                                    } else {
+                                        tasks[pos] = item;
+                                    }
+                                    $rootScope.tasks = tasks;
+                                    $rootScope.$apply();
+
                                 }
                             }
                         })
