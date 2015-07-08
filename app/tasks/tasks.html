@@ -5,6 +5,14 @@
         </div>
     </div>
     <hr/>
-   Nada...
+    Design or kill me...<br>
+    <table class="table table-condensed table-hover table-striped">
+        <tr ng-repeat="task in $root.tasks">
+            <td>{{task.id}}</td>
+            <td>{{task.status}}</td>
+            <td>{{task.progress}}</td>
+            <td>{{task.progressDetail.start * 1000 | date:'dd, MMM yyyy HH:mm:ss'}}</td>
+        </tr>
+    </table>
     {{$root.tasks}}
 </div>
