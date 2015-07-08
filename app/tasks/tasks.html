@@ -5,14 +5,34 @@
         </div>
     </div>
     <hr/>
-    Design or kill me...<br>
     <table class="table table-condensed table-hover table-striped">
+        <thead>
+        <tr class="success">
+            <td width="2%" class="vcenter"><strong>ID</strong></td>
+            <td width="15%" class="vcenter"><strong>Status</strong></td>
+            <td width="10%" class="vcenter"><strong>Current</strong></td>
+            <td width="5%" class="vcenter"><strong>Started</strong></td>
+            <td width="50%" class="vcenter"><strong>Progress</strong></td>
+        </tr>
+        </thead>
+        <tbody>
         <tr ng-repeat="task in $root.tasks">
             <td>{{task.id}}</td>
             <td>{{task.status}}</td>
-            <td>{{task.progress}}</td>
-            <td>{{task.progressDetail.start * 1000 | date:'dd, MMM yyyy HH:mm:ss'}}</td>
+            <td>{{task.progress | bytes:2}} / {{task.total | bytes:2}}</td>
+            <td ng-show="task.start!=null">{{task.start * 1000 | date:'dd, MMM yyyy HH:mm:ss'}}</td>
+            <td ng-show="task.start==null">-</td>
+            <td>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success"
+                         ng-class="{'progress-bar-striped active':task.progress!=task.total}"
+                         role="progressbar" aria-valuenow="40" aria-valuemin="0"
+                         aria-valuemax="100" style="width: {{task.progress/task.total*100}}%">
+                        <span class="sr-only">40% Complete (success)</span>
+                    </div>
+                </div>
+            </td>
         </tr>
+        </tbody>
     </table>
-    {{$root.tasks}}
 </div>

@@ -45,22 +45,59 @@ angular.module('repository', ['ngRoute'])
                     })
                         .node('*', function (item) {
                             if (typeof item == "object" && !Helpers.isEmpty(item) && !Helpers.isEmpty(item.status)) {
-                                console.log("Received: " + JSON.stringify(item));
                                 if (item.status === "Status: Downloaded newer image for lexandro/echo-repeat:latest") {
-                                    console.log('Finito');
+                                    toastr["success"]('Image of ' + imageName + ' pull completed');
                                     this.abort();
                                 } else {
                                     var tasks = $rootScope.tasks;
                                     var pos = -1;
+                                    var newTask = {};
+                                    $rootScope.taskInProgress = false;
                                     tasks.forEach(function (task, index) {
                                         if (task.id == item.id) {
                                             pos = index;
                                         }
+                                        if (task.total != task.progress) {
+                                            $rootScope.taskInProgress = true;
+                                        }
                                     });
-                                    if (!Helpers.isEmpty(item.id) && pos == -1) {
-                                        tasks.push(item);
+                                    newTask.id = item.id;
+                                    newTask.status = item.status;
+                                    if (item.status == 'Download complete' || item.status == 'Pull complete') {
+                                        newTask.total = 1;
+                                        newTask.progress = 1;
+                                        newTask.start = null;
+                                    } else if (item.progressDetail.total == -1) {
+                                        newTask.progress = item.progress;
+                                        newTask.total = 0;
+                                        newTask.start = task.progressDetail.start;
                                     } else {
-                                        tasks[pos] = item;
+                                        newTask.progress = item.progressDetail.current;
+                                        newTask.total = item.progressDetail.total;
+                                        newTask.start = null;
+                                    }
+                                    if (!Helpers.isEmpty(item.id) && pos == -1) {
+
+                                        newTask.id = item.id;
+                                        newTask.status = item.status;
+
+                                        tasks.push(newTask);
+                                    } else {
+                                        newTask = tasks[pos];
+                                        newTask.status = item.status;
+                                        if (item.status == 'Download complete' || item.status == 'Pull complete') {
+                                            newTask.progress = newTask.total;
+                                        } else if (item.progressDetail.total == -1) {
+                                            newTask.progress = item.progress;
+                                            newTask.total = 0;
+                                            newTask.start = task.progressDetail.start;
+                                        } else {
+                                            newTask.progress = item.progressDetail.current;
+                                            newTask.total = item.progressDetail.total;
+                                            newTask.start = null;
+                                        }
+
+                                        tasks[pos] = newTask;
                                     }
                                     $rootScope.tasks = tasks;
                                     $rootScope.$apply();
@@ -72,7 +109,6 @@ angular.module('repository', ['ngRoute'])
                             console.log('there are', things.item.length, 'things to read');
                         });
                 }
-                console.log('download ' + imageName);
             };
 
             $scope.downloadSelectedImages = function () {
