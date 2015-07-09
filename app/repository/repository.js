@@ -44,14 +44,16 @@ angular.module('repository', ['ngRoute'])
                         method: 'POST'
                     })
                         .node('*', function (item) {
+
+
                             if (typeof item == "object" && !Helpers.isEmpty(item) && !Helpers.isEmpty(item.status)) {
                                 if (item.status === "Status: Downloaded newer image for lexandro/echo-repeat:latest") {
                                     toastr["success"]('Image of ' + imageName + ' pull completed');
                                     this.abort();
                                 } else {
+                                    console.log(JSON.stringify(item));
                                     var tasks = $rootScope.tasks;
-                                    var pos = -1;
-                                    var newTask = {};
+                                    var pos = null;
                                     $rootScope.taskInProgress = false;
                                     tasks.forEach(function (task, index) {
                                         if (task.id == item.id) {
@@ -61,49 +63,30 @@ angular.module('repository', ['ngRoute'])
                                             $rootScope.taskInProgress = true;
                                         }
                                     });
-                                    newTask.id = item.id;
-                                    newTask.status = item.status;
-                                    if (item.status == 'Download complete' || item.status == 'Pull complete') {
-                                        newTask.total = 1;
-                                        newTask.progress = 1;
-                                        newTask.start = null;
-                                    } else if (item.progressDetail.total == -1) {
-                                        newTask.progress = item.progress;
-                                        newTask.total = 0;
-                                        newTask.start = task.progressDetail.start;
-                                    } else {
-                                        newTask.progress = item.progressDetail.current;
-                                        newTask.total = item.progressDetail.total;
-                                        newTask.start = null;
-                                    }
-                                    if (!Helpers.isEmpty(item.id) && pos == -1) {
-
+                                    //
+                                    if (pos == null && !Helpers.isEmpty(item.id)) {
+                                        var newTask = {};
                                         newTask.id = item.id;
-                                        newTask.status = item.status;
-
+                                        newTask.finished = false;
+                                        newTask.start = null;
+                                        //
+                                        updateTaskStatus(newTask, item);
+                                        //
                                         tasks.push(newTask);
                                     } else {
-                                        newTask = tasks[pos];
-                                        newTask.status = item.status;
-                                        if (item.status == 'Download complete' || item.status == 'Pull complete') {
-                                            newTask.progress = newTask.total;
-                                        } else if (item.progressDetail.total == -1) {
-                                            newTask.progress = item.progress;
-                                            newTask.total = 0;
-                                            newTask.start = task.progressDetail.start;
-                                        } else {
-                                            newTask.progress = item.progressDetail.current;
-                                            newTask.total = item.progressDetail.total;
-                                            newTask.start = null;
-                                        }
-
+                                        var newTask = tasks[pos];
+                                        updateTaskStatus(newTask, item);
                                         tasks[pos] = newTask;
                                     }
-                                    $rootScope.tasks = tasks;
-                                    $rootScope.$apply();
+
+                                    $rootScope.$apply(function () {
+                                        $rootScope.tasks = tasks;
+                                    });
 
                                 }
+
                             }
+
                         })
                         .done(function (things) {
                             console.log('there are', things.item.length, 'things to read');
@@ -135,4 +118,27 @@ angular.module('repository', ['ngRoute'])
                 $scope.selectAllImagesFlag = false;
             }
         }
-    }]);
+
+        function updateTaskStatus(newTask, item) {
+            newTask.status = item.status;
+
+            if (item.status == 'Download complete' || item.status == 'Pull complete') {
+                newTask.finished = true;
+                newTask.percent = 100;
+            } else {
+                if (item.progressDetail.total == -1) {
+                    newTask.progress = item.progressDetail.current;
+                    console.log(newTask.id + ' ' + newTask.progress);
+                    newTask.total = 0;
+                    newTask.start = task.progressDetail.start;
+                } else {
+                    newTask.progress = item.progressDetail.current;
+                    newTask.total = item.progressDetail.total;
+                    newTask.percent = 100 * newTask.progress / newTask.total;
+                    newTask.start = null;
+                }
+            }
+
+        }
+    }
+    ]);
