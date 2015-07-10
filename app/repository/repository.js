@@ -9,7 +9,7 @@ angular.module('repository', ['ngRoute'])
         });
     }])
 
-    .controller('RepositoryCtrl', ['$rootScope', '$scope', '$location', '$routeParams', 'Helpers', 'Docker', function ($rootScope, $scope, $location, $routeParams, Helpers, Docker) {
+    .controller('RepositoryCtrl', ['$rootScope', '$scope', '$location', '$routeParams', 'Helpers', 'Docker', 'Registry', function ($rootScope, $scope, $location, $routeParams, Helpers, Docker, Registry) {
         if (Helpers.isEmpty($rootScope.hostUrl)) {
             $location.path('/hosts');
         } else {
@@ -25,7 +25,24 @@ angular.module('repository', ['ngRoute'])
                     $scope.repositorySearching = false;
                     $scope.searchResults = searchResults;
                     searchResults.forEach(function (searchResult) {
-                        searchResults.selected = false;
+                        searchResult.selected = false;
+                        searchResult.tagsLoaded = false;
+                        searchResult.selectedTag = '';
+                        var tags = Registry.tags().get({imageName: searchResult.name}, function () {
+                            searchResult.tags = tags;
+                            searchResult.tagsLoaded = true;
+                            // trying to find latest...
+                            tags.forEach(function (tag) {
+                                if (tag.name == 'latest') {
+                                    searchResult.selectedTag = tag.name;
+                                }
+                            });
+                            // default tag
+                            if (searchResult.selectedTag.length == 0) {
+                                searchResult.selectedTag = tags[0].name;
+                            }
+                        });
+
                     });
 
                 }, function (error) {
@@ -36,54 +53,49 @@ angular.module('repository', ['ngRoute'])
 
 
             };
-            $scope.downloadImage = function (imageName) {
-                toastr["info"]('Pulling image ' + imageName, 'Check the progress on tasks');
+            $scope.downloadImage = function (searchResult) {
+                var imageName = searchResult.name;
+                var imageTag = searchResult.selectedTag;
+                toastr["info"]('Pulling image ' + imageName + ':' + imageTag, 'Check the progress on tasks');
                 oboe({
-                    url: 'http://localhost:2375/images/create?fromImage=' + imageName + '&tag=latest',
+                    url: 'http://localhost:2375/images/create?fromImage=' + imageName + '&tag=' + imageTag,
                     method: 'POST'
                 })
                     .node('*', function (item) {
 
 
                         if (typeof item == "object" && !Helpers.isEmpty(item) && !Helpers.isEmpty(item.status)) {
-                            if (item.status === "Status: Downloaded newer image for lexandro/echo-repeat:latest") {
-                                toastr["success"]('Image of ' + imageName + ' pull completed');
-                                this.abort();
-                            } else {
-                                var tasks = $rootScope.tasks;
-                                var pos = null;
-                                $rootScope.taskInProgress = false;
-                                tasks.forEach(function (task, index) {
-                                    if (task.id == item.id) {
-                                        pos = index;
-                                    }
-                                    if (!task.finished) {
-                                        $rootScope.taskInProgress = true;
-                                    }
-                                });
-                                //
-                                if (pos == null && !Helpers.isEmpty(item.id)) {
-                                    var newTask = {};
-                                    newTask.id = item.id;
-                                    newTask.finished = false;
-                                    newTask.start = null;
-                                    //
-                                    updateTaskStatus(newTask, item);
-                                    //
-                                    tasks.push(newTask);
-                                } else {
-                                    var newTask = tasks[pos];
-                                    updateTaskStatus(newTask, item);
-                                    tasks[pos] = newTask;
+
+                            var tasks = $rootScope.tasks;
+                            var pos = null;
+                            $rootScope.taskInProgress = false;
+                            tasks.forEach(function (task, index) {
+                                if (task.id == item.id) {
+                                    pos = index;
                                 }
-                                $rootScope.$apply(function () {
-                                    $rootScope.tasks = tasks;
-                                });
-
+                                if (!task.finished) {
+                                    $rootScope.taskInProgress = true;
+                                }
+                            });
+                            //
+                            if (pos == null && !Helpers.isEmpty(item.id)) {
+                                var newTask = {};
+                                newTask.id = item.id;
+                                newTask.finished = false;
+                                newTask.start = null;
+                                //
+                                updateTaskStatus(newTask, item);
+                                //
+                                tasks.push(newTask);
+                            } else {
+                                var newTask = tasks[pos];
+                                updateTaskStatus(newTask, item);
+                                tasks[pos] = newTask;
                             }
-
+                            $rootScope.$apply(function () {
+                                $rootScope.tasks = tasks;
+                            });
                         }
-
                     })
                     .done(function (things) {
                         console.log('there are', things.item.length, 'things to read');
@@ -94,7 +106,11 @@ angular.module('repository', ['ngRoute'])
                 var searchResults = $scope.searchResults;
                 searchResults.forEach(function (searchResult) {
                     if (searchResult.selected) {
-                        $scope.downloadImage(searchResult.name);
+                        if (searchResult.selectedTag.length > 0) {
+                            $scope.downloadImage(searchResult);
+                        } else {
+                            toastr["warning"]("Can't pull image " + searchResult.name, "No tag selected!");
+                        }
                     }
                 });
             };
