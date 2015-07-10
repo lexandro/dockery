@@ -5,20 +5,31 @@
         </div>
     </div>
     <hr/>
-    <table class="table table-condensed table-hover table-striped">
+    <table class="table table-condensed table-hover table-striped table-bordered">
         <thead>
-        <tr class="success">
-            <td width="2%" class="vcenter"><strong>ID</strong></td>
-            <td width="25%" class="vcenter"><strong>Status</strong></td>
-            <td width="10%" class="vcenter"><strong>Current</strong></td>
-            <td width="5%" class="vcenter"><strong>Started</strong></td>
-            <td width="50%" class="vcenter"><strong>Progress</strong></td>
+        <tr class="success vcenter form-group">
+            <td colspan="5">
+                <button type="button" class="btn btn-danger btn-sm" ng-click="clearFinishedTasks()"><span
+                        class="fa fa-trash"></span><strong>
+                    Clear finished</strong>
+                </button>
+                <label>Filter: <input ng-model="search.$"></label>
+                <strong>Items listed: <span class="badge">{{$root.tasks.length}}</span></strong>
+            </td>
+        </tr>
+
+        <tr>
+            <td width="2%" class="text-center"><strong>ID</strong></td>
+            <td width="25%" class="text-center"><strong>Status</strong></td>
+            <td width="10%" class="text-center"><strong>Current</strong></td>
+            <td width="5%" class="text-center"><strong>Started</strong></td>
+            <td width="50%" class="text-center"><strong>Progress</strong></td>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="task in $root.tasks">
+        <tr ng-repeat="task in $root.tasks | filter:search">
             <td>{{task.id}}</td>
-            <td>{{task.status}} {{task.percent}}</td>
+            <td>{{task.status}}</td>
             <td ng-show="task.total!=0">{{task.progress | bytes:2}} / {{task.total | bytes:2}}</td>
             <td ng-show="task.total==0">{{task.progress | bytes:2}}</td>
             <td ng-show="task.start!=null">{{task.start * 1000 | date:'dd, MMM yyyy HH:mm:ss'}}</td>
@@ -26,10 +37,10 @@
             <td>
                 <div class="progress">
                     <div class="progress-bar progress-bar-success"
-                         ng-class="{'progress-bar-striped active':!newTask.finished}"
+                         ng-class="{'progress-bar-striped active':!task.finished}"
                          role="progressbar" aria-valuemin="0" aria-valuemax="100"
-                         aria-valuenow="{{newTask.percent}}" style="width: {{newTask.percent}}%">
-                        <span class="sr-only">{{newTask.percent}}% Complete (success)</span>
+                         aria-valuenow="{{task.percent}}" style="width: {{task.percent}}%">
+                        <span class="sr-only">{{task.percent}}% Complete (success)</span>
                     </div>
                 </div>
             </td>

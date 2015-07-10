@@ -38,67 +38,62 @@ angular.module('repository', ['ngRoute'])
             };
             $scope.downloadImage = function (imageName) {
                 toastr["info"]('Pulling image ' + imageName, 'Check the progress on tasks');
-                if (imageName == 'lexandro/echo-repeat') {
-                    oboe({
-                        url: 'http://localhost:2375/images/create?fromImage=lexandro/echo-repeat&tag=latest',
-                        method: 'POST'
-                    })
-                        .node('*', function (item) {
+                oboe({
+                    url: 'http://localhost:2375/images/create?fromImage=' + imageName + '&tag=latest',
+                    method: 'POST'
+                })
+                    .node('*', function (item) {
 
 
-                            if (typeof item == "object" && !Helpers.isEmpty(item) && !Helpers.isEmpty(item.status)) {
-                                if (item.status === "Status: Downloaded newer image for lexandro/echo-repeat:latest") {
-                                    toastr["success"]('Image of ' + imageName + ' pull completed');
-                                    this.abort();
-                                } else {
-                                    console.log(JSON.stringify(item));
-                                    var tasks = $rootScope.tasks;
-                                    var pos = null;
-                                    $rootScope.taskInProgress = false;
-                                    tasks.forEach(function (task, index) {
-                                        if (task.id == item.id) {
-                                            pos = index;
-                                        }
-                                        if (task.total != task.progress) {
-                                            $rootScope.taskInProgress = true;
-                                        }
-                                    });
-                                    //
-                                    if (pos == null && !Helpers.isEmpty(item.id)) {
-                                        var newTask = {};
-                                        newTask.id = item.id;
-                                        newTask.finished = false;
-                                        newTask.start = null;
-                                        //
-                                        updateTaskStatus(newTask, item);
-                                        //
-                                        tasks.push(newTask);
-                                    } else {
-                                        var newTask = tasks[pos];
-                                        updateTaskStatus(newTask, item);
-                                        tasks[pos] = newTask;
+                        if (typeof item == "object" && !Helpers.isEmpty(item) && !Helpers.isEmpty(item.status)) {
+                            if (item.status === "Status: Downloaded newer image for lexandro/echo-repeat:latest") {
+                                toastr["success"]('Image of ' + imageName + ' pull completed');
+                                this.abort();
+                            } else {
+                                var tasks = $rootScope.tasks;
+                                var pos = null;
+                                $rootScope.taskInProgress = false;
+                                tasks.forEach(function (task, index) {
+                                    if (task.id == item.id) {
+                                        pos = index;
                                     }
-
-                                    $rootScope.$apply(function () {
-                                        $rootScope.tasks = tasks;
-                                    });
-
+                                    if (!task.finished) {
+                                        $rootScope.taskInProgress = true;
+                                    }
+                                });
+                                //
+                                if (pos == null && !Helpers.isEmpty(item.id)) {
+                                    var newTask = {};
+                                    newTask.id = item.id;
+                                    newTask.finished = false;
+                                    newTask.start = null;
+                                    //
+                                    updateTaskStatus(newTask, item);
+                                    //
+                                    tasks.push(newTask);
+                                } else {
+                                    var newTask = tasks[pos];
+                                    updateTaskStatus(newTask, item);
+                                    tasks[pos] = newTask;
                                 }
+                                $rootScope.$apply(function () {
+                                    $rootScope.tasks = tasks;
+                                });
 
                             }
 
-                        })
-                        .done(function (things) {
-                            console.log('there are', things.item.length, 'things to read');
-                        });
-                }
+                        }
+
+                    })
+                    .done(function (things) {
+                        console.log('there are', things.item.length, 'things to read');
+                    });
             };
 
             $scope.downloadSelectedImages = function () {
                 var searchResults = $scope.searchResults;
                 searchResults.forEach(function (searchResult) {
                     if (searchResult.selected) {
-                        console.log(JSON.stringify(searchResult));
                         $scope.downloadImage(searchResult.name);
                     }
                 });
@@ -121,14 +116,12 @@ angular.module('repository', ['ngRoute'])
 
         function updateTaskStatus(newTask, item) {
             newTask.status = item.status;
-
-            if (item.status == 'Download complete' || item.status == 'Pull complete') {
+            if (item.status == 'Download complete' || item.status == 'Pull complete' || item.status == 'Already exists') {
                 newTask.finished = true;
                 newTask.percent = 100;
             } else {
                 if (item.progressDetail.total == -1) {
                     newTask.progress = item.progressDetail.current;
-                    console.log(newTask.id + ' ' + newTask.progress);
                     newTask.total = 0;
                     newTask.start = task.progressDetail.start;
                 } else {
@@ -141,4 +134,5 @@ angular.module('repository', ['ngRoute'])
 
         }
     }
-    ]);
+    ])
+;

@@ -35,9 +35,9 @@
                     <li><a class="active" href="#/hosts"><span class="fa fa-server"></span> Hosts</a></li>
                     <li><a class="active" href="#/containers"><span class="fa fa-cubes"></span> Containers</a></li>
                     <li><a href="#/images"><span class="fa fa-database"></span> Images</a></li>
-                    <!--<li><a href="#/repository"><span class="fa fa-cloud"></span> Repository</a></li>-->
-                    <!--<li><a href="#/tasks" style="color: red" ng-show="$root.taskInProgress"><span class="fa fa-heartbeat"></span> Tasks</a></li>-->
-                    <!--<li><a href="#/tasks" ng-show="!$root.taskInProgress"><span class=" fa fa-heartbeat"></span> Tasks</a></li>-->
+                    <li><a href="#/repository"><span class="fa fa-cloud"></span> Repository</a></li>
+                    <li><a href="#/tasks" style="color: red" ng-show="$root.taskInProgress"><span class="fa fa-heartbeat"></span> Tasks <span class="badge">{{$root.tasks.length}}</span></a></li>
+                    <li><a href="#/tasks" ng-show="!$root.taskInProgress"><span class=" fa fa-heartbeat"></span> Tasks <span class="badge">{{$root.tasks.length}}</span></a></li>
                     <!--<li><a href="#/events"><span class="fa fa-history"></span> Events</a></li>-->
                     <li><a href="#/hostDetails"><span class="fa fa-laptop"></span> Host details</a></li>
                 </ul>

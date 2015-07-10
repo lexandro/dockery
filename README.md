@@ -77,21 +77,13 @@ These screenshots are not representing the final version!
 Here's the list of active, scheduled, planned and finished development goals
 
 ## Under development
-0.2.8
-- Add: image search/pull (from the public repo)
-+ Add: copyright when released or published (xterm.js, json-formatter)
-+ Add: version info
-+ Add: remove button/entry to images list
-+ Fix: clicking on image in container list causes error (need to load all images into the rootscope)
-+ Fix: scrolling in window not enabled as chrome app
-- Fix: stopping multiple containers is not working properly on huge list with already stopped containers
-
-## Roadmap /by priority/
 0.2.9
 - Add: link containers in Create
 - Add: download logs as file.
 - Add: back button/listener to screens in chrome mode
+- Add: release notes to about/first run of new version 
 
+## Roadmap /by priority/
 0.3.0
 - Add: add search for container diff
 - Add: commit container as image
@@ -148,7 +140,7 @@ Here's the list of active, scheduled, planned and finished development goals
 ## Not scheduled
 - Help
 - docker image with version check in the webapp
-
+- Fix: stopping multiple containers is not working properly on huge list with already stopped containers
 ## Possible future development ideas
 I collected some undecided features [on this page!](https://github.com/lexandro/dockery/wiki/Development-ideas)
 

@@ -58,7 +58,7 @@ angular.module('dockery', [
     })
     .run(function ($rootScope) {
         $rootScope.appName = 'dockery';
-        $rootScope.appVersion = '0.2.8';
+        $rootScope.appVersion = '0.2.9';
         $rootScope.tasks = [];
         $rootScope.taskInProgress = false;
         if (window.chrome && chrome.app && chrome.app.runtime) {
