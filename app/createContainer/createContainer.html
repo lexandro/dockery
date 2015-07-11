@@ -97,7 +97,7 @@
                             <input class="form-control"
                                    bs-switch
                                    ng-model="hostVolumeBinding.writable"
-                                   type="radio"
+                                   type="checkbox"
                                    switch-active="true"
                                    switch-on-text="Y"
                                    switch-off-text="N"
@@ -147,7 +147,7 @@
                             <input class="form-control"
                                    bs-switch
                                    ng-model="volumeBinding.writable"
-                                   type="radio"
+                                   type="checkbox"
                                    switch-active="true"
                                    switch-on-text="Y"
                                    switch-off-text="N"
@@ -196,7 +196,7 @@
                             <input
                                     bs-switch
                                     ng-model="volumeFrom.writable"
-                                    type="radio"
+                                    type="checkbox"
                                     switch-active="true"
                                     switch-on-text="Y"
                                     switch-off-text="N"
@@ -327,47 +327,72 @@
                     <h4>Publish exposed ports
                         <small>(--publish)</small>
                     </h4>
-                </div>
-                <div class="col-md-6">
-                    <h5>
-                        Container
-                    </h5>
-                </div>
-                <div class="col-md-6">
-                    <h5>
-                        Host
-                    </h5>
-                </div>
-                <div class="form-group input-group" ng-repeat="portBinding in portBindings"
-                     ng-class="{'has-success':portBinding.status=='valid','has-error':portBinding.status=='invalid'}">
-                    <div class="col-md-3">
-                        <input type="text" class="form-control" ng-model="portBinding.port"
-                               placeholder="1-65535"
-                               aria-describedby="portBindingValidationStatus" ng-keyup="portBindingValidator()">
+                    <div class="col-md-6">
+                        <h5>
+                            Container
+                        </h5>
                     </div>
-                    <div class="col-md-3">
-                        <select class="form-control" ng-model="portBinding.protocol">
-                            <option value="tcp">tcp</option>
-                            <option value="udp">udp</option>
-                        </select>
+                    <div class="col-md-6">
+                        <h5>
+                            Host
+                        </h5>
                     </div>
-                    <div class="col-md-3">
-                        <input type="text" class="form-control" ng-model="portBinding.hostIp"
-                               placeholder="1-65535"
-                               aria-describedby="portBindingValidationStatus" ng-keyup="portBindingValidator()">
-                    </div>
-                    <div class="col-md-2 input-group">
+                    <div class="form-group input-group" ng-repeat="portBinding in portBindings"
+                         ng-class="{'has-success':portBinding.status=='valid','has-error':portBinding.status=='invalid'}">
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" ng-model="portBinding.port"
+                                   placeholder="1-65535"
+                                   aria-describedby="portBindingValidationStatus" ng-keyup="portBindingValidator()">
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control" ng-model="portBinding.protocol">
+                                <option value="tcp">tcp</option>
+                                <option value="udp">udp</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" ng-model="portBinding.hostIp"
+                                   placeholder="1-65535"
+                                   aria-describedby="portBindingValidationStatus" ng-keyup="portBindingValidator()">
+                        </div>
+                        <div class="col-md-2 input-group">
                                 <span class="input-group-btn">
-                                <input type="text" class="form-control" ng-model="portBinding.hostPort" maxlength="5"
-                                       size="5"
-                                       placeholder="1-65535"
-                                       aria-describedby="portBindingValidationStatus" ng-keyup="portBindingValidator()">
-                                <button ng-click="deletePortBinding($index)" title="Delete entry" type="submit"
-                                        class="btn btn-danger"
-                                        style="width: 40px; margin-right: 57px;margin-left: 3px;">
-                                    <span class="fa fa-trash" style="font-size: large"></span>
-                                </button>
-                                </span>
+                    <input type="text" class="form-control" ng-model="portBinding.hostPort" maxlength="5"
+                           size="5"
+                           placeholder="1-65535"
+                           aria-describedby="portBindingValidationStatus" ng-keyup="portBindingValidator()">
+                    <button ng-click="deletePortBinding($index)" title="Delete entry" type="submit"
+                            class="btn btn-danger"
+                            style="width: 40px; margin-right: 57px;margin-left: 3px;">
+                        <span class="fa fa-trash" style="font-size: large"></span>
+                    </button>
+                    </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <h4>Link containers
+                        <small>(--link=[])</small>
+                    </h4>
+                    <div class="form-group input-group" ng-repeat="linkedContainer in linkedContainers"
+                        ng-class="{'has-success':linkedContainer.status=='valid','has-error':linkedContainer.status=='invalid'}">
+                        <div class="col-md-6">
+                            <select ng-options="container.Id as container.Names[0] for container in containers"
+                                    ng-model="linkedContainer.containerId" class="form-control" ng-change="linkedContainerValidator()"></select>
+                        </div>
+                        <div class="col-md-6 input-group">
+                             <span class="input-group-btn">
+                            <input type="text" class="form-control" ng-model="linkedContainer.alias" maxlength="5"
+                                   placeholder="alias"
+                                   aria-describedby="linkedContainerValidationStatus" ng-keyup="linkedContainerValidator()">
+
+                            <button ng-click="deleteLinkedContainer($index)" title="Delete entry" type="submit"
+                                    class="btn btn-danger"
+                                    style="width: 40px; margin-right: 57px;margin-left: 3px;">
+                                <span class="fa fa-trash" style="font-size: large"></span>
+                            </button>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

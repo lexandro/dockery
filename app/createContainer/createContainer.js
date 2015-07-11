@@ -30,8 +30,10 @@ angular.module('createContainer', ['ngRoute'])
             $scope.volumeBindings = [{value: "", writable: true, status: ""}];
             $scope.volumesFrom = [{containerId: "", writable: true, status: ""}];
             $scope.containerNameStatus = true;
+            $scope.linkedContainers = [{containerId: "", alias: "", status: ""}];
             // !!!!!!!!!!!!
             $scope.containerListing = true;
+
 
             //
             var containers = Docker.containers().query({all: 1}, function () {
@@ -174,6 +176,20 @@ angular.module('createContainer', ['ngRoute'])
                     });
                     newContainerParameters.HostConfig.VolumesFrom = VolumesFrom;
                 }
+
+                if ($scope.linkedContainers.length > 1) {
+                    var linkedContainersData = $scope.linkedContainers;
+                    var newLinkedContainers = [];
+                    var Links = [];
+                    linkedContainersData.forEach(function (linkedContainersEntry) {
+                        if (!isEmpty(linkedContainersEntry.containerId) && !isLinkedContainerDuplicated(newLinkedContainers, linkedContainersEntry)) {
+                            var linkedContainersString = linkedContainersEntry.containerId + ':' + linkedContainersEntry.alias;
+                            Links.push(linkedContainersString)
+                        }
+                        newLinkedContainers.push(linkedContainersEntry);
+                    });
+                    newContainerParameters.HostConfig.Links = Links;
+                }
                 //
                 console.log(JSON.stringify(newContainerParameters));
                 //
@@ -192,7 +208,8 @@ angular.module('createContainer', ['ngRoute'])
                         }
                     }
                 )
-            };
+            }
+            ;
 
 
             $scope.createAndStartContainer = function () {
@@ -305,6 +322,23 @@ angular.module('createContainer', ['ngRoute'])
             newVolumesFrom.push({containerId: "", writable: true, status: ""});
             $scope.volumesFrom = newVolumesFrom;
         };
+        $scope.linkedContainerValidator = function () {
+            var linkedContainers = $scope.linkedContainers;
+            var newLinkedContainers = [];
+            linkedContainers.forEach(function (linkedContainer) {
+                if (!isEmpty(linkedContainer.containerId) || !isEmpty(linkedContainer.alias)) {
+                    if (isEmpty(linkedContainer.alias || isEmpty(linkedContainer.containerId))) {
+                        linkedContainer.status = "invalid";
+                    } else {
+                        linkedContainer.status = "valid";
+                    }
+
+                    newLinkedContainers.push(linkedContainer);
+                }
+            });
+            newLinkedContainers.push({containerId: "", alias: "", status: ""});
+            $scope.linkedContainers = newLinkedContainers;
+        };
 
 
         $scope.deleteEnvVarEntry = function (index) {
@@ -325,6 +359,9 @@ angular.module('createContainer', ['ngRoute'])
 
         $scope.deleteHostVolumeBinding = function (index) {
             $scope.deleteFromArray($scope.hostVolumeBindings, index);
+        };
+        $scope.deleteLinkedContainer = function (index) {
+            $scope.deleteFromArray($scope.linkedContainers, index);
         };
 
         $scope.deleteVolumeBinding = function (index) {
@@ -379,6 +416,16 @@ angular.module('createContainer', ['ngRoute'])
             return result;
         }
 
+        function isLinkedContainerDuplicated(newLinkedContainers, linkedContainersEntry) {
+            var result = false;
+            newLinkedContainers.forEach(function (newLinkedContainer) {
+                if (newLinkedContainer.alias == linkedContainersEntry.alias) {
+                    result = true;
+                }
+            });
+            return result;
+        }
+
 
         function isEmpty(obj) {
             return Helpers.isEmpty(obj);
@@ -388,4 +435,5 @@ angular.module('createContainer', ['ngRoute'])
             return Helpers.isPositiveInteger(obj);
         }
     }]
-);
+)
+;

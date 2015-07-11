@@ -78,10 +78,12 @@ Here's the list of active, scheduled, planned and finished development goals
 
 ## Under development
 0.2.9
-- Add: link containers in Create
++ Add: link containers in Create
+- Add: show links in container details
 - Add: download logs as file.
 - Add: back button/listener to screens in chrome mode
-+ Add: release notes to about/first run of new version 
++ Add: release notes to about/first run of new version
++ Fix: Create container on/off switch changed from radio to checkbox
 
 ## Roadmap /by priority/
 0.3.0
