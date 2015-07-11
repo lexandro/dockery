@@ -16,8 +16,8 @@
     "128": "assets/img/dockery_icon.png"
   },
   "permissions": [
-    "http://*/",
-    "https://*/",
+    "http://*/*",
+    "https://*/*",
     "storage"
   ]
 }

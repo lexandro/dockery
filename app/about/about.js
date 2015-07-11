@@ -10,9 +10,8 @@ angular.module('about', ['ngRoute'])
     }])
 
     .controller('AboutCtrl', ['$rootScope', '$scope', '$location', '$routeParams', 'Helpers', 'Docker', function ($rootScope, $scope, $location, $routeParams, Helpers, Docker) {
-        if (Helpers.isEmpty($rootScope.hostUrl)) {
-            $location.path('/hosts');
-        } else {
-
+        $scope.openTwitter = function () {
+            console.log('openwtite');
+            chrome.tabs.create({url: 'https://twitter.com'});
         }
     }]);

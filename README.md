@@ -81,7 +81,7 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: link containers in Create
 - Add: download logs as file.
 - Add: back button/listener to screens in chrome mode
-- Add: release notes to about/first run of new version 
++ Add: release notes to about/first run of new version 
 
 ## Roadmap /by priority/
 0.3.0
