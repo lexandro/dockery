@@ -6,10 +6,12 @@
     </div>
     <hr/>
     <div class="alert alert-info" role="alert" ng-show="repositorySearching">
-        <h3 class="panel-title"><span class="fa fa-refresh fa-spin"></span> Searching for <strong>{{searchText}}</strong></h3>
+        <h3 class="panel-title"><span class="fa fa-refresh fa-spin"></span> Searching for
+            <strong>{{searchText}}</strong></h3>
     </div>
     <div class="alert alert-danger" role="alert" ng-show="repositorySearchingError">
-        <h3 class="panel-title"><span class="fa fa-frown-o"></span> Error occurred during searching for <strong>{{searchImageName}}</strong></h3>
+        <h3 class="panel-title"><span class="fa fa-frown-o"></span> Error occurred during searching for <strong>{{searchImageName}}</strong>
+        </h3>
 
         <div class="panel-body">
             <div class="col-md-1 text-right"><strong>Message:</strong></div>
@@ -45,38 +47,56 @@
 
         <tr>
             <td width="3%" class="text-center">
-                <span class="vcenter" ng-class="{'glyphicon glyphicon-check':selectAllImagesFlag, 'glyphicon glyphicon-unchecked':!selectAllImagesFlag}"
+                <span class="vcenter"
+                      ng-class="{'glyphicon glyphicon-check':selectAllImagesFlag, 'glyphicon glyphicon-unchecked':!selectAllImagesFlag}"
                       class="vcenter" ng-click="switchSelectAllImagesFlag()">
                 </span>
             </td>
             <td width="5%" class="text-center"><strong>Actions</strong></td>
-            <td width="25%" class="text-center"><strong>Name</strong></td>
+            <td width="13%" class="text-center"><strong>Tags</strong></td>
+            <td width="15%" class="text-center"><strong>Name</strong></td>
             <td width="5%" class="text-center"><strong>Official</strong></td>
             <td width="5%" class="text-center"><strong>Trusted</strong></td>
             <td width="5%" class="text-center"><strong>Automated</strong></td>
             <td width="5%" class="text-center"><strong>Rating</strong></td>
-            <td width="55%" class="text-center"><strong>Description</strong></td>
+            <td width="35%" class="text-center"><strong>Description</strong></td>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="searchResult in searchResults" ng-class="{'success': searchResult.is_official}">
             <td class="text-center vcenter">
-                <span class="vcenter" ng-class="{'glyphicon glyphicon-check':searchResult.selected, 'glyphicon glyphicon-unchecked':!searchResult.selected}"
+                <span class="vcenter"
+                      ng-class="{'glyphicon glyphicon-check':searchResult.selected, 'glyphicon glyphicon-unchecked':!searchResult.selected}"
                       ng-click="selectImageFlag(searchResult)">
                 </span>
             </td>
             <td>
-                <button type="button" class="btn btn-success form-control" ng-click="downloadImage(searchResult.name)"><span
+                <button type="button" class="btn btn-success form-control"
+                        ng-click="downloadImage(searchResult)"
+                        ng-disabled="!searchResult.tagsLoaded || searchResult.selectedTag.length==0"><span
                         class="fa fa-cloud-download"></span><strong>
                     Pull</strong>
                 </button>
             </td>
-            <td><strong>{{searchResult.name}}</strong></td>
+            <td>
+                <select ng-model="searchResult.selectedTag" style="min-width: 200px;">
+                    <option ng-repeat="tag in searchResult.tags" value="{{tag.name}}">{{tag.name}}</option>
+                </select>
+                <span class="fa fa-refresh fa-spin" ng-hide="searchResult.tagsLoaded">
+
+            </td>
+            <td class="text-left"
+                style="max-width: 500px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                data-toggle="tooltip" ng-attr-title="{{searchResult.name}}">
+                <strong>{{searchResult.name}}</strong>
+            </td>
+
             <td class="text-center"><span class="fa fa-check" ng-show="searchResult.is_official"></span>&nbsp;</td>
             <td class="text-center"><span class="fa fa-check" ng-show="searchResult.is_trusted"></span>&nbsp;</td>
             <td class="text-center"><span class="fa fa-check" ng-show="searchResult.is_automated"></span>&nbsp;</td>
             <td class="text-center"><strong>{{searchResult.star_count}}</strong></td>
-            <td style="max-width: 500px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" data-toggle="tooltip"
+            <td style="max-width: 500px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                data-toggle="tooltip"
                 ng-attr-title="{{searchResult.description}}">{{searchResult.description}}
             </td>
 

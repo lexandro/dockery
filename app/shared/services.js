@@ -170,21 +170,19 @@ angular.module('services', [])
             }
         }
     })
-    //.factory('Registry', function ($resource, $http, $rootScope) {
-    //    return {
-    //        containerLogs: function (containerId, logParams, callback) {
-    //            $http({
-    //                method: 'GET',
-    //                url: $rootScope.hostUrl + '/containers/' + containerId + '/logs',
-    //                params: logParams
-    //            })
-    //                .success(callback)
-    //                .error(function (data, status, headers, config) {
-    //                    console.log('error', data);
-    //                });
-    //        }
-    //    }
-    //})
+    .factory('Registry', function ($resource, $http, $rootScope) {
+        return {
+            // TODO: replace with a CORS based stuff. If possible.. :)
+            tags: function (imageName) {
+                return $resource('https://jsonp.nodejitsu.com/?url=https://index.docker.io/v1/repositories/:imageName/tags', null, {
+                    get: {
+                        method: "GET",
+                        isArray: true
+                    }
+                });
+            }
+        }
+    })
     .factory('HostService', ['$rootScope', 'Helpers', function ($rootScope, Helpers) {
         return {
             load: function (callback) {
