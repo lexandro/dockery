@@ -79,7 +79,7 @@ Here's the list of active, scheduled, planned and finished development goals
 ## Under development
 0.2.9
 + Add: link containers in Create
-- Add: show links in container details
++ Add: show links in container details
 - Add: download logs as file.
 - Add: back button/listener to screens in chrome mode
 + Add: release notes to about/first run of new version
@@ -89,6 +89,7 @@ Here's the list of active, scheduled, planned and finished development goals
 0.3.0
 - Add: add search for container diff
 - Add: commit container as image
+- Add: login into the docker hub and/or private repo(s)
 - Add: push image to the repository
 
 0.3.1
@@ -100,8 +101,7 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: status filter to container list view
 
 0.3.3
-- Add: login into the docker hub and/or private repo(s) 
-- Add: search/pull image from private repo(s) 
+ - Add: search/pull image from private repo(s) 
 
 0.4.0
 - Fix: redesign host information page...drastically++ :)
