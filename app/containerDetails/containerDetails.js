@@ -99,6 +99,11 @@ angular.module('containerDetails', ['ngRoute'])
                 );
             };
             //
+            $scope.downloadAllLogs = function () {
+                console.log('download ' + $rootScope.hostUrl + '/containers/' + $routeParams.containerId + '/logs?stderr=1&stdout=1');
+
+            };
+            //
             $scope.showLogs = function (containerId) {
                 $scope.containerLogsLoading = true;
                 $scope.containerLogsLoadingMessage = 'Loading log information';

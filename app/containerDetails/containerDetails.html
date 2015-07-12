@@ -309,14 +309,17 @@
             <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span>
                 {{containerLogsLoadingMessage}}</h3>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
+            <button type="button" ng-click="downloadAllLogs()"
+                    class='btn btn-success'>
+                <span class='fa fa-download'></span>
+                Download logs
+            </button>
             <button type="button" ng-click="switchStdOutPanel()"
                     ng-class="{'btn btn-primary': logSettings['showStdOut'], 'btn btn-info': !logSettings['showStdOut']}">
                 <span ng-class="{'glyphicon glyphicon-check': logSettings['showStdOut'], 'glyphicon glyphicon-unchecked': !logSettings['showStdOut']}"></span>
                 Standard output
             </button>
-        </div>
-        <div class="col-md-6">
             <button type="button" ng-click="switchStdErrPanel()"
                     ng-class="{'btn btn-primary': logSettings['showStdErr'], 'btn btn-info': !logSettings['showStdErr']}">
                 <span ng-class="{'glyphicon glyphicon-check': logSettings['showStdErr'], 'glyphicon glyphicon-unchecked': !logSettings['showStdErr']}"></span>
