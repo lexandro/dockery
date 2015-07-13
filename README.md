@@ -85,6 +85,7 @@ Here's the list of active, scheduled, planned and finished development goals
 + Add: release notes to about/first run of new version
 + Fix: Create container on/off switch changed from radio to checkbox
 + Fix: CSS/colspan on Repository view
++ Fix: Xterm.js css wasn't imported
 
 ## Roadmap /by priority/
 0.3.0
