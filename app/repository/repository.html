@@ -23,7 +23,7 @@
     <table class="table table-condensed table-hover table-striped table-bordered">
         <thead>
         <tr class="success vcenter form-group">
-            <td colspan="8">
+            <td colspan="9">
                 <label class="sr-only" for="search"></label>
                 <input type="text" class="ng-pristine ng-untouched ng-invalid ng-invalid-required " id="search"
                        ng-model='searchImageName' placeholder="Type image name here"
@@ -79,7 +79,7 @@
                 </button>
             </td>
             <td>
-                <select ng-model="searchResult.selectedTag" style="min-width: 200px;">
+                <select ng-model="searchResult.selectedTag" style="min-width: 200px;" class="form-control">
                     <option ng-repeat="tag in searchResult.tags" value="{{tag.name}}">{{tag.name}}</option>
                 </select>
                 <span class="fa fa-refresh fa-spin" ng-hide="searchResult.tagsLoaded">
