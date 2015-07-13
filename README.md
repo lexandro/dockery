@@ -84,6 +84,7 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: back button/listener to screens in chrome mode
 + Add: release notes to about/first run of new version
 + Fix: Create container on/off switch changed from radio to checkbox
++ Fix: CSS/colspan on Repository view
 
 ## Roadmap /by priority/
 0.3.0

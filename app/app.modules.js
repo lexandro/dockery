@@ -61,6 +61,10 @@ angular.module('dockery', [
         $rootScope.appVersion = '0.2.9';
         $rootScope.tasks = [];
         $rootScope.taskInProgress = false;
+        $rootScope.goto = function (path) {
+            console.log('back')
+            window.history.back();
+        };
         if (window.chrome && chrome.app && chrome.app.runtime) {
             $rootScope.chrome = true;
             chrome.app.window.current().maximize();

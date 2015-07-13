@@ -3,9 +3,14 @@
         <h3 class="panel-title"><span class="fa fa-exclamation-triangle"></span>
             This is a privileged container</h3>
     </div>
+
     <div class="row">
         <div class="col-md-6">
-            <h3>Container: <strong>{{containerDetails.Name.substring(1).toUpperCase()}}</strong>
+
+            <h3>
+                <button class="btn btn-success btn-sm" ng-click="$root.goBack()" ng-show="$root.chrome"><span
+                        class="fa fa-arrow-left"></span><strong> Go back</strong></button>
+                </button>Container: <strong>{{containerDetails.Name.substring(1).toUpperCase()}}</strong>
                 <span ng-show='containerDetails.State.Running==true && containerDetails.State.Paused==false'
                       class="label label-success">Running</span>
                 <span ng-show='containerDetails.State.Paused==true' class="label label-warning">Paused</span>
@@ -26,37 +31,37 @@
                 <button class="btn btn-success btn-sm"
                         ng-disabled="!canStart"
                         ng-click="startContainer()">
-                    <span class="glyphicon glyphicon glyphicon-play"></span><strong> start</strong>
+                    <span class="glyphicon glyphicon-play"></span><strong> start</strong>
                 </button>
                 <button class="btn btn-danger btn-sm"
                         ng-disabled="!canStop"
                         ng-click="stopContainer()">
-                    <span class="glyphicon glyphicon glyphicon-stop"></span><strong> stop</strong>
+                    <span class="glyphicon glyphicon-stop"></span><strong> stop</strong>
                 </button>
                 <button class="btn btn-primary btn-sm"
                         ng-disabled="!canRestart"
                         ng-click="restartContainer()">
-                    <span class="glyphicon glyphicon glyphicon-refresh"></span><strong> restart</strong>
+                    <span class="glyphicon glyphicon-refresh"></span><strong> restart</strong>
                 </button>
                 <button class="btn btn-danger btn-sm"
                         ng-disabled="!canKill"
                         ng-click="killContainer()">
-                    <span class="glyphicon glyphicon glyphicon-trash"></span><strong> kill</strong>
+                    <span class="glyphicon glyphicon-trash"></span><strong> kill</strong>
                 </button>
                 <button class="btn btn-warning btn-sm"
                         ng-disabled="!canPause"
                         ng-click="pauseContainer()">
-                    <span class="glyphicon glyphicon glyphicon-pause"></span><strong> pause</strong>
+                    <span class="glyphicon glyphicon-pause"></span><strong> pause</strong>
                 </button>
                 <button class="btn btn-info btn-sm"
                         ng-disabled="!canUnpause"
                         ng-click="unpauseContainer()">
-                    <span class="glyphicon glyphicon glyphicon-repeat"></span><strong> unpause</strong>
+                    <span class="glyphicon glyphicon-repeat"></span><strong> unpause</strong>
                 </button>
                 <button class="btn btn-danger btn-sm"
                         ng-disabled="!canRemove"
                         ng-click="removeContainer()">
-                    <span class="glyphicon glyphicon glyphicon-trash"></span><strong> remove</strong>
+                    <span class="glyphicon glyphicon-trash"></span><strong> remove</strong>
                 </button>
             </div>
         </div>

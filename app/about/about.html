@@ -1,47 +1,57 @@
-<class="col-md-12 pull-right">
-<div class="row">
-    <div class="col-md-12">
-        <h3>About</h3>
+<div class="col-md-12 pull-right">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                <button class="btn btn-success btn-sm" ng-click="$root.goBack()" ng-show="$root.chrome"><span
+                        class="fa fa-arrow-left"></span><strong> Go back</strong></button>
+                About
+            </h3>
+        </div>
     </div>
-</div>
-<hr/>
-<h4>An about page is not so interesting thing isn't?</h4><br/>
-Dockery is a Docker host management and monitoring application with full container lifecycle support<br/>
+    <hr/>
+    <h4>An about page is not so interesting thing isn't?</h4><br/>
+    Dockery is a Docker host management and monitoring application with full container lifecycle support<br/>
 
-Developer: Robert Stern (lexandro2000@(google's mail provider).com<br/>
-Twitter: <a href="https://twitter.com/lexandro" ng-click="openTwitter()">https://twitter.com/lexandro</a><br/>
+    Developer: Robert Stern (lexandro2000@(google's mail provider).com<br/>
+    Twitter: <a href="https://twitter.com/lexandro" ng-click="openTwitter()">https://twitter.com/lexandro</a><br/>
 
-GitHub source: <a href="https://github.com/lexandro/dockery">https://github.com/lexandro/dockery</a><br/>
-Reporting issues: <a href="https://github.com/lexandro/dockery/issues">https://github.com/lexandro/dockery/issues</a><br/>
-Wiki: <a href="https://github.com/lexandro/dockery/wiki">https://github.com/lexandro/dockery/wiki</a><br/>
-Version: {{appVersion}}<br/>
-<br/>
-<div>
-    <h3>Release notes:</h3>
+    GitHub source: <a href="https://github.com/lexandro/dockery">https://github.com/lexandro/dockery</a><br/>
+    Reporting issues: <a
+        href="https://github.com/lexandro/dockery/issues">https://github.com/lexandro/dockery/issues</a><br/>
+    Wiki: <a href="https://github.com/lexandro/dockery/wiki">https://github.com/lexandro/dockery/wiki</a><br/>
+    Version: {{appVersion}}<br/>
+    <br/>
 
     <div>
-        <strong>0.2.8</strong>
-        <ul>
-            <li>Add: image search/pull (from the public repo)</li>
-            <li> Add: copyright when released or published (xterm.js, json-formatter)</li>
-            <li> Add: version info</li>
-            <li> Add: remove button/entry to images list</li>
-            <li> Add: clear finished tasks</li>
-            <li> Fix: clicking on image in container list causes error (need to load all images into the rootscope)</li>
-            <li> Fix: scrolling in window not enabled as chrome app</li>
-        </ul>
-        <strong>0.2.7</strong>
-        <ul>
-            <li> Add: list active containers related to the image in image details</li>
-            <li> Fix: add http/https prefix selector to host URL</li>
-        </ul>
-        <strong>0.2.6</strong>
-        <ul>
-            <li> Add: tag list to the image details</li>
-            <li> Fix: show image name in the image details</li>
-            <li> Fix: use image ID in container list link, because the 'namespace/repo:tag' is forwarding to wrong place</li>
-        </ul>
+        <h3>Release notes:</h3>
+
+        <div>
+            <strong>0.2.8</strong>
+            <ul>
+                <li>Add: image search/pull (from the public repo)</li>
+                <li> Add: copyright when released or published (xterm.js, json-formatter)</li>
+                <li> Add: version info</li>
+                <li> Add: remove button/entry to images list</li>
+                <li> Add: clear finished tasks</li>
+                <li> Fix: clicking on image in container list causes error (need to load all images into the
+                    rootscope)
+                </li>
+                <li> Fix: scrolling in window not enabled as chrome app</li>
+            </ul>
+            <strong>0.2.7</strong>
+            <ul>
+                <li> Add: list active containers related to the image in image details</li>
+                <li> Fix: add http/https prefix selector to host URL</li>
+            </ul>
+            <strong>0.2.6</strong>
+            <ul>
+                <li> Add: tag list to the image details</li>
+                <li> Fix: show image name in the image details</li>
+                <li> Fix: use image ID in container list link, because the 'namespace/repo:tag' is forwarding to wrong
+                    place
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
-<small>Mehh... I need someone who could write a cool about text for this app...</small>
+    <small>Mehh... I need someone who could write a cool about text for this app...</small>
 </div>

@@ -296,6 +296,7 @@ angular.module('containerDetails', ['ngRoute'])
             });
 
         }
+
         function loadContainerDetails() {
             $scope.containerDetailsLoading = true;
             containerDetails = Docker.containers().get({containerId: $routeParams.containerId}, function () {
