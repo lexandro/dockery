@@ -3,7 +3,7 @@
 // TODO add better logging
 
 // Declare app level module which depends on views, and components
-angular.module('dockermon', [
+angular.module('dockery', [
         'ngRoute',
         'ngResource',
         'jsonFormatter',
@@ -16,6 +16,10 @@ angular.module('dockermon', [
         'createContainer',
         'images',
         'imageDetails',
+        'repository',
+        'tasks',
+        'events',
+        'about',
         'frapontillo.bootstrap-switch'],
     function ($provide) {
         // Prevent Angular from sniffing for the history API
@@ -38,7 +42,29 @@ angular.module('dockermon', [
             });
         };
     })
+    .directive('toggle', function () {
+        // http://www.bootply.com/H4Zii7Mb6l
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+                if (attrs.toggle == "tooltip") {
+                    $(element).tooltip();
+                }
+                if (attrs.toggle == "popover") {
+                    $(element).popover();
+                }
+            }
+        };
+    })
     .run(function ($rootScope) {
+        $rootScope.appName = 'dockery';
+        $rootScope.appVersion = '0.2.9';
+        $rootScope.tasks = [];
+        $rootScope.taskInProgress = false;
+        $rootScope.goto = function (path) {
+            console.log('back')
+            window.history.back();
+        };
         if (window.chrome && chrome.app && chrome.app.runtime) {
             $rootScope.chrome = true;
             chrome.app.window.current().maximize();

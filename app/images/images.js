@@ -51,13 +51,23 @@ angular.module('images', ['ngRoute'])
         $scope.removeSelectedImages = function () {
             $scope.images.forEach(function (image) {
                 if (image.selected) {
-                    Docker.images().remove({imageId: image.Id, force: 1}, {}, function () {
-                            refreshImages();
-                        }
-                    );
+                    removeImage(image.Id);
                 }
             });
+            refreshImages();
         };
+
+        $scope.removeImage = function (imageId) {
+            removeImage(imageId);
+            refreshImages();
+        };
+
+        function removeImage(imageId) {
+            Docker.images().remove({imageId: imageId, force: 1}, {}, function () {
+                    refreshImages();
+                }
+            );
+        }
 
         $scope.switchSelectAllImagesFlag = function () {
             $scope.selectAllImagesFlag = !$scope.selectAllImagesFlag;

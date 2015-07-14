@@ -135,6 +135,11 @@ angular.module('services', [])
                         url: $rootScope.hostUrl + '/images/:imageId',
                         method: "DELETE",
                         isArray: true
+                    },
+                    search: {
+                        url: $rootScope.hostUrl + '/images/search',
+                        method: "GET",
+                        isArray: true
                     }
                 });
             },
@@ -160,6 +165,19 @@ angular.module('services', [])
                     get: {
                         method: "GET",
                         isArray: false
+                    }
+                });
+            }
+        }
+    })
+    .factory('Registry', function ($resource, $http, $rootScope) {
+        return {
+            // TODO: replace with a CORS based stuff. If possible.. :)
+            tags: function (imageName) {
+                return $resource('https://jsonp.nodejitsu.com/?url=https://index.docker.io/v1/repositories/:imageName/tags', null, {
+                    get: {
+                        method: "GET",
+                        isArray: true
                     }
                 });
             }

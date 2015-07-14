@@ -1,7 +1,7 @@
 <div class="col-md-12 pull-right">
     <div class="row">
         <div class="col-md-12">
-            <h3>Image: {{imageDetails.RepoTags[0]}}
+            <h3>Image: <strong>{{imageDetails.RepoTags[0]}}</strong>
             </h3>
         </div>
     </div>
@@ -10,80 +10,127 @@
         <h3 class="panel-title"><span class="glyphicon glyphicon-refresh spin"></span> {{imageDataLoadingMessage}}</h3>
     </div>
     <div class="row">
-        <div class="col-md-1">ID / Parent ID:</div>
-        <div class="col-md-4"><a ng-href="#/imageDetails/{{imageDetails.Id}}">
-            <samp><span class="label label-primary">{{imageDetails.Id | limitTo:12}}</span></samp></a> / <a
-                ng-href="#/imageDetails/{{imageDetails.Parent}}"><samp><span class="label label-info">{{imageDetails.Parent | limitTo:12}}</span></samp></a>
-        </div>
-        <div class="col-md-2">Author:</div>
-        <div class="col-md-5">{{imageDetails.Author}}</div>
-    </div>
-    <div class="row">
-        <div class="col-md-1">Image name:</div>
-        <div class="col-md-4">N/A</div>
-        <div class="col-md-2">OS/Architecture:</div>
-        <div class="col-md-5">{{imageDetails.Os}}/{{imageDetails.Architecture}}</div>
-    </div>
-    <div class="row">
-        <div class="col-md-1">Creation date:</div>
-        <div class="col-md-4">{{imageDetails.Created | date:'medium'}}</div>
-        <div class="col-md-2">Command:</div>
-        <div class="col-md-5"><code ng-show="imageDetails.ContainerConfig.Cmd.length>0"><span
-                ng-repeat="cmd in imageDetails.ContainerConfig.Cmd"> {{cmd}}</span></code></div>
-    </div>
-    <div class="row">
-        <div class="col-md-1">Docker version:</div>
-        <div class="col-md-4">{{imageDetails.DockerVersion}}</div>
-        <div class="col-md-2">Entry point:</div>
-        <div class="col-md-5"><code ng-show="imageDetails.Config.Entrypoint.length>0">{{imageDetails.Config.Entrypoint[0]}}</code>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-1">Size (virtual size):</div>
-        <div class="col-md-4">{{imageDetails.Size | bytes}} ({{imageDetails.VirtualSize | bytes}})</div>
-        <div class="col-md-2">Exposed ports:</div>
-        <div class="col-md-5">{{imageDetails.Config.ExposedPorts}}</div>
-    </div>
-    <div class="row">
-        <div class="col-md-1">Comment:</div>
-        <div class="col-md-4">{{imageDetails.Comment}}</div>
-        <div class="col-md-2">Environment variables:</div>
-        <div class="col-md-5"><p ng-repeat="env in imageDetails.Config.Env"><code>{{env}}</code></p></div>
-    </div>
-    <div class="row">
-        <div class="col-md-2 col-md-offset-5">Working dir:</div>
-        <div class="col-md-5"><code
-                ng-show="imageDetails.Config.WorkingDir.length>0">{{imageDetails.Config.WorkingDir}}</code></div>
-    </div>
-    <hr/>
-    <div class="table-responsive">
-        <table class="table table-condensed table-hover table-striped table-bordered">
-            <thead>
-            <tr class="success">
-                <td colspan="4">
-                    <div class="col-md-12 vcenter text-center">
-                        <strong>Image history <span class="badge">{{imageHistoryList.length}}</span></strong>
+        <div class="col-md-4">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h4 class="panel-title"><span class="fa fa-gears"></span> Basic settings</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-4"><strong>ID / Parent ID:</strong></div>
+                    <div class="col-md-8"><a ng-href="#/imageDetails/{{imageDetails.Id}}">
+                        <samp><span class="label label-primary">{{imageDetails.Id | limitTo:12}}</span></samp></a>&nbsp;/&nbsp;<a
+                            ng-href="#/imageDetails/{{imageDetails.Parent}}"><samp><span
+                            class="label label-info">{{imageDetails.Parent | limitTo:12}}</span></samp></a>&nbsp;
                     </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td width="3%" class="text-center"><strong>Id</strong></td>
-                <td width="5%" class="text-center"><strong>Created</strong></td>
-                <td width="40%" class="text-center"><strong>Command (first 160 chars)</strong></td>
-                <td width="3%" class="text-center"><strong>Size</strong></td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="imageHistory in imageHistoryList">
-                <td class="text-center"><a ng-href="#/imageDetails/{{imageHistory.Id}}"><samp><span
-                        class="label label-info">{{imageHistory.Id | limitTo:12}}</span></samp></a></td>
-                <td>{{imageHistory.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
-                <td><code>{{imageHistory.CreatedBy| shorten:true:160}}</code></td>
-                <td>{{imageHistory.Size | bytes:2}}</td>
-            </tr>
-            </tbody>
-
-        </table>
+                    <div class="col-md-4"><strong>Image name:</strong></div>
+                    <div class="col-md-8">{{imageDetails.RepoTags[0]}}</div>
+                    <div class="col-md-4"><strong>Author:</strong></div>
+                    <div class="col-md-8">{{imageDetails.Author}}&nbsp;</div>
+                    <div class="col-md-4"><strong>Creation date:</strong></div>
+                    <div class="col-md-8">{{imageDetails.Created | date:'medium'}}&nbsp;</div>
+                    <div class="col-md-4"><strong>Docker version:</strong></div>
+                    <div class="col-md-8">{{imageDetails.DockerVersion}}&nbsp;</div>
+                    <div class="col-md-4"><strong>Size (virtual size):</strong></div>
+                    <div class="col-md-8">{{imageDetails.Size | bytes}} ({{imageDetails.VirtualSize | bytes}})&nbsp;</div>
+                    <div class="col-md-4"><strong>Comment:</strong></div>
+                    <div class="col-md-8">{{imageDetails.Comment}}&nbsp;</div>
+                    <div class="col-md-4"><strong>Repo tags:</strong></div>
+                    <div class="col-md-8">
+                        <div ng-repeat="repoTag in imageDetails.RepoTags">{{repoTag.trim()}}<br ng-show="!$last"/></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h4 class="panel-title"><span class="fa fa-tachometer"></span> Runtime settings</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-2"><strong>OS/Architecture:</strong></div>
+                    <div class="col-md-9">{{imageDetails.Os}}/{{imageDetails.Architecture}}&nbsp;</div>
+                    <div class="col-md-2"><strong>Command:</strong></div>
+                    <div class="col-md-9"><code ng-show="imageDetails.ContainerConfig.Cmd.length>0"><span
+                            ng-repeat="cmd in imageDetails.ContainerConfig.Cmd"> {{cmd}}</span></code>&nbsp;</div>
+                    <div class="col-md-2"><strong>Entry point:</strong></div>
+                    <div class="col-md-9"><code ng-show="imageDetails.Config.Entrypoint.length>0">{{imageDetails.Config.Entrypoint[0]}}</code>&nbsp;</div>
+                    <div class="col-md-2"><strong>Exposed ports:</strong></div>
+                    <div class="col-md-9">{{imageDetails.Config.ExposedPorts}}&nbsp;</div>
+                    <div class="col-md-2"><strong>Environment variables:</strong></div>
+                    <div class="col-md-9"><code ng-repeat="env in imageDetails.Config.Env">{{env}}<br ng-show="!$last"/></code>&nbsp;</div>
+                    <div class="col-md-2"><strong>Working dir:</strong></div>
+                    <div class="col-md-9"><code ng-show="imageDetails.Config.WorkingDir.length>0">{{imageDetails.Config.WorkingDir}}</code>&nbsp;</div>
+                </div>
+            </div>
+        </div>
     </div>
+    <div class="row">
+        <div ng-class="{'col-md-9':containers.length>0, 'col-md-12':containers.length==1}">
+            <table class="table table-condensed table-hover table-striped table-bordered">
+                <thead>
+                <tr class="success">
+                    <td colspan="4">
+                        <div class="col-md-12 vcenter text-center">
+                            <strong>Image history <span class="badge">{{imageHistoryList.length}}</span></strong>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="3%" class="text-center"><strong>Id</strong></td>
+                    <td width="7%" class="text-center"><strong>Created</strong></td>
+                    <td width="40%" class="text-center"><strong>Command (first 80 chars)</strong></td>
+                    <td width="5%" class="text-center"><strong>Size</strong></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="imageHistory in imageHistoryList">
+                    <td class="text-center"><a ng-href="#/imageDetails/{{imageHistory.Id}}"><samp><span
+                            class="label label-info">{{imageHistory.Id | limitTo:12}}</span></samp></a></td>
+                    <td>{{imageHistory.Created * 1000 | date:'dd-MM-yy HH:mm:ss'}}</td>
+                    <td><code>{{imageHistory.CreatedBy| shorten:true:80}}</code></td>
+                    <td>{{imageHistory.Size | bytes:2}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-3" ng-show="containers.length>0">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4 class="panel-title" ng-show="containerDataLoading"><span class="fa fa-refresh fa-spin"></span> Loading containers data</h4>
+                    <h4 class="panel-title" ng-show="!containerDataLoading"><span class="fa fa-cubes"></span> Containers using this image</h4>
+                </div>
+                <div class="panel-body">
+
+
+                    <table class="table table-condensed table-hover table-striped table-bordered">
+                        <thead>
+
+                        <tr class="success">
+                            <td width="50%" class="text-center"><strong>Id</strong></td>
+                            <td width="50%" class="text-center"><strong>Name</strong></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="container in containers">
+                            <td>
+                                <div ng-show="container.Privileged==true">
+                                    <span class="fa fa-exclamation-triangle" style="color: red"></span>
+                                    <a ng-href="#/containerDetails/{{container.Id }}">{{container.Id | limitTo:12}}</a>
+                                </div>
+                                <div ng-show="container.Privileged!=true">
+                                    <a ng-href="#/containerDetails/{{container.Id }}">{{container.Id | limitTo:12}}</a>
+                                </div>
+
+                            </td>
+                            <td><a ng-href="#/containerDetails/{{container.Id }}">{{container.Name}}</a></td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                    <span class="fa fa-exclamation-triangle" style="color: red"></span> = privileged
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

@@ -1,11 +1,14 @@
 <div class="col-md-12">
 
-    <div>
-    </div>
     <form class="form-inline" role="form">
         <div class="form-group">
             <input type="text" class="form-control" id="newHostName" ng-model="newHostName" placeholder="name">
-            <input type="url" class="form-control" id="newHostUrl" ng-model="newHostUrl" placeholder="docker host address">
+
+            <select ng-model="newHostPrefix" class="form-control">
+                <option value="http://">http://</option>
+                <!--<option value="https://">https://</option>-->
+            </select>
+            <input class="form-control" id="newHostUrl" ng-model="newHostUrl" placeholder="docker host address">
         </div>
         <button type="submit" class="btn btn-success " ng-click="addHost()"><span class="glyphicon glyphicon-plus"></span> Add</button>
         <br/>
@@ -13,6 +16,7 @@
     </form>
     <div class="table-responsive">
         <table class="table table-condensed table-hover table-striped table-bordered">
+            <thead>
             <tr class="success">
                 <td colspan="8">
                     <div class="input-group col-md-3">
@@ -28,6 +32,7 @@
                     </div>
                 </td>
             </tr>
+
             <tr>
                 <td width="1%" class="text-center"><strong>Status</strong></td>
                 <td width="15%" class="text-center"><strong>Name</strong></td>
@@ -37,6 +42,8 @@
                 <td width="1%" class="text-center"><strong>Actions</strong></td>
                 <td width="1%" class="text-center"><strong>Default</strong></td>
             </tr>
+            </thead>
+            <tbody>
             <tr ng-repeat="host in hosts  | orderBy: '[!status, name]'">
                 <!--<tr ng-repeat="host in hosts track by $index | orderBy: '[!status, name]'">-->
                 <td width="1%" class="text-left">
@@ -85,7 +92,7 @@
                           aria-hidden="true"></span>
                 </td>
             </tr>
-
+            </tbody>
         </table>
     </div>
 </div>

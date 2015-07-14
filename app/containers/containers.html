@@ -1,7 +1,9 @@
 <div class="col-md-12 pull-right">
     <div class="row">
         <div class="col-md-6">
-            <h3>Containers on: <strong>{{$root.hostUrl}}</strong></h3>
+            <h3><button class="btn btn-success btn-sm" ng-click="$root.goBack()" ng-show="$root.chrome"><span
+                    class="fa fa-arrow-left"></span><strong> Go back</strong></button> Containers on: <strong>{{$root.hostUrl}}</strong></h3>
+
         </div>
         <div class="col-md-6">
             <div class="pull-right " style=" vertical-align: middle;margin-top: 21px">
@@ -74,7 +76,7 @@
                        ng-click="switchSelectAllFlag()">
                 </span>
             </td>
-            <td width="12%" class="text-center">
+            <td width="10%" class="text-center">
                 <div class="vcenter"><strong>Control</strong></div>
             </td>
             <td width="5%" class="text-center vcenter" ng-click="changeSorting('Status')">
@@ -87,7 +89,7 @@
             </td>
             <td width="7%" class="text-center" ng-click="changeSorting('Id')">
                 <div class="vcenter">
-                    <strong>ID</strong>
+                    <strong>Container ID</strong>
                     <span class='fa'
                           ng-class="{'fa-sort-amount-desc ':sort.column=='Id' && sort.direction==='descending','fa-sort-amount-asc':sort.column=='Id' && sort.direction==='ascending'}">
                     </span>
@@ -104,7 +106,7 @@
             <td width="3%" class="text-center vcenter">
                 <div class="vcenter"><strong>Edit</strong></div>
             </td>
-            <td width="15%" class="text-center vcenter" ng-click="changeSorting('ImageName')">
+            <td width="14%" class="text-center vcenter" ng-click="changeSorting('ImageName')">
                 <div class="vcenter">
                     <strong>Image</strong>
                     <span class='fa'
@@ -173,11 +175,11 @@
             <td class="form-groupID">
                 <div ng-show="containerData.Privileged==true">
                     <span class="fa fa-exclamation-triangle" style="color: red"></span>
-                    <a ng-href="#/containerDetails/{{containerData.Id }}">
+                    <a ng-href="#/containerDetails/{{containerData.Id}}" data-toggle="tooltip" ng-attr-title="{{containerData.Id}}">
                         {{containerData.Id | limitTo:12}}</a>
                 </div>
                 <div ng-hide="containerData.Privileged==true">
-                    <a ng-href="#/containerDetails/{{containerData.Id }}">
+                    <a ng-href="#/containerDetails/{{containerData.Id}}" data-toggle="tooltip" ng-attr-title="{{containerData.Id}}">
                         {{containerData.Id | limitTo:12}}</a>
                 </div>
             </td>
@@ -189,7 +191,7 @@
 
                 <div ng-show="!containerData.renameContainerEnabled">
                     <strong>
-                        <a ng-href="#/containerDetails/{{containerData.Id }}">
+                        <a ng-href="#/containerDetails/{{containerData.Id}}" data-toggle="tooltip" ng-attr-title="{{containerData.ContainerName}}">
                             {{containerData.ContainerName.charAt(0) === '/' ?
                             containerData.ContainerName.substr(1) : containerData.ContainerName | shorten:true:30}}</a>
                     </strong>
@@ -201,10 +203,12 @@
                         ng-click="renameContainer(containerData)" title="Rename container"></button>
             </td>
             <td class="text-center">
-                <a ng-href="#/imageDetails/{{containerData.ImageName}}">
+                <a ng-href="#/imageDetails/{{containerData.ImageId}}" data-toggle="tooltip" ng-attr-title="{{containerData.ImageName}}">
                     {{containerData.ImageName | shorten:true:30}}</a>
             </td>
-            <td class="text-left">{{containerData.Command | shorten:true:80}}</td>
+            <td class="text-left" style="max-width: 500px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" data-toggle="tooltip" ng-attr-title="{{containerData.Command}}">
+                {{containerData.Command}}
+            </td>
             <td class="text-left">{{showContainerSizeFlag==true?containerData.SizeRw:NAN | bytes:2 }}
                 ({{showContainerSizeFlag==true?containerData.SizeRootFs:NAN | bytes:2 }})
             </td>
@@ -212,5 +216,5 @@
         </tr>
         </tbody>
     </table>
-    <span class="fa fa-exclamation-triangle" style="color: red"></span> - privileged
+    <span class="fa fa-exclamation-triangle" style="color: red"></span> = privileged
 </div>

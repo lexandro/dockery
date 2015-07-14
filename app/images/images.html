@@ -19,7 +19,7 @@
     <table class="table table-condensed table-hover table-striped table-bordered">
         <thead>
         <tr class="success vcenter form-group">
-            <td colspan="6">
+            <td colspan="7">
                 <button type="button" ng-click="refreshImages()" class="btn btn-primary btn-sm"><span
                         class="glyphicon glyphicon-refresh"></span><strong> Refresh</strong>
                 </button>
@@ -44,7 +44,10 @@
                           ng-click="switchSelectAllImagesFlag()">
                 </span>
             </td>
-            <td width="1%" class="text-center" ng-click="changeSorting('Id')">
+            <td width="2%" class="text-center">
+                <strong>Control</strong>
+            </td>
+            <td width="3%" class="text-center" ng-click="changeSorting('Id')">
                 <strong>Image ID</strong>
                     <span class='fa'
                           ng-class="{'fa-sort-amount-desc ':sort.column=='Id' && sort.direction==='descending','fa-sort-amount-asc':sort.column=='Id' && sort.direction==='ascending'}">
@@ -82,6 +85,11 @@
                        class="vcenter"
                        ng-click="switchSelectedImage(image)">
                 </span>
+            </td>
+            <td class="text-center">
+                <button class="btn btn-danger btn-block btn-sm" ng-click="removeImage(image.Id)">
+                    <strong>Remove</strong>
+                </button>
             </td>
             <td class="text-center">
                 <button class="btn btn-info btn-block btn-sm" ng-click="goImageDetails(image.Id)">

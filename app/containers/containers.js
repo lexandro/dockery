@@ -256,6 +256,7 @@ angular.module('containers', ['ngRoute'])
                         //
                         containerData.ContainerName = containerDetails.Name;
                         containerData.Privileged = containerDetails.HostConfig.Privileged;
+                        containerData.ImageId = containerDetails.Image;
                     });
 
                 });

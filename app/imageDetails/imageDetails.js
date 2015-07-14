@@ -17,20 +17,41 @@ angular.module('imageDetails', ['ngRoute'])
             $scope.imageDataLoadingMessage = 'Loading image data';
             var imageDetails = Docker.images().get({imageId: $routeParams.imageId}, function () {
                 $scope.imageDataLoading = false;
+                $scope.containerDataLoading = false;
 
                 // converting the port listing map map to a more readable format
                 if (imageDetails.Config.ExposedPorts) {
                     imageDetails.Config.ExposedPorts = Object.keys(imageDetails.Config.ExposedPorts).join(', ');
                 }
-
-                var images = $rootScope.images;
-                images.forEach(function (image) {
-                    console.log(image);
-                    if (image.Id == imageDetails.Id) {
-                        imageDetails.RepoTags = image.RepoTags;
-                    }
-                });
                 $scope.imageDetails = imageDetails;
+                var images = Docker.images().query({showAllImagesFlag: 1}, function () {
+                    images.forEach(function (image) {
+                        if (image.Id == imageDetails.Id) {
+                            imageDetails.RepoTags = image.RepoTags;
+                            $scope.imageDetails = imageDetails;
+                        }
+                    });
+                });
+                $scope.containerDataLoading = true;
+                var allContainers = Docker.containers().query({all: 1}, function () {
+                    var imageContainers = [];
+                    allContainers.forEach(function (container) {
+                        var containerDetails = Docker.containers().get({containerId: container.Id}, function () {
+                            //
+                            if (containerDetails.Image == imageDetails.Id) {
+                                var containerData = {};
+                                console.log(containerDetails.Name);
+                                containerData.Name = containerDetails.Name.substr(1);
+                                containerData.Id = containerDetails.Id;
+                                containerData.Privileged = containerDetails.HostConfig.Privileged
+                                containerData.State = containerDetails.State
+                                imageContainers.push(containerData);
+                            }
+                        });
+                    });
+                    $scope.containers = imageContainers;
+                    $scope.containerDataLoading = false;
+                });
             });
 
 
