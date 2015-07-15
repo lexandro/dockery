@@ -3,14 +3,9 @@
         <h3 class="panel-title"><span class="fa fa-exclamation-triangle"></span>
             This is a privileged container</h3>
     </div>
-
     <div class="row">
         <div class="col-md-6">
-
-            <h3>
-                <button class="btn btn-success btn-sm" ng-click="$root.goBack()" ng-show="$root.chrome"><span
-                        class="fa fa-arrow-left"></span><strong> Go back</strong></button>
-                </button>Container: <strong>{{containerDetails.Name.substring(1).toUpperCase()}}</strong>
+            <h3>Container: <strong>{{containerDetails.Name.substring(1).toUpperCase()}}</strong>
                 <span ng-show='containerDetails.State.Running==true && containerDetails.State.Paused==false'
                       class="label label-success">Running</span>
                 <span ng-show='containerDetails.State.Paused==true' class="label label-warning">Paused</span>
@@ -315,11 +310,11 @@
                 {{containerLogsLoadingMessage}}</h3>
         </div>
         <div class="col-md-12">
-            <button type="button" ng-click="downloadAllLogs()"
-                    class='btn btn-success'>
-                <span class='fa fa-download'></span>
-                Download logs
-            </button>
+            <!--<button type="button" ng-click="downloadAllLogs()"-->
+                    <!--class='btn btn-success'>-->
+                <!--<span class='fa fa-download'></span>-->
+                <!--Download logs-->
+            <!--</button>-->
             <button type="button" ng-click="switchStdOutPanel()"
                     ng-class="{'btn btn-primary': logSettings['showStdOut'], 'btn btn-info': !logSettings['showStdOut']}">
                 <span ng-class="{'glyphicon glyphicon-check': logSettings['showStdOut'], 'glyphicon glyphicon-unchecked': !logSettings['showStdOut']}"></span>
