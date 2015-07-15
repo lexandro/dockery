@@ -77,21 +77,14 @@ These screenshots are not representing the final version!
 Here's the list of active, scheduled, planned and finished development goals
 
 ## Under development
-0.2.9
-- Add: link containers in Create
-- Add: show links in container details
-- Add: release notes to about/first run of new version
-- Fix: Create container on/off switch changed from radio to checkbox
-- Fix: CSS/colspan on Repository view
-- Fix: Xterm.js css wasn't imported
-
-## Roadmap /by priority/
 0.3.0
 - Add: add search for container diff
 - Add: commit container as image
 - Add: login into the docker hub and/or private repo(s)
 - Add: push image to the repository
+- Add: release notes to about/first run of new version
 
+## Roadmap /by priority/
 0.3.1
 - Add: helper links to the known fields/information pieces to help understand
 - Add: In Chrome mode add Settings view to enable synced storage usage  

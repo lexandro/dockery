@@ -2,7 +2,7 @@
   "name": "Dockery light",
   "short_name": "Dockery light",
   "description": "Frontend application for Docker management",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "manifest_version": 2,
   "app": {
     "background": {

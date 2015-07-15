@@ -1,7 +1,7 @@
 {
   "name": "docker|mon",
   "description": "Docker monitoring and host administration tool",
-  "version": "0.2.9-beta",
+  "version": "0.3.0",
   "homepage": "https://github.com/lexandro/dockery",
   "private": false,
   "dependencies": {
