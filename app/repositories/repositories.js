@@ -3,13 +3,13 @@
 angular.module('repository', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/repository', {
-            templateUrl: 'app/repository/repository.html',
-            controller: 'RepositoryCtrl'
+        $routeProvider.when('/repositories', {
+            templateUrl: 'app/repositories/repositories.html',
+            controller: 'RepositoriesCtrl'
         });
     }])
 
-    .controller('RepositoryCtrl', ['$rootScope', '$scope', '$location', '$routeParams', 'Helpers', 'Docker', 'Registry', function ($rootScope, $scope, $location, $routeParams, Helpers, Docker, Registry) {
+    .controller('RepositoriesCtrl', ['$rootScope', '$scope', '$location', '$routeParams', 'Helpers', 'Docker', 'Registry', function ($rootScope, $scope, $location, $routeParams, Helpers, Docker, Registry) {
         if (Helpers.isEmpty($rootScope.hostUrl)) {
             $location.path('/hosts');
         } else {
