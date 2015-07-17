@@ -78,7 +78,7 @@ Here's the list of active, scheduled, planned and finished development goals
 
 ## Under development
 0.3.0
-- Add: add search for container diff
++ Add: add search for container diff
 - Add: commit container as image
 - Add: login into the docker hub and/or private repo(s)
 - Add: push image to the repository
