@@ -58,6 +58,11 @@
                         ng-click="removeContainer()">
                     <span class="glyphicon glyphicon-trash"></span><strong> remove</strong>
                 </button>
+                <button class="btn btn-success btn-sm"
+                        ng-disabled="!canCommit"
+                        ng-click="commitContainer()">
+                    <span class="fa fa-folder"></span><strong> commit</strong>
+                </button>
             </div>
         </div>
     </div>
@@ -328,6 +333,7 @@
         </div>
         <br/>
         <br/>
+
         <div ng-class="{'col-md-6': logSettings['showStdErr'], 'col-md-12': !logSettings['showStdErr']}"
              ng-show="logSettings['showStdOut']">
             <div class="panel panel-success">
@@ -348,7 +354,6 @@
                             <span ng-class="{'glyphicon glyphicon-unchecked':!logSettings['stdOutTailAll'], 'glyphicon glyphicon-check':logSettings['stdOutTailAll']}"></span>
                             all
                         </button>
-
                     </div>
                 </div>
                 <div class="panel-body">
