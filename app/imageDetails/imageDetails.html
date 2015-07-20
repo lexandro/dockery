@@ -50,8 +50,8 @@
                     <div class="col-md-2"><strong>OS/Architecture:</strong></div>
                     <div class="col-md-9">{{imageDetails.Os}}/{{imageDetails.Architecture}}&nbsp;</div>
                     <div class="col-md-2"><strong>Command:</strong></div>
-                    <div class="col-md-9"><code ng-show="imageDetails.ContainerConfig.Cmd.length>0"><span
-                            ng-repeat="cmd in imageDetails.ContainerConfig.Cmd"> {{cmd}}</span></code>&nbsp;</div>
+                    <div class="col-md-9"><code ng-show="imageDetails.Config.Cmd.length>0"><span
+                            ng-repeat="cmd in imageDetails.Config.Cmd"> {{cmd}}</span></code>&nbsp;</div>
                     <div class="col-md-2"><strong>Entry point:</strong></div>
                     <div class="col-md-9"><code ng-show="imageDetails.Config.Entrypoint.length>0">{{imageDetails.Config.Entrypoint[0]}}</code>&nbsp;</div>
                     <div class="col-md-2"><strong>Exposed ports:</strong></div>
