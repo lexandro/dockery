@@ -94,7 +94,23 @@
                                   ng-show="!!imageNameForm.$error.required"></span>
                         </form>
                     </div>
+                    <div class="col-md-3 vcenter text-right">
+                        <strong>Author:</strong>
+                    </div>
+                    <div class="col-md-9 input-group has-feedback form-group">
+                        <form name="imageNameForm">
+                            <input type="text" class="form-control" ng-model="imageName" name="imageNameInput"
+                                   placeholder="Enter the author's name" required ng-trim="true">
+                            <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"
+                                  ng-show="!imageNameForm.$error.required"></span>
+                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"
+                                  ng-show="!!imageNameForm.$error.required"></span>
+                        </form>
+                    </div>
+
                 </div>
+
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-success">Commit</button>
