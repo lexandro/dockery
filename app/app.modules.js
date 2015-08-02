@@ -23,9 +23,11 @@ angular.module('dockery', [
         'frapontillo.bootstrap-switch'],
     function ($provide) {
         // Prevent Angular from sniffing for the history API
-        // since it's not supported in packaged apps.
+        // since it's not supported in packaged apps. Only in chrome
         $provide.decorator('$window', function ($delegate) {
-            $delegate.history = null;
+            if (window.chrome && chrome.app && chrome.app.runtime) {
+                $delegate.history = null;
+            }
             return $delegate;
         });
     })
