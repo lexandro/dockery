@@ -56,7 +56,7 @@
                     <div class="col-md-9"><code ng-show="imageDetails.Config.Entrypoint.length>0">{{imageDetails.Config.Entrypoint[0]}}</code>&nbsp;</div>
                     <div class="col-md-2"><strong>Exposed ports:</strong></div>
                     <div class="col-md-9">{{imageDetails.Config.ExposedPorts}}&nbsp;</div>
-                    <div class="col-md-2"><strong>Environment variables:</strong></div>
+                    <div class="col-md-2"><strong>Env. variables:</strong></div>
                     <div class="col-md-9"><code ng-repeat="env in imageDetails.Config.Env">{{env}}<br ng-show="!$last"/></code>&nbsp;</div>
                     <div class="col-md-2"><strong>Working dir:</strong></div>
                     <div class="col-md-9"><code ng-show="imageDetails.Config.WorkingDir.length>0">{{imageDetails.Config.WorkingDir}}</code>&nbsp;</div>
