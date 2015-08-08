@@ -93,6 +93,7 @@ Here's the list of active, scheduled, planned and finished development goals
 0.3.1
 - Add: helper links to the known fields/information pieces to help understand
 - Add: In Chrome mode add Settings view to enable synced storage usage  
+- Add: pure JSON view for image details
 
 0.3.2
 - Add: exit code filter to container list view 
