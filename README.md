@@ -84,7 +84,7 @@ Here's the list of active, scheduled, planned and finished development goals
 ## Under development 
 0.3.0
 + Add: add search for container diff
-- Add: commit container as image
++ Add: commit container as image
 - Add: login into the docker hub and/or private repo(s)
 - Add: push image to the repository
 - Add: release notes to about/first run of new version
@@ -94,7 +94,7 @@ Here's the list of active, scheduled, planned and finished development goals
 0.3.1
 - Add: helper links to the known fields/information pieces to help understand
 - Add: In Chrome mode add Settings view to enable synced storage usage  
-- Add: pure JSON view for image details
+- Add: pure JSON view for imageDetails
 - Add: remove button to imageDetails
 
 0.3.2
