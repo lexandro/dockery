@@ -47,7 +47,8 @@ angular.module('containerDetails', ['ngRoute'])
             $scope.imageAuthorName = "";
             $scope.imageRepositoryName = "";
             $scope.imageRepositoryTagName = "latest";
-            $scope.dismissTarget = "";
+            $scope.imageChanges = [{value: ""}];
+            $scope.commitError = false;
 
             loadContainerDetails();
             //
@@ -104,20 +105,47 @@ angular.module('containerDetails', ['ngRoute'])
                 );
             };
             //
+            $scope.showCommitContainerDialog = function () {
+                $scope.commitError = false;
+            };
+            //
             $scope.commitContainer = function () {
                 //
-                $scope.dismissTarget = "modal";
+                var commitConfig = {
+                    container: $routeParams.containerId,
+                    comment: $scope.imageCommitMessage,
+                    author: $scope.imageAuthorName,
+                    repo: $scope.imageRepositoryName,
+                    tag: $scope.imageRepositoryTagName
+                };
                 //
-                var committedContainer = Docker.commit().save({
-                        container: $routeParams.containerId,
-                        comment: $scope.imageCommitMessage,
-                        author: $scope.imageAuthorName,
-                        repo: $scope.imageRepositoryName,
-                        tag: $scope.imageRepositoryTagName
-                    },
+
+                var imageChanges = $scope.imageChanges;
+                var changes = [];
+                if (imageChanges.length > 1) {
+                    imageChanges.forEach(function (change) {
+                        if (!Helpers.isEmpty(change.value)) {
+                            changes.push(change.value);
+                        }
+                    });
+                    commitConfig["changes"] = changes;
+                }
+                console.log(JSON.stringify(commitConfig));
+                //
+                var committedContainer = Docker.commit().save(
+                    commitConfig,
                     $scope.containerDetails.Config,
                     function () {
                         console.log('done ' + JSON.stringify(committedContainer));
+                        $('#commitModal').modal('hide')
+                        $scope.commitError = false;
+                    },
+                    function (error) {
+                        $scope.commitError = true;
+                        $scope.commitErrorStatus = error.status;
+                        $scope.commitErrorStatusText = error.statusText;
+                        $scope.commitErrorMessage = error.data;
+                        console.log('gebasz? ' + JSON.stringify(error));
                     }
                 );
             };
@@ -319,6 +347,28 @@ angular.module('containerDetails', ['ngRoute'])
 
         }
 
+        $scope.imageChangeValidator = function () {
+            var imageChanges = $scope.imageChanges;
+            var newImageChanges = [];
+            imageChanges.forEach(function (change) {
+                if (!Helpers.isEmpty(change.value)) {
+                    newImageChanges.push(change);
+                }
+            });
+            newImageChanges.push({value: ""});
+            $scope.imageChanges = newImageChanges;
+        };
+
+        $scope.deleteImageChangeEntry = function (index) {
+            $scope.deleteFromArray($scope.imageChanges, index);
+        };
+
+        $scope.deleteFromArray = function (array, index) {
+            var arrayLength = array.length;
+            if (arrayLength > 1 && index < arrayLength - 1) {
+                array.splice(index, 1);
+            }
+        };
         function loadContainerDetails() {
             $scope.containerDetailsLoading = true;
             containerDetails = Docker.containers().get({containerId: $routeParams.containerId}, function () {
@@ -349,5 +399,14 @@ angular.module('containerDetails', ['ngRoute'])
                 $scope.portAssignments = portAssignments.substring(0, portAssignments.length - 2);
             });
         }
-    }])
-;
+    }]);
+
+//$(window).on('popstate', function () {
+//    $('#commitModal').modal('show');
+//    console.log("vateva");
+//});
+//
+//$('#commitModal').on('shown.bs.modal', function (e) {
+//    console.log("shown");
+///    $('#commitModal').modal('hide');
+//});

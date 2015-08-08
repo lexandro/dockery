@@ -60,6 +60,7 @@
                 </button>
                 <button class="btn btn-success btn-sm"
                         ng-disabled="canCommit"
+                        ng-click="showCommitContainerDialog()"
                         data-toggle="modal" data-target="#commitModal">
                     <span class="fa fa-folder"></span><strong> commit</strong>
                 </button>
@@ -133,11 +134,36 @@
                         </form>
                     </div>
 
+                    <div class="col-md-12 vcenter text-center">
+                        <h4>Extra <a href="https://docs.docker.com/reference/builder/" target="_blank">Dockerfile</a> commands</h4>
+                    </div>
+                    <div class="form-group">
+                        <div ng-repeat="imageChange in imageChanges" class="form-group col-md-offset-3 col-md-8 input-group">
+                            <span class="input-group-btn">
+                            <input type="text" class="form-control" ng-model="imageChange.value"
+                                   placeholder="image change command" ng-keyup="imageChangeValidator()">
+
+                            <button ng-click="deleteImageChangeEntry($index)" title="Delete image change" type="submit"
+                                    class="btn btn-danger input-group-btn"
+                                    style="width: 40px; margin-right: 0px;margin-left: 3px;">
+                                <span class="fa fa-trash" style="font-size: large"></span>
+                            </button>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-10 form-group input-group vcenter text-center">
+                        {{imageChange}}
+                    </div>
                 </div>
                 <div class="modal-footer">
+                    <div ng-show="commitError" class="alert alert-danger col-md-12 text-left" role="alert">
+                        <strong>Error! - {{commitErrorMessage}}</strong>
+                        <br/>
+                        {{commitErrorStatus}} - {{commitErrorStatusText}}
+                    </div>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-success"
-                            data-dismiss="{{dismissTarget}}"
                             ng-disabled="imageCommitMessage.length == 0 || imageAuthorName.length == 0 || imageRepositoryName.length==0 || imageRepositoryTagName.length==0"
                             ng-click="commitContainer()">Commit
                     </button>
