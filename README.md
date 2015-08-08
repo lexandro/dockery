@@ -35,6 +35,8 @@ DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4 -H tcp://0.0.0.0:2375 -H unix:///var/ru
 
 ```
 
+This command makes docker daemon accessible on port 2375, you just need to add to Dockery as http://<server ip>:2375.
+
 then issue the following command to activate changes:
 ```bash
 service docker restart
@@ -52,6 +54,9 @@ docker pull lexandro/dockery
 ```bash
 docker run -d -p 80:80 --name dockery lexandro/dockery
 ```
+
+Then you can access docker at http://<docker host>:80.
+
 ## Beta screenshots
 These screenshots are not representing the final version!
 
@@ -76,7 +81,7 @@ These screenshots are not representing the final version!
 # Development roadmap
 Here's the list of active, scheduled, planned and finished development goals
 
-## Under development
+## Under development 
 0.3.0
 + Add: add search for container diff
 - Add: commit container as image
