@@ -143,8 +143,24 @@ angular.module('services', [])
                     }
                 });
             },
+            commit: function () {
+                return $resource($rootScope.hostUrl + '/commit', null, {
+                    save: {
+                        method: "POST",
+                        isArray: false
+                    }
+                });
+            },
             info: function () {
                 return $resource($rootScope.hostUrl + '/info', null, {
+                    get: {
+                        method: "GET",
+                        isArray: false
+                    }
+                });
+            },
+            ping: function (hostUrl) {
+                return $resource(hostUrl + '/_ping', null, {
                     get: {
                         method: "GET",
                         isArray: false
@@ -159,15 +175,6 @@ angular.module('services', [])
                     }
                 });
             },
-
-            ping: function (hostUrl) {
-                return $resource(hostUrl + '/_ping', null, {
-                    get: {
-                        method: "GET",
-                        isArray: false
-                    }
-                });
-            }
         }
     })
     .factory('Registry', function ($resource, $http, $rootScope) {
