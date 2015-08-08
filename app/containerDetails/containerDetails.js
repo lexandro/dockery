@@ -38,12 +38,17 @@ angular.module('containerDetails', ['ngRoute'])
             $scope.logSettings = logSettings;
             // dirt hack to emulate destroy function :)
             var term = {};
-
-
             $scope.containerDetailsLoadingMessage = 'Loading container data';
             $scope.containerTopLoading = false;
             $scope.containerLogsLoading = false;
             $scope.containerDiffLoading = false;
+            //
+            $scope.imageCommitMessage = "";
+            $scope.imageAuthorName = "";
+            $scope.imageRepositoryName = "";
+            $scope.imageRepositoryTagName = "latest";
+            $scope.dismissTarget = "";
+
             loadContainerDetails();
             //
             $scope.isEmpty = function (obj) {
@@ -99,9 +104,26 @@ angular.module('containerDetails', ['ngRoute'])
                 );
             };
             //
+            $scope.commitContainer = function () {
+                //
+                $scope.dismissTarget = "modal";
+                //
+                var committedContainer = Docker.commit().save({
+                        container: $routeParams.containerId,
+                        comment: $scope.imageCommitMessage,
+                        author: $scope.imageAuthorName,
+                        repo: $scope.imageRepositoryName,
+                        tag: $scope.imageRepositoryTagName
+                    },
+                    $scope.containerDetails.Config,
+                    function () {
+                        console.log('done ' + JSON.stringify(committedContainer));
+                    }
+                );
+            };
+            //
             $scope.downloadAllLogs = function () {
                 console.log('download ' + $rootScope.hostUrl + '/containers/' + $routeParams.containerId + '/logs?stderr=1&stdout=1');
-
             };
             //
             $scope.showLogs = function (containerId) {
@@ -311,7 +333,9 @@ angular.module('containerDetails', ['ngRoute'])
                 $scope.canPause = $scope.canStop;
                 $scope.canUnpause = containerDetails.State.Running && containerDetails.State.Paused;
                 $scope.canRemove = !containerDetails.State.Running;
-                //
+                // removing angular related objects
+                delete containerDetails["$promise"];
+                delete containerDetails["$resolved"];
                 // TODO check output format with multiple port situation
                 var portAssignments = "";
                 for (var key in containerDetails.NetworkSettings.Ports) {

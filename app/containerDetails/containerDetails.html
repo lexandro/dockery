@@ -60,7 +60,6 @@
                 </button>
                 <button class="btn btn-success btn-sm"
                         ng-disabled="canCommit"
-                        ng-click="commitContainer()"
                         data-toggle="modal" data-target="#commitModal">
                     <span class="fa fa-folder"></span><strong> commit</strong>
                 </button>
@@ -85,9 +84,35 @@
                         <strong>Commit message:</strong>
                     </div>
                     <div class="col-md-9 input-group has-feedback form-group">
+                        <form name="commitMessageForm">
+                            <input type="text" class="form-control" ng-model="imageCommitMessage" name="imageCommitInput"
+                                   placeholder="Enter the commit message" required ng-trim="true">
+                            <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"
+                                  ng-show="!commitMessageForm.$error.required"></span>
+                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"
+                                  ng-show="!!commitMessageForm.$error.required"></span>
+                        </form>
+                    </div>
+                    <div class="col-md-3 vcenter text-right">
+                        <strong>Author:</strong>
+                    </div>
+                    <div class="col-md-9 input-group has-feedback form-group">
+                        <form name="imageAuthorForm">
+                            <input type="text" class="form-control" ng-model="imageAuthorName" name="imageAuthorInput"
+                                   placeholder="Enter the author's name" required ng-trim="true">
+                            <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"
+                                  ng-show="!imageAuthorForm.$error.required"></span>
+                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"
+                                  ng-show="!!imageAuthorForm.$error.required"></span>
+                        </form>
+                    </div>
+                    <div class="col-md-3 vcenter text-right">
+                        <strong>Repository:</strong>
+                    </div>
+                    <div class="col-md-9 input-group has-feedback form-group">
                         <form name="imageNameForm">
-                            <input type="text" class="form-control" ng-model="imageName" name="imageNameInput"
-                                   placeholder="Enter the image name" required ng-trim="true">
+                            <input type="text" class="form-control" ng-model="imageRepositoryName" name="imageRepositoryInput"
+                                   placeholder="Enter repository/image name" required ng-trim="true">
                             <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"
                                   ng-show="!imageNameForm.$error.required"></span>
                             <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"
@@ -95,22 +120,27 @@
                         </form>
                     </div>
                     <div class="col-md-3 vcenter text-right">
-                        <strong>Author:</strong>
+                        <strong>Tag:</strong>
                     </div>
                     <div class="col-md-9 input-group has-feedback form-group">
-                        <form name="imageNameForm">
-                            <input type="text" class="form-control" ng-model="imageName" name="imageNameInput"
-                                   placeholder="Enter the author's name" required ng-trim="true">
+                        <form name="imageNameTagForm">
+                            <input type="text" class="form-control" ng-model="imageRepositoryTagName" name="imageRepositoryTagInput"
+                                   placeholder="Enter repository tag name" required ng-trim="true">
                             <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"
-                                  ng-show="!imageNameForm.$error.required"></span>
+                                  ng-show="!imageNameTagForm.$error.required"></span>
                             <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"
-                                  ng-show="!!imageNameForm.$error.required"></span>
+                                  ng-show="!!imageNameTagForm.$error.required"></span>
                         </form>
                     </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Commit</button>
+                    <button type="button" class="btn btn-success"
+                            data-dismiss="{{dismissTarget}}"
+                            ng-disabled="imageCommitMessage.length == 0 || imageAuthorName.length == 0 || imageRepositoryName.length==0 || imageRepositoryTagName.length==0"
+                            ng-click="commitContainer()">Commit
+                    </button>
                 </div>
             </div>
         </div>
