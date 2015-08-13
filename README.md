@@ -43,7 +43,7 @@ DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4 -H tcp://0.0.0.0:2375 -H unix:///var/ru
 
 ```
 
-This command makes docker daemon accessible on port 2375, you just need to add to Dockery as http://<server ip>:2375.
+This command makes docker daemon accessible on port 2375, you just need to add to Dockery as http://**server ip**:2375.
 
 then issue the following command to activate changes:
 ```bash
