@@ -1,7 +1,11 @@
 # dockery
 
-Dockery is a lightweight docker management and monitoring application for Developers. If you are new with container technologies and lxc based containerization, use Dockery 
-for easier management and more productivity. Dockery is available as Chrome application, Docker image or Github repository.
+Dockery is a lightweight [docker] (http://docker.io) management and monitoring application for **developers**. If you are new with container technologies and lxc based containerization, use Dockery 
+for easier management and more productivity. Dockery is available as 
+
+- **[Chrome application](https://chrome.google.com/webstore/detail/dockery-light/cefhojablgaokgccloekpocgmffgecmm)**
+- **[Docker image](https://hub.docker.com/r/lexandro/dockery/)**
+- **[Github hosted webapp](http://dockery.io/dockery/#/hosts)**
 
 <a target="_blank" href="https://chrome.google.com/webstore/detail/dockery-light/cefhojablgaokgccloekpocgmffgecmm">
 <img alt="Try it now" src="https://raw.github.com/GoogleChrome/chrome-app-samples/master/tryitnowbutton_small.png" title="Click here to install this app from the Chrome Web Store"></img>
