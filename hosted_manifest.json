@@ -1,0 +1,24 @@
+{
+  "name": "Dockery light",
+  "short_name": "Dockery light",
+  "description": "Frontend application for Docker management",
+  "version": "0.3.0",
+  "manifest_version": 2,
+  "app": {
+    "urls": [
+      "*://www.dockery.io/dockery"
+    ],
+    "launch": {
+      "web_url": "http://www.dockery.io/dockery"
+    }
+  },
+  "icons": {
+    "16": "assets/img/dockery_icon_16.png",
+    "128": "assets/img/dockery_icon.png"
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*"
+  ]
+}
+
