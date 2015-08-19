@@ -1,9 +1,30 @@
 <div class="col-md-12">
+    <div modal="showModal" class="modal fade " id="newsModal" tabindex="-1" role="dialog" aria-labelledby="newsModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="newsModalLabel">Dockery upgraded to {{$root.appVersion}}</h4>
+                </div>
+                <div class="modal-body col-md-offset-1">
+
+                    <strong>Changes:</strong><br/>
+                    <li>a</li>
+                    <li>a</li>
+                    <li>a</li>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal" aria-label="Close" ng-click="markNewsRead()"><span
+                            aria-hidden="true">Close</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <form class="form-inline" role="form">
         <div class="form-group">
             <input type="text" class="form-control" id="newHostName" ng-model="newHostName" placeholder="name">
-
             <select ng-model="newHostPrefix" class="form-control">
                 <option value="http://">http://</option>
                 <!--<option value="https://">https://</option>-->

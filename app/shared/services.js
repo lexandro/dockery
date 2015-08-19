@@ -192,25 +192,15 @@ angular.module('services', [])
     })
     .factory('HostService', ['$rootScope', 'Helpers', function ($rootScope, Helpers) {
         return {
-            load: function (callback) {
+            load: function () {
                 //
                 var hosts = [];
                 var host = {};
                 if ($rootScope.chrome === true) {
                     console.log('chrome storage');
-                    //host.id = Helpers.newId();
-                    //host.name = 'localhost'
-                    //host.url = 'http://localhost:2375';
-                    //host.created = new Date();
-                    //host.lastConnected = null;
-                    //host.status = false;
-                    //host.defaultConnection = true;
-                    //host.selected = false;
-                    //hosts.push(host);
-                    //callback(hosts);
                     chrome.storage.local.get("hosts", function (result) {
                         console.log(JSON.stringify(result));
-                        callback(JSON.parse(result.hosts));
+                        return (JSON.parse(result.hosts));
                     });
 
                 } else {
@@ -225,7 +215,7 @@ angular.module('services', [])
                             }
                         });
                     }
-                    callback(hosts);
+                    return (hosts);
                 }
             },
             save: function (hosts) {
@@ -237,8 +227,53 @@ angular.module('services', [])
                     localStorage.setItem("hosts", angular.toJson(hosts));
                 }
 
+            },
+            loadSettings: function (callback) {
+                var dockerySettings = {};
+                if ($rootScope.chrome === true) {
+                    console.log('chrome storage');
+                    chrome.storage.local.get("dockerySettings", function (result) {
+                        console.log(JSON.stringify(result));
+                        dockerySettings = result.dockerySettings;
+                        $rootScope.showNews = dockerySettings.version === $rootScope.appVersion;
+                        callback(JSON.parse(dockerySettings.hosts));
+                    });
+                } else {
+                    //localStorage.clear();
+                    var dockerySettings = JSON.parse(localStorage.getItem("dockerySettings"));
+                    if (Helpers.isEmpty(dockerySettings) || Helpers.isEmpty(dockerySettings.hosts)) {
+                        hosts = [];
+                    } else {
+                        hosts.forEach(function (host) {
+                            if (host.default) {
+                                $rootScope.hostUrl = host;
+                            }
+                        });
+                    }
+                    callback(dockerySettings.hosts);
+
+
+                }
+            },
+            saveSettings: function () {
+                var dockerySettings = $rootScope.dockerySettings;
+                if (Helpers.isEmpty(dockerySettings)) {
+                    dockerySettings = {};
+                }
+                dockerySettings["version"] = 1;
+                dockerySettings.hosts = $rootScope.hosts;
+                if ($rootScope.chrome === true) {
+                    chrome.storage.local.set({'dockerySettings': angular.toJson(dockerySettings)}, function () {
+                    });
+                } else {
+                    // in the future it will be removed
+                    //localStorage.setItem("hosts");
+                    localStorage.setItem("dockerySettings", angular.toJson(dockerySettings));
+                }
             }
         }
-    }]);
+    }
+    ])
+;
 
 

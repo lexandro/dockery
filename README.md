@@ -93,6 +93,7 @@ Here's the list of active, scheduled, planned and finished development goals
 0.3.0
 + Add: add search for container diff
 + Add: commit container as image (initial version, with basic validations)
+- Add: Extend saved configuration scope with extra data. Version, etc...
 - Add: login into the docker hub and/or private repo(s)
 - Add: push image to the repository
 - Add: release notes to about/first run of new version
