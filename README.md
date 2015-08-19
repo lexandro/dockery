@@ -1,7 +1,15 @@
+# FYI
+
+Dockery is available as hosted webapp from now: **[http://dockery.io/dockery](http://dockery.io/dockery)** No any local installation or hosting needed, just bookmark it in your browser
+
 # dockery
 
-Dockery is a lightweight docker management and monitoring application for Developers. If you are new with container technologies and lxc based containerization, use Dockery 
-for easier management and more productivity. Dockery is available as Chrome application, Docker image or Github repository.
+Dockery is a lightweight [docker] (http://docker.io) management and monitoring application for **developers**. If you are new with container technologies and lxc based containerization, use Dockery 
+for easier management and more productivity. Dockery is available as 
+
+- **[Chrome application](https://chrome.google.com/webstore/detail/dockery-light/cefhojablgaokgccloekpocgmffgecmm)**
+- **[Docker image](https://hub.docker.com/r/lexandro/dockery/)**
+- **[Github hosted webapp](http://dockery.io/dockery/)**
 
 <a target="_blank" href="https://chrome.google.com/webstore/detail/dockery-light/cefhojablgaokgccloekpocgmffgecmm">
 <img alt="Try it now" src="https://raw.github.com/GoogleChrome/chrome-app-samples/master/tryitnowbutton_small.png" title="Click here to install this app from the Chrome Web Store"></img>
@@ -35,7 +43,7 @@ DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4 -H tcp://0.0.0.0:2375 -H unix:///var/ru
 
 ```
 
-This command makes docker daemon accessible on port 2375, you just need to add to Dockery as http://<server ip>:2375.
+This command makes docker daemon accessible on port 2375, you just need to add to Dockery as http://**server ip**:2375.
 
 then issue the following command to activate changes:
 ```bash
@@ -84,7 +92,7 @@ Here's the list of active, scheduled, planned and finished development goals
 ## Under development 
 0.3.0
 + Add: add search for container diff
-+ Add: commit container as image
++ Add: commit container as image (initial version, with basic validations)
 - Add: login into the docker hub and/or private repo(s)
 - Add: push image to the repository
 - Add: release notes to about/first run of new version
@@ -94,7 +102,7 @@ Here's the list of active, scheduled, planned and finished development goals
 0.3.1
 - Add: helper links to the known fields/information pieces to help understand
 - Add: In Chrome mode add Settings view to enable synced storage usage  
-- Add: pure JSON view for imageDetails
+- Add: pure JSON view for image details
 - Add: remove button to imageDetails
 
 0.3.2
