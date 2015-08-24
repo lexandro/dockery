@@ -16,12 +16,10 @@ angular.module('hosts', ['ngRoute'])
         }
         $scope.pingInterval = $rootScope.lastPingInterval;
         $scope.newHostPrefix = 'http://';
-        $scope.showNews = true;
-        $('#newsModal').modal('show');
         var hosts = [];
 
         try {
-            HostService.loadSettings(function (loadedHosts) {
+            HostService.load(function (loadedHosts) {
 
 
                 loadedHosts.forEach(function (host) {
@@ -45,9 +43,6 @@ angular.module('hosts', ['ngRoute'])
             console.log("Error loading hosts data: " + err);
         }
 
-        $scope.markNewsRead = function () {
-            console.log('news read');
-        };
         function updateStatus() {
             $rootScope.tick = true;
             tick();
@@ -78,7 +73,7 @@ angular.module('hosts', ['ngRoute'])
 
         function saveHosts() {
             $scope.hosts = hosts;
-            HostService.saveSettings($scope.hosts);
+            HostService.save($scope.hosts);
         }
 
         function setActiveHost(host) {
