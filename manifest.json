@@ -13,7 +13,7 @@
   },
   "icons": {
     "16": "assets/img/dockery_icon_16.png",
-    "128": "assets/img/dockery_icon.png"
+    "128": "assets/img/dockery_icon_128.png"
   },
   "permissions": [
     "http://*/*",
