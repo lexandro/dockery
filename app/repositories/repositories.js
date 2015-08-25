@@ -58,7 +58,7 @@ angular.module('repository', ['ngRoute'])
                 var imageTag = searchResult.selectedTag;
                 toastr["info"]('Pulling image ' + imageName + ':' + imageTag, 'Check the progress on tasks');
                 oboe({
-                    url: 'http://localhost:2375/images/create?fromImage=' + imageName + '&tag=' + imageTag,
+                    url: $rootScope.hostUrl + '/images/create?fromImage=' + imageName + '&tag=' + imageTag,
                     method: 'POST'
                 })
                     .node('*', function (item) {
