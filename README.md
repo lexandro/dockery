@@ -94,16 +94,19 @@ Here's the list of active, scheduled, planned and finished development goals
 + Add: add search for container diff
 + Add: commit container as image (initial version, with basic validations)
 + Add: Extend saved configuration scope with extra data. Version, etc...
-- Add: Add bootstrapping page to the app during the startup 
++ Add: announce the chrome app change from packaged to hosted
++ Add: release notes to about/first run of new version
+- Add: Add bootstrapping page to the app during the startup
 - Add: login into the docker hub and/or private repo(s)
 - Add: push image to the repository
-+ Add: release notes to about/first run of new version
 + Fix: removed $promise and $removed properties from the pure json view in containerDetails
 
 ## Roadmap /by priority/
 0.3.1
 - Add: helper links to the known fields/information pieces to help understand
-- Add: In Chrome mode add Settings view to enable synced storage usage  
+- Add: In Chrome mode add Settings view to enable synced storage usage, etc..
+- Add: cloud based settings persistence
+- Add: Online stat for the hosted app. Sorry.
 - Add: pure JSON view for image details
 - Add: remove button to imageDetails
 
@@ -151,12 +154,14 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: export/import hosts list
 
 
-## Not scheduled
+## Not scheduled yet
+- Add: TTL based authentication for docker daemon ports
 - Add: download logs as file.
 - Add: back button/listener to screens in chrome mode
 - Help
 - docker image with version check in the webapp
 - Fix: stopping multiple containers is not working properly on huge list with already stopped containers
+
 ## Possible future development ideas
 I collected some undecided features [on this page!](https://github.com/lexandro/dockery/wiki/Development-ideas)
 
