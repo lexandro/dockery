@@ -113,6 +113,7 @@ Here's the list of active, scheduled, planned and finished development goals
 0.3.2
 - Add: exit code filter to container list view 
 - Add: status filter to container list view
+- Add: shareable URLs in the address line.
 
 0.3.3
  - Add: search/pull image from private repo(s) 
