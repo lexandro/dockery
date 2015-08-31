@@ -25,6 +25,16 @@ for easier management and more productivity. Dockery is available as
 
 ## Enable remote access to a Docker daemon
 
+## Changes from version 1.18
+
+In the V1.18 of remote api, docker introduced a new version of cors configuration. The [documentation] (https://docs.docker.com/v1.6/reference/api/docker_remote_api_v1.18/#33-cors-requests) describes how could you setup the origin for the daemon.
+
+If you use Dockery as hosted app you should configure **http://dockery.io** as origin.
+
+
+
+## Pre 1.18 config:
+
 To manage your docker host(s) with **dockery** please please add the following parameters to your Docker daemon launcher:
 
 ```bash
