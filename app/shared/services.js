@@ -192,25 +192,13 @@ angular.module('services', [])
     })
     .factory('HostService', ['$rootScope', 'Helpers', function ($rootScope, Helpers) {
         return {
-            load: function (callback) {
+            load: function () {
                 //
                 var hosts = [];
-                var host = {};
                 if ($rootScope.chrome === true) {
-                    console.log('chrome storage');
-                    //host.id = Helpers.newId();
-                    //host.name = 'localhost'
-                    //host.url = 'http://localhost:2375';
-                    //host.created = new Date();
-                    //host.lastConnected = null;
-                    //host.status = false;
-                    //host.defaultConnection = true;
-                    //host.selected = false;
-                    //hosts.push(host);
-                    //callback(hosts);
                     chrome.storage.local.get("hosts", function (result) {
                         console.log(JSON.stringify(result));
-                        callback(JSON.parse(result.hosts));
+                        return (JSON.parse(result.hosts));
                     });
 
                 } else {
@@ -225,20 +213,98 @@ angular.module('services', [])
                             }
                         });
                     }
-                    callback(hosts);
+                    return hosts;
                 }
             },
             save: function (hosts) {
                 if ($rootScope.chrome === true) {
                     chrome.storage.local.set({'hosts': angular.toJson(hosts)}, function () {
-                        //console.log('Settings saved: ' + angular.toJson(hosts));
                     });
                 } else {
                     localStorage.setItem("hosts", angular.toJson(hosts));
                 }
 
+            },
+            loadSettings: function (callback) {
+                console.log('loadSettings');
+
+                var dockerySettings = {};
+                var hosts = [];
+
+                if ($rootScope.chrome === true) {
+                    console.log('chrome storage');
+                    chrome.storage.local.get("dockerySettings", function (result) {
+                        console.log(JSON.stringify(result));
+                        dockerySettings = result.dockerySettings;
+                        callback(JSON.parse(dockerySettings.hosts));
+                    });
+                } else {
+                    //localStorage.clear();
+                    console.log('browser storage');
+                    var dockerySettings = JSON.parse(localStorage.getItem("dockerySettings"));
+                    // do we need legacy load?
+                    if (Helpers.isEmpty(dockerySettings)) {
+                        console.log('loadSettings legacy load ' + JSON.stringify(dockerySettings));
+                        dockerySettings = this.initSettings();
+                        hosts = this.load();
+                        if (Helpers.isEmpty(hosts)) {
+                            dockerySettings.hosts = [];
+                        } else {
+                            dockerySettings.hosts = hosts;
+                        }
+                        $rootScope.dockerySettings = dockerySettings;
+                        this.saveSettings();
+
+
+                    } else {
+                        dockerySettings.hosts.forEach(function (host) {
+                            if (host.default) {
+                                $rootScope.hostUrl = host;
+                            }
+                        });
+                    }
+
+                    console.log('dockerySettings ' + JSON.stringify(dockerySettings));
+                    if (dockerySettings.appVersion == $rootScope.appVersion) {
+                        $rootScope.dockerySettings = dockerySettings;
+                    } else {
+                        dockerySettings.appVersion = $rootScope.appVersion
+                        dockerySettings.newsRead = false;
+                        $rootScope.dockerySettings = dockerySettings;
+                        this.saveSettings();
+                    }
+
+                    callback(dockerySettings.hosts);
+
+
+                }
+            },
+            saveSettings: function () {
+                console.log('SaveSettings');
+                //
+                var dockerySettings = $rootScope.dockerySettings;
+                if (Helpers.isEmpty(dockerySettings)) {
+                    dockerySettings = this.initSettings();
+                }
+                //
+                if ($rootScope.chrome === true) {
+                    chrome.storage.local.set({'dockerySettings': angular.toJson(dockerySettings)}, function () {
+                    });
+                } else {
+                    localStorage.setItem("dockerySettings", angular.toJson(dockerySettings));
+                }
+            },
+            initSettings: function () {
+                var dockerySettings = {};
+                dockerySettings.hosts = [];
+                dockerySettings.configVersion = 1;
+                dockerySettings.appVersion = $rootScope.appVersion;
+                dockerySettings.newsRead = false;
+                return dockerySettings;
             }
         }
-    }]);
+    }
+    ])
+;
 
 

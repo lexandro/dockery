@@ -57,8 +57,21 @@ angular.module('dockery', [
                 }
             }
         };
-    })
-    .run(function ($rootScope) {
+    }).directive("dockeryLoading", function ($animate) {
+        return ({
+            link: link,
+            restrict: "C"
+        });
+        function link(scope, element, attributes) {
+            $animate.leave(element.children().eq(1)).then(
+                function cleanupAfterAnimation() {
+                    element.remove();
+                    scope = element = attributes = null;
+                }
+            );
+        }
+    }
+).run(function ($rootScope) {
         $rootScope.appName = 'dockery';
         $rootScope.appVersion = '0.3.0';
         $rootScope.tasks = [];

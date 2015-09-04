@@ -19,8 +19,10 @@ angular.module('hosts', ['ngRoute'])
         var hosts = [];
 
         try {
-            HostService.load(function (loadedHosts) {
-
+            HostService.loadSettings(function (loadedHosts) {
+                if ($rootScope.dockerySettings.newsRead == false) {
+                    $('#newsModal').modal('show');
+                }
 
                 loadedHosts.forEach(function (host) {
                     host.status = false;
@@ -43,6 +45,12 @@ angular.module('hosts', ['ngRoute'])
             console.log("Error loading hosts data: " + err);
         }
 
+        $scope.markNewsRead = function () {
+            var dockerySettings = $rootScope.dockerySettings;
+            dockerySettings.newsRead = true;
+            $rootScope.dockerySettings = dockerySettings;
+            HostService.saveSettings();
+        };
         function updateStatus() {
             $rootScope.tick = true;
             tick();
@@ -73,6 +81,18 @@ angular.module('hosts', ['ngRoute'])
 
         function saveHosts() {
             $scope.hosts = hosts;
+            //
+            console.log('Hosts-hosts ' + JSON.stringify(hosts));
+            var dockerySettings = $rootScope.dockerySettings;
+            if (Helpers.isEmpty(dockerySettings)) {
+                dockerySettings = HostService.initSettings();
+            }
+            dockerySettings.hosts = $scope.hosts;
+            $rootScope.dockerySettings = dockerySettings;
+            //
+            console.log('Hosts-saveHosts ' + JSON.stringify(dockerySettings));
+            HostService.saveSettings();
+            // FIXME delete this line
             HostService.save($scope.hosts);
         }
 
@@ -151,7 +171,6 @@ angular.module('hosts', ['ngRoute'])
                 host.defaultConnection = false;
                 host.selected = false;
                 hosts.push(host);
-
                 saveHosts();
                 pingHost(host);
             }

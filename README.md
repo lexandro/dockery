@@ -106,7 +106,7 @@ Here's the list of active, scheduled, planned and finished development goals
 + Add: Extend saved configuration scope with extra data. Version, etc...
 + Add: announce the chrome app change from packaged to hosted
 + Add: release notes to about/first run of new version
-- Add: Add bootstrapping page to the app during the startup
++ Add: Add bootstrapping page to the app during the startup
 - Add: login into the docker hub and/or private repo(s)
 - Add: push image to the repository
 - Add: info about cors config pre/post 1.18

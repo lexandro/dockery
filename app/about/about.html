@@ -9,6 +9,29 @@
         </div>
     </div>
     <hr/>
+    <h3 style="color: red">Why did I change packaged Chrome app version to hosted one?</h3>
+
+    <p>Wow! Such a big red title! Later I'll put this entry somewhere else with less aggressive style, but this is a quite important now.</p>
+
+    <p>When I started to work on
+        Dockery the plan was to learn Javascript and Angular a bit via a demo project. As I added more and more function, I started to use regularly during my
+        daily work, so I decided to share the app with others for free. One day my colleague <a href="https://twitter.com/jens_wl">Jens</a> asked me why don't
+        try to release Dockery as Chrom app? I scratched my head, then fired up Google to search for some tutorials. Next day I released the packaged app into
+        the Chrome shop and checked the daily statistics of the installs :) Turning an Angular app to Chrome app is relatively easy with some extra spice, but
+        from the beginning I missed some features from the app: back button, opening URL by click, etc. I went through several tutorials, mailing archives and
+        blog entries, but there were no answer to my questions, how to make equally usable packaged app for Chrome like the hosted version.
+    </p>
+
+    <p>
+        Finally I decided to put Dockery on Github pages first, then change the app from packaged to hosted one. I hope it remains usable for everyone, but
+        please create an <a href="https://github.com/lexandro/dockery/issues">issue ticket</a> on Github if you feel the necessity of the old, packaged app,
+        then I will try to do something.
+    </p>
+
+    <p>
+        Ok, lets go back to the good old about stuff...
+    </p>
+    <hr/>
     <h4>An about page is not so interesting thing isn't?</h4><br/>
     Dockery is a Docker host management and monitoring application with full container lifecycle support<br/>
 
@@ -24,15 +47,17 @@
 
     <div>
         <h3>Release notes:</h3>
+
         <div>
-            <strong>0.3.0 - in progress</strong>
+            <strong>0.3.0</strong>
             <ul>
-                <li>+ Add: add search for container diff</li>
-                <li>+ Add: commit container as image</li>
-                <li>- Add: login into the docker hub and/or private repo(s)</li>
-                <li>- Add: push image to the repository</li>
-                <li>- Add: release notes to about/first run of new version</li>
-                <li>+ Fix: removed $promise and $removed properties from the pure json view in containerDetails</li>
+                <li>Add: add search for container diff</li>
+                <li>Add: commit container as image</li>
+                <li>Add: Extend saved configuration scope with extra data. Version, etc...</li>
+                <li>Add: login into the docker hub and/or private repo(s)</li>
+                <li>Add: push image to the repository</li>
+                <li>Add: release notes to about/first run of new version</li>
+                <li>Fix: removed $promise and $removed properties from the pure json view in containerDetails</li>
             </ul>
             <strong>0.2.9</strong>
             <ul>

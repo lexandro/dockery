@@ -15,8 +15,71 @@
     <link rel='stylesheet' href='assets/libs/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css'>
 </head>
 <body>
+<!-- BEGIN: Pre-Bootstrap Loading Screen. -->
+<div class="dockery-loading" ng-animate-children>
+    x
+    <style type="text/css">
+        div.dockery-loading {
+            position: fixed;
+        }
 
-<div id="header" class="navbar  navbar-fixed-top">
+        div.dockery-loading div.preload-container {
+            background-color: #FFFFFF;
+            bottom: 0px;
+            left: 0px;
+            opacity: 1.0;
+            position: fixed;
+            right: 0px;
+            top: 0px;
+            z-index: 999999;
+        }
+
+        /* Used to initialize the ng-leave animation state. */
+        div.dockery-loading div.preload-container.ng-leave {
+            opacity: 1.0;
+            transition: all linear 200ms;
+            -webkit-transition: all linear 200ms;
+        }
+
+        /* Used to set the end properties of the ng-leave animation state. */
+        div.dockery-loading div.preload-container.ng-leave-active {
+            opacity: 0;
+        }
+
+        div.dockery-loading div.messaging {
+            color: black;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            left: 0px;
+            margin-top: -37px;
+            position: absolute;
+            right: 0px;
+            text-align: center;
+            top: 50%;
+        }
+
+        div.dockery-loading h1 {
+            font-size: 26px;
+            line-height: 35px;
+            margin: 0px 0px 20px 0px;
+        }
+
+    </style>
+
+
+    <div class="preload-container">
+
+        <div class="messaging">
+            <h1>
+                Loading Dockery...
+            </h1>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="header" class="navbar  navbar-fixed-top" ng-cloak>
     <div class="navbar-header">
         <nav class="navbar navbar-default navbar-fixed-top ">
             <div class="navbar-header">
@@ -38,8 +101,10 @@
                     <li><a class="active" href="#/containers"><span class="fa fa-cubes"></span> Containers</a></li>
                     <li><a href="#/images"><span class="fa fa-database"></span> Images</a></li>
                     <li><a href="#/repositories"><span class="fa fa-cloud"></span> Repositories</a></li>
-                    <li><a href="#/tasks" style="color: red" ng-show="$root.taskInProgress"><span class="fa fa-heartbeat"></span> Tasks <span class="badge">{{$root.tasks.length}}</span></a></li>
-                    <li><a href="#/tasks" ng-show="!$root.taskInProgress"><span class=" fa fa-heartbeat"></span> Tasks <span class="badge">{{$root.tasks.length}}</span></a></li>
+                    <li><a href="#/tasks" style="color: red" ng-show="$root.taskInProgress"><span class="fa fa-heartbeat"></span> Tasks <span class="badge">{{$root.tasks.length}}</span></a>
+                    </li>
+                    <li><a href="#/tasks" ng-show="!$root.taskInProgress"><span class=" fa fa-heartbeat"></span> Tasks <span class="badge">{{$root.tasks.length}}</span></a>
+                    </li>
                     <!--<li><a href="#/events"><span class="fa fa-history"></span> Events</a></li>-->
                     <li><a href="#/hostDetails"><span class="fa fa-laptop"></span> Host details</a></li>
                 </ul>
@@ -53,6 +118,7 @@
 <br/>
 <br/>
 <br/>
+
 <div ng-view class="container-fluid">
 </div>
 <!---->
