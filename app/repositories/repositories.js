@@ -128,6 +128,10 @@ angular.module('repository', ['ngRoute'])
                 image.selected = !image.selected;
                 $scope.selectAllImagesFlag = false;
             }
+
+            $scope.showRepositoryLogin = function () {
+                console.log('Logiiiiiiiiiiin');
+            }
         }
 
         function updateTaskStatus(newTask, item) {
