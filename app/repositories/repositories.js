@@ -8,11 +8,32 @@ angular.module('repository', ['ngRoute'])
             controller: 'RepositoriesCtrl'
         });
     }])
-
-    .controller('RepositoriesCtrl', ['$rootScope', '$scope', '$location', '$routeParams', 'Helpers', 'Docker', 'Registry', function ($rootScope, $scope, $location, $routeParams, Helpers, Docker, Registry) {
+    .controller('RepositoriesCtrl', ['$rootScope', '$scope', '$modal', '$location', '$routeParams', 'Helpers', 'Docker', 'Registry', function ($rootScope, $scope, $modal, $location, $routeParams, Helpers, Docker, Registry) {
         if (Helpers.isEmpty($rootScope.hostUrl)) {
             $location.path('/hosts');
         } else {
+            $scope.items = ['item1', 'item2', 'item3'];
+            $scope.showRepositoryLogin = function (size) {
+
+                var modalInstance = $modal.open({
+                    animation: true,
+                    templateUrl: 'app/repositoryLogin/repositoryLogin.html',
+                    controller: 'RepositoryLoginCtrl',
+                    //size: size,
+                    resolve: {
+                        items: function () {
+                            return $scope.items;
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function (selectedItem) {
+                    $scope.selected = selectedItem;
+                }, function () {
+                    $log.info('Modal dismissed at: ' + new Date());
+                });
+            };
+
             $scope.searchImageName = '';
             $scope.repositorySearching = false;
             $scope.repositorySearchingError = false;
@@ -127,11 +148,8 @@ angular.module('repository', ['ngRoute'])
             $scope.selectImageFlag = function (image) {
                 image.selected = !image.selected;
                 $scope.selectAllImagesFlag = false;
-            }
+            };
 
-            $scope.showRepositoryLogin = function () {
-                console.log('Logiiiiiiiiiiin');
-            }
         }
 
         function updateTaskStatus(newTask, item) {
@@ -156,3 +174,4 @@ angular.module('repository', ['ngRoute'])
     }
     ])
 ;
+

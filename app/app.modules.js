@@ -17,10 +17,12 @@ angular.module('dockery', [
         'images',
         'imageDetails',
         'repository',
+        'repositoryLogin',
         'tasks',
         'events',
         'about',
-        'frapontillo.bootstrap-switch'],
+        'frapontillo.bootstrap-switch',
+        'ui.bootstrap'],
     function ($provide) {
         // Prevent Angular from sniffing for the history API
         // since it's not supported in packaged apps. Only in chrome
