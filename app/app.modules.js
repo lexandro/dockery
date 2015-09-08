@@ -78,6 +78,9 @@ angular.module('dockery', [
         $rootScope.appVersion = '0.3.0';
         $rootScope.tasks = [];
         $rootScope.taskInProgress = false;
+        //
+        toastr.options.escapeHtml = true;
+        //
         if (window.chrome && chrome.app && chrome.app.runtime) {
             $rootScope.chrome = true;
             chrome.app.window.current().maximize();

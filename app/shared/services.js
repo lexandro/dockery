@@ -143,7 +143,14 @@ angular.module('services', [])
                     }
                 });
             },
-            commit: function () {
+            auth: function () {
+                return $resource($rootScope.hostUrl + '/auth', null, {
+                    post: {
+                        method: "POST",
+                        isArray: false
+                    }
+                });
+            }, commit: function () {
                 return $resource($rootScope.hostUrl + '/commit', null, {
                     save: {
                         method: "POST",
@@ -174,7 +181,7 @@ angular.module('services', [])
                         isArray: false
                     }
                 });
-            },
+            }
         }
     })
     .factory('Registry', function ($resource, $http, $rootScope) {

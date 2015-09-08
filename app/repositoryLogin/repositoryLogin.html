@@ -1,41 +1,42 @@
 <div class="modal-header">
     <h3 class="modal-title">Login to a repository</h3>
 </div>
-<div class="modal-body vcenter">
+<div class="modal-body">
     <div class="row form-group">
-        <div class="col-md-3 text-right">
+        <div class="col-md-3 text-right vcenter">
             <strong>Server address:</strong>
         </div>
         <div class="col-md-9">
-            <input class="form-control" type="text">
+            <input type="text" class="form-control" name="authServerAddress" ng-model="ServerAddress" placeholder="https://index.docker.io/v1" required
+                   ng-trim="true">
         </div>
     </div>
     <div class="row form-group">
-        <div class="col-md-3 text-right">
+        <div class="col-md-3 text-right vcenter">
             <strong>Email:</strong>
         </div>
         <div class="col-md-9">
-            <input class="form-control" type="text">
+            <input type="text" class="form-control" name="authEmail" ng-model="Email" placeholder="Enter email for login" required ng-trim="true">
         </div>
     </div>
     <div class="row form-group">
-        <div class="col-md-3 text-right">
+        <div class="col-md-3 text-right vcenter">
             <strong>Username:</strong>
         </div>
         <div class="col-md-9">
-            <input class="form-control" type="text">
+            <input type="text" class="form-control" name="authUsername" ng-model="Username" placeholder="Enter username" required ng-trim="true">
         </div>
     </div>
     <div class="row form-group">
-        <div class="col-md-3 text-right ">
+        <div class="col-md-3 text-right vcenter">
             <strong>Password:</strong>
         </div>
         <div class="col-md-9">
-            <input class="form-control" type="text">
+            <input type="password" class="form-control" name="authPassword" ng-model="Password" placeholder="Enter password" required ng-trim="true">
         </div>
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-success" type="button" ng-click="login()">Login</button>
+    <button class="btn btn-danger" type="button" ng-click="cancel()">Cancel</button>
 </div>
