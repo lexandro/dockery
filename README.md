@@ -121,6 +121,7 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: pure JSON view for image details
 - Add: remove button to imageDetails
 - Fix: container creation has no real random generator and image tag list
+- Fix: create container not running with remote images
 
 0.3.2
 - Add: exit code filter to container list view 
