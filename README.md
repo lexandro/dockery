@@ -120,6 +120,7 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: Online stat for the hosted app. Sorry.
 - Add: pure JSON view for image details
 - Add: remove button to imageDetails
+- Fix: create container not running with remote images
 
 0.3.2
 - Add: exit code filter to container list view 
