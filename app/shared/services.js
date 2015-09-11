@@ -273,6 +273,9 @@ angular.module('services', [])
 
                     console.log('dockerySettings ' + JSON.stringify(dockerySettings));
                     if (dockerySettings.appVersion == $rootScope.appVersion) {
+                        if (dockerySettings.newsRead != true) {
+                            dockerySettings.newsRead = false;
+                        }
                         $rootScope.dockerySettings = dockerySettings;
                     } else {
                         dockerySettings.appVersion = $rootScope.appVersion
@@ -280,7 +283,6 @@ angular.module('services', [])
                         $rootScope.dockerySettings = dockerySettings;
                         this.saveSettings();
                     }
-
                     callback(dockerySettings.hosts);
 
 

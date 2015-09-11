@@ -12,7 +12,6 @@ angular.module('repository', ['ngRoute'])
         if (Helpers.isEmpty($rootScope.hostUrl)) {
             $location.path('/hosts');
         } else {
-            $scope.items = ['item1', 'item2', 'item3'];
             $scope.showRepositoryLogin = function (size) {
 
                 var modalInstance = $modal.open({

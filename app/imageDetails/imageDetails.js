@@ -9,7 +9,7 @@ angular.module('imageDetails', ['ngRoute'])
         });
     }])
 
-    .controller('ImageDetailsCtrl', ['$rootScope', '$scope', '$location', '$routeParams', 'Helpers', 'Docker', function ($rootScope, $scope, $location, $routeParams, Helpers, Docker) {
+    .controller('ImageDetailsCtrl', ['$rootScope', '$scope', '$modal', '$location', '$routeParams', 'Helpers', 'Docker', function ($rootScope, $scope, $modal, $location, $routeParams, Helpers, Docker) {
         if (Helpers.isEmpty($rootScope.hostUrl)) {
             $location.path('/hosts');
         } else {
@@ -58,6 +58,27 @@ angular.module('imageDetails', ['ngRoute'])
             var imageHistoryList = Docker.images().history({imageId: $routeParams.imageId}, function () {
                 $scope.imageHistoryList = imageHistoryList;
             });
+
+            $scope.pushImage = function () {
+
+                var modalInstance = $modal.open({
+                    animation: true,
+                    templateUrl: 'app/pushImage/pushImage.html',
+                    controller: 'PushImageCtrl',
+                    size: 'lg',
+                    resolve: {
+                        imageDetails: function () {
+                            return $scope.imageDetails;
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function (selectedItem) {
+                    $scope.selected = selectedItem;
+                }, function () {
+                    // dismiss
+                });
+            };
         }
     }])
 ;

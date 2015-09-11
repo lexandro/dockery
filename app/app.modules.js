@@ -18,6 +18,7 @@ angular.module('dockery', [
         'imageDetails',
         'repository',
         'repositoryLogin',
+        'pushImage',
         'tasks',
         'events',
         'about',

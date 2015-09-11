@@ -1,13 +1,16 @@
 'use strict';
 
-angular.module('repositoryLogin', ['ngRoute'])
+angular.module('pushImage', ['ngRoute'])
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/repositoryLogin', {
-            templateUrl: 'app/repositoryLogin/repositoryLogin.html',
-            controller: 'RepositoryLoginCtrl'
+        $routeProvider.when('/pushImage', {
+            templateUrl: 'app/pushImage/pushImage.html',
+            controller: 'PushImageCtrl'
         });
     }])
-    .controller('RepositoryLoginCtrl', ['$scope', '$modalInstance', 'Helpers', 'Docker', function ($scope, $modalInstance, Helpers, Docker) {
+    .controller('PushImageCtrl', ['$scope', '$modalInstance', 'Helpers', 'Docker', 'imageDetails', function ($scope, $modalInstance, Helpers, Docker, imageDetails) {
+        $scope.imageDetails = imageDetails;
+        $scope.inputTag = imageDetails.RepoTags[0];
+        console.log('************************');
 
         $scope.login = function () {
             var authConfig = {};
@@ -30,7 +33,7 @@ angular.module('repositoryLogin', ['ngRoute'])
             $modalInstance.close();
         };
 
-        $scope.cancel = function () {
+        $scope.cancelPushImage = function () {
             $modalInstance.dismiss('cancel');
         };
     }]);

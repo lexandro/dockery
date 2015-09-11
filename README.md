@@ -108,25 +108,28 @@ Here's the list of active, scheduled, planned and finished development goals
 + Add: release notes to about/first run of new version
 + Add: Add bootstrapping page to the app during the startup
 + Add: login into the docker hub and/or insecure private repo(s)
-- Add: push image to the repository
-- Add: info about cors config pre/post 1.18
++ Add: info about cors config pre/post 1.18
 + Fix: removed $promise and $removed properties from the pure json view in containerDetails
 
 ## Roadmap /by priority/
 0.3.1
+- Add: push image to the repository
 - Add: helper links to the known fields/information pieces to help understand
 - Add: In Chrome mode add Settings view to enable synced storage usage, etc..
 - Add: cloud based settings persistence
 - Add: Online stat for the hosted app. Sorry.
 - Add: pure JSON view for image details
 - Add: remove button to imageDetails
+- Fix: redesign image deletion/tag deletion
 - Fix: container creation has no real random generator and image tag list
-- Fix: create container not running with remote images
+- Fix: create container not running with locally not available images
+
 
 0.3.2
 - Add: exit code filter to container list view 
 - Add: status filter to container list view
 - Add: shareable URLs in the address line.
+- Add: ordering in search result by fields 
 
 0.3.3
  - Add: search/pull image from private repo(s) 

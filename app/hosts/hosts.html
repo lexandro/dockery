@@ -12,21 +12,32 @@
                         <strong>{{$root.appVersion}}</strong>
                         <ul>
                             <li>Add: added search for container diff</li>
-                            <li>Add: commit container as image</li>
-                            <li>Add: login into the docker hub and/or private repo(s)</li>
+                            <li>Add: commit container as image (initial version, with basic validations)</li>
+                            <li>Add: login into the docker hub and/or insecure private repo(s)</li>
                             <li>Add: push image to the repository</li>
                             <li>Add: release notes to about/first run of new version</li>
+                            <li>Add: Add bootstrapping page to the app during the startup</li>
                             <li>Fix: removed $promise and $removed properties from the pure json view in containerDetails</li>
                         </ul>
                     </div>
+                    <hr/>
                     <div class="alert alert-danger" ng-show="!root.chrome">
                         <strong>In the next release, the packaged Chrome app version will be replaced with hosted version from dockery.io site. The reason
                             explained in the following
                             blog entry: <a href="http://codeventor.blogspot.de/">http://codeventor.blogspot.de</a> and also added to the about page</strong>
-
-
                     </div>
-
+                    <hr/>
+                    <div class="alert alert-warning" ng-show="!root.chrome">
+                        <strong>The CORS enablement changed from API V1.18. The
+                            <pre>--api-enable-cors </pre>
+                            changed to
+                            <pre>--api-cors-header="http://foo.bar"</pre>
+                            if you use hosted dockery, you need to add
+                            <pre>http://docker.io</pre>
+                            to your docker hosts. The old setting is still working as '*' header configuration.
+                            Check <a href="https://docs.docker.com/reference/api/docker_remote_api_v1.18/#3-3-cors-requests">API docs</a> for the details.
+                        </strong>
+                    </div>
                 </div>
 
                 <div class="modal-footer">
