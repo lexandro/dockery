@@ -205,12 +205,12 @@ angular.module('services', [])
                 if ($rootScope.chrome === true) {
                     chrome.storage.local.get("hosts", function (result) {
                         console.log(JSON.stringify(result));
-                        return (JSON.parse(result.hosts));
+                        return (angular.fromJson(result.hosts));
                     });
 
                 } else {
                     //localStorage.clear();
-                    var hosts = JSON.parse(localStorage.getItem("hosts"));
+                    var hosts = angular.fromJson(localStorage.getItem("hosts"));
                     if (Helpers.isEmpty(hosts)) {
                         hosts = [];
                     } else {
@@ -225,7 +225,7 @@ angular.module('services', [])
             },
             save: function (hosts) {
                 if ($rootScope.chrome === true) {
-                    chrome.storage.local.set({'hosts': angular.toJson(hosts)}, function () {
+                    chrome.storage.local.set({"hosts": angular.toJson(hosts)}, function () {
                     });
                 } else {
                     localStorage.setItem("hosts", angular.toJson(hosts));
@@ -240,15 +240,35 @@ angular.module('services', [])
 
                 if ($rootScope.chrome === true) {
                     console.log('chrome storage');
+                    //chrome.storage.local.clear();
+                    var myself = this;
                     chrome.storage.local.get("dockerySettings", function (result) {
-                        console.log(JSON.stringify(result));
-                        dockerySettings = result.dockerySettings;
-                        callback(JSON.parse(dockerySettings.hosts));
+                        if (Helpers.isEmpty(result.dockerySettings)) {
+                            dockerySettings = myself.initSettings();
+                            console.log('chrome load init ' + JSON.stringify(dockerySettings));
+                            //
+                            chrome.storage.local.get("hosts", function (result) {
+                                console.log(JSON.stringify(result));
+                                dockerySettings.hosts = JSON.parse(result.hosts);
+                                console.log('chrome load hosts ' + JSON.stringify(dockerySettings));
+                                $rootScope.dockerySettings = dockerySettings;
+                                console.log('chrome saveset ' + JSON.stringify(dockerySettings));
+                                myself.saveSettings();
+                                callback();
+                            });
+
+                        } else {
+                            console.log('chrome load std ' + JSON.stringify(dockerySettings));
+                            dockerySettings = JSON.parse(result.dockerySettings);
+                            $rootScope.dockerySettings = dockerySettings;
+                            callback();
+                        }
                     });
+
                 } else {
                     //localStorage.clear();
                     console.log('browser storage');
-                    var dockerySettings = JSON.parse(localStorage.getItem("dockerySettings"));
+                    var dockerySettings = angular.fromJson(localStorage.getItem("dockerySettings"));
                     // do we need legacy load?
                     if (Helpers.isEmpty(dockerySettings)) {
                         console.log('loadSettings legacy load ' + JSON.stringify(dockerySettings));
@@ -261,7 +281,6 @@ angular.module('services', [])
                         }
                         $rootScope.dockerySettings = dockerySettings;
                         this.saveSettings();
-
 
                     } else {
                         dockerySettings.hosts.forEach(function (host) {
@@ -283,10 +302,9 @@ angular.module('services', [])
                         $rootScope.dockerySettings = dockerySettings;
                         this.saveSettings();
                     }
-                    callback(dockerySettings.hosts);
-
-
+                    callback();
                 }
+
             },
             saveSettings: function () {
                 console.log('SaveSettings');
@@ -297,8 +315,9 @@ angular.module('services', [])
                 }
                 //
                 if ($rootScope.chrome === true) {
-                    chrome.storage.local.set({'dockerySettings': angular.toJson(dockerySettings)}, function () {
+                    chrome.storage.local.set({"dockerySettings": angular.toJson(dockerySettings)}, function () {
                     });
+                    this.save(dockerySettings.hosts);
                 } else {
                     localStorage.setItem("dockerySettings", angular.toJson(dockerySettings));
                 }

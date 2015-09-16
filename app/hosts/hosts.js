@@ -19,10 +19,13 @@ angular.module('hosts', ['ngRoute'])
         var hosts = [];
 
         try {
-            HostService.loadSettings(function (loadedHosts) {
+            HostService.loadSettings(function () {
+                console.log('---' + JSON.stringify($rootScope.dockerySettings));
                 if ($rootScope.dockerySettings.newsRead == false) {
                     $('#newsModal').modal('show');
                 }
+
+                var loadedHosts = $rootScope.dockerySettings.hosts;
 
                 loadedHosts.forEach(function (host) {
                     host.status = false;
@@ -93,7 +96,7 @@ angular.module('hosts', ['ngRoute'])
             console.log('Hosts-saveHosts ' + JSON.stringify(dockerySettings));
             HostService.saveSettings();
             // FIXME delete this line
-            HostService.save($scope.hosts);
+            //HostService.save($scope.hosts);
         }
 
         function setActiveHost(host) {

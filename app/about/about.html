@@ -11,7 +11,7 @@
     <hr/>
     <h3 style="color: red">Why did I change packaged Chrome app version to hosted one?</h3>
 
-    <p>Wow! Such a big red title! Later I'll put this entry somewhere else with less aggressive style, but this is a quite important now.</p>
+    <p>Wow! Such a big red title! Later I'll put this entry somewhere else with less aggressive style.</p>
 
     <p>When I started to work on
         Dockery the plan was to learn Javascript and Angular a bit via a demo project. As I added more and more function, I started to use regularly during my
@@ -28,22 +28,14 @@
         then I will try to do something.
     </p>
     <hr/>
-    <div class="alert alert-danger" ng-show="!root.chrome">
-        <strong>In the next release, the packaged Chrome app version will be replaced with hosted version from dockery.io site. The reason
-            explained in the following
-            blog entry: <a href="http://codeventor.blogspot.de/">http://codeventor.blogspot.de</a> and also added to the about page</strong>
-
-
-    </div>
-    <hr/>
     <div class="alert alert-warning" ng-show="!root.chrome">
-        <strong>The CORS enablement changed from API V1.18. The
+        <strong>The CORS enablement changed from Docker Remote API V1.18 The old setting:
             <pre>--api-enable-cors </pre>
-            changed to
+            changed to:
             <pre>--api-cors-header="http://foo.bar"</pre>
-            if you use hosted dockery, you need to add
+            if you want to use hosted dockery, you need to add:
             <pre>http://docker.io</pre>
-            to your docker hosts. The old setting is still working as '*' header configuration.
+            to your docker host settings. The old setting is still working as '*' header configuration.
             Check <a href="https://docs.docker.com/reference/api/docker_remote_api_v1.18/#3-3-cors-requests">API docs</a> for the details.
         </strong>
     </div>
