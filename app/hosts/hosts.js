@@ -20,7 +20,6 @@ angular.module('hosts', ['ngRoute'])
 
         try {
             HostService.loadSettings(function () {
-                console.log('---' + JSON.stringify($rootScope.dockerySettings));
                 if ($rootScope.dockerySettings.newsRead == false) {
                     $('#newsModal').modal('show');
                 }
