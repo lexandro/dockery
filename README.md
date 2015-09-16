@@ -25,15 +25,15 @@ for easier management and more productivity. Dockery is available as
 
 ## Enable remote access to a Docker daemon
 
-## Changes from version 1.18
+## Changes from Remote API version 1.18
 
-In the V1.18 of remote api, docker introduced a new version of cors configuration. The [documentation] (https://docs.docker.com/v1.6/reference/api/docker_remote_api_v1.18/#33-cors-requests) describes how could you setup the origin for the daemon.
+In the V1.18 of Remote API, docker introduced a new version of cors configuration. The [documentation] (https://docs.docker.com/v1.6/reference/api/docker_remote_api_v1.18/#33-cors-requests) describes how could you setup the origin for the daemon.
 
 If you use Dockery as hosted app you should configure **http://dockery.io** as origin.
 
 
 
-## Pre 1.18 config:
+## Pre v1.18 config:
 
 To manage your docker host(s) with **dockery** please please add the following parameters to your Docker daemon launcher:
 
@@ -99,19 +99,9 @@ These screenshots are not representing the final version!
 # Development roadmap
 Here's the list of active, scheduled, planned and finished development goals
 
-## Under development 
-0.3.0
-+ Add: add search for container diff
-+ Add: commit container as image (initial version, with basic validations)
-+ Add: Extend saved configuration scope with extra data. Version, etc...
-+ Add: announce the chrome app change from packaged to hosted
-+ Add: release notes to about/first run of new version
-+ Add: Add bootstrapping page to the app during the startup
-+ Add: login into the docker hub and/or insecure private repo(s)
-+ Add: info about cors config pre/post 1.18
-+ Fix: removed $promise and $removed properties from the pure json view in containerDetails
+## Under development
 
-## Roadmap /by priority/
+## Under development
 0.3.1
 - Add: push image to the repository
 - Add: helper links to the known fields/information pieces to help understand
@@ -124,7 +114,7 @@ Here's the list of active, scheduled, planned and finished development goals
 - Fix: container creation has no real random generator and image tag list
 - Fix: create container not running with locally not available images
 
-
+## Roadmap /by priority/
 0.3.2
 - Add: exit code filter to container list view 
 - Add: status filter to container list view
@@ -189,9 +179,10 @@ You could find the release notes on [this wiki page!](https://github.com/lexandr
 ## Stack
 * [Angular.js](https://github.com/angular/angular.js)
 * [Bootstrap](http://getbootstrap.com/)
+* [AngularUI for Bootstrap](https://angular-ui.github.io/)
 * [Angular-Bootstrap switch](https://github.com/frapontillo/angular-bootstrap-switch)
 * [JSON formatter](https://github.com/mohsen1/json-formatter)
 * [xterm.js](http://xtermjs.readthedocs.org/en/latest/)
 * [toastr.js](https://github.com/CodeSeven/toastr)
-
-Please let me know if I forgot anyone.
+* [oboe.js](http://oboejs.com/)
+* [Font awesome](https://fortawesome.github.io/Font-Awesome/)
