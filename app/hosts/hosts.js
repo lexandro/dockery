@@ -84,7 +84,6 @@ angular.module('hosts', ['ngRoute'])
         function saveHosts() {
             $scope.hosts = hosts;
             //
-            console.log('Hosts-hosts ' + JSON.stringify(hosts));
             var dockerySettings = $rootScope.dockerySettings;
             if (Helpers.isEmpty(dockerySettings)) {
                 dockerySettings = HostService.initSettings();
@@ -92,7 +91,6 @@ angular.module('hosts', ['ngRoute'])
             dockerySettings.hosts = $scope.hosts;
             $rootScope.dockerySettings = dockerySettings;
             //
-            console.log('Hosts-saveHosts ' + JSON.stringify(dockerySettings));
             HostService.saveSettings();
             // FIXME delete this line
             //HostService.save($scope.hosts);

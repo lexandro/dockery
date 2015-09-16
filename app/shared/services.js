@@ -302,7 +302,6 @@ angular.module('services', [])
 
             },
             saveSettings: function () {
-                console.log('SaveSettings');
                 //
                 var dockerySettings = $rootScope.dockerySettings;
                 if (Helpers.isEmpty(dockerySettings)) {
