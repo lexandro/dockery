@@ -100,8 +100,6 @@ These screenshots are not representing the final version!
 Here's the list of active, scheduled, planned and finished development goals
 
 ## Under development
-
-## Under development
 0.3.1
 - Add: push image to the repository
 - Add: helper links to the known fields/information pieces to help understand
