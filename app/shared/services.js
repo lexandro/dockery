@@ -244,8 +244,10 @@ angular.module('services', [])
                             dockerySettings = myself.initSettings();
                             //
                             chrome.storage.local.get("hosts", function (result) {
-                                console.log('loadSettings chrome legacy load ' + JSON.stringify(dockerySettings));
-                                dockerySettings.hosts = JSON.parse(result.hosts);
+                                if (!Helpers.isEmpty(result)) {
+                                    console.log('loadSettings chrome legacy load ' + JSON.stringify(dockerySettings));
+                                    dockerySettings.hosts = JSON.parse(result.hosts);
+                                }
                                 $rootScope.dockerySettings = dockerySettings;
                                 myself.saveSettings();
                                 callback();

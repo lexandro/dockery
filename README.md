@@ -129,7 +129,8 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: exit code filter to container list view 
 - Add: status filter to container list view
 - Add: shareable URLs in the address line.
-- Add: ordering in search result by fields 
+- Add: ordering in search result by fields
+- Review: Docker Host info
 
 0.3.3
  - Add: search/pull image from private repo(s) 
