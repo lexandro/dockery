@@ -109,6 +109,7 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: pure JSON view for image details
 - Add: remove button to imageDetails
 - Fix: redesign image deletion/tag deletion
+- Fix: container details info tab wrong ordering
 
 ## Roadmap /by priority/
 0.3.2

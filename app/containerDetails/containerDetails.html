@@ -77,7 +77,8 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="commitModalLabel">Commit container</h4>
                 </div>
                 <div class="modal-body">
@@ -86,7 +87,8 @@
                     </div>
                     <div class="col-md-9 input-group has-feedback form-group">
                         <form name="commitMessageForm">
-                            <input type="text" class="form-control" ng-model="imageCommitMessage" name="imageCommitInput"
+                            <input type="text" class="form-control" ng-model="imageCommitMessage"
+                                   name="imageCommitInput"
                                    placeholder="Enter the commit message" required ng-trim="true">
                             <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"
                                   ng-show="!commitMessageForm.$error.required"></span>
@@ -112,7 +114,8 @@
                     </div>
                     <div class="col-md-9 input-group has-feedback form-group">
                         <form name="imageNameForm">
-                            <input type="text" class="form-control" ng-model="imageRepositoryName" name="imageRepositoryInput"
+                            <input type="text" class="form-control" ng-model="imageRepositoryName"
+                                   name="imageRepositoryInput"
                                    placeholder="Enter repository/image name" required ng-trim="true">
                             <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"
                                   ng-show="!imageNameForm.$error.required"></span>
@@ -125,7 +128,8 @@
                     </div>
                     <div class="col-md-9 input-group has-feedback form-group">
                         <form name="imageNameTagForm">
-                            <input type="text" class="form-control" ng-model="imageRepositoryTagName" name="imageRepositoryTagInput"
+                            <input type="text" class="form-control" ng-model="imageRepositoryTagName"
+                                   name="imageRepositoryTagInput"
                                    placeholder="Enter repository tag name" required ng-trim="true">
                             <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"
                                   ng-show="!imageNameTagForm.$error.required"></span>
@@ -135,10 +139,12 @@
                     </div>
 
                     <div class="col-md-12 vcenter text-center">
-                        <h4>Extra <a href="https://docs.docker.com/reference/builder/" target="_blank">Dockerfile</a> commands</h4>
+                        <h4>Extra <a href="https://docs.docker.com/reference/builder/" target="_blank">Dockerfile</a>
+                            commands</h4>
                     </div>
                     <div class="form-group">
-                        <div ng-repeat="imageChange in imageChanges" class="form-group col-md-offset-3 col-md-8 input-group">
+                        <div ng-repeat="imageChange in imageChanges"
+                             class="form-group col-md-offset-3 col-md-8 input-group">
                             <span class="input-group-btn">
                             <input type="text" class="form-control" ng-model="imageChange.value"
                                    placeholder="image change command" ng-keyup="imageChangeValidator()">
@@ -277,108 +283,113 @@
                 {{containerDetailsLoadingMessage}}</h3>
         </div>
         <div class="col-md-4">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        <span class="fa fa-link"></span>
-                        Links
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-condensed table-hover table-striped"
-                           ng-show="!isEmpty(containerDetails.HostConfig.Links)">
-                        <thead>
-                        <tr>
-                            <th>Link</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="Link in containerDetails.HostConfig.Links">
-                            <td>{{Link}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="fa fa-link"></span>
+                            Links
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-condensed table-hover table-striped"
+                               ng-show="!isEmpty(containerDetails.HostConfig.Links)">
+                            <thead>
+                            <tr>
+                                <th>Link</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="Link in containerDetails.HostConfig.Links">
+                                <td>{{Link}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+            <div class="col-md-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="fa fa-plug"> </span>
+                            Port assignments
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-condensed table-hover table-striped" ng-show="true">
+                            <thead>
+                            <tr>
+                                <th>Container internal port</th>
+                                <th>Host IP/port</th>
+                                <th class="text-center">Public</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="(key, value) in containerDetails.NetworkSettings['Ports']">
+                                <td>{{key}}</td>
+                                <td>{{value[0]["HostIp"]}}{{value.length>0?":":""}}{{value[0]["HostPort"]}}</td>
+                                <td class="text-center" ng-show="value.length>0"><strong>true</strong></td>
+                                <td class="text-center" ng-show="!value.length>0">false</td>
+                            </tr>
+                            </tbody>
+                        </table>
 
+                    </div>
+                </div>
+            </div>
         </div>
+
         <div class="col-md-8">
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        <span class="fa fa-folder-open"></span>
-                        Volumes
-                    </h3>
+            <div class="col-md-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="fa fa-folder-open"></span>
+                            Volumes
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-condensed table-hover table-striped"
+                               ng-show="!isEmpty(containerDetails.Volumes)">
+                            <thead>
+                            <tr>
+                                <th>Host</th>
+                                <th>Container</th>
+                                <th class="text-center">Writeable</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="(key,value) in containerDetails.Volumes">
+                                <td>{{value}}</td>
+                                <td>{{key}}</td>
+                                <td class="text-center">{{containerDetails.VolumesRW[key]==true?'yes':'no'}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="panel-body">
-                    <table class="table table-condensed table-hover table-striped"
-                           ng-show="!isEmpty(containerDetails.Volumes)">
-                        <thead>
-                        <tr>
-                            <th>Host</th>
-                            <th>Container</th>
-                            <th class="text-center">Writeable</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="(key,value) in containerDetails.Volumes">
-                            <td>{{value}}</td>
-                            <td>{{key}}</td>
-                            <td class="text-center">{{containerDetails.VolumesRW[key]==true?'yes':'no'}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+
             </div>
 
-        </div>
-        <div class="col-md-4">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        <span class="fa fa-plug"> </span>
-                        Port assignments
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-condensed table-hover table-striped" ng-show="true">
-                        <thead>
-                        <tr>
-                            <th>Container internal port</th>
-                            <th>Host IP/port</th>
-                            <th class="text-center">Public</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="(key, value) in containerDetails.NetworkSettings['Ports']">
-                            <td>{{key}}</td>
-                            <td>{{value[0]["HostIp"]}}{{value.length>0?":":""}}{{value[0]["HostPort"]}}</td>
-                            <td class="text-center" ng-show="value.length>0"><strong>true</strong></td>
-                            <td class="text-center" ng-show="!value.length>0">false</td>
-                        </tr>
-                        </tbody>
-                    </table>
+            <div class="col-md-12">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="fa fa-info"> </span>
+                            Environment variables
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-condensed table-hover table-striped" ng-show="true">
+                            <tbody>
+                            <tr ng-repeat="env in containerDetails.Config.Env | orderBy:env">
+                                <td>{{env}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
 
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        <span class="fa fa-info"> </span>
-                        Environment variables
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-condensed table-hover table-striped" ng-show="true">
-                        <tbody>
-                        <tr ng-repeat="env in containerDetails.Config.Env | orderBy:env">
-                            <td>{{env}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-
+                    </div>
                 </div>
             </div>
         </div>
