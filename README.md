@@ -103,28 +103,29 @@ Here's the list of active, scheduled, planned and finished development goals
 0.3.1
 - Add: push image to the repository
 - Add: helper links to the known fields/information pieces to help understand
-- Add: In Chrome mode add Settings view to enable synced storage usage, etc..
+- Add: In Chrome mode add Settings view to enable synced storage usage, etc.
 - Add: cloud based settings persistence
-- Add: Online stat for the hosted app. Sorry.
+- Add: Online stats for the hosted app. Sorry.
 - Add: pure JSON view for image details
 - Add: remove button to imageDetails
 - Fix: redesign image deletion/tag deletion
-- Fix: container creation has no real random generator and image tag list
-- Fix: create container not running with locally not available images
 
 ## Roadmap /by priority/
 0.3.2
 - Add: exit code filter to container list view 
 - Add: status filter to container list view
-- Add   : shareable URLs in the address line.
+- Add: shareable URLs in the address line.
 - Add: ordering in search result by fields
+- Add: clone button to host data for faster server additions
 - Review: Docker Host info
+- Fix: container creation has no real random generator and image tag list
+- Fix: create container not running with locally not available images
 
 0.3.3
  - Add: search/pull image from private repo(s) 
 
 0.4.0
-- Fix: redesign host information page...drastically++ :)
+- Review: redesign host information page...drastically++ :)
 
 0.4.1
 - Add: download file link to containers/container details/diff listing items
@@ -134,10 +135,10 @@ Here's the list of active, scheduled, planned and finished development goals
 - Add: also add tooltips to these items on all views
 
 0.5.0
-- Fix: make it more responsive
+- Review: redesign the container logs view... drastically
+- Review: make it more responsive
 
 0.5.1
-
 - Add: option to show containers logs as formatted/raw 
 - Fix: TTY terminal doubling characters in some cases.  
 
@@ -163,7 +164,6 @@ Here's the list of active, scheduled, planned and finished development goals
 ## Not scheduled yet
 - Add: TTL based authentication for docker daemon ports
 - Add: download logs as file.
-- Add: back button/listener to screens in chrome mode
 - Help
 - docker image with version check in the webapp
 - Fix: stopping multiple containers is not working properly on huge list with already stopped containers
