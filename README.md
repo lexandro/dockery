@@ -102,14 +102,12 @@ Here's the list of active, scheduled, planned and finished development goals
 ## Under development
 0.3.1
 - Add: push image to the repository
-- Add: helper links to the known fields/information pieces to help understand
-- Add: In Chrome mode add Settings view to enable synced storage usage, etc.
-- Add: cloud based settings persistence
+- Add: helper links to the known fields/information pieces to help understanding
 - Add: Online stats for the hosted app. Sorry.
 - Add: pure JSON view for image details
 - Add: remove button to imageDetails
 - Fix: redesign image deletion/tag deletion
-- Fix: container details info tab wrong ordering
++ Fix: container details info tab wrong ordering
 
 ## Roadmap /by priority/
 0.3.2
@@ -123,7 +121,9 @@ Here's the list of active, scheduled, planned and finished development goals
 - Fix: create container not running with locally not available images
 
 0.3.3
- - Add: search/pull image from private repo(s) 
+ - Add: search/pull image from private repo(s)
+ - Add: In Chrome mode add Settings view to enable synced storage usage, etc.
+ - Add: cloud based settings persistence
 
 0.4.0
 - Review: redesign host information page...drastically++ :)
